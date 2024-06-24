@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: af4eba7082063b14ba2a50474bf3c2e1
+  m_SerializeEntries:
+  - m_GUID: 7c35e4bd4d075be40b97bad778ec1d70
+    m_Address: Packages/evoreek.lazypan/Runtime/Bundles/GameSetting/GameSetting.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08265563f7929dc409420eac6a028cf4
+    m_Address: Assets/LazyPan/Bundles/Configs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4591654adc6b73c489f916cdbe404d67
+    m_Address: Assets/LazyPan/Bundles/Prefabs/Global
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08669d945b7fe314db91b2663794a84f
+    m_Address: Assets/LazyPan/Bundles/Prefabs/Obj
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4943b65c7f6e6c4884372f855221c04
+    m_Address: Assets/LazyPan/Bundles/Prefabs/Tool
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfdd2be0d799d024b872fb9e7992ff82
+    m_Address: Assets/LazyPan/Bundles/Prefabs/UI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c03734b46c52be4493e5952ede52a02
+    m_Address: Assets/LazyPan/Bundles/Configs/Input/LazyPanInputControl.inputactions
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6f7717521dcea85419ede1df738f7afe, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 72de7438f91624d4582ac42d5d4d2650, type: 2}
+    - {fileID: 11400000, guid: 1e65d167e2c6166448ad4c18bd74f9de, type: 2}

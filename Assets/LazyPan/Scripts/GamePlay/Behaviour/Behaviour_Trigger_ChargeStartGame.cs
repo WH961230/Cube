@@ -5,20 +5,22 @@ using UnityEngine.UI;
 namespace LazyPan {
     public class Behaviour_Trigger_ChargeStartGame : Behaviour {
         private Flow_SceneA _flowSceneA;
-        private bool _isChargingEnergy;
-        private float _energy;
-        private float _energyMax;
-        private float _energyChargeSpeed;
+        private BoolData _isChargingEnergyData;
+        private FloatData _energyData;
+        private FloatData _energyMaxData;
+        private FloatData _energySpeedData;
         private Image _energyImage;
 
         public Behaviour_Trigger_ChargeStartGame(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flowSceneA);
 
-            _energy = 0;
-            _energyMax = 10;
-            _energyChargeSpeed = 5;
+            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY, out _energyData);
+            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY + Cube.Label.MAX, out _energyMaxData);
+            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY + Cube.Label.SPEED, out _energySpeedData);
+            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY + Cube.Label.ING, out _isChargingEnergyData);
+
             _energyImage = Cond.Instance.Get<Image>(entity, Cube.Label.ENERGY);
-            _energyImage.fillAmount = _energy / _energyMax;
+            _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
 
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(ChargeIn);
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerExitEvent.AddListener(ChargeOut);
@@ -26,26 +28,26 @@ namespace LazyPan {
         }
 
         private void OnUpdate() {
-            if (_isChargingEnergy) {
-                _energy += _energyChargeSpeed * Time.deltaTime;
-                if (_energy >= _energyMax) {
+            if (_isChargingEnergyData.Bool) {
+                _energyData.Float += _energySpeedData.Float * Time.deltaTime;
+                if (_energyData.Float >= _energyMaxData.Float) {
                     _flowSceneA.Next("SceneB");
                     return;
                 }
 
                 if (_energyImage.gameObject.activeSelf) {
-                    _energyImage.fillAmount = _energy / _energyMax;
+                    _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
                 }
             } else {
                 _energyImage.gameObject.SetActive(false);
-                _energy = 0;
+                _energyData.Float = 0;
             }
         }
 
         private void ChargeIn(Collider arg0) {
             if (Data.Instance.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {
                 if (playerEntity.EntityData.BaseRuntimeData.Type == "Player") {
-                    _isChargingEnergy = true;
+                    _isChargingEnergyData.Bool = true;
                     _energyImage.gameObject.SetActive(true);
                 }
             }
@@ -55,9 +57,9 @@ namespace LazyPan {
             if (Data.Instance.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(),
                     out Entity playerEntity)) {
                 if (playerEntity.EntityData.BaseRuntimeData.Type == "Player") {
-                    _isChargingEnergy = false;
+                    _isChargingEnergyData.Bool = false;
                     _energyImage.gameObject.SetActive(false);
-                    _energy = 0;
+                    _energyData.Float = 0;
                 }
             }
         }

@@ -204,6 +204,8 @@ MonoBehaviour:
   Transforms:
   - Sign: Foot
     Tran: {fileID: 2989751782826645411}
+  - Sign: Body
+    Tran: {fileID: 6584285122501561018}
   Colliders: []
   Materials: []
   Renderers: []

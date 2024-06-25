@@ -15,6 +15,8 @@ SceneB,战斗场景B,open_ui,创建,Init,初始化,UI_SceneB,战斗场景B界面
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Camera_Camera,战斗场景B相机
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Terrain_Terrain,战斗场景B地形
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Player_Player,战斗场景B玩家
+SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Tower_Tower,战斗场景B塔
+SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Tower_Tower,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Player_Player,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Terrain_Terrain,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Camera_Camera,

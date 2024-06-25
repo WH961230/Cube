@@ -8,3 +8,4 @@ Obj_Trigger_ChargeStartGame,SceneA,Trigger,开始场景A开始游戏触发器,Lo
 Obj_Camera_Camera,SceneB,Camera,战斗场景B相机,,Behaviour_Auto_CameraPlayerView
 Obj_Player_Player,SceneB,Player,战斗场景B玩家,LocationInf_Single_SceneB_Player,Behaviour_Auto_Gravity|Behaviour_Input_PlayerMovement
 Obj_Terrain_Terrain,SceneB,Terrain,战斗场景B场景,LocationInf_Single_SceneB_Terrain,
+Obj_Tower_Tower,SceneB,Tower,战斗场景B塔,LocationInf_Single_SceneB_Tower,

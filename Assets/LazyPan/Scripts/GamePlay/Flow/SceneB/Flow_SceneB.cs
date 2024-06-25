@@ -7,6 +7,7 @@ namespace LazyPan {
 		private Entity Obj_Camera_Camera;
 		private Entity Obj_Terrain_Terrain;
 		private Entity Obj_Player_Player;
+		private Entity Obj_Tower_Tower;
 
         public override void Init(Flow baseFlow) {
             base.Init(baseFlow);
@@ -16,6 +17,7 @@ namespace LazyPan {
 			Obj_Camera_Camera = Obj.Instance.LoadEntity("Obj_Camera_Camera");
 			Obj_Terrain_Terrain = Obj.Instance.LoadEntity("Obj_Terrain_Terrain");
 			Obj_Player_Player = Obj.Instance.LoadEntity("Obj_Player_Player");
+			Obj_Tower_Tower = Obj.Instance.LoadEntity("Obj_Tower_Tower");
 
         }
 
@@ -33,6 +35,7 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
+			Obj.Instance.UnLoadEntity(Obj_Tower_Tower);
 			Obj.Instance.UnLoadEntity(Obj_Player_Player);
 			Obj.Instance.UnLoadEntity(Obj_Terrain_Terrain);
 			Obj.Instance.UnLoadEntity(Obj_Camera_Camera);

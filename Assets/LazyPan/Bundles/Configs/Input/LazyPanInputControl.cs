@@ -70,6 +70,78 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player"",
+            ""id"": ""041603f5-47f1-4d07-8f34-416f43ff15e7"",
+            ""actions"": [
+                {
+                    ""name"": ""Motion"",
+                    ""type"": ""Value"",
+                    ""id"": ""2330f3c6-0aa2-42b2-9d48-fe0a98bd95cc"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""2c2a6a68-7bab-4b63-962f-2bdfe5f7d787"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motion"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""6627a07b-d118-4bd1-af79-d3885ec6036f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8e9d8b14-29fe-4b10-abb1-e34a03871872"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2b111c5e-d2ee-4d96-84d5-7ae268fee50c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""be15fffd-7017-4028-9d19-eec57ffb1ed7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +150,9 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_Space = m_Global.FindAction("Space", throwIfNotFound: true);
         m_Global_Console = m_Global.FindAction("Console", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Motion = m_Player.FindAction("Motion", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,9 +264,59 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         }
     }
     public GlobalActions @Global => new GlobalActions(this);
+
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Motion;
+    public struct PlayerActions
+    {
+        private @LazyPanInputControl m_Wrapper;
+        public PlayerActions(@LazyPanInputControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Motion => m_Wrapper.m_Player_Motion;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @Motion.started += instance.OnMotion;
+            @Motion.performed += instance.OnMotion;
+            @Motion.canceled += instance.OnMotion;
+        }
+
+        private void UnregisterCallbacks(IPlayerActions instance)
+        {
+            @Motion.started -= instance.OnMotion;
+            @Motion.performed -= instance.OnMotion;
+            @Motion.canceled -= instance.OnMotion;
+        }
+
+        public void RemoveCallbacks(IPlayerActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
     public interface IGlobalActions
     {
         void OnSpace(InputAction.CallbackContext context);
         void OnConsole(InputAction.CallbackContext context);
+    }
+    public interface IPlayerActions
+    {
+        void OnMotion(InputAction.CallbackContext context);
     }
 }

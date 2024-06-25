@@ -5,6 +5,8 @@ SceneA,开始场景A,open_ui,创建,Init,初始化,UI_SceneA,开始场景A界面
 SceneA,开始场景A,load_entity,创建,Init,初始化,Obj_Camera_Camera,开始场景A相机
 SceneA,开始场景A,load_entity,创建,Init,初始化,Obj_Terrain_Terrain,开始场景A场景
 SceneA,开始场景A,load_entity,创建,Init,初始化,Obj_Player_Player,开始场景A玩家
+SceneA,开始场景A,load_entity,创建,Init,初始化,Obj_Trigger_ChargeStartGame,开始场景A开始游戏充能
+SceneA,开始场景A,unload_entity,销毁,Clear,清除,Obj_Trigger_ChargeStartGame,
 SceneA,开始场景A,unload_entity,销毁,Clear,清除,Obj_Player_Player,
 SceneA,开始场景A,unload_entity,销毁,Clear,清除,Obj_Terrain_Terrain,
 SceneA,开始场景A,unload_entity,销毁,Clear,清除,Obj_Camera_Camera,

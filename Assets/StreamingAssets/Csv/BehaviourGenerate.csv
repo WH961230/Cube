@@ -7,3 +7,5 @@ PlayerMovement,玩家输入移动,Input,Init,初始化
 PlayerMovement,玩家输入移动,Input,Clear,清除
 Gravity,重力,Auto,Init,初始化
 Gravity,重力,Auto,Clear,清除
+ChargeStartGame,充能开始游戏,Trigger,Init,初始化
+ChargeStartGame,充能开始游戏,Trigger,Clear,清除

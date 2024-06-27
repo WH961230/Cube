@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LazyPan {
     public class Behaviour_Auto_CameraPlayerView : Behaviour {
@@ -8,6 +9,20 @@ namespace LazyPan {
         public Behaviour_Auto_CameraPlayerView(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _virtualCamera = Cond.Instance.Get<Transform>(entity, Label.CAMERA).GetComponent<CinemachineVirtualCamera>();
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+            TestUI();
+        }
+
+        private void TestUI() {
+            Flo.Instance.GetFlow(out Flow_SceneA flow);
+            Comp ui = flow.GetUI();
+            Button testDead = Cond.Instance.Get<Button>(ui, "TestDead");
+            ButtonRegister.AddListener(testDead, () => {
+                flow.Next("SceneA");
+            });
+            Button testWin = Cond.Instance.Get<Button>(ui, "TestWin");
+            ButtonRegister.AddListener(testWin, () => {
+                flow.Next("SceneA");
+            });
         }
 
         private void OnUpdate() {

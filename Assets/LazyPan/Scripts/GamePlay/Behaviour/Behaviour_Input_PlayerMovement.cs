@@ -4,15 +4,14 @@ using UnityEngine.InputSystem;
 
 namespace LazyPan {
     public class Behaviour_Input_PlayerMovement : Behaviour {
-        private float _movementSpeed;//移动速度
+        private FloatData _movementSpeedData;//移动速度
         private Vector3 _movementDirection;//移动方向
         private Vector2 _inputMovementValue;
         private CharacterController _characterController;
         public Behaviour_Input_PlayerMovement(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _characterController = Cond.Instance.Get<CharacterController>(entity, Label.CHARACTERCONTROLLER);
-            _movementSpeed = 5;
             InputRegister.Instance.Load(InputRegister.Motion, InputMotionEvent);
-            Data.Instance.OnUpdateEvent.AddListener(OnMovementUpdate);
+            Game.instance.OnUpdateEvent.AddListener(OnMovementUpdate);
         }
 
         private void InputMotionEvent(InputAction.CallbackContext obj) {
@@ -27,13 +26,14 @@ namespace LazyPan {
         private void OnMovementUpdate() {
             if (_characterController != null) {
                 Vector3 moveDirection = GetMovementDirection();
-                _characterController.Move(moveDirection * _movementSpeed * Time.deltaTime);
+                 Cond.Instance.GetData(entity, Label.Assemble(Label.MOVEMENT, Label.SPEED), out _movementSpeedData);
+                _characterController.Move(moveDirection * _movementSpeedData.Float * Time.deltaTime);
             }
         }
 
         public override void Clear() {
             base.Clear();
-            Data.Instance.OnUpdateEvent.RemoveListener(OnMovementUpdate);
+            Game.instance.OnUpdateEvent.RemoveListener(OnMovementUpdate);
             InputRegister.Instance.UnLoad(InputRegister.Motion, InputMotionEvent);
         }
     }

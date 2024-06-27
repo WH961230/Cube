@@ -14,17 +14,17 @@ namespace LazyPan {
         public Behaviour_Trigger_ChargeStartGame(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flowSceneA);
 
-            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY, out _energyData);
-            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY + Cube.Label.MAX, out _energyMaxData);
-            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY + Cube.Label.SPEED, out _energySpeedData);
-            entity.Comp.GetComponent<CubeData>().GetData(Cube.Label.ENERGY + Cube.Label.ING, out _isChargingEnergyData);
+            Cond.Instance.GetData(entity, Label.ENERGY, out _energyData);
+            Cond.Instance.GetData(entity, Label.ENERGY + Label.MAX, out _energyMaxData);
+            Cond.Instance.GetData(entity, Label.ENERGY + Label.SPEED, out _energySpeedData);
+            Cond.Instance.GetData(entity, Label.ENERGY + Label.ING, out _isChargingEnergyData);
 
-            _energyImage = Cond.Instance.Get<Image>(entity, Cube.Label.ENERGY);
+            _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
 
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(ChargeIn);
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerExitEvent.AddListener(ChargeOut);
-            Data.Instance.OnUpdateEvent.AddListener(OnUpdate);
+            Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
         private void OnUpdate() {
@@ -45,8 +45,8 @@ namespace LazyPan {
         }
 
         private void ChargeIn(Collider arg0) {
-            if (Data.Instance.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {
-                if (playerEntity.EntityData.BaseRuntimeData.Type == "Player") {
+            if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {
+                if (playerEntity.Type == "Player") {
                     _isChargingEnergyData.Bool = true;
                     _energyImage.gameObject.SetActive(true);
                 }
@@ -54,9 +54,9 @@ namespace LazyPan {
         }
 
         private void ChargeOut(Collider arg0) {
-            if (Data.Instance.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(),
+            if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(),
                     out Entity playerEntity)) {
-                if (playerEntity.EntityData.BaseRuntimeData.Type == "Player") {
+                if (playerEntity.Type == "Player") {
                     _isChargingEnergyData.Bool = false;
                     _energyImage.gameObject.SetActive(false);
                     _energyData.Float = 0;
@@ -68,7 +68,7 @@ namespace LazyPan {
             base.Clear();
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.RemoveListener(ChargeIn);
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerExitEvent.RemoveListener(ChargeOut);
-            Data.Instance.OnUpdateEvent.RemoveListener(OnUpdate);
+            Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
         }
     }
 }

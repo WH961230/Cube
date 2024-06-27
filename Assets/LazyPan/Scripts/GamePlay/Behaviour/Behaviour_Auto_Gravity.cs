@@ -8,7 +8,7 @@ namespace LazyPan {
         public Behaviour_Auto_Gravity(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _characterController = Cond.Instance.Get<CharacterController>(entity, Label.CHARACTERCONTROLLER);
             _gravitySpeed = 5;
-            Data.Instance.OnLateUpdateEvent.AddListener(OnGravityUpdate);
+            Game.instance.OnLateUpdateEvent.AddListener(OnGravityUpdate);
         }
 
         private void OnGravityUpdate() {
@@ -19,7 +19,7 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
-            Data.Instance.OnLateUpdateEvent.RemoveListener(OnGravityUpdate);
+            Game.instance.OnLateUpdateEvent.RemoveListener(OnGravityUpdate);
         }
     }
 }

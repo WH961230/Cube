@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7325986197047342079}
   - component: {fileID: 6436606269490017380}
+  - component: {fileID: 7666428357650901853}
   m_Layer: 0
   m_Name: Obj_Camera_Camera
   m_TagString: Untagged
@@ -217,6 +218,22 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+--- !u!114 &7666428357650901853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224688507135368775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bools: []
+  Ints: []
+  Floats: []
+  Strings: []
 --- !u!1 &6489847830909397080
 GameObject:
   m_ObjectHideFlags: 0

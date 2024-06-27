@@ -7,7 +7,7 @@ namespace LazyPan {
         private CinemachineVirtualCamera _virtualCamera;
         public Behaviour_Auto_CameraPlayerView(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _virtualCamera = Cond.Instance.Get<Transform>(entity, Label.CAMERA).GetComponent<CinemachineVirtualCamera>();
-            Data.Instance.OnUpdateEvent.AddListener(OnUpdate);
+            Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
         private void OnUpdate() {
@@ -22,7 +22,7 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
-            Data.Instance.OnUpdateEvent.RemoveListener(OnUpdate);
+            Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
         }
     }
 }

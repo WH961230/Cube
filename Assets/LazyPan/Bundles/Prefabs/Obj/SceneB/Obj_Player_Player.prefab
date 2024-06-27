@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8afa660f62222b64eaa323dea3369320, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5371547547950525104}
   - component: {fileID: 7806520133526987753}
-  - component: {fileID: 7953418538301792137}
+  - component: {fileID: 6094217625829534042}
   m_Layer: 0
   m_Name: Obj_Player_Player
   m_TagString: Untagged
@@ -227,7 +227,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
---- !u!114 &7953418538301792137
+--- !u!114 &6094217625829534042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,14 +236,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4923463278167618314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22da087a75b442ab99b1450592f06e99, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Bools: []
-  Ints:
-  - Sign: Health
-    Int: 100
-  Floats: []
+  Ints: []
+  Floats:
+  - Sign: MovementSpeed
+    Float: 5
   Strings: []
 --- !u!1 &6152797482325617040
 GameObject:

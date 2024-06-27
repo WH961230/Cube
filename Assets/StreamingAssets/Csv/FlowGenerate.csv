@@ -16,6 +16,10 @@ SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Camera_Camera,战斗�
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Terrain_Terrain,战斗场景B地形
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Player_Player,战斗场景B玩家
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Tower_Tower,战斗场景B塔
+SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Creator_ActivatableCapabilityCreator,战斗场景B可激活物体生成器
+SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Creator_RobotCreator,战斗场景B机器人生成器
+SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Creator_RobotCreator,
+SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Creator_ActivatableCapabilityCreator,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Tower_Tower,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Player_Player,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Terrain_Terrain,

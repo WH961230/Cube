@@ -13,16 +13,17 @@ namespace LazyPan {
         }
 
         private void TestUI() {
-            Flo.Instance.GetFlow(out Flow_SceneA flow);
-            Comp ui = flow.GetUI();
-            Button testDead = Cond.Instance.Get<Button>(ui, "TestDead");
-            ButtonRegister.AddListener(testDead, () => {
-                flow.Next("SceneA");
-            });
-            Button testWin = Cond.Instance.Get<Button>(ui, "TestWin");
-            ButtonRegister.AddListener(testWin, () => {
-                flow.Next("SceneA");
-            });
+            if (Flo.Instance.GetFlow(out Flow_SceneB flow)) {
+                Comp ui = flow.GetUI();
+                Button testDead = Cond.Instance.Get<Button>(ui, "TestDead");
+                ButtonRegister.AddListener(testDead, () => {
+                    flow.Next("SceneA");
+                });
+                Button testWin = Cond.Instance.Get<Button>(ui, "TestWin");
+                ButtonRegister.AddListener(testWin, () => {
+                    flow.Next("SceneA");
+                });
+            }
         }
 
         private void OnUpdate() {

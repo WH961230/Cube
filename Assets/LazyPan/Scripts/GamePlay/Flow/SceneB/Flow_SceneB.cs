@@ -8,6 +8,8 @@ namespace LazyPan {
 		private Entity Obj_Terrain_Terrain;
 		private Entity Obj_Player_Player;
 		private Entity Obj_Tower_Tower;
+		private Entity Obj_Creator_ActivatableCapabilityCreator;
+		private Entity Obj_Creator_RobotCreator;
 
         public override void Init(Flow baseFlow) {
             base.Init(baseFlow);
@@ -18,6 +20,8 @@ namespace LazyPan {
 			Obj_Terrain_Terrain = Obj.Instance.LoadEntity("Obj_Terrain_Terrain");
 			Obj_Player_Player = Obj.Instance.LoadEntity("Obj_Player_Player");
 			Obj_Tower_Tower = Obj.Instance.LoadEntity("Obj_Tower_Tower");
+			Obj_Creator_ActivatableCapabilityCreator = Obj.Instance.LoadEntity("Obj_Creator_ActivatableCapabilityCreator");
+			Obj_Creator_RobotCreator = Obj.Instance.LoadEntity("Obj_Creator_RobotCreator");
 
         }
 
@@ -35,6 +39,8 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
+			Obj.Instance.UnLoadEntity(Obj_Creator_RobotCreator);
+			Obj.Instance.UnLoadEntity(Obj_Creator_ActivatableCapabilityCreator);
 			Obj.Instance.UnLoadEntity(Obj_Tower_Tower);
 			Obj.Instance.UnLoadEntity(Obj_Player_Player);
 			Obj.Instance.UnLoadEntity(Obj_Terrain_Terrain);

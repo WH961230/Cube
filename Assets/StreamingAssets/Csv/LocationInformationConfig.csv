@@ -1,5 +1,11 @@
 ﻿Sign,Description
 string,string
 标识,描述
-LocationInf_Single_SceneA_Player,开始场景A玩家初始方位
-LocationInf_Single_SceneB_Player,战斗场景B玩家初始方位
+LocationInf_SceneA_Player,开始场景A玩家初始方位
+LocationInf_SceneA_StartGame,开始场景A开始游戏初始方位
+LocationInf_SceneA_Terrain,开始场景A地形初始方位
+LocationInf_SceneB_Player,战斗场景B玩家初始方位
+LocationInf_SceneB_Terrain,战斗场景B地形初始方位
+LocationInf_SceneB_Tower,战斗场景B塔初始方位
+LocationInf_SceneB_ActivatableCapabilityCreator,战斗场景B可激活能力生成器初始方位
+LocationInf_SceneB_RobotCreator,战斗场景B机器人生成器初始方位

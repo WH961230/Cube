@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77819a1bce2c4b03a3046288c64f14d7, type: 3}
-  m_Name: LocationInf_Single_SceneA_Terrain
+  m_Name: LocationInf_SceneB_RobotCreator
   m_EditorClassIdentifier: 
-  SettingName: 
-  TerrainGo: {fileID: 0}
+  SettingName: "\u673A\u5668\u4EBA\u751F\u6210\u5668"
   locationInformationDatas:
   - Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: -0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}

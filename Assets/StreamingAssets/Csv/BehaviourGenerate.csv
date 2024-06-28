@@ -9,3 +9,11 @@ Gravity,重力,Auto,Init,初始化
 Gravity,重力,Auto,Clear,清除
 ChargeStartGame,充能开始游戏,Trigger,Init,初始化
 ChargeStartGame,充能开始游戏,Trigger,Clear,清除
+CreateRandomPositionActivatableCapability,创建随机位置激活物体,Event,Init,初始化
+CreateRandomPositionActivatableCapability,创建随机位置激活物体,Event,GetRandomPosition,获取随机位置
+CreateRandomPositionActivatableCapability,创建随机位置激活物体,Event,CreateActivatableCapability,创建可激活物体
+CreateRandomPositionActivatableCapability,创建随机位置激活物体,Event,Clear,清除
+CreateRandomPositionRobot,创建随机位置机器人,Event,Init,初始化
+CreateRandomPositionRobot,创建随机位置机器人,Event,GetRandomPosition,获取随机位置
+CreateRandomPositionRobot,创建随机位置机器人,Event,CreateRobot,创建机器人
+CreateRandomPositionRobot,创建随机位置机器人,Event,Clear,清除

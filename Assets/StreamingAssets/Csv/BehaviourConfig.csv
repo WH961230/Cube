@@ -5,3 +5,5 @@ Behaviour_Auto_Gravity,重力,重力
 Behaviour_Input_PlayerMovement,玩家移动,玩家移动
 Behaviour_Auto_CameraPlayerView,相机跟随玩家,相机跟随玩家
 Behaviour_Trigger_ChargeStartGame,开始游戏充能,开始游戏充能
+Behaviour_Event_CreateRandomPositionActivatableCapability,创建随机位置可激活物体,创建随机位置可激活物体
+Behaviour_Event_CreateRandomPositionRobot,创建随机位置机器人,创建随机位置机器人

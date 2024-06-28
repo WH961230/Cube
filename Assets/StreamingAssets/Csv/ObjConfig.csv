@@ -13,3 +13,11 @@ Obj_Activable_ActivatableCapability,SceneB,Activable,战斗场景B可激活能�
 Obj_Creator_ActivatableCapabilityCreator,SceneB,Creator,战斗场景B可激活能力生成器,LocationInf_SceneB_ActivatableCapabilityCreator,Behaviour_Event_CreateRandomPositionActivatableCapability
 Obj_Creator_RobotCreator,SceneB,Creator,战斗场景B机器人生成器,LocationInf_SceneB_RobotCreator,Behaviour_Event_CreateRandomPositionRobot
 Obj_Robot_RobotA,SceneB,Robot,战斗场景B A级机器人,,
+Obj_Robot_RobotB,SceneB,Robot,战斗场景B B级机器人,,
+Obj_Robot_RobotC,SceneB,Robot,战斗场景B C级机器人,,
+Obj_Robot_RobotD,SceneB,Robot,战斗场景B D级机器人,,
+Obj_Robot_RobotE,SceneB,Robot,战斗场景B E级机器人,,
+Obj_Robot_RobotF,SceneB,Robot,战斗场景B F级机器人,,
+Obj_Robot_RobotG,SceneB,Robot,战斗场景B G级机器人,,
+Obj_Robot_RobotH,SceneB,Robot,战斗场景B H级机器人,,
+Obj_Robot_RobotI,SceneB,Robot,战斗场景B I级机器人,,

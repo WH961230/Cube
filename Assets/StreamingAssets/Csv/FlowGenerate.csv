@@ -18,6 +18,12 @@ SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Player_Player,战斗�
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Tower_Tower,战斗场景B塔
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Creator_ActivatableCapabilityCreator,战斗场景B可激活物体生成器
 SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Creator_RobotCreator,战斗场景B机器人生成器
+SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Event_PlayerThreeChooseOne,战斗场景B玩家增益三选一
+SceneB,战斗场景B,load_entity,创建,Init,初始化,Obj_Event_RobotThreeChooseOne,战斗场景B机器人增益三选一
+SceneB,战斗场景B,load_entity,创建,Settlement,结算,Obj_Event_Settlement,战斗场景B结算
+SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Event_Settlement,
+SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Event_PlayerThreeChooseOne,
+SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Event_RobotThreeChooseOne,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Creator_RobotCreator,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Creator_ActivatableCapabilityCreator,
 SceneB,战斗场景B,unload_entity,销毁,Clear,清除,Obj_Tower_Tower,

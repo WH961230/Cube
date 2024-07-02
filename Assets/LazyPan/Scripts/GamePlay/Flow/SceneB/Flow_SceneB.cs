@@ -10,6 +10,9 @@ namespace LazyPan {
 		private Entity Obj_Tower_Tower;
 		private Entity Obj_Creator_ActivatableCapabilityCreator;
 		private Entity Obj_Creator_RobotCreator;
+		private Entity Obj_Event_PlayerThreeChooseOne;
+		private Entity Obj_Event_RobotThreeChooseOne;
+		private Entity Obj_Event_Settlement;
 
         public override void Init(Flow baseFlow) {
             base.Init(baseFlow);
@@ -22,12 +25,19 @@ namespace LazyPan {
 			Obj_Tower_Tower = Obj.Instance.LoadEntity("Obj_Tower_Tower");
 			Obj_Creator_ActivatableCapabilityCreator = Obj.Instance.LoadEntity("Obj_Creator_ActivatableCapabilityCreator");
 			Obj_Creator_RobotCreator = Obj.Instance.LoadEntity("Obj_Creator_RobotCreator");
+			Obj_Event_PlayerThreeChooseOne = Obj.Instance.LoadEntity("Obj_Event_PlayerThreeChooseOne");
+			Obj_Event_RobotThreeChooseOne = Obj.Instance.LoadEntity("Obj_Event_RobotThreeChooseOne");
 
         }
 
 		/*获取UI*/
 		public Comp GetUI() {
 			return UI_SceneB;
+		}
+
+		/*结算*/
+		public void Settlement() {
+			Obj_Event_Settlement = Obj.Instance.LoadEntity("Obj_Event_Settlement");
 		}
 
 
@@ -39,6 +49,9 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
+			Obj.Instance.UnLoadEntity(Obj_Event_Settlement);
+			Obj.Instance.UnLoadEntity(Obj_Event_PlayerThreeChooseOne);
+			Obj.Instance.UnLoadEntity(Obj_Event_RobotThreeChooseOne);
 			Obj.Instance.UnLoadEntity(Obj_Creator_RobotCreator);
 			Obj.Instance.UnLoadEntity(Obj_Creator_ActivatableCapabilityCreator);
 			Obj.Instance.UnLoadEntity(Obj_Tower_Tower);

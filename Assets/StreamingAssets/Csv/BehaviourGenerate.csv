@@ -17,3 +17,13 @@ CreateRandomPositionRobot,创建随机位置机器人,Event,Init,初始化
 CreateRandomPositionRobot,创建随机位置机器人,Event,GetRandomPosition,获取随机位置
 CreateRandomPositionRobot,创建随机位置机器人,Event,CreateRobot,创建机器人
 CreateRandomPositionRobot,创建随机位置机器人,Event,Clear,清除
+PlayerThreeChooseOne,玩家增益三选一,Event,Init,初始化
+PlayerThreeChooseOne,玩家增益三选一,Event,Clear,清除
+RobotThreeChooseOne,机器人增益三选一,Event,Init,初始化
+RobotThreeChooseOne,机器人增益三选一,Event,Clear,清除
+Settlement,结算,Event,Init,初始化
+Settlement,结算,Event,Clear,清除
+PlayerExperience,玩家经验,Auto,Init,初始化
+PlayerExperience,玩家经验,Auto,Clear,清除
+PlayerHealth,玩家血量,Auto,Init,初始化
+PlayerHealth,玩家血量,Auto,Clear,清除

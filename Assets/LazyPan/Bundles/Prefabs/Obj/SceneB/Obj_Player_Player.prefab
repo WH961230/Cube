@@ -244,6 +244,16 @@ MonoBehaviour:
   Floats:
   - Sign: MovementSpeed
     Float: 5
+  - Sign: Health
+    Float: 100
+  - Sign: MaxHealth
+    Float: 100
+  - Sign: ChargeEnergySpeed
+    Float: 10
+  - Sign: Experience
+    Float: 0
+  - Sign: MaxExperience
+    Float: 100
   Strings: []
 --- !u!1 &6152797482325617040
 GameObject:

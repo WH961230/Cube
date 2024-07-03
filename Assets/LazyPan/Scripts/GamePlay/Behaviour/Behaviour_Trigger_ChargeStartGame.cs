@@ -31,7 +31,7 @@ namespace LazyPan {
             if (_isChargingEnergyData.Bool) {
                 _energyData.Float += _energySpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
-                    _flowSceneA.Next("SceneB");
+                    Next();
                     return;
                 }
 
@@ -42,6 +42,10 @@ namespace LazyPan {
                 _energyImage.gameObject.SetActive(false);
                 _energyData.Float = 0;
             }
+        }
+
+        private void Next() {
+            _flowSceneA.Next("SceneB");
         }
 
         private void ChargeIn(Collider arg0) {

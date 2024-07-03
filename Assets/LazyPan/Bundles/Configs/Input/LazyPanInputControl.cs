@@ -44,6 +44,24 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""09cef4c5-4939-4944-94cb-0e7314b66417"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""c732785d-fe27-46d1-a860-5c3aef11bf0b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -66,6 +84,28 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Console"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebc553f7-e70f-42a1-b40b-4e48e18817f7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b3d27ac-fc28-4139-ae5e-6adbe64d4e91"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -150,6 +190,8 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_Space = m_Global.FindAction("Space", throwIfNotFound: true);
         m_Global_Console = m_Global.FindAction("Console", throwIfNotFound: true);
+        m_Global_Escape = m_Global.FindAction("Escape", throwIfNotFound: true);
+        m_Global_R = m_Global.FindAction("R", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Motion = m_Player.FindAction("Motion", throwIfNotFound: true);
@@ -216,12 +258,16 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
     private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
     private readonly InputAction m_Global_Space;
     private readonly InputAction m_Global_Console;
+    private readonly InputAction m_Global_Escape;
+    private readonly InputAction m_Global_R;
     public struct GlobalActions
     {
         private @LazyPanInputControl m_Wrapper;
         public GlobalActions(@LazyPanInputControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Space => m_Wrapper.m_Global_Space;
         public InputAction @Console => m_Wrapper.m_Global_Console;
+        public InputAction @Escape => m_Wrapper.m_Global_Escape;
+        public InputAction @R => m_Wrapper.m_Global_R;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -237,6 +283,12 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
             @Console.started += instance.OnConsole;
             @Console.performed += instance.OnConsole;
             @Console.canceled += instance.OnConsole;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+            @R.started += instance.OnR;
+            @R.performed += instance.OnR;
+            @R.canceled += instance.OnR;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -247,6 +299,12 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
             @Console.started -= instance.OnConsole;
             @Console.performed -= instance.OnConsole;
             @Console.canceled -= instance.OnConsole;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+            @R.started -= instance.OnR;
+            @R.performed -= instance.OnR;
+            @R.canceled -= instance.OnR;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -314,6 +372,8 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
     {
         void OnSpace(InputAction.CallbackContext context);
         void OnConsole(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
     }
     public interface IPlayerActions
     {

@@ -12,3 +12,7 @@ Behaviour_Auto_PlayerExperience,玩家经验值,玩家经验值
 Behaviour_Event_Settlement,结算,结算
 Behaviour_Event_PlayerThreeChooseOne,玩家增益三选一,玩家增益三选一
 Behaviour_Event_RobotThreeChooseOne,机器人增益三选一,机器人增益三选一
+Behaviour_Auto_TowerChargeEnergy,塔充能,塔充能
+Behaviour_Auto_TowerWeaponManagement,塔武器管理,塔武器管理
+Behaviour_Auto_SubmachineGun,冲锋枪,冲锋枪
+Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,冲锋枪射速更快范围更近

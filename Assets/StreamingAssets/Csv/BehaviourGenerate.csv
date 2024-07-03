@@ -27,3 +27,11 @@ PlayerExperience,玩家经验,Auto,Init,初始化
 PlayerExperience,玩家经验,Auto,Clear,清除
 PlayerHealth,玩家血量,Auto,Init,初始化
 PlayerHealth,玩家血量,Auto,Clear,清除
+SubmachineGun,冲锋枪,Auto,Init,初始化
+SubmachineGun,冲锋枪,Auto,Clear,清除
+TowerChargeEnergy,塔充能,Auto,Init,初始化
+TowerChargeEnergy,塔充能,Auto,Clear,清除
+TowerWeaponManagement,塔武器管理,Auto,Init,初始化
+TowerWeaponManagement,塔武器管理,Auto,Clear,清除
+SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,Auto,Init,初始化
+SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,Auto,Clear,清除

@@ -19,15 +19,35 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, "MaxHealth", out _maxHealthData);
             Cond.Instance.GetData(entity, "Health", out _healthData);
             _healthData.Float = _maxHealthData.Float;
+            
+            InputRegister.Instance.Load(InputCode.R, context => {
+                if (context.performed) {
+                    BeDamaged(10);
+                }
+            });
 
             Game.instance.OnLateUpdateEvent.AddListener(OnUpdate);
         }
 
         private void OnUpdate() {
             _healthBar.value = _healthData.Float / _maxHealthData.Float;
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                _healthData.Float -= 5;
+        }
+
+        private void BeDamaged(float damageValue) {
+            if (_healthData.Float != 0) {
+                if (_healthData.Float > 0) {
+                    _healthData.Float -= damageValue;
+                }
+
+                if (_healthData.Float <= 0) {
+                    _healthData.Float = 0;
+                    Next();
+                }
             }
+        }
+
+        private void Next() {
+            _flow.Settlement();
         }
 
         public override void Clear() {

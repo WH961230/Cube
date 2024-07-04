@@ -15,4 +15,14 @@ Behaviour_Event_RobotThreeChooseOne,机器人增益三选一,机器人增益三�
 Behaviour_Auto_TowerChargeEnergy,塔充能,塔充能
 Behaviour_Auto_TowerWeaponManagement,塔武器管理,塔武器管理
 Behaviour_Auto_SubmachineGun,冲锋枪,冲锋枪
+Behaviour_Auto_Shotgun,霰弹枪,霰弹枪
+Behaviour_Auto_Sniperrifle,狙击枪,狙击枪
+Behaviour_Auto_Strafesatellite,扫射卫星,扫射卫星
+Behaviour_Auto_Ring,圆环,圆环
+Behaviour_Auto_Orbitingball,环绕球,环绕球
+Behaviour_Auto_Laserray,激光射线,激光射线
+Behaviour_Auto_Grenade,手雷,手雷
 Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,冲锋枪射速更快范围更近
+Behaviour_Auto_IncreasePickupRange,增加玩家的拾取范围,增加玩家的拾取范围
+Behaviour_Auto_IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,增加塔的能量容量
+Behaviour_Auto_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,增加所有敌人的移动速度并减少生命值,增加所有敌人的移动速度并减少生命值

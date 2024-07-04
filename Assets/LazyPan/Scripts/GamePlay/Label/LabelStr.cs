@@ -14,6 +14,10 @@ public class LabelStr {
     public static string WEAPON = "Weapon";
     public static string ICON = "Icon";
     public static string FOOT = "Foot";
+    public static string USED = "Used";
+    public static string TARGET = "Target";
+    public static string SIGN = "Sign";
+    public static string INFO = "Info";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

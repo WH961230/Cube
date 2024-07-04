@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_Robot_RobotG
+  m_Name: Obj_PlayerBuff_IncreasePickupRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,10 +125,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools: []
+  Bools:
+  - Sign: Used
+    Description: "\u88AB\u4F7F\u7528"
+    Bool: 0
   Ints: []
   Floats: []
-  Strings: []
+  Strings:
+  - Sign: Target
+    Description: "\u76EE\u6807\u5B9E\u4F53\u6807\u8BC6"
+    String: Obj_Player_Player
+  - Sign: Sign
+    Description: "\u5F85\u6CE8\u518C\u884C\u4E3A\u6807\u8BC6"
+    String: Behaviour_Auto_IncreasePickupRange
+  - Sign: Icon
+    Description: "\u56FE\u6807\u5730\u5740"
+    String: IncreasePickupRange
+  - Sign: Info
+    Description: "\u8BF4\u660E"
+    String: "\u589E\u52A0\u73A9\u5BB6\u7684\u62FE\u53D6\u8303\u56F4"
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

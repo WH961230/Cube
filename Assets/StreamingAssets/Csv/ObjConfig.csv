@@ -12,17 +12,27 @@ Obj_Tower_Tower,SceneB,Tower,战斗场景B塔,LocationInf_SceneB_Tower,Behaviour
 Obj_Activable_ActivatableCapability,SceneB,Activable,战斗场景B可激活能力,,
 Obj_Creator_ActivatableCapabilityCreator,SceneB,Creator,战斗场景B可激活能力生成器,LocationInf_SceneB_ActivatableCapabilityCreator,Behaviour_Event_CreateRandomPositionActivatableCapability
 Obj_Creator_RobotCreator,SceneB,Creator,战斗场景B机器人生成器,LocationInf_SceneB_RobotCreator,Behaviour_Event_CreateRandomPositionRobot
-Obj_Robot_RobotA,SceneB,Robot,战斗场景B A级机器人,,
-Obj_Robot_RobotB,SceneB,Robot,战斗场景B B级机器人,,
-Obj_Robot_RobotC,SceneB,Robot,战斗场景B C级机器人,,
-Obj_Robot_RobotD,SceneB,Robot,战斗场景B D级机器人,,
-Obj_Robot_RobotE,SceneB,Robot,战斗场景B E级机器人,,
-Obj_Robot_RobotF,SceneB,Robot,战斗场景B F级机器人,,
-Obj_Robot_RobotG,SceneB,Robot,战斗场景B G级机器人,,
-Obj_Robot_RobotH,SceneB,Robot,战斗场景B H级机器人,,
-Obj_Robot_RobotI,SceneB,Robot,战斗场景B I级机器人,,
+Obj_Robot_SmallTriangle,SceneB,Robot,战斗场景B小三角,,
+Obj_Robot_BigTriangle,SceneB,Robot,战斗场景B大三角,,
+Obj_Robot_Breed,SceneB,Robot,战斗场景B繁育,,
+Obj_Robot_Bomb,SceneB,Robot,战斗场景B炸弹,,
+Obj_Robot_Rapidly,SceneB,Robot,战斗场景B急速,,
+Obj_Robot_Remotely,SceneB,Robot,战斗场景B远程,,
+Obj_Robot_TriangularEyes,SceneB,Robot,战斗场景B三角眼,,
+Obj_Robot_RoundEyes,SceneB,Robot,战斗场景B圆形眼,,
+Obj_Robot_BreedingFortress,SceneB,Robot,战斗场景B繁育堡垒,,
 Obj_Event_PlayerThreeChooseOne,SceneB,Event,战斗场景B玩家增益三选一,,Behaviour_Event_PlayerThreeChooseOne
 Obj_Event_RobotThreeChooseOne,SceneB,Event,战斗场景B机器人增益三选一,,Behaviour_Event_RobotThreeChooseOne
 Obj_Event_Settlement,SceneB,Event,战斗场景B结算,,Behaviour_Event_Settlement
 Obj_Weapon_SubmachineGun,SceneB,Weapon,战斗场景B冲锋枪,,Behaviour_Auto_SubmachineGun
-Obj_PlayerBuff_SubmachineGunFiresFasterAndHasACloserRange,SceneB,PlayerBuff,战斗场景B冲锋枪射速更快范围更近,,Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange
+Obj_Weapon_Shotgun,SceneB,Weapon,战斗场景B霰弹枪,,Behaviour_Auto_Shotgun
+Obj_Weapon_Sniperrifle,SceneB,Weapon,战斗场景B狙击枪,,Behaviour_Auto_Sniperrifle
+Obj_Weapon_Strafesatellite,SceneB,Weapon,战斗场景B扫射卫星,,Behaviour_Auto_Strafesatellite
+Obj_Weapon_Ring,SceneB,Weapon,战斗场景B圆环,,Behaviour_Auto_Ring
+Obj_Weapon_Orbitingball,SceneB,Weapon,战斗场景B环绕球,,Behaviour_Auto_Orbitingball
+Obj_Weapon_Laserray,SceneB,Weapon,战斗场景B激光射线,,Behaviour_Auto_Laserray
+Obj_Weapon_Grenade,SceneB,Weapon,战斗场景B手雷,,Behaviour_Auto_Grenade
+Obj_WeaponBuff_SubmachineGunFiresFasterAndHasACloserRange,SceneB,WeaponBuff,战斗场景B冲锋枪射速更快范围更近,,
+Obj_PlayerBuff_IncreasePickupRange,SceneB,PlayerBuff,战斗场景B增加玩家拾取范围,,
+Obj_RobotBuff_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,SceneB,RobotBuff,战斗场景B增加所有机器人的移速并减少生命值,,
+Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,

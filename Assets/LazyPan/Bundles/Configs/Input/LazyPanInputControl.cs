@@ -62,6 +62,24 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Q"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb70b2cb-44f2-4ffd-89c0-273514d729a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""E"",
+                    ""type"": ""Button"",
+                    ""id"": ""086470f1-2e7f-4e41-b68c-599b5c577158"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -106,6 +124,28 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dadf6569-e35f-4bb5-ad03-933bb34d56b0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Q"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdead6ff-9901-46b4-a6b0-5f6a0f41384c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""E"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -192,6 +232,8 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         m_Global_Console = m_Global.FindAction("Console", throwIfNotFound: true);
         m_Global_Escape = m_Global.FindAction("Escape", throwIfNotFound: true);
         m_Global_R = m_Global.FindAction("R", throwIfNotFound: true);
+        m_Global_Q = m_Global.FindAction("Q", throwIfNotFound: true);
+        m_Global_E = m_Global.FindAction("E", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Motion = m_Player.FindAction("Motion", throwIfNotFound: true);
@@ -260,6 +302,8 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Global_Console;
     private readonly InputAction m_Global_Escape;
     private readonly InputAction m_Global_R;
+    private readonly InputAction m_Global_Q;
+    private readonly InputAction m_Global_E;
     public struct GlobalActions
     {
         private @LazyPanInputControl m_Wrapper;
@@ -268,6 +312,8 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         public InputAction @Console => m_Wrapper.m_Global_Console;
         public InputAction @Escape => m_Wrapper.m_Global_Escape;
         public InputAction @R => m_Wrapper.m_Global_R;
+        public InputAction @Q => m_Wrapper.m_Global_Q;
+        public InputAction @E => m_Wrapper.m_Global_E;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -289,6 +335,12 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
             @R.started += instance.OnR;
             @R.performed += instance.OnR;
             @R.canceled += instance.OnR;
+            @Q.started += instance.OnQ;
+            @Q.performed += instance.OnQ;
+            @Q.canceled += instance.OnQ;
+            @E.started += instance.OnE;
+            @E.performed += instance.OnE;
+            @E.canceled += instance.OnE;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -305,6 +357,12 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
             @R.started -= instance.OnR;
             @R.performed -= instance.OnR;
             @R.canceled -= instance.OnR;
+            @Q.started -= instance.OnQ;
+            @Q.performed -= instance.OnQ;
+            @Q.canceled -= instance.OnQ;
+            @E.started -= instance.OnE;
+            @E.performed -= instance.OnE;
+            @E.canceled -= instance.OnE;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -374,6 +432,8 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         void OnConsole(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnR(InputAction.CallbackContext context);
+        void OnQ(InputAction.CallbackContext context);
+        void OnE(InputAction.CallbackContext context);
     }
     public interface IPlayerActions
     {

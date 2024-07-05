@@ -14,7 +14,9 @@ namespace LazyPan {
             #region Test
 
             InputRegister.Instance.Load(InputCode.E, context => {
-                MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
+                if (context.performed) {
+                    MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
+                }
             });
 
             #endregion

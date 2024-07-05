@@ -15,7 +15,9 @@ namespace LazyPan {
             #region Test
 
             InputRegister.Instance.Load(InputCode.Q, context => {
-                MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
+                if (context.performed) {
+                    MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
+                }
             });
 
             #endregion

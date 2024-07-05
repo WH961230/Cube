@@ -55,3 +55,5 @@ IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,Auto,Init,初始化
 IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,Auto,Clear,清除
 AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,增加所有敌人的移动速度并减少生命值,Auto,Init,初始化
 AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,增加所有敌人的移动速度并减少生命值,Auto,Clear,清除
+ChargeActivation,充能激活,Trigger,Init,初始化
+ChargeActivation,充能激活,Trigger,Clear,清除

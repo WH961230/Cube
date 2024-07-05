@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SettingName: "\u673A\u5668\u4EBA\u751F\u6210\u5668"
   locationInformationDatas:
-  - Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
+  - Position: {x: -13.09, y: 0, z: 5.78}
+    Rotation: {x: -0, y: 0, z: 0}
+  - Position: {x: 13.63, y: 0, z: 5.78}
+    Rotation: {x: -0, y: 0, z: 0}
+  - Position: {x: 13.63, y: 0, z: -6.15}
+    Rotation: {x: -0, y: 0, z: 0}
+  - Position: {x: -12.93, y: 0, z: -6.15}
+    Rotation: {x: -0, y: 0, z: 0}

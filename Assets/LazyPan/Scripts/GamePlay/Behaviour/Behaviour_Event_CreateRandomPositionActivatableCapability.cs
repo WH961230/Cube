@@ -6,6 +6,16 @@ namespace LazyPan {
     public class Behaviour_Event_CreateRandomPositionActivatableCapability : Behaviour {
         public Behaviour_Event_CreateRandomPositionActivatableCapability(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
 	        CreateActivatableCapability();
+	        
+	        #region Test
+
+	        InputRegister.Instance.Load(InputCode.C, context => {
+		        if (context.performed) {
+			        CreateActivatableCapability();
+		        }
+	        });
+
+	        #endregion
         }
 
 		/*获取随机位置*/

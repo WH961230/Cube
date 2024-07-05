@@ -7,6 +7,16 @@ namespace LazyPan {
 	    private List<Entity> _robots = new List<Entity>();
         public Behaviour_Event_CreateRandomPositionRobot(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
 	        MessageRegister.Instance.Reg(MessageCode.MsgStartGame, MsgStartGame);
+	        
+	        #region Test
+
+	        InputRegister.Instance.Load(InputCode.SPACE, context => {
+		        if (context.performed) {
+			        MessageRegister.Instance.Dis(MessageCode.MsgStartGame);
+		        }
+	        });
+
+	        #endregion
         }
 
         private void MsgStartGame() {
@@ -28,7 +38,7 @@ namespace LazyPan {
 		private void CreateRobot() {
 			//获取随机位置
 			LocationInformationData locationData = GetRandomPosition();
-			Entity instance = Obj.Instance.LoadEntity("");
+			Entity instance = Obj.Instance.LoadEntity("Obj_Robot_SmallTriangle");
 			//设置位置
 			instance.SetBeginLocationInfo(locationData);
 			//注册事件

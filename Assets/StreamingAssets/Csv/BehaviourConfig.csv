@@ -26,3 +26,4 @@ Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快�
 Behaviour_Auto_IncreasePickupRange,增加玩家的拾取范围,增加玩家的拾取范围
 Behaviour_Auto_IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,增加塔的能量容量
 Behaviour_Auto_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,增加所有敌人的移动速度并减少生命值,增加所有敌人的移动速度并减少生命值
+Behaviour_Trigger_ChargeActivation,充能激活,充能激活

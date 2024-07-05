@@ -95,6 +95,8 @@ MonoBehaviour:
   Transforms:
   - Sign: Foot
     Tran: {fileID: 7868656383781502519}
+  - Sign: Body
+    Tran: {fileID: 4123056821849299908}
   Colliders: []
   Materials: []
   Renderers: []
@@ -112,7 +114,9 @@ MonoBehaviour:
   UnityEventDatas: []
   TrailRenderers: []
   Cameras: []
-  NavMeshAgents: []
+  NavMeshAgents:
+  - Sign: NavMeshAgent
+    NavMeshAgent: {fileID: 4748065417787586821}
 --- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +131,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bools: []
   Ints: []
-  Floats: []
+  Floats:
+  - Sign: MovementSpeed
+    Description: "\u79FB\u52A8\u901F\u5EA6"
+    Float: 1
   Strings: []
 --- !u!1 &8090360991350506415
 GameObject:
@@ -173,6 +180,7 @@ GameObject:
   - component: {fileID: 6575765543141138691}
   - component: {fileID: 1494548911668348729}
   - component: {fileID: 5087919874951588738}
+  - component: {fileID: 4748065417787586821}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -268,3 +276,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!195 &4748065417787586821
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818269230642924652}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5000001
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

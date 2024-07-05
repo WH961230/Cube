@@ -429,7 +429,7 @@ Transform:
   m_Children:
   - {fileID: 2099932068105562825}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4668949735583421440
 MonoBehaviour:
@@ -542,7 +542,7 @@ MonoBehaviour:
     Float: 100
   - Sign: EnergySpeed
     Description: "\u80FD\u91CF\u6FC0\u6D3B\u901F\u5EA6"
-    Float: 25
+    Float: 50
   Strings: []
 --- !u!1 &8497300849643511715
 GameObject:

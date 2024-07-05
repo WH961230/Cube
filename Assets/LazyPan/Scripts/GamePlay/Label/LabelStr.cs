@@ -18,6 +18,10 @@ public class LabelStr {
     public static string TARGET = "Target";
     public static string SIGN = "Sign";
     public static string INFO = "Info";
+    public static string MOVEMENT = "Movement";
+    public static string SPEED = "Speed";
+    public static string NAVMESHAGENT = "NavMeshAgent";
+    public static string BODY = "Body";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -22,6 +22,14 @@ public class LabelStr {
     public static string SPEED = "Speed";
     public static string NAVMESHAGENT = "NavMeshAgent";
     public static string BODY = "Body";
+    public static string FIRE = "Fire";
+    public static string RATE = "Rate";
+    public static string INTERVAL = "Interval";
+    public static string RANGE = "Range";
+    public static string DAMAGE = "Damage";
+    public static string MUZZLE = "Muzzle";
+    public static string BULLET = "Bullet";
+    public static string TRIGGER = "Trigger";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -50,16 +50,16 @@ namespace LazyPan {
                 if (_energyData.Float > _energyMaxData.Float) {
                     _energyData.Float = _energyMaxData.Float;
                 }
-
-                if (_energyImage.gameObject.activeSelf) {
-                    _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
-                }
             } else {
                 _energyData.Float -= _energySpeedData.Float * Time.deltaTime;
                 if (_energyData.Float < 0) {
                     _energyImage.gameObject.SetActive(false);
                     _energyData.Float = 0;
                 }
+            }
+
+            if (_energyImage.gameObject.activeSelf) {
+                _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
             }
         }
 

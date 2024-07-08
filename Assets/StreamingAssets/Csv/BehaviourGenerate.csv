@@ -59,3 +59,5 @@ ChargeActivation,充能激活,Trigger,Init,初始化
 ChargeActivation,充能激活,Trigger,Clear,清除
 GlobalTrackingOfPlayer,全局追踪玩家,Auto,Init,初始化
 GlobalTrackingOfPlayer,全局追踪玩家,Auto,Clear,清除
+RobotHealth,敌人血量,Auto,Init,初始化
+RobotHealth,敌人血量,Auto,Clear,清除

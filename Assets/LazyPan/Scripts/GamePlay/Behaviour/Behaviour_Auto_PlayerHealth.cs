@@ -26,6 +26,7 @@ namespace LazyPan {
                 }
             });
 
+            MessageRegister.Instance.Reg<float>(MessageCode.MsgDamagePlayer, BeDamaged);
             Game.instance.OnLateUpdateEvent.AddListener(OnUpdate);
         }
 
@@ -53,6 +54,7 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             Game.instance.OnLateUpdateEvent.RemoveListener(OnUpdate);
+            MessageRegister.Instance.UnReg<float>(MessageCode.MsgDamagePlayer, BeDamaged);
         }
     }
 }

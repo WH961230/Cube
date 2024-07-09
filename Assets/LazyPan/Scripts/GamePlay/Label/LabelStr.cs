@@ -30,6 +30,8 @@ public class LabelStr {
     public static string MUZZLE = "Muzzle";
     public static string BULLET = "Bullet";
     public static string TRIGGER = "Trigger";
+    public static string KNOCKBACK = "Knockback";
+    public static string ACCELERATION = "Acceleration";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

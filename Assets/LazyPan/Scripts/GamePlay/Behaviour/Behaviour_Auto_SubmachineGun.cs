@@ -88,10 +88,11 @@ namespace LazyPan {
             }
         }
 
-        private void OnParticleCollisionEvent(GameObject arg0) {
+        private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity entity)) {
                 if (entity.ObjConfig.Type == "Robot") {
                     Debug.Log("获取机器人");
+                    fxGo.SetActive(false);
                 }
             }
         }

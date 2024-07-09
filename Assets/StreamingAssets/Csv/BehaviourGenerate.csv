@@ -61,3 +61,7 @@ GlobalTrackingOfPlayer,全局追踪玩家,Auto,Init,初始化
 GlobalTrackingOfPlayer,全局追踪玩家,Auto,Clear,清除
 RobotHealth,敌人血量,Auto,Init,初始化
 RobotHealth,敌人血量,Auto,Clear,清除
+KnockbackPlayer,击退玩家,Auto,Init,初始化
+KnockbackPlayer,击退玩家,Auto,Clear,清除
+KnockbackRobot,击退敌人,Auto,Init,初始化
+KnockbackRobot,击退敌人,Auto,Clear,清除

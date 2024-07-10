@@ -32,6 +32,8 @@ public class LabelStr {
     public static string TRIGGER = "Trigger";
     public static string KNOCKBACK = "Knockback";
     public static string ACCELERATION = "Acceleration";
+    public static string HEALTH = "Health";
+    public static string MAX = "Max";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

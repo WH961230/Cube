@@ -6,9 +6,11 @@ namespace LazyPan {
     public class Behaviour_Auto_PlayerHealth : Behaviour {
         private Flow_SceneB _flow;
         private Comp _ui;
-        private Slider _healthBar;
-        private FloatData _maxHealthData;
-        private FloatData _healthData;
+        private Slider _healthBar;//血条
+        private FloatData _maxHealthData;//血量上限
+        private FloatData _healthData;//血量
+        private FloatData _healthRecoverSpeed;//血量恢复速度
+        private BoolData _chargyingEnergyData;//充能中
         public Behaviour_Auto_PlayerHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -16,9 +18,12 @@ namespace LazyPan {
             Comp _health = Cond.Instance.Get<Comp>(_ui, "Health");
             _healthBar = Cond.Instance.Get<Slider>(_health, "Slider");
 
-            Cond.Instance.GetData(entity, "MaxHealth", out _maxHealthData);
-            Cond.Instance.GetData(entity, "Health", out _healthData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out _maxHealthData);
+            Cond.Instance.GetData(entity, LabelStr.HEALTH, out _healthData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.HEALTH, LabelStr.SPEED), out _healthRecoverSpeed);
             _healthData.Float = _maxHealthData.Float;
+            
+            Cond.Instance.GetData(entity, Label.ENERGY + Label.ING, out _chargyingEnergyData);
             
             InputRegister.Instance.Load(InputCode.R, context => {
                 if (context.performed) {
@@ -32,6 +37,14 @@ namespace LazyPan {
 
         private void OnUpdate() {
             _healthBar.value = _healthData.Float / _maxHealthData.Float;
+
+            if (_chargyingEnergyData.Bool) {
+                if (_healthData.Float < _maxHealthData.Float) {
+                    _healthData.Float += _healthRecoverSpeed.Float * Time.deltaTime;
+                } else {
+                    _healthData.Float = _maxHealthData.Float;
+                }
+            }
         }
 
         private void BeDamaged(float damageValue) {

@@ -29,5 +29,5 @@ Behaviour_Auto_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,增加所有
 Behaviour_Trigger_ChargeActivation,充能激活,充能激活
 Behaviour_Auto_GlobalTrackingOfPlayer,全局追踪玩家,全局追踪玩家
 Behaviour_Auto_RobotHealth,机器人血量,机器人血量
-Behaviour_Auto_KnockbackPlayer,击退玩家,击退玩家
-Behaviour_Auto_KnockbackRobot,击退机器人,击退机器人
+Behaviour_Trigger_KnockbackPlayer,击退玩家,击退玩家
+Behaviour_Trigger_AttackTowerSelfDestruct,攻击塔自爆,攻击塔自爆

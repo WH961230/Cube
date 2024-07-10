@@ -31,6 +31,8 @@ namespace LazyPan {
                 if (playerEntity.Type == "Player") {
                     _isChargingEnergyData.Bool = true;
                     _energyImage.gameObject.SetActive(true);
+                    Cond.Instance.GetData(playerEntity, Label.ENERGY + Label.ING, out BoolData playerIsChargingEnergyData);
+                    playerIsChargingEnergyData.Bool = true;
                 }
             }
         }
@@ -40,6 +42,8 @@ namespace LazyPan {
                     out Entity playerEntity)) {
                 if (playerEntity.Type == "Player") {
                     _isChargingEnergyData.Bool = false;
+                    Cond.Instance.GetData(playerEntity, Label.ENERGY + Label.ING, out BoolData playerIsChargingEnergyData);
+                    playerIsChargingEnergyData.Bool = false;
                 }
             }
         }

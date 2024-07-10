@@ -242,7 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools: []
+  Bools:
+  - Sign: Energying
+    Description: "\u5145\u80FD\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed
@@ -254,6 +257,9 @@ MonoBehaviour:
   - Sign: MaxHealth
     Description: "\u6700\u5927\u8840\u91CF"
     Float: 100
+  - Sign: HealthSpeed
+    Description: "\u8840\u91CF\u56DE\u590D\u901F\u5EA6"
+    Float: 2
   - Sign: ChargeEnergySpeed
     Description: "\u5145\u80FD\u901F\u5EA6"
     Float: 10

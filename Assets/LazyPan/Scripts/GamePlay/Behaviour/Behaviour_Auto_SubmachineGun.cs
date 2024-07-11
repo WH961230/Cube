@@ -117,27 +117,13 @@ namespace LazyPan {
         }
 
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
-            if (TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
+            if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "Robot") {
                     Debug.Log("获取机器人");
-                    // MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, entity.ID, _fireDamage.Float);
-                    // fxGo.SetActive(false);
+                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, entity.ID, _fireDamage.Float);
+                    fxGo.SetActive(false);
                 }
             }
-        }
-        
-        //查BodyInstanceID
-        public static bool TryGetEntityByBodyPrefabID(int id, out Entity entity) {
-            foreach (Entity tempEntity in EntityRegister.EntityDic.Values) {
-                Transform bodyTran = Cond.Instance.Get<Transform>(tempEntity, Label.BODY);
-                if (bodyTran != null && bodyTran.gameObject != null && bodyTran.gameObject.GetInstanceID() == id) {
-                    entity = tempEntity;
-                    return true;
-                }
-            }
-
-            entity = null;
-            return false;
         }
 
         #region Math

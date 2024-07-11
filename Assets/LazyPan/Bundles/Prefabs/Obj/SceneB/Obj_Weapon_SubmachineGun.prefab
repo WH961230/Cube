@@ -289,7 +289,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5168,7 +5168,7 @@ MonoBehaviour:
   Floats:
   - Sign: FireRateInterval
     Description: "\u5C04\u51FB\u901F\u7387\u95F4\u9694"
-    Float: 0.5
+    Float: 1
   - Sign: FireDamage
     Description: "\u5C04\u51FB\u4F24\u5BB3"
     Float: 20

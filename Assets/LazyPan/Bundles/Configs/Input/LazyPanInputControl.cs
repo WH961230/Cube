@@ -89,6 +89,15 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""T"",
+                    ""type"": ""Button"",
+                    ""id"": ""e325f6b5-2d62-4487-8885-dda3cf928bd0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -166,6 +175,17 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""C"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a01e2615-f638-44b8-a8e1-35c369f72f4f"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""T"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -255,6 +275,7 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         m_Global_Q = m_Global.FindAction("Q", throwIfNotFound: true);
         m_Global_E = m_Global.FindAction("E", throwIfNotFound: true);
         m_Global_C = m_Global.FindAction("C", throwIfNotFound: true);
+        m_Global_T = m_Global.FindAction("T", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Motion = m_Player.FindAction("Motion", throwIfNotFound: true);
@@ -326,6 +347,7 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Global_Q;
     private readonly InputAction m_Global_E;
     private readonly InputAction m_Global_C;
+    private readonly InputAction m_Global_T;
     public struct GlobalActions
     {
         private @LazyPanInputControl m_Wrapper;
@@ -337,6 +359,7 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         public InputAction @Q => m_Wrapper.m_Global_Q;
         public InputAction @E => m_Wrapper.m_Global_E;
         public InputAction @C => m_Wrapper.m_Global_C;
+        public InputAction @T => m_Wrapper.m_Global_T;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +390,9 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
             @C.started += instance.OnC;
             @C.performed += instance.OnC;
             @C.canceled += instance.OnC;
+            @T.started += instance.OnT;
+            @T.performed += instance.OnT;
+            @T.canceled += instance.OnT;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -392,6 +418,9 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
             @C.started -= instance.OnC;
             @C.performed -= instance.OnC;
             @C.canceled -= instance.OnC;
+            @T.started -= instance.OnT;
+            @T.performed -= instance.OnT;
+            @T.canceled -= instance.OnT;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -464,6 +493,7 @@ public partial class @LazyPanInputControl: IInputActionCollection2, IDisposable
         void OnQ(InputAction.CallbackContext context);
         void OnE(InputAction.CallbackContext context);
         void OnC(InputAction.CallbackContext context);
+        void OnT(InputAction.CallbackContext context);
     }
     public interface IPlayerActions
     {

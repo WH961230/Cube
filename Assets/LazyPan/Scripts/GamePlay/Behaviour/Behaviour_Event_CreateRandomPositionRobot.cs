@@ -10,7 +10,7 @@ namespace LazyPan {
 	        
 	        #region Test
 
-	        InputRegister.Instance.Load(InputCode.SPACE, context => {
+	        InputRegister.Instance.Load(InputCode.T, context => {
 		        if (context.performed) {
 			        MessageRegister.Instance.Dis(MessageCode.MsgStartGame);
 		        }

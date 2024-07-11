@@ -239,12 +239,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools: []
+  Bools:
+  - Sign: Movementing
+    Description: "\u79FB\u52A8\u4E2D"
+    Bool: 0
+  - Sign: Teleporting
+    Description: "\u4F20\u9001\u4E2D"
+    Bool: 0
+  - Sign: Knockbacking
+    Description: "\u51FB\u9000\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed
+    Description: 
     Float: 5
   Strings: []
+  Vector3s:
+  - Sign: MovementDirection
+    Description: "\u79FB\u52A8\u65B9\u5411"
+    Vector3: {x: 0, y: 0, z: 0}
 --- !u!1 &6152797482325617040
 GameObject:
   m_ObjectHideFlags: 0

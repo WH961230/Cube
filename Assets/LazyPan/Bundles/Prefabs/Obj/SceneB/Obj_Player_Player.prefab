@@ -246,6 +246,15 @@ MonoBehaviour:
   - Sign: Energying
     Description: "\u5145\u80FD\u4E2D"
     Bool: 0
+  - Sign: Movementing
+    Description: "\u79FB\u52A8\u4E2D"
+    Bool: 0
+  - Sign: Teleporting
+    Description: "\u4F20\u9001\u4E2D"
+    Bool: 0
+  - Sign: Knockbacking
+    Description: "\u51FB\u9000\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed
@@ -275,7 +284,17 @@ MonoBehaviour:
   - Sign: KnockbackAcceleration
     Description: "\u51FB\u9000\u52A0\u901F\u5EA6\uFF08\u8D1F\u6570\uFF09"
     Float: -50
+  - Sign: TeleportSpeed
+    Description: "\u77AC\u79FB\u901F\u5EA6"
+    Float: 20
+  - Sign: TeleportAcceleration
+    Description: "\u77AC\u79FB\u52A0\u901F\u5EA6"
+    Float: -50
   Strings: []
+  Vector3s:
+  - Sign: MovementDirection
+    Description: "\u79FB\u52A8\u65B9\u5411"
+    Vector3: {x: 0, y: 0, z: 0}
 --- !u!1 &5134341421025027679
 GameObject:
   m_ObjectHideFlags: 0

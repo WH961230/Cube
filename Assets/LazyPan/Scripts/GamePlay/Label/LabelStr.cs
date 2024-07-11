@@ -34,6 +34,8 @@ public class LabelStr {
     public static string ACCELERATION = "Acceleration";
     public static string HEALTH = "Health";
     public static string MAX = "Max";
+    public static string TELEPORT = "Teleport";
+    public static string DIRECTION = "Direction";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

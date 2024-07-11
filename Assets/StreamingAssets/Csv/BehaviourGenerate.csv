@@ -65,3 +65,5 @@ KnockbackPlayer,击退玩家,Trigger,Init,初始化
 KnockbackPlayer,击退玩家,Trigger,Clear,清除
 AttackTowerSelfDestruct,攻击塔自爆,Trigger,Init,初始化
 AttackTowerSelfDestruct,攻击塔自爆,Trigger,Clear,清除
+PlayerInvincibleTeleportation,玩家无敌瞬移,Auto,Init,初始化
+PlayerInvincibleTeleportation,玩家无敌瞬移,Auto,Clear,清除

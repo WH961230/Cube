@@ -5,8 +5,12 @@ using UnityEngine.InputSystem;
 namespace LazyPan {
     public class Behaviour_Input_PlayerMovement : Behaviour {
         private FloatData _movementSpeedData;//移动速度
-        private Vector3 _movementDirection;//移动方向
         private Vector2 _inputMovementValue;
+        private Vector3Data _moveDirectionData;//移动方向
+
+        private BoolData _moveData;
+        private BoolData _teleportData;
+        private BoolData _knockbackData;
 
         private Vector3 _knockbackDirection;
         private FloatData _knockbackSpeedSetting;
@@ -20,8 +24,15 @@ namespace LazyPan {
             _characterController = Cond.Instance.Get<CharacterController>(entity, Label.CHARACTERCONTROLLER);
             InputRegister.Instance.Load(InputRegister.Motion, InputMotionEvent);
             MessageRegister.Instance.Reg<Vector3>(MessageCode.MsgKnockbackPlayer, KnockbackPlayer);
+
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.KNOCKBACK, LabelStr.SPEED), out _knockbackSpeedSetting);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.KNOCKBACK, LabelStr.ACCELERATION), out _knockbackAccelerationSetting);
+            Cond.Instance.GetData(entity, Label.Assemble(Label.MOVEMENT, Label.SPEED), out _movementSpeedData);
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, Label.ING), out _moveData);
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, Label.ING), out _teleportData);
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.KNOCKBACK, Label.ING), out _knockbackData);
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, LabelStr.DIRECTION), out _moveDirectionData);
+
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
@@ -36,8 +47,12 @@ namespace LazyPan {
         }
 
         private Vector3 GetMovementDirection() {
-            _movementDirection = Vector3.forward * _inputMovementValue.y + Vector3.right * _inputMovementValue.x;
-            return _movementDirection;
+            Vector3 moveDirection = Vector3.forward * _inputMovementValue.y + Vector3.right * _inputMovementValue.x;
+            if (moveDirection != Vector3.zero) {
+                _moveDirectionData.Vector3 = moveDirection;
+            }
+
+            return moveDirection;
         }
 
         private void OnUpdate() {
@@ -47,22 +62,29 @@ namespace LazyPan {
 
         private void Movement() {
             if (_characterController != null) {
+                //传送中取消移动控制
+                if (_teleportData.Bool || _knockbackData.Bool) {
+                    _moveData.Bool = false;
+                    return;
+                }
+
                 Vector3 moveDirection = GetMovementDirection();
-                Cond.Instance.GetData(entity, Label.Assemble(Label.MOVEMENT, Label.SPEED), out _movementSpeedData);
                 _characterController.Move(moveDirection * _movementSpeedData.Float * Time.deltaTime);
+                _moveData.Bool = moveDirection != Vector3.zero;
             }
         }
 
         private void Knockback() {
             if (_characterController != null) {
-                if (_knockbackSpeedSetting != null) {
-                    if (_knockbackSpeed > 0) {
-                        _knockbackSpeed += _knockbackAcceleration * Time.deltaTime;
-                        _characterController.Move(_knockbackDirection * _knockbackSpeed * Time.deltaTime);
-                    } else {
-                        _knockbackSpeed = 0;
-                    }
+                //击退中无法移动无法瞬移
+                if (_knockbackSpeed > 0) {
+                    _knockbackSpeed += _knockbackAcceleration * Time.deltaTime;
+                    _characterController.Move(_knockbackDirection * _knockbackSpeed * Time.deltaTime);
+                } else {
+                    _knockbackSpeed = 0;
                 }
+
+                _knockbackData.Bool = _knockbackSpeed != 0;
             }
         }
 

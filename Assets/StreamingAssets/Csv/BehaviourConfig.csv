@@ -31,3 +31,4 @@ Behaviour_Auto_GlobalTrackingOfPlayer,全局追踪玩家,全局追踪玩家
 Behaviour_Auto_RobotHealth,机器人血量,机器人血量
 Behaviour_Trigger_KnockbackPlayer,击退玩家,击退玩家
 Behaviour_Trigger_AttackTowerSelfDestruct,攻击塔自爆,攻击塔自爆
+Behaviour_Auto_PlayerInvincibleTeleportation,玩家无敌传送,玩家无敌传送

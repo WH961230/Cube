@@ -134,10 +134,10 @@ MonoBehaviour:
   - Sign: Wave
     Description: "\u673A\u5668\u4EBA\u521B\u5EFA\u6CE2\u6B21"
     WaveInstanceDefaultList:
-    - InstanceNumber: 5
+    - InstanceNumber: 12
       InstanceRobotSign: Obj_Robot_SmallTriangle
-      InstanceDelayTime: 3
-    WaveInstanceQueue: []
+      InstanceDelayTime: 2
+    WaveInstanceList: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

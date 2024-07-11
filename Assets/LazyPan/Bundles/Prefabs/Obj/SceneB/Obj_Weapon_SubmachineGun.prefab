@@ -4927,6 +4927,7 @@ MonoBehaviour:
     Description: "\u5C04\u51FB\u4F24\u5BB3"
     Float: 20
   Strings: []
+  Vector3s: []
 --- !u!1 &1903922605036452615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5167,17 +5168,18 @@ MonoBehaviour:
   Floats:
   - Sign: FireRateInterval
     Description: "\u5C04\u51FB\u901F\u7387\u95F4\u9694"
-    Float: 1
+    Float: 0.5
   - Sign: FireDamage
     Description: "\u5C04\u51FB\u4F24\u5BB3"
     Float: 20
   - Sign: FireRange
     Description: "\u5C04\u51FB\u8303\u56F4"
-    Float: 10
+    Float: 20
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
     String: SubmachineGun
+  Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

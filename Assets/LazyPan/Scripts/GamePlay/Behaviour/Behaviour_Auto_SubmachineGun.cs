@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace LazyPan {
     public class Behaviour_Auto_SubmachineGun : Behaviour {
@@ -13,6 +16,7 @@ namespace LazyPan {
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
+        private List<GameObject> _bullets = new List<GameObject>();
 
         private float fireRateIntervalDeploy;
         private GameObject bulletTemplate;
@@ -45,6 +49,7 @@ namespace LazyPan {
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
             
             fireRateIntervalDeploy = _fireRateInterval.Float;
+            _bullets.Clear();
         }
 
         private void OnLateUpdate() {
@@ -79,7 +84,7 @@ namespace LazyPan {
                     fireRateIntervalDeploy = _fireRateInterval.Float;
 
                     GameObject instanceBullet = FireParticleSystemBullet();
-
+                    _bullets.Add(instanceBullet);
                     Comp comp = instanceBullet.GetComponent<Comp>();
                     comp.OnParticleCollisionEvent.RemoveAllListeners();
                     comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
@@ -112,13 +117,27 @@ namespace LazyPan {
         }
 
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
-            if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity entity)) {
-                if (entity.ObjConfig.Type == "Robot") {
+            if (TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
+                if (bodyEntity.ObjConfig.Type == "Robot") {
                     Debug.Log("获取机器人");
-                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, _fireDamage.Float);
-                    fxGo.SetActive(false);
+                    // MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, entity.ID, _fireDamage.Float);
+                    // fxGo.SetActive(false);
                 }
             }
+        }
+        
+        //查BodyInstanceID
+        public static bool TryGetEntityByBodyPrefabID(int id, out Entity entity) {
+            foreach (Entity tempEntity in EntityRegister.EntityDic.Values) {
+                Transform bodyTran = Cond.Instance.Get<Transform>(tempEntity, Label.BODY);
+                if (bodyTran != null && bodyTran.gameObject != null && bodyTran.gameObject.GetInstanceID() == id) {
+                    entity = tempEntity;
+                    return true;
+                }
+            }
+
+            entity = null;
+            return false;
         }
 
         #region Math
@@ -147,6 +166,9 @@ namespace LazyPan {
             base.Clear();
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
             Game.instance.OnLateUpdateEvent.RemoveListener(OnLateUpdate);
+            foreach (var bullet in _bullets) {
+                GameObject.Destroy(bullet);
+            }
         }
     }
 }

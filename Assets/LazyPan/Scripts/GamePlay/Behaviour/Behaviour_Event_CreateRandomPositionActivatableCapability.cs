@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace LazyPan {
     public class Behaviour_Event_CreateRandomPositionActivatableCapability : Behaviour {
+	    public List<Entity> ActivatableCapabilityEntities = new List<Entity>();
         public Behaviour_Event_CreateRandomPositionActivatableCapability(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+	        ActivatableCapabilityEntities.Clear();
 	        CreateActivatableCapability();
 	        
 	        #region Test
@@ -30,10 +32,14 @@ namespace LazyPan {
 			LocationInformationData data = GetRandomPosition();
 			Entity instanceEntity = Obj.Instance.LoadEntity("Obj_Activable_ActivatableCapability");
 			instanceEntity.SetBeginLocationInfo(data);
+			ActivatableCapabilityEntities.Add(instanceEntity);
 		}
 
         public override void Clear() {
             base.Clear();
+            foreach (var activatable in ActivatableCapabilityEntities) {
+	            Obj.Instance.UnLoadEntity(activatable);
+            }
         }
     }
 }

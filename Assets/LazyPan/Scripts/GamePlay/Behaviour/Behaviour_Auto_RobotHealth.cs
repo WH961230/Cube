@@ -17,19 +17,21 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.HEALTH, out _healthData);
             _healthData.Float = _maxHealthData.Float;
 
-            MessageRegister.Instance.Reg<float>(MessageCode.MsgDamageRobot, BeDamaged);
+            MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
         }
 
-        private void BeDamaged(float damageValue) {
-            if (_healthData.Float != 0) {
-                if (_healthData.Float > 0) {
-                    _healthData.Float -= damageValue;
-                }
+        private void BeDamaged(int entityId, float damageValue) {
+            if (entity.ID == entityId) {
+                if (_healthData.Float != 0) {
+                    if (_healthData.Float > 0) {
+                        _healthData.Float -= damageValue;
+                    }
 
-                if (_healthData.Float <= 0) {
-                    _healthData.Float = 0;
-                    Dead();
-                }
+                    if (_healthData.Float <= 0) {
+                        _healthData.Float = 0;
+                        Dead();
+                    }
+                } 
             }
         }
 
@@ -39,7 +41,7 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
-            MessageRegister.Instance.UnReg<float>(MessageCode.MsgDamageRobot, BeDamaged);
+            MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
         }
     }
 }

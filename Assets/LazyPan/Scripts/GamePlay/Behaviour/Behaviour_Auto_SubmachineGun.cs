@@ -82,6 +82,7 @@ namespace LazyPan {
                     instanceBullet.transform.forward = aimDir.normalized;
 
                     Comp comp = instanceBullet.GetComponent<Comp>();
+                    comp.OnParticleCollisionEvent.RemoveAllListeners();
                     comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
                     instanceBullet.SetActive(true);
                 }

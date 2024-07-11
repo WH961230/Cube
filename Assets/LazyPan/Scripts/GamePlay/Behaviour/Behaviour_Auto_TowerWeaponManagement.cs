@@ -67,6 +67,13 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
+            foreach (Entity tmpWeapon in _allWeapons) {
+                Obj.Instance.UnLoadEntity(tmpWeapon);
+            }
+
+            foreach (Entity tmpWeapon in _assembledWeapons) {
+                Obj.Instance.UnLoadEntity(tmpWeapon);
+            }
         }
     }
 }

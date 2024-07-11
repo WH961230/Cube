@@ -17,6 +17,8 @@ namespace LazyPan {
 	        });
 
 	        #endregion
+	        
+	        _robots.Clear();
         }
 
         private void MsgStartGame() {
@@ -45,6 +47,8 @@ namespace LazyPan {
 			foreach (var behaviourSign in _setUpBehaviours) {
 				BehaviourRegister.RegisterBehaviour(instance.ID, behaviourSign);
 			}
+
+			_robots.Add(instance);
 		}
 
 		public void AddSetUpBehaviourSign(string behaviourSign) {
@@ -56,6 +60,10 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             MessageRegister.Instance.UnReg(MessageCode.MsgStartGame, MsgStartGame);
+
+            foreach (var tmpRobot in _robots) {
+	            Obj.Instance.UnLoadEntity(tmpRobot);
+            }
         }
     }
 }

@@ -255,6 +255,9 @@ MonoBehaviour:
   - Sign: Knockbacking
     Description: "\u51FB\u9000\u4E2D"
     Bool: 0
+  - Sign: Invincibleing
+    Description: "\u65E0\u654C\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 namespace LazyPan {
     public class Behaviour_Auto_PlayerInvincibleTeleportation : Behaviour {
         private Transform _body;
@@ -11,6 +10,7 @@ namespace LazyPan {
 
         private BoolData _teleportData;
         private BoolData _knockbackData;
+        private BoolData _invincibleData;
         private FloatData _teleportSpeedData;
         private FloatData _teleportAccelerationData;
         private Vector3Data _moveDirectionData;
@@ -29,6 +29,7 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, Label.ING), out _teleportData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.KNOCKBACK, Label.ING), out _knockbackData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, LabelStr.DIRECTION), out _moveDirectionData);
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
 
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, Label.SPEED), out _teleportSpeedData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, LabelStr.ACCELERATION), out _teleportAccelerationData);
@@ -46,6 +47,7 @@ namespace LazyPan {
                 //击退中取消瞬移
                 if (_knockbackData.Bool) {
                     _teleportData.Bool = false;
+                    _invincibleData.Bool = _teleportData.Bool;
                     return;
                 }
 
@@ -63,6 +65,7 @@ namespace LazyPan {
                 }
 
                 _teleportData.Bool = _teleportSpeed != 0;
+                _invincibleData.Bool = _teleportData.Bool;
             }
         }
 

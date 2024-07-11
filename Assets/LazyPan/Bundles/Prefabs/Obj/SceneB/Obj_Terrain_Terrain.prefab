@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8229517183546245424}
   - component: {fileID: -4081997928361341376}
   - component: {fileID: 3673368273386780484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obj_Terrain_Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,6 +201,7 @@ MonoBehaviour:
   Ints: []
   Floats: []
   Strings: []
+  Vector3s: []
 --- !u!114 &3673368273386780484
 MonoBehaviour:
   m_ObjectHideFlags: 0

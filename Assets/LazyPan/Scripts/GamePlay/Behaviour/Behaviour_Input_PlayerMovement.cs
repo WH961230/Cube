@@ -11,6 +11,7 @@ namespace LazyPan {
         private BoolData _moveData;
         private BoolData _teleportData;
         private BoolData _knockbackData;
+        private BoolData _invincibleData;
 
         private Vector3 _knockbackDirection;
         private FloatData _knockbackSpeedSetting;
@@ -31,6 +32,7 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, Label.ING), out _moveData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, Label.ING), out _teleportData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.KNOCKBACK, Label.ING), out _knockbackData);
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, LabelStr.DIRECTION), out _moveDirectionData);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -76,6 +78,10 @@ namespace LazyPan {
 
         private void Knockback() {
             if (_characterController != null) {
+                if (_invincibleData.Bool) {
+                    _knockbackData.Bool = false;
+                    return;
+                }
                 //击退中无法移动无法瞬移
                 if (_knockbackSpeed > 0) {
                     _knockbackSpeed += _knockbackAcceleration * Time.deltaTime;

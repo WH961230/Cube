@@ -11,6 +11,7 @@ namespace LazyPan {
         private FloatData _healthData;//血量
         private FloatData _healthRecoverSpeed;//血量恢复速度
         private BoolData _chargyingEnergyData;//充能中
+        private BoolData _invincibleData;
         public Behaviour_Auto_PlayerHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -31,6 +32,8 @@ namespace LazyPan {
                 }
             });
 
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
+            
             MessageRegister.Instance.Reg<float>(MessageCode.MsgDamagePlayer, BeDamaged);
             Game.instance.OnLateUpdateEvent.AddListener(OnUpdate);
         }
@@ -48,6 +51,10 @@ namespace LazyPan {
         }
 
         private void BeDamaged(float damageValue) {
+            if (_invincibleData.Bool) {
+                return;
+            }
+
             if (_healthData.Float != 0) {
                 if (_healthData.Float > 0) {
                     _healthData.Float -= damageValue;

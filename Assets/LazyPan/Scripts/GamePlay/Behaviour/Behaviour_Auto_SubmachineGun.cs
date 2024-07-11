@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.AI;
 
 namespace LazyPan {
     public class Behaviour_Auto_SubmachineGun : Behaviour {
         private Transform _foot;//冲锋枪
-        private Transform _bulletFoot;//子弹根节点
         private Transform _body;//身体
         private Transform _muzzle;//枪口
+        private Transform _bulletFoot;//子弹根节点
         private Transform _towerFoot;//塔
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
@@ -25,7 +24,7 @@ namespace LazyPan {
             _bulletFoot = Cond.Instance.Get<Transform>(entity, LabelStr.Assemble(LabelStr.BULLET, LabelStr.FOOT));
             //子弹模板
             bulletTemplate = Cond.Instance.Get<GameObject>(entity, LabelStr.BULLET);
-            //冲锋枪
+            //身体
             _body = Cond.Instance.Get<Transform>(entity, LabelStr.BODY);
             //枪口
             _muzzle = Cond.Instance.Get<Transform>(entity, LabelStr.MUZZLE);
@@ -49,44 +48,67 @@ namespace LazyPan {
         }
 
         private void OnLateUpdate() {
+            SetToTowerPoint();
+        }
+
+        private void SetToTowerPoint() {
             if (_foot != null && _towerFoot != null) {
                 _foot.position = _towerFoot.position;
-                if (_targetInRangeRobotEntity != null) {
-                    Vector3 aimDir = Cond.Instance.Get<Transform>(_targetInRangeRobotEntity, LabelStr.BODY).position -
-                                     _foot.position;
-                    aimDir.y = 0;
-                    _foot.forward = aimDir;
-                }
             }
         }
 
         private void OnUpdate() {
+            GetWithinDistanceEntity();
+            ShotBulletToEnemy();
+        }
+
+        private void GetWithinDistanceEntity() {
             if (EntityRegister.TryGetEntitiesWithinDistance("Robot", _foot.position,
-                _fireRange.Float, out List<Entity> entities)) {
+                    _fireRange.Float, out List<Entity> entities)) {
                 _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
             } else {
                 _targetInRangeRobotEntity = null;
             }
+        }
 
+        private void ShotBulletToEnemy() {
             if (_targetInRangeRobotEntity != null) {
                 if (fireRateIntervalDeploy > 0) {
                     fireRateIntervalDeploy -= Time.deltaTime;
                 } else {
                     fireRateIntervalDeploy = _fireRateInterval.Float;
-                    GameObject instanceBullet = Object.Instantiate(bulletTemplate, _bulletFoot);
-                    //位置
-                    instanceBullet.transform.position = _muzzle.position;
-                    //方向
-                    Vector3 aimDir = Cond.Instance.Get<Transform>(_targetInRangeRobotEntity, LabelStr.BODY).position - _foot.position;
-                    aimDir.y = 0;
-                    instanceBullet.transform.forward = aimDir.normalized;
+
+                    GameObject instanceBullet = FireParticleSystemBullet();
 
                     Comp comp = instanceBullet.GetComponent<Comp>();
                     comp.OnParticleCollisionEvent.RemoveAllListeners();
                     comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
-                    instanceBullet.SetActive(true);
                 }
             }
+        }
+
+        private GameObject FireParticleSystemBullet() {
+            Transform targetRobot = Cond.Instance.Get<Transform>(_targetInRangeRobotEntity, LabelStr.BODY);
+
+            //创建子弹
+            GameObject bulletGameObject =
+                Object.Instantiate(bulletTemplate, _muzzle.position, Quaternion.identity, _bulletFoot);
+            bulletGameObject.SetActive(true);
+
+            ParticleSystem bulletInstance = bulletGameObject.GetComponent<ParticleSystem>();
+
+            //计算预瞄敌人
+            NavMeshAgent targetRobotNavMeshAgent = Cond.Instance.Get<NavMeshAgent>(_targetInRangeRobotEntity, LabelStr.NAVMESHAGENT);
+            if (ComputeDirection(targetRobot.position, _foot.position, targetRobotNavMeshAgent.velocity, bulletInstance.startSpeed, out Vector3 result)) {
+                result.y = 0;
+                _body.forward = result;
+            } else {
+                _body.forward = (targetRobot.position - _foot.position).normalized;
+            }
+
+            bulletGameObject.transform.position = _muzzle.position;
+            bulletGameObject.transform.forward = _body.forward;
+            return bulletGameObject;
         }
 
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
@@ -97,6 +119,28 @@ namespace LazyPan {
                 }
             }
         }
+
+        #region Math
+
+        private bool ComputeDirection(Vector3 targetDir, Vector3 bulletStartPoint, Vector3 vA, float speed, out Vector3 result) {
+            var aTob = bulletStartPoint - targetDir;
+            var dc = aTob.magnitude;
+            var alpha = Vector3.Angle(aTob, vA) * Mathf.Deg2Rad;
+            var sA = vA.magnitude;
+            var r = sA / speed;
+            if (MyMathUtil.ComputeRoot((1 - r * r), 2 * dc * r * Mathf.Cos(alpha), -dc * dc, out float root1, out float root2) == 0) {
+                result = default;
+                return false;
+            }
+
+            var dA = Mathf.Max(root1, root2);
+            var t = dA / speed;
+            var c = targetDir + t * vA;
+            result = (c - bulletStartPoint).normalized;
+            return true;
+        }
+
+        #endregion
 
         public override void Clear() {
             base.Clear();

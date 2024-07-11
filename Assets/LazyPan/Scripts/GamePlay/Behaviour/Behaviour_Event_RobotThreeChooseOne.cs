@@ -87,7 +87,7 @@ namespace LazyPan {
             Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
             if (!choose.gameObject.activeSelf) {
 
-                List<Entity> robotBuffEntities = GetBuff(new[]{"RobotBuff"});
+                List<Entity> robotBuffEntities = GetBuff(new[]{"RobotBuff", "WaveBuff"});
                 if (robotBuffEntities.Count == 0) {
                     return;
                 }
@@ -114,7 +114,11 @@ namespace LazyPan {
                     //注册按钮事件
                     Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
                     ButtonRegister.RemoveAllListener(button);
-                    ButtonRegister.AddListener(button, RegisterBehaviour, buffEntity);
+                    if (buffEntity.ObjConfig.Type == "RobotBuff") {
+                        ButtonRegister.AddListener(button, RegisterBehaviour, buffEntity);
+                    } else if (buffEntity.ObjConfig.Type == "WaveBuff") {
+                        ButtonRegister.AddListener(button, RegisterWave, buffEntity);
+                    }
                 }
 
                 InputRegister.Instance.Load(InputRegister.ESCAPE, InputCloseUI);
@@ -141,6 +145,23 @@ namespace LazyPan {
                                 usedBoolData.Bool = true;
                                 CloseRobotThreeChooseOneUI();
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RegisterWave(Entity buffEntity) {
+            if (Cond.Instance.GetData(buffEntity, LabelStr.WAVE, out WaveInstanceData waveData)) {
+                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                    //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
+                    if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
+                            out Entity createRobotEntity)) {
+                        if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
+                                out Behaviour_Event_CreateRandomPositionRobot beh)) {
+                            beh.AddWaveInstanceData(waveData);
+                            usedBoolData.Bool = true;
+                            CloseRobotThreeChooseOneUI();
                         }
                     }
                 }

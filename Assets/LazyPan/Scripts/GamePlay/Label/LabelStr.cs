@@ -37,6 +37,7 @@ public class LabelStr {
     public static string TELEPORT = "Teleport";
     public static string DIRECTION = "Direction";
     public static string INVINCIBLE = "Invincible";
+    public static string WAVE = "Wave";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,7 +27,7 @@ namespace LazyPan {
         private void InitBuffs() {
             _buffs.Clear();
             List<string> objConfigs = ObjConfig.GetKeys();
-            string[] types = new[] { "RobotBuff" };
+            string[] types = new[] { "RobotBuff", "WaveBuff" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
                 if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
@@ -52,9 +53,14 @@ namespace LazyPan {
                 foreach (var type in types) {
                     //获取当前的类型
                     if (buffEntity.ObjConfig.Type == type) {
-                        if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                            if (!usedBoolData.Bool) {
-                                retEntities.Add(buffEntity);
+                        Type dataType = buffEntity.Data.GetType();
+                        if (dataType == typeof(RobotWaveData)) {
+                            retEntities.Add(buffEntity);
+                        } else {
+                            if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                                if (!usedBoolData.Bool) {
+                                    retEntities.Add(buffEntity);
+                                }
                             }
                         }
                     }
@@ -94,7 +100,7 @@ namespace LazyPan {
 
                 Time.timeScale = 0;
                 choose.gameObject.SetActive(true);
-                int resultCount = 1;
+                int resultCount = 3;
                 int[] index = MathUtil.Instance.GetRandNoRepeatIndex(robotBuffEntities.Count, resultCount);
 
                 for (int i = 0; i < index.Length; i++) {
@@ -151,18 +157,16 @@ namespace LazyPan {
             }
         }
 
+        //波次BUFF可以重复选择
         private void RegisterWave(Entity buffEntity) {
-            if (Cond.Instance.GetData(buffEntity, LabelStr.WAVE, out WaveInstanceData waveData)) {
-                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                    //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-                    if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
-                            out Entity createRobotEntity)) {
-                        if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
-                                out Behaviour_Event_CreateRandomPositionRobot beh)) {
-                            beh.AddWaveInstanceData(waveData);
-                            usedBoolData.Bool = true;
-                            CloseRobotThreeChooseOneUI();
-                        }
+            if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE, out WaveData waveData)) {
+                //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
+                if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
+                        out Entity createRobotEntity)) {
+                    if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
+                            out Behaviour_Event_CreateRandomPositionRobot beh)) {
+                        beh.AddWaveInstanceData(waveData.WaveInstanceDefaultList[0]);
+                        CloseRobotThreeChooseOneUI();
                     }
                 }
             }

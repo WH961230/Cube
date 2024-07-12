@@ -38,6 +38,7 @@ public class LabelStr {
     public static string DIRECTION = "Direction";
     public static string INVINCIBLE = "Invincible";
     public static string WAVE = "Wave";
+    public static string LEVEL = "Level";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

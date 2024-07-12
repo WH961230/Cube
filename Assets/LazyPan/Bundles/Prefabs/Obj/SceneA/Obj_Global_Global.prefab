@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3094119822270521761}
   - component: {fileID: 5603811672759092760}
-  - component: {fileID: 187674213716340927}
+  - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_Creator_RobotCreator
+  m_Name: Obj_Global_Global
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
---- !u!114 &187674213716340927
+--- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,25 +122,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7962291709713167343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22340419de6d2ad4b822d3a755f01c99, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Bools: []
   Ints:
   - Sign: Level
-    Description: "\u521B\u5EFA\u673A\u5668\u4EBA\u7B49\u7EA7"
+    Description: "\u521D\u59CB\u5173\u5361\u7B49\u7EA7"
     Int: 0
   Floats: []
   Strings: []
   Vector3s: []
-  Waves:
-  - Sign: Wave
-    Description: "\u673A\u5668\u4EBA\u521B\u5EFA\u6CE2\u6B21"
-    WaveInstanceDefaultList:
-    - InstanceNumber: 5
-      InstanceRobotSign: Obj_Robot_SmallTriangle
-      InstanceDelayTime: 2
-    WaveInstanceList: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

@@ -171,7 +171,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 20
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3942,7 +3942,7 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.01
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4780,7 +4780,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: cf2fc5f20fb18f943a48ed5e73683c85, type: 2}
-  - {fileID: 2100000, guid: 8afa660f62222b64eaa323dea3369320, type: 2}
+  - {fileID: 2100000, guid: e3d730fd32821d645b0246cc899a203c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5168,13 +5168,13 @@ MonoBehaviour:
   Floats:
   - Sign: FireRateInterval
     Description: "\u5C04\u51FB\u901F\u7387\u95F4\u9694"
-    Float: 1
+    Float: 0.8
   - Sign: FireDamage
     Description: "\u5C04\u51FB\u4F24\u5BB3"
     Float: 20
   - Sign: FireRange
     Description: "\u5C04\u51FB\u8303\u56F4"
-    Float: 20
+    Float: 10
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"

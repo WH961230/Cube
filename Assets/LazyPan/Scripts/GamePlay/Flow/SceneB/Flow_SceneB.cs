@@ -4,6 +4,7 @@ namespace LazyPan {
     public class Flow_SceneB : Flow {
 		private Comp UI_SceneB;
 
+		private Entity Obj_Global_Global;
 		private Entity Obj_Camera_Camera;
 		private Entity Obj_Terrain_Terrain;
 		private Entity Obj_Player_Player;
@@ -19,6 +20,7 @@ namespace LazyPan {
             ConsoleEx.Instance.ContentSave("flow", "Flow_SceneB  战斗场景B流程");
 			UI_SceneB = UI.Instance.Open("UI_SceneB");
 
+			Obj_Global_Global = Obj.Instance.LoadEntity("Obj_Global_Global");
 			Obj_Camera_Camera = Obj.Instance.LoadEntity("Obj_Camera_Camera");
 			Obj_Terrain_Terrain = Obj.Instance.LoadEntity("Obj_Terrain_Terrain");
 			Obj_Player_Player = Obj.Instance.LoadEntity("Obj_Player_Player");
@@ -58,6 +60,7 @@ namespace LazyPan {
 			Obj.Instance.UnLoadEntity(Obj_Player_Player);
 			Obj.Instance.UnLoadEntity(Obj_Terrain_Terrain);
 			Obj.Instance.UnLoadEntity(Obj_Camera_Camera);
+			Obj.Instance.UnLoadEntity(Obj_Global_Global);
 
 			UI.Instance.Close("UI_SceneB");
 

@@ -8,58 +8,90 @@ namespace LazyPan {
 	    private List<string> _setUpBehaviours = new List<string>();
 	    private List<Entity> _robots = new List<Entity>();
 	    private WaveData _waveData = new WaveData();
-	    private Queue<WaveInstanceData> _waveInstanceDatas = new Queue<WaveInstanceData>();
+	    private Queue<WaveInstanceData> _waveInstanceQueue = new Queue<WaveInstanceData>();
 	    private WaveInstanceData operatorWave;
+	    private IntData _globalLevelData;
+	    private IntData _robotCreateLevelData;
+	    private bool startLevelCreate;
 	    private float delayDeployTime;
         public Behaviour_Event_CreateRandomPositionRobot(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
-	        MessageRegister.Instance.Reg(MessageCode.MsgStartGame, MsgStartGame);
+	        MessageRegister.Instance.Reg(MessageCode.MsgStartLevel, MsgStartLevel);
+	        MessageRegister.Instance.Reg(MessageCode.MsgGlobalLevelUp, MsgGlobalLevelUp);
 	        _robots.Clear();
-	        _waveInstanceDatas.Clear();
+	        _waveInstanceQueue.Clear();
 	        _setUpBehaviours.Clear();
-	        Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+	        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL, out _globalLevelData);
+	        Cond.Instance.GetData<RobotWaveData, IntData>(entity, LabelStr.LEVEL, out _robotCreateLevelData);
+	        Cond.Instance.GetData<RobotWaveData, WaveData>(entity, LabelStr.WAVE, out _waveData);
 
-	        InputRegister.Instance.Load(InputCode.T, InputStartGame);
+	        foreach (var wave in _waveData.WaveInstanceDefaultList) {
+		        WaveInstanceData instanceWave = new WaveInstanceData();
+		        instanceWave.InstanceNumber = wave.InstanceNumber;
+		        instanceWave.InstanceRobotSign = wave.InstanceRobotSign;
+		        instanceWave.InstanceDelayTime = wave.InstanceDelayTime;
+		        _waveData.WaveInstanceList.Add(instanceWave);
+	        }
+	        
+	        InputRegister.Instance.Load(InputCode.M, InputStartLevel);
+	        Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
-        private void InputStartGame(InputAction.CallbackContext obj) {
+        private void InputStartLevel(InputAction.CallbackContext obj) {
 	        if (obj.started) {
-		        MsgStartGame();
+		        MsgStartLevel();
 	        }
         }
 
         private void OnUpdate() {
-	        if (delayDeployTime > 0) {
-		        delayDeployTime -= Time.deltaTime;
-	        } else {
-		        //当前波数不为空
-		        if (operatorWave != null) {
-			        if (operatorWave.InstanceNumber > 0) {
-				        CreateRobot(operatorWave.InstanceRobotSign);
-				        delayDeployTime = operatorWave.InstanceDelayTime;
-				        operatorWave.InstanceNumber--;
-			        } else {
-				        operatorWave = null;
-			        }
+	        if (startLevelCreate) {
+		        if (delayDeployTime > 0) {
+			        delayDeployTime -= Time.deltaTime;
 		        } else {
-			        if (_waveInstanceDatas.Any()) {
-				        operatorWave = _waveInstanceDatas.Dequeue();
+			        //当前波数不为空
+			        if (operatorWave != null) {
+				        if (operatorWave.InstanceNumber > 0) {
+					        CreateRobot(operatorWave.InstanceRobotSign);
+					        delayDeployTime = Random.Range(1, operatorWave.InstanceDelayTime);
+					        operatorWave.InstanceNumber--;
+				        } else {
+					        operatorWave = null;
+				        }
 			        } else {
-				        delayDeployTime = 0;
+				        if (_waveInstanceQueue.Any()) {
+					        operatorWave = _waveInstanceQueue.Dequeue();
+				        } else {
+					        delayDeployTime = 0;
+					        startLevelCreate = false;
+					        Debug.Log("生成完成 当前Global等级" + _globalLevelData.Int);
+					        MessageRegister.Instance.Dis(MessageCode.MsgGlobalLevelUp);
+				        }
 			        }
 		        }
 	        }
         }
 
-        private void MsgStartGame() {
-	        Debug.Log("开始游戏");
-	        Cond.Instance.GetData(entity, LabelStr.WAVE, out _waveData);
+        private void MsgStartLevel() {
+	        StartLevel();
+        }
 
-	        foreach (var wave in _waveData.WaveInstanceDefaultList) {
-		        _waveData.WaveInstanceList.Add(wave);
-	        }
+        private void MsgGlobalLevelUp() {
+	        _globalLevelData.Int++;
+        }
 
-	        foreach (var wave in _waveData.WaveInstanceList) {
-		        _waveInstanceDatas.Enqueue(wave);
+        private void StartLevel() {
+	        //当Level升级后开始生成 当前等级低于全局等级
+	        if (_robotCreateLevelData.Int < _globalLevelData.Int) {
+		        _robotCreateLevelData.Int++;
+
+		        foreach (var wave in _waveData.WaveInstanceList) {
+			        WaveInstanceData instanceWave = new WaveInstanceData();
+			        instanceWave.InstanceNumber = wave.InstanceNumber;
+			        instanceWave.InstanceRobotSign = wave.InstanceRobotSign;
+			        instanceWave.InstanceDelayTime = wave.InstanceDelayTime;
+			        _waveInstanceQueue.Enqueue(instanceWave);
+		        }
+
+		        startLevelCreate = true;
 	        }
         }
 
@@ -122,8 +154,9 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
-            MessageRegister.Instance.UnReg(MessageCode.MsgStartGame, MsgStartGame);
-            InputRegister.Instance.UnLoad(InputCode.T, InputStartGame);
+            MessageRegister.Instance.UnReg(MessageCode.MsgStartLevel, MsgStartLevel);
+            MessageRegister.Instance.UnReg(MessageCode.MsgGlobalLevelUp, MsgGlobalLevelUp);
+            InputRegister.Instance.UnLoad(InputCode.M, InputStartLevel);
 
             foreach (var tmpRobot in _robots) {
 	            Obj.Instance.UnLoadEntity(tmpRobot);

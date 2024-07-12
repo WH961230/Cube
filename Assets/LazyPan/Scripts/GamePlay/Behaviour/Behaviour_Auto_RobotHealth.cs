@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace LazyPan {
@@ -9,15 +10,25 @@ namespace LazyPan {
         private FloatData _healthData;//血量
         private BoolData _chargyingEnergyData;//充能中
         private BoolData _invincibleData;
+        private Image _healthImg;
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
+
+            _healthImg = Cond.Instance.Get<Image>(entity, LabelStr.HEALTH);
             
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out _maxHealthData);
             Cond.Instance.GetData(entity, LabelStr.HEALTH, out _healthData);
             _healthData.Float = _maxHealthData.Float;
 
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
+            Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+        }
+
+        private void OnUpdate() {
+            if (_healthImg != null) {
+                _healthImg.fillAmount = _healthData.Float / _maxHealthData.Float;
+            }
         }
 
         private void BeDamaged(int entityId, float damageValue) {
@@ -41,6 +52,7 @@ namespace LazyPan {
 
         public override void Clear() {
             base.Clear();
+            Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
             MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
         }
     }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3094119822270521761}
   - component: {fileID: 5603811672759092760}
-  - component: {fileID: 187674213716340927}
+  - component: {fileID: 7110792416881632203}
   m_Layer: 0
-  m_Name: Obj_Creator_RobotCreator
+  m_Name: Obj_WaveBuff_AddTenSmallTriangleRobots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7868656383781502519}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5603811672759092760
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
---- !u!114 &187674213716340927
+--- !u!114 &7110792416881632203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,18 +126,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bools: []
-  Ints:
-  - Sign: Level
-    Description: "\u521B\u5EFA\u673A\u5668\u4EBA\u7B49\u7EA7"
-    Int: 0
+  Ints: []
   Floats: []
-  Strings: []
+  Strings:
+  - Sign: Icon
+    Description: "\u56FE\u6807\u5730\u5740"
+    String: AddTenSmallTriangleRobots
+  - Sign: Info
+    Description: "\u8BF4\u660E"
+    String: "\u589E\u52A0\u5341\u4E2A\u5C0F\u4E09\u89D2\u673A\u5668\u4EBA"
   Vector3s: []
   Waves:
   - Sign: Wave
-    Description: "\u673A\u5668\u4EBA\u521B\u5EFA\u6CE2\u6B21"
+    Description: "\u6CE2\u6570Buff"
     WaveInstanceDefaultList:
-    - InstanceNumber: 5
+    - InstanceNumber: 10
       InstanceRobotSign: Obj_Robot_SmallTriangle
       InstanceDelayTime: 2
     WaveInstanceList: []

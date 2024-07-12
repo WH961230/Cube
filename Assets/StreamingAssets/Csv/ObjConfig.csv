@@ -36,3 +36,7 @@ Obj_WeaponBuff_SubmachineGunFiresFasterAndHasACloserRange,SceneB,WeaponBuff,战�
 Obj_PlayerBuff_IncreasePickupRange,SceneB,PlayerBuff,战斗场景B增加玩家拾取范围,,
 Obj_RobotBuff_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,SceneB,RobotBuff,战斗场景B增加所有机器人的移速并减少生命值,,
 Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,
+Obj_Global_Global,SceneB,Global,战斗场景B全局,,
+Obj_WaveBuff_AddTenSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加10个小三角机器人,,
+Obj_WaveBuff_AddThirtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加30个小三角机器人,,
+Obj_WaveBuff_AddSixtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加60个小三角机器人,,

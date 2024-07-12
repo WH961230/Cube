@@ -47,6 +47,10 @@ namespace LazyPan {
         }
 
         private void Dead() {
+            Entity drop = Obj.Instance.LoadEntity("Obj_PickUp_ExperiencePoint");
+            drop.SetBeginLocationInfo(new LocationInformationData() {
+                Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
+            });
             Obj.Instance.UnLoadEntity(entity);
         }
 

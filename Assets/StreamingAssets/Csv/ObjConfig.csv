@@ -40,3 +40,4 @@ Obj_Global_Global,SceneB,Global,战斗场景B全局,,
 Obj_WaveBuff_AddTenSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加10个小三角机器人,,
 Obj_WaveBuff_AddThirtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加30个小三角机器人,,
 Obj_WaveBuff_AddSixtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加60个小三角机器人,,
+Obj_PickUp_ExperiencePoint,SceneB,PickUp,战斗场景B可拾取经验值,,Behaviour_Trigger_PickUpExperiencePoint

@@ -67,3 +67,5 @@ AttackTowerSelfDestruct,攻击塔自爆,Trigger,Init,初始化
 AttackTowerSelfDestruct,攻击塔自爆,Trigger,Clear,清除
 PlayerInvincibleTeleportation,玩家无敌瞬移,Auto,Init,初始化
 PlayerInvincibleTeleportation,玩家无敌瞬移,Auto,Clear,清除
+PickUpExperiencePoint,可拾取经验值,Trigger,Init,初始化
+PickUpExperiencePoint,可拾取经验值,Trigger,Clear,清除

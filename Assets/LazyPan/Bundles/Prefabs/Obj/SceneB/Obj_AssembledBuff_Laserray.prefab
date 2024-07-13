@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_Weapon_Orbitingball
+  m_Name: Obj_AssembledBuff_Laserray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,13 +125,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools: []
+  Bools:
+  - Sign: Used
+    Description: "\u88AB\u4F7F\u7528"
+    Bool: 0
   Ints: []
   Floats: []
   Strings:
+  - Sign: Sign
+    Description: "\u6B66\u5668\u6807\u8BC6"
+    String: Obj_Weapon_Laserray
   - Sign: Icon
-    Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
-    String: Orbitingball
+    Description: "\u56FE\u6807"
+    String: Laserray
+  - Sign: Info
+    Description: "\u63CF\u8FF0"
+    String: "\u83B7\u53D6\u6B66\u5668\u6FC0\u5149\u5C04\u7EBF"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

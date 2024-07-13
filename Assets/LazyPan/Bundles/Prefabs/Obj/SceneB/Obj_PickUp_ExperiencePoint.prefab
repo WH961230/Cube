@@ -421,7 +421,7 @@ MonoBehaviour:
   Floats:
   - Sign: Experience
     Description: "\u7ECF\u9A8C\u503C"
-    Float: 10
+    Float: 20
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

@@ -51,7 +51,7 @@ namespace LazyPan {
             drop.SetBeginLocationInfo(new LocationInformationData() {
                 Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
             });
-            Obj.Instance.UnLoadEntity(entity);
+            MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
         }
 
         public override void Clear() {

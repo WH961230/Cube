@@ -17,6 +17,7 @@ namespace LazyPan {
         public Behaviour_Event_CreateRandomPositionRobot(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
 	        MessageRegister.Instance.Reg(MessageCode.MsgStartLevel, MsgStartLevel);
 	        MessageRegister.Instance.Reg(MessageCode.MsgGlobalLevelUp, MsgGlobalLevelUp);
+	        MessageRegister.Instance.Reg<int>(MessageCode.MsgRobotDead, MsgRobotDead);
 	        _robots.Clear();
 	        _waveInstanceQueue.Clear();
 	        _setUpBehaviours.Clear();
@@ -76,6 +77,22 @@ namespace LazyPan {
 
         private void MsgGlobalLevelUp() {
 	        _globalLevelData.Int++;
+        }
+
+        private void MsgRobotDead(int entityId) {
+	        if (_robots.Count > 0) {
+		        for (int i = _robots.Count - 1; i >= 0; i--) {
+			        Entity tmpRobot = _robots[i];
+			        if (tmpRobot.ID == entityId) {
+				        _robots.Remove(tmpRobot);
+				        Obj.Instance.UnLoadEntity(tmpRobot);
+			        }
+		        }
+
+		        if (_robots.Count == 0) {
+			        MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
+		        }
+	        }
         }
 
         private void StartLevel() {
@@ -156,6 +173,7 @@ namespace LazyPan {
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
             MessageRegister.Instance.UnReg(MessageCode.MsgStartLevel, MsgStartLevel);
             MessageRegister.Instance.UnReg(MessageCode.MsgGlobalLevelUp, MsgGlobalLevelUp);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgRobotDead, MsgRobotDead);
             InputRegister.Instance.UnLoad(InputCode.M, InputStartLevel);
 
             foreach (var tmpRobot in _robots) {

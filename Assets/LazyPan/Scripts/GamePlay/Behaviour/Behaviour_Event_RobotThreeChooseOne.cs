@@ -140,6 +140,7 @@ namespace LazyPan {
                             BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String);
                             usedBoolData.Bool = true;
                             CloseRobotThreeChooseOneUI();
+                            MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
                         }
                     } else {
                         //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
@@ -150,6 +151,7 @@ namespace LazyPan {
                                 beh.AddSetUpBehaviourSign(behaviourSignStringData.String);
                                 usedBoolData.Bool = true;
                                 CloseRobotThreeChooseOneUI();
+                                MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
                             }
                         }
                     }
@@ -167,6 +169,7 @@ namespace LazyPan {
                             out Behaviour_Event_CreateRandomPositionRobot beh)) {
                         beh.AddWaveInstanceData(waveData.WaveInstanceDefaultList[0]);
                         CloseRobotThreeChooseOneUI();
+                        MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
                     }
                 }
             }

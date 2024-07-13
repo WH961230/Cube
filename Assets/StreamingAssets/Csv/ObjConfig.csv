@@ -41,3 +41,10 @@ Obj_WaveBuff_AddTenSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加10个�
 Obj_WaveBuff_AddThirtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加30个小三角机器人,,
 Obj_WaveBuff_AddSixtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加60个小三角机器人,,
 Obj_PickUp_ExperiencePoint,SceneB,PickUp,战斗场景B可拾取经验值,,Behaviour_Trigger_PickUpExperiencePoint
+Obj_AssembledBuff_Shotgun,SceneB,AssembledBuff,战斗场景B组装武器Buff霰弹枪,,
+Obj_AssembledBuff_Sniperrifle,SceneB,AssembledBuff,战斗场景B组装武器Buff狙击枪,,
+Obj_AssembledBuff_Strafesatellite,SceneB,AssembledBuff,战斗场景B组装武器Buff扫射卫星,,
+Obj_AssembledBuff_Ring,SceneB,AssembledBuff,战斗场景B组装武器Buff圆环,,
+Obj_AssembledBuff_Orbitingball,SceneB,AssembledBuff,战斗场景B组装武器Buff环绕球,,
+Obj_AssembledBuff_Laserray,SceneB,AssembledBuff,战斗场景B组装武器Buff激光射线,,
+Obj_AssembledBuff_Grenade,SceneB,AssembledBuff,战斗场景B组装武器Buff手雷,,

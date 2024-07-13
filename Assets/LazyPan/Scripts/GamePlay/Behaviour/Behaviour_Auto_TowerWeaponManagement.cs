@@ -13,7 +13,6 @@ namespace LazyPan {
             _ui = _flow.GetUI();
             InitAllWeapon();
             InitDefaultWeapon();
-            RefreshWeapons();
         }
 
         private void InitAllWeapon() {
@@ -50,7 +49,16 @@ namespace LazyPan {
 
         private void InitDefaultWeapon() {
             _assembledWeapons.Clear();
-            _assembledWeapons.Add(GetWeapon("Obj_Weapon_SubmachineGun"));
+            InitWeapon("Obj_Weapon_SubmachineGun");
+        }
+
+        public void InitWeapon(string weaponSign) {
+            _assembledWeapons.Add(GetWeapon(weaponSign));
+            RefreshWeapons();
+        }
+
+        public int GetAssembledWeaponCount() {
+            return _assembledWeapons.Count;
         }
 
         private void RefreshWeapons() {

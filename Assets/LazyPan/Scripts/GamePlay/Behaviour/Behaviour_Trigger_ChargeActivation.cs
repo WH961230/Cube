@@ -40,7 +40,7 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(),
                     out Entity playerEntity)) {
                 if (playerEntity.Type == "Player") {
-                    CancelCharge();
+                    _isChargingEnergyData.Bool = false;
                 }
             }
         }
@@ -49,29 +49,25 @@ namespace LazyPan {
             _isChargingEnergyData.Bool = true;
             _energyImage.gameObject.SetActive(true);
         }
-        
-        private void CancelCharge() {
-            _isChargingEnergyData.Bool = false;
-            _energyImage.gameObject.SetActive(false);
-            _energyData.Float = 0;
-        }
 
         private void OnUpdate() {
             if (_isChargingEnergyData.Bool) {
                 _energyData.Float += _energySpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
-                    CancelCharge();
                     MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
                     Obj.Instance.UnLoadEntity(entity);
                     return;
                 }
-
-                if (_energyImage.gameObject.activeSelf) {
-                    _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
-                }
             } else {
-                _energyImage.gameObject.SetActive(false);
-                _energyData.Float = 0;
+                _energyData.Float -= _energySpeedData.Float * Time.deltaTime;
+                if (_energyData.Float < 0) {
+                    _energyImage.gameObject.SetActive(false);
+                    _energyData.Float = 0;
+                }
+            }
+
+            if (_energyImage.gameObject.activeSelf) {
+                _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
             }
         }
         

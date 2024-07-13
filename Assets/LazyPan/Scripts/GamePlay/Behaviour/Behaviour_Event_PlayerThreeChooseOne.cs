@@ -27,7 +27,7 @@ namespace LazyPan {
         private void InitBuffs() {
             _buffs.Clear();
             List<string> objConfigs = ObjConfig.GetKeys();
-            string[] types = new[] { "WeaponBuff", "PlayerBuff", "TowerBuff" };
+            string[] types = new[] { "WeaponBuff", "PlayerBuff", "TowerBuff", "AssembledBuff" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
                 if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
@@ -50,12 +50,26 @@ namespace LazyPan {
             List<Entity> retEntities = new List<Entity>();
             //遍历所有的buff
             foreach (var buffEntity in _buffs) {
-                foreach (var type in types) {
-                    //获取当前的类型
-                    if (buffEntity.ObjConfig.Type == type) {
-                        if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                            if (!usedBoolData.Bool) {
-                                retEntities.Add(buffEntity);
+                //获取当前的类型
+                if (buffEntity.ObjConfig.Type == "PlayerBuff" ||
+                    buffEntity.ObjConfig.Type == "WeaponBuff" ||
+                    buffEntity.ObjConfig.Type == "TowerBuff") {
+                    if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                        if (!usedBoolData.Bool) {
+                            retEntities.Add(buffEntity);
+                        }
+                    }
+                } else if (buffEntity.ObjConfig.Type == "AssembledBuff") {
+                    if (EntityRegister.TryGetRandEntityByType("Tower",
+                        out Entity towerEntity)) {
+                        if (BehaviourRegister.GetBehaviour(towerEntity.ID,
+                            out Behaviour_Auto_TowerWeaponManagement beh)) {
+                            if (beh.GetAssembledWeaponCount() < 4) {
+                                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                                    if (!usedBoolData.Bool) {
+                                        retEntities.Add(buffEntity);
+                                    }
+                                }
                             }
                         }
                     }
@@ -88,7 +102,7 @@ namespace LazyPan {
             Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
             if (!choose.gameObject.activeSelf) {
 
-                List<Entity> playBuffEntity = GetBuff(new[]{"WeaponBuff", "PlayerBuff", "TowerBuff"});
+                List<Entity> playBuffEntity = GetBuff(new[]{"WeaponBuff", "PlayerBuff", "TowerBuff", "AssembledBuff"});
                 if (playBuffEntity.Count == 0) {
                     return;
                 }
@@ -115,23 +129,47 @@ namespace LazyPan {
                     //注册按钮事件
                     Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
                     ButtonRegister.RemoveAllListener(button);
-                    ButtonRegister.AddListener(button, () => {
-                        //让目标单位注册该方法
-                        if (Cond.Instance.GetData(buffEntity, LabelStr.TARGET, out StringData targetSignStringData)) {
-                            if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
-                                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                                    if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
-                                        BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String);
-                                        usedBoolData.Bool = true;
-                                        ClosePlayerThreeChooseOneUI();
-                                    }
-                                }
-                            }
-                        }
-                    });
+                    if (buffEntity.ObjConfig.Type == "PlayerBuff" ||
+                        buffEntity.ObjConfig.Type == "WeaponBuff" ||
+                        buffEntity.ObjConfig.Type == "TowerBuff") {
+                        ButtonRegister.AddListener(button, RegisterBehaviour, buffEntity);
+                    } else if (buffEntity.ObjConfig.Type == "AssembledBuff") {
+                        ButtonRegister.AddListener(button, RegisterAssembledWeapon, buffEntity);
+                    }
                 }
 
                 InputRegister.Instance.Load(InputRegister.ESCAPE, InputCloseUI);
+            }
+        }
+
+        private void RegisterBehaviour(Entity buffEntity) {
+            //让目标单位注册该方法
+            if (Cond.Instance.GetData(buffEntity, LabelStr.TARGET, out StringData targetSignStringData)) {
+                if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
+                    if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                        if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
+                            BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String);
+                            usedBoolData.Bool = true;
+                            ClosePlayerThreeChooseOneUI();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RegisterAssembledWeapon(Entity buffEntity) {
+            if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData stringData)) {
+                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                    if (EntityRegister.TryGetRandEntityByType("Tower",
+                        out Entity towerEntity)) {
+                        if (BehaviourRegister.GetBehaviour(towerEntity.ID,
+                            out Behaviour_Auto_TowerWeaponManagement beh)) {
+                            beh.InitWeapon(stringData.String);
+                            usedBoolData.Bool = true;
+                            ClosePlayerThreeChooseOneUI();
+                        }
+                    }
+                }
             }
         }
 

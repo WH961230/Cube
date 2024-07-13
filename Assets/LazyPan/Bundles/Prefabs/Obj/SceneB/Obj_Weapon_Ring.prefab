@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7868656383781502519}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5603811672759092760
 MonoBehaviour:
@@ -128,7 +128,11 @@ MonoBehaviour:
   Bools: []
   Ints: []
   Floats: []
-  Strings: []
+  Strings:
+  - Sign: Icon
+    Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
+    String: Ring
+  Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

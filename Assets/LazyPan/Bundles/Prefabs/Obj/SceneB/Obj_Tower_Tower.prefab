@@ -250,6 +250,7 @@ MonoBehaviour:
     Description: "\u5145\u80FD\u901F\u5EA6"
     Float: 10
   Strings: []
+  Vector3s: []
 --- !u!1 &6242194965163223405
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +264,7 @@ GameObject:
   - component: {fileID: 8934396192623528862}
   - component: {fileID: 4370679796295100354}
   - component: {fileID: 4561313845300280855}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

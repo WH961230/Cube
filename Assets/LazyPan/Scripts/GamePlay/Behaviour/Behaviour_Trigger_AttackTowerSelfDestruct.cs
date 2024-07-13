@@ -16,15 +16,11 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity triggerEntity)) {
                 if (triggerEntity.ObjConfig.Type == "Tower") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamagePlayer, _damage.Float);
-                    SelfDestruct();
+                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, entity.ID, Mathf.Infinity);
                 }
             }
         }
 
-        private void SelfDestruct() {
-            Obj.Instance.UnLoadEntity(entity);
-        }
-        
         public override void Clear() {
             base.Clear();
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.RemoveListener(OnAttackTower);

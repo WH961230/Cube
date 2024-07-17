@@ -17,7 +17,7 @@ namespace LazyPan {
 
             InitBuffs();
             MessageRegister.Instance.Reg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
-            MessageRegister.Instance.Reg(MessageCode.MsgLevelUp, MsgLevelUp);
+            MessageRegister.Instance.Reg(MessageCode.MsgLevelUp, MsgDisplayLevelUp);
 
             #region Test
 
@@ -34,10 +34,13 @@ namespace LazyPan {
 
         //传入消息开始三选一
         private void MsgRobotThreeChooseOne() {
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL),
+                out IntData robotLevel);
+            robotLevel.Int++;
             OpenRobotThreeChooseOneUI();
         }
 
-        private void MsgLevelUp() {
+        private void MsgDisplayLevelUp() {
             DisplayLevelUI();
         }
 
@@ -51,6 +54,8 @@ namespace LazyPan {
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
                 LabelStr.Assemble(LabelStr.MAX, LabelStr.LEVEL), out IntData maxLevel);
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL, out IntData level);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL), out IntData robotLevel);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.PLAYER, LabelStr.LEVEL), out IntData playerLevel);
 
             int tmpMaxLevel = maxLevel.Int;
             int tmpLevel = level.Int;
@@ -77,6 +82,16 @@ namespace LazyPan {
                     GameObject.Destroy(o.gameObject);
                 }
             });
+
+            Comp countComp = Cond.Instance.Get<Comp>(_ui, LabelStr.COUNT);
+            TextMeshProUGUI robot = Cond.Instance.Get<TextMeshProUGUI>(countComp, LabelStr.ROBOT);
+            robot.text = robotLevel.Int.ToString();
+
+            TextMeshProUGUI player = Cond.Instance.Get<TextMeshProUGUI>(countComp, LabelStr.PLAYER);
+            player.text = playerLevel.Int.ToString();
+
+            TextMeshProUGUI levelText = Cond.Instance.Get<TextMeshProUGUI>(countComp, LabelStr.LEVEL);
+            levelText.text = level.Int.ToString();
         }
 
         //初始化Buff
@@ -251,7 +266,7 @@ namespace LazyPan {
             CloseRobotThreeChooseOneUI();
             ClearBuffs();
             MessageRegister.Instance.UnReg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
-            MessageRegister.Instance.UnReg(MessageCode.MsgLevelUp, MsgLevelUp);
+            MessageRegister.Instance.UnReg(MessageCode.MsgLevelUp, MsgDisplayLevelUp);
         }
     }
 }

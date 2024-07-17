@@ -89,6 +89,9 @@ namespace LazyPan {
 
         //传入消息开始三选一
         private void MsgPlayerThreeChooseOne() {
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.PLAYER, LabelStr.LEVEL), out IntData playerLevel);
+            playerLevel.Int++;
+            MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
             OpenPlayerThreeChooseOneUI();
         }
 

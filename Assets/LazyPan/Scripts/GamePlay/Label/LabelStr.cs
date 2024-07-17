@@ -42,6 +42,10 @@ public class LabelStr {
     public static string EXPERIENCE = "Experience";
     public static string GRID = "Grid";
     public static string PARENT = "Parent";
+    public static string COUNT = "Count";
+    public static string ROBOT = "Robot";
+    public static string GLOBAL = "Global";
+    public static string PLAYER = "Player";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

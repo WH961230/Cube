@@ -130,6 +130,9 @@ MonoBehaviour:
   - Sign: Level
     Description: "\u521D\u59CB\u5173\u5361\u7B49\u7EA7"
     Int: 1
+  - Sign: MaxLevel
+    Description: "\u6700\u9AD8\u5173\u5361\u7B49\u7EA7"
+    Int: 7
   Floats: []
   Strings: []
   Vector3s: []

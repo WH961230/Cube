@@ -4,23 +4,74 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace LazyPan {
     public class Behaviour_Event_RobotThreeChooseOne : Behaviour {
+        private Flow_SceneB _flow;
+        private Comp _ui;
         private List<Entity> _buffs = new List<Entity>();
         public Behaviour_Event_RobotThreeChooseOne(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            Flo.Instance.GetFlow(out _flow);
+            _ui = _flow.GetUI();
+
             InitBuffs();
             MessageRegister.Instance.Reg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
-            
+            MessageRegister.Instance.Reg(MessageCode.MsgLevelUp, MsgLevelUp);
+
             #region Test
 
             InputRegister.Instance.Load(InputCode.E, context => {
                 if (context.performed) {
-                    MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
+                    // MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
+                    MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
                 }
             });
 
             #endregion
+        }
+
+        //传入消息开始三选一
+        private void MsgRobotThreeChooseOne() {
+            OpenRobotThreeChooseOneUI();
+        }
+
+        private void MsgLevelUp() {
+            //UI弹出显示当前的关卡
+            Comp levelComp = Cond.Instance.Get<Comp>(_ui, LabelStr.LEVEL);
+            GameObject grid = Cond.Instance.Get<GameObject>(levelComp, LabelStr.GRID);
+            Transform parent = Cond.Instance.Get<Transform>(levelComp, LabelStr.PARENT);
+
+            //生成总关卡数的关卡 当前关卡以及之前的不透明度拉满 未参加的关卡 降低不透明度
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                LabelStr.Assemble(LabelStr.MAX, LabelStr.LEVEL), out IntData maxLevel);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL, out IntData level);
+
+            int tmpMaxLevel = maxLevel.Int;
+            int tmpLevel = level.Int;
+
+            foreach (Transform o in parent) {
+                GameObject.Destroy(o.gameObject);
+            }
+
+            int count = tmpMaxLevel;
+            while (count > 0) {
+                GameObject tmpInstance = Object.Instantiate(grid, parent);
+                tmpInstance.SetActive(true);
+
+                Image gridImg = tmpInstance.GetComponent<Image>();
+                Color color = gridImg.color;
+                color.a = count <= tmpLevel ? 1 : 0.5f;
+                gridImg.color = color;
+
+                count--;
+            }
+
+            ClockUtil.Instance.AlarmAfter(2, () => {
+                foreach (Transform o in parent) {
+                    GameObject.Destroy(o.gameObject);
+                }
+            });
         }
 
         //初始化Buff
@@ -76,11 +127,6 @@ namespace LazyPan {
                 Obj.Instance.UnLoadEntity(buffEntity);
             }
             _buffs.Clear();
-        }
-
-        //传入消息开始三选一
-        private void MsgRobotThreeChooseOne() {
-            OpenRobotThreeChooseOneUI();
         }
 
         //打开机器人三选一界面
@@ -200,6 +246,7 @@ namespace LazyPan {
             CloseRobotThreeChooseOneUI();
             ClearBuffs();
             MessageRegister.Instance.UnReg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
+            MessageRegister.Instance.UnReg(MessageCode.MsgLevelUp, MsgLevelUp);
         }
     }
 }

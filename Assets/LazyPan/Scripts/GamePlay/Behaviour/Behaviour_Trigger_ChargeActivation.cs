@@ -54,7 +54,7 @@ namespace LazyPan {
             if (_isChargingEnergyData.Bool) {
                 _energyData.Float += _energySpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
-                    MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
+                    MessageRegister.Instance.Dis(MessageCode.MsgPlayerLevelUp);
                     Obj.Instance.UnLoadEntity(entity);
                     return;
                 }

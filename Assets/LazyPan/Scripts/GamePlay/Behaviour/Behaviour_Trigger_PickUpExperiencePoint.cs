@@ -19,7 +19,7 @@ namespace LazyPan {
                     } else {
                         expData.Float = afterExp - maxExpData.Float;
                         //升级三选一
-                        MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
+                        MessageRegister.Instance.Dis(MessageCode.MsgPlayerLevelUp);
                     }
                     Obj.Instance.UnLoadEntity(entity);
                 }

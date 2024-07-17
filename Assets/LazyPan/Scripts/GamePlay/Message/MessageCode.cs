@@ -1,5 +1,5 @@
 public class MessageCode {
-    public static int MsgLevelUp = 0;//升级
+    public static int MsgPlayerLevelUp = 0;//升级
     public static int MsgRobotUp = 1;//机器人升级
     public static int MsgKnockbackPlayer = 2;//击退玩家
     public static int MsgDamagePlayer = 3;//对玩家造成伤害
@@ -7,4 +7,5 @@ public class MessageCode {
     public static int MsgStartLevel = 5;//开始关卡
     public static int MsgGlobalLevelUp = 6;//全局关卡等级提升
     public static int MsgRobotDead = 7;//机器人死亡
+    public static int MsgLevelUp = 8;//关卡等级升级
 }

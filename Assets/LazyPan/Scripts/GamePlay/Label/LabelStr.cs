@@ -40,6 +40,8 @@ public class LabelStr {
     public static string WAVE = "Wave";
     public static string LEVEL = "Level";
     public static string EXPERIENCE = "Experience";
+    public static string GRID = "Grid";
+    public static string PARENT = "Parent";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

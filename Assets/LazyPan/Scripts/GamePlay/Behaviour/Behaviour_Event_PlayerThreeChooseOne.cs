@@ -10,13 +10,13 @@ namespace LazyPan {
         private List<Entity> _buffs = new List<Entity>();
         public Behaviour_Event_PlayerThreeChooseOne(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             InitBuffs();
-            MessageRegister.Instance.Reg(MessageCode.MsgLevelUp, MsgPlayerThreeChooseOne);
+            MessageRegister.Instance.Reg(MessageCode.MsgPlayerLevelUp, MsgPlayerThreeChooseOne);
 
             #region Test
 
             InputRegister.Instance.Load(InputCode.Q, context => {
                 if (context.performed) {
-                    MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
+                    MessageRegister.Instance.Dis(MessageCode.MsgPlayerLevelUp);
                 }
             });
 
@@ -112,32 +112,33 @@ namespace LazyPan {
                 int resultCount = 3;
                 int[] index = MathUtil.Instance.GetRandNoRepeatIndex(playBuffEntity.Count, resultCount);
 
-                for (int i = 0; i < index.Length; i++) {
-                    Entity buffEntity = playBuffEntity[i];
-                    Comp item = Cond.Instance.Get<Comp>(choose,
-                        LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
-                    //注册图片
-                    Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
-                    Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
-                    image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
+                if (index != null) {
+                    for (int i = 0; i < index.Length; i++) {
+                        Entity buffEntity = playBuffEntity[i];
+                        Comp item = Cond.Instance.Get<Comp>(choose,
+                            LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
+                        //注册图片
+                        Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
+                        Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
+                        image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
 
-                    //注册说明
-                    TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
-                    Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
-                    info.text = infoData.String;
+                        //注册说明
+                        TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                        Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                        info.text = infoData.String;
 
-                    //注册按钮事件
-                    Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
-                    ButtonRegister.RemoveAllListener(button);
-                    if (buffEntity.ObjConfig.Type == "PlayerBuff" ||
-                        buffEntity.ObjConfig.Type == "WeaponBuff" ||
-                        buffEntity.ObjConfig.Type == "TowerBuff") {
-                        ButtonRegister.AddListener(button, RegisterBehaviour, buffEntity);
-                    } else if (buffEntity.ObjConfig.Type == "AssembledBuff") {
-                        ButtonRegister.AddListener(button, RegisterAssembledWeapon, buffEntity);
+                        //注册按钮事件
+                        Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
+                        ButtonRegister.RemoveAllListener(button);
+                        if (buffEntity.ObjConfig.Type == "PlayerBuff" ||
+                            buffEntity.ObjConfig.Type == "WeaponBuff" ||
+                            buffEntity.ObjConfig.Type == "TowerBuff") {
+                            ButtonRegister.AddListener(button, RegisterBehaviour, buffEntity);
+                        } else if (buffEntity.ObjConfig.Type == "AssembledBuff") {
+                            ButtonRegister.AddListener(button, RegisterAssembledWeapon, buffEntity);
+                        }
                     }
                 }
-
                 InputRegister.Instance.Load(InputRegister.ESCAPE, InputCloseUI);
             }
         }
@@ -197,7 +198,7 @@ namespace LazyPan {
             base.Clear();
             ClosePlayerThreeChooseOneUI();
             ClearBuffs();
-            MessageRegister.Instance.UnReg(MessageCode.MsgLevelUp, MsgPlayerThreeChooseOne);
+            MessageRegister.Instance.UnReg(MessageCode.MsgPlayerLevelUp, MsgPlayerThreeChooseOne);
         }
     }
 }

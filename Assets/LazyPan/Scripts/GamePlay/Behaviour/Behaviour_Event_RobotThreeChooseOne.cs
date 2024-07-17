@@ -23,12 +23,13 @@ namespace LazyPan {
 
             InputRegister.Instance.Load(InputCode.E, context => {
                 if (context.performed) {
-                    // MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
-                    MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
+                    MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
                 }
             });
 
             #endregion
+            
+            DisplayLevelUI();
         }
 
         //传入消息开始三选一
@@ -37,6 +38,10 @@ namespace LazyPan {
         }
 
         private void MsgLevelUp() {
+            DisplayLevelUI();
+        }
+
+        private void DisplayLevelUI() {
             //UI弹出显示当前的关卡
             Comp levelComp = Cond.Instance.Get<Comp>(_ui, LabelStr.LEVEL);
             GameObject grid = Cond.Instance.Get<GameObject>(levelComp, LabelStr.GRID);
@@ -61,7 +66,7 @@ namespace LazyPan {
 
                 Image gridImg = tmpInstance.GetComponent<Image>();
                 Color color = gridImg.color;
-                color.a = count <= tmpLevel ? 1 : 0.5f;
+                color.a = count > tmpMaxLevel - tmpLevel ? 1 : 0.5f;
                 gridImg.color = color;
 
                 count--;

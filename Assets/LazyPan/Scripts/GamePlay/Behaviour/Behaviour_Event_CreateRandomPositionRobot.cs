@@ -11,6 +11,7 @@ namespace LazyPan {
 	    private Queue<WaveInstanceData> _waveInstanceQueue = new Queue<WaveInstanceData>();
 	    private WaveInstanceData operatorWave;
 	    private IntData _globalLevelData;
+	    private IntData _globalMaxLevelData;
 	    private IntData _robotCreateLevelData;
 	    private bool startLevelCreate;
 	    private float delayDeployTime;
@@ -22,6 +23,7 @@ namespace LazyPan {
 	        _waveInstanceQueue.Clear();
 	        _setUpBehaviours.Clear();
 	        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL, out _globalLevelData);
+	        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.MAX, LabelStr.LEVEL), out _globalMaxLevelData);
 	        Cond.Instance.GetData<RobotWaveData, IntData>(entity, LabelStr.LEVEL, out _robotCreateLevelData);
 	        Cond.Instance.GetData<RobotWaveData, WaveData>(entity, LabelStr.WAVE, out _waveData);
 
@@ -63,8 +65,6 @@ namespace LazyPan {
 				        } else {
 					        delayDeployTime = 0;
 					        startLevelCreate = false;
-					        Debug.Log("生成完成 当前Global等级" + _globalLevelData.Int);
-					        MessageRegister.Instance.Dis(MessageCode.MsgGlobalLevelUp);
 				        }
 			        }
 		        }
@@ -76,7 +76,9 @@ namespace LazyPan {
         }
 
         private void MsgGlobalLevelUp() {
-	        _globalLevelData.Int++;
+	        if (_globalLevelData.Int < _globalMaxLevelData.Int) {
+		        _globalLevelData.Int++;
+	        }
         }
 
         private void MsgRobotDead(int entityId) {
@@ -90,7 +92,9 @@ namespace LazyPan {
 		        }
 
 		        if (_robots.Count == 0) {
+			        MessageRegister.Instance.Dis(MessageCode.MsgGlobalLevelUp);
 			        MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
+			        MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
 		        }
 	        }
         }

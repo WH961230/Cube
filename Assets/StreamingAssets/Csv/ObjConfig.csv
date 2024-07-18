@@ -13,7 +13,7 @@ Obj_Activable_ActivatableCapability,SceneB,Activable,战斗场景B可激活能�
 Obj_Creator_ActivatableCapabilityCreator,SceneB,Creator,战斗场景B可激活能力生成器,LocationInf_SceneB_ActivatableCapabilityCreator,Behaviour_Event_CreateRandomPositionActivatableCapability
 Obj_Creator_RobotCreator,SceneB,Creator,战斗场景B机器人生成器,LocationInf_SceneB_RobotCreator,Behaviour_Event_CreateRandomPositionRobot
 Obj_Robot_SmallTriangle,SceneB,Robot,战斗场景B小三角,,Behaviour_Auto_GlobalTrackingOfPlayer|Behaviour_Trigger_KnockbackPlayer|Behaviour_Trigger_AttackTowerSelfDestruct|Behaviour_Auto_RobotHealth
-Obj_Robot_BigTriangle,SceneB,Robot,战斗场景B大三角,,Behaviour_Auto_GlobalTrackingOfPlayer
+Obj_Robot_BigTriangle,SceneB,Robot,战斗场景B大三角,,Behaviour_Auto_GlobalTrackingOfPlayer|Behaviour_Trigger_KnockbackPlayer|Behaviour_Trigger_AttackTowerSelfDestruct|Behaviour_Auto_RobotHealth
 Obj_Robot_Breed,SceneB,Robot,战斗场景B繁育,,Behaviour_Auto_GlobalTrackingOfPlayer
 Obj_Robot_Bomb,SceneB,Robot,战斗场景B炸弹,,Behaviour_Auto_GlobalTrackingOfPlayer
 Obj_Robot_Rapidly,SceneB,Robot,战斗场景B急速,,Behaviour_Auto_GlobalTrackingOfPlayer
@@ -33,9 +33,15 @@ Obj_Weapon_Orbitingball,SceneB,Weapon,战斗场景B环绕球,,Behaviour_Auto_Orb
 Obj_Weapon_Laserray,SceneB,Weapon,战斗场景B激光射线,,Behaviour_Auto_Laserray
 Obj_Weapon_Grenade,SceneB,Weapon,战斗场景B手雷,,Behaviour_Auto_Grenade
 Obj_WeaponBuff_SubmachineGunFiresFasterAndHasACloserRange,SceneB,WeaponBuff,战斗场景B冲锋枪射速更快范围更近,,
-Obj_PlayerBuff_IncreasePickupRange,SceneB,PlayerBuff,战斗场景B增加玩家拾取范围,,
+Obj_PlayerBuff_IncreasePickupRange,SceneB,PlayerBuff,战斗场景B增加玩家拾取范围,,Behaviour_Event_IncreasePickupRange
+Obj_PlayerBuff_IncreaseHealthMax,SceneB,PlayerBuff,战斗场景B增加玩家血量上限,,Behaviour_Event_IncreaseHealthMax
+Obj_PlayerBuff_IncreaseHealthSpeed,SceneB,PlayerBuff,战斗场景B增加玩家血量回复速度,,Behaviour_Event_IncreaseHealthSpeed
+Obj_PlayerBuff_IncreaseChargeEnergySpeed,SceneB,PlayerBuff,战斗场景B增加玩家充能速度,,Behaviour_Event_IncreaseChargeEnergySpeed
+Obj_PlayerBuff_MoreDrops,SceneB,PlayerBuff,战斗场景B更多掉落物,,Behaviour_Event_MoreDrops
+Obj_PlayerBuff_RecoverHealth,SceneB,PlayerBuff,战斗场景B一次性增加玩家血量,,Behaviour_Event_RecoverHealth
+Obj_PlayerBuff_DestroyAllRobot,SceneB,PlayerBuff,战斗场景B清理机器人,,Behaviour_Event_DestroyAllRobot
 Obj_RobotBuff_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,SceneB,RobotBuff,战斗场景B增加所有机器人的移速并减少生命值,,
-Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,
+Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower
 Obj_Global_Global,SceneB,Global,战斗场景B全局,,
 Obj_WaveBuff_AddTenSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加10个小三角机器人,,
 Obj_WaveBuff_AddThirtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加30个小三角机器人,,

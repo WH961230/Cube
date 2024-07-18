@@ -145,33 +145,10 @@ namespace LazyPan {
         private void OnTriggerEvent(Collider collider) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(collider.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "Robot") {
-                    Debug.Log("激光射击敌人");
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                 }
             }
         }
-
-        #region Math
-
-        private bool ComputeDirection(Vector3 targetDir, Vector3 bulletStartPoint, Vector3 vA, float speed, out Vector3 result) {
-            var aTob = bulletStartPoint - targetDir;
-            var dc = aTob.magnitude;
-            var alpha = Vector3.Angle(aTob, vA) * Mathf.Deg2Rad;
-            var sA = vA.magnitude;
-            var r = sA / speed;
-            if (MyMathUtil.ComputeRoot((1 - r * r), 2 * dc * r * Mathf.Cos(alpha), -dc * dc, out float root1, out float root2) == 0) {
-                result = default;
-                return false;
-            }
-
-            var dA = Mathf.Max(root1, root2);
-            var t = dA / speed;
-            var c = targetDir + t * vA;
-            result = (c - bulletStartPoint).normalized;
-            return true;
-        }
-
-        #endregion
 
         public override void Clear() {
             base.Clear();

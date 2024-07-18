@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 4663217929726040343}
   - component: {fileID: 6588566537595957412}
   - component: {fileID: 5476840306277865611}
-  - component: {fileID: 1308121029709465685}
   m_Layer: 3
   m_Name: Bullet
   m_TagString: Untagged
@@ -5004,26 +5003,6 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
---- !u!114 &1308121029709465685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138989693990245501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bools: []
-  Ints: []
-  Floats:
-  - Sign: FireDamage
-    Description: "\u5C04\u51FB\u4F24\u5BB3"
-    Float: 20
-  Strings: []
-  Vector3s: []
 --- !u!1 &5140789121946981623
 GameObject:
   m_ObjectHideFlags: 0

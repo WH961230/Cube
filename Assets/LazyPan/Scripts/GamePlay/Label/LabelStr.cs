@@ -47,6 +47,8 @@ public class LabelStr {
     public static string GLOBAL = "Global";
     public static string PLAYER = "Player";
     public static string LINE = "Line";
+    public static string SURROUND = "Surround";
+    public static string BALL = "Ball";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909447801756063273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.658, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4979,7 +4979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2367648286006123757
 Transform:
   m_ObjectHideFlags: 0
@@ -5225,6 +5225,8 @@ MonoBehaviour:
   GameObjects:
   - Sign: Bullet
     GO: {fileID: 909447801756063273}
+  - Sign: FireRange
+    GO: {fileID: 3502550820605530437}
   Transforms:
   - Sign: Foot
     Tran: {fileID: 7868656383781502519}

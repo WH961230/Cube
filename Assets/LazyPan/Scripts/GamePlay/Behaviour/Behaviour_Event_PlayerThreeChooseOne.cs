@@ -117,7 +117,8 @@ namespace LazyPan {
 
                 if (index != null) {
                     for (int i = 0; i < index.Length; i++) {
-                        Entity buffEntity = playBuffEntity[i];
+                        int tmpIndex = index[i];
+                        Entity buffEntity = playBuffEntity[tmpIndex];
                         Comp item = Cond.Instance.Get<Comp>(choose,
                             LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
                         //注册图片

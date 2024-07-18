@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
@@ -20,8 +19,9 @@ namespace LazyPan {
 
         private float fireRateIntervalDeploy;
         private GameObject bulletTemplate;
+        private GameObject _fireRangeImgGo;//范围图片
+
         public Behaviour_Auto_SubmachineGun(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
-            Debug.Log("冲锋枪");
             //冲锋枪根源
             _foot = Cond.Instance.Get<Transform>(entity, LabelStr.FOOT);
             //子弹根节点
@@ -44,6 +44,7 @@ namespace LazyPan {
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
+            _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -52,7 +53,17 @@ namespace LazyPan {
             _bullets.Clear();
         }
 
+        private bool IsActive() {
+            bool active = entity.Prefab.activeSelf;
+            _fireRangeImgGo.SetActive(active);
+            return active;
+        }
+
         private void OnLateUpdate() {
+            if (!IsActive()) {
+                return;
+            }
+
             SetToTowerPoint();
         }
 
@@ -63,6 +74,9 @@ namespace LazyPan {
         }
 
         private void OnUpdate() {
+            if (!IsActive()) {
+                return;
+            }
             GetWithinDistanceEntity();
             ShotBulletToEnemy();
         }
@@ -119,7 +133,6 @@ namespace LazyPan {
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "Robot") {
-                    Debug.Log("获取机器人");
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                     fxGo.SetActive(false);
                 }

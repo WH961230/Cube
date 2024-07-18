@@ -29,6 +29,7 @@ namespace LazyPan {
                 foreach (var type in types) {
                     if (config.Type == type) {
                         Entity instanceEntity = Obj.Instance.LoadEntity(config.Sign);
+                        instanceEntity.Prefab.SetActive(false);
                         _allWeapons.Add(instanceEntity);
                         Debug.Log("获取武器:" + config.Name);
                         break;
@@ -53,7 +54,9 @@ namespace LazyPan {
         }
 
         public void InitWeapon(string weaponSign) {
-            _assembledWeapons.Add(GetWeapon(weaponSign));
+            Entity prepareAssembledWeapon = GetWeapon(weaponSign);
+            prepareAssembledWeapon.Prefab.SetActive(true);
+            _assembledWeapons.Add(prepareAssembledWeapon);
             RefreshWeapons();
         }
 

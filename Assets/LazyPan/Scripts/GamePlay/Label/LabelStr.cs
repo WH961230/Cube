@@ -49,6 +49,10 @@ public class LabelStr {
     public static string LINE = "Line";
     public static string SURROUND = "Surround";
     public static string BALL = "Ball";
+    public static string INCREASE = "Increase";
+    public static string CHARGE = "Charge";
+    public static string DROP = "Drop";
+    public static string RATIO = "Ratio";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

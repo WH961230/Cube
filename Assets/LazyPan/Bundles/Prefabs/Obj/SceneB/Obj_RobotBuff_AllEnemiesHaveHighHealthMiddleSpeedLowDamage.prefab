@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower
+  m_Name: Obj_RobotBuff_AllEnemiesHaveHighHealthMiddleSpeedLowDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,23 +131,17 @@ MonoBehaviour:
     Description: "\u88AB\u4F7F\u7528"
     Bool: 0
   Ints: []
-  Floats:
-  - Sign: IncreaseEnergyMax
-    Description: "\u589E\u52A0\u7684\u80FD\u91CF\u5BB9\u91CF \u589E\u52A0\u91CF"
-    Float: 50
+  Floats: []
   Strings:
-  - Sign: Target
-    Description: "\u76EE\u6807\u5B9E\u4F53\u6807\u8BC6"
-    String: Obj_Tower_Tower
   - Sign: Sign
     Description: "\u5F85\u6CE8\u518C\u884C\u4E3A\u6807\u8BC6"
-    String: Behaviour_Auto_IncreaseTheEnergyCapacityOfTheTower
+    String: Behaviour_Auto_AllEnemiesHaveHighHealthMiddleSpeedLowDamage
   - Sign: Icon
     Description: "\u56FE\u6807\u5730\u5740"
-    String: IncreaseTheEnergyCapacityOfTheTower
+    String: AllEnemiesHaveHighHealthMiddleSpeedLowDamage
   - Sign: Info
     Description: "\u8BF4\u660E"
-    String: "\u589E\u52A0\u5854\u7684\u80FD\u91CF\u5BB9\u91CF"
+    String: "\u6240\u6709\u654C\u4EBA\u9AD8\u8840\u4E2D\u901F\u4F4E\u4F24"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

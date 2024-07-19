@@ -204,7 +204,7 @@ namespace LazyPan {
                     //有目标 针对单独目标
                     if (Cond.Instance.GetData(buffEntity, LabelStr.TARGET, out StringData targetSignStringData)) {
                         if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
-                            BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String);
+                            BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
                             usedBoolData.Bool = true;
                             CloseRobotThreeChooseOneUI();
                             MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);

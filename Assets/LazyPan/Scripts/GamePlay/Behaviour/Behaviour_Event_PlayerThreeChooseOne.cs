@@ -13,6 +13,7 @@ namespace LazyPan {
             MessageRegister.Instance.Reg(MessageCode.MsgPlayerLevelUp, MsgPlayerThreeChooseOne);
 
             #region Test
+            
 
             InputRegister.Instance.Load(InputCode.Q, context => {
                 if (context.performed) {
@@ -153,7 +154,8 @@ namespace LazyPan {
                 if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
                     if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                         if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
-                            BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String);
+                            BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
+                            outBehaviour.SetBehaviourData(buffEntity.Data);
                             usedBoolData.Bool = true;
                             ClosePlayerThreeChooseOneUI();
                         }

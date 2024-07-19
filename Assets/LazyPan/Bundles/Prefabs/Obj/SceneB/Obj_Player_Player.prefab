@@ -230,6 +230,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &6094217625829534042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,9 +273,6 @@ MonoBehaviour:
   - Sign: HealthSpeed
     Description: "\u8840\u91CF\u56DE\u590D\u901F\u5EA6"
     Float: 2
-  - Sign: ChargeEnergySpeed
-    Description: "\u5145\u80FD\u901F\u5EA6"
-    Float: 10
   - Sign: Experience
     Description: "\u7ECF\u9A8C\u503C"
     Float: 0
@@ -481,6 +479,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!1 &6152797482325617040
 GameObject:
   m_ObjectHideFlags: 0

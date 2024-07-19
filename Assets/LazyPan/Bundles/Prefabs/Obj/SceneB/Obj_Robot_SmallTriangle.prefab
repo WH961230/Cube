@@ -224,6 +224,7 @@ MonoBehaviour:
   NavMeshAgents:
   - Sign: NavMeshAgent
     NavMeshAgent: {fileID: 4748065417787586821}
+  LineRenderers: []
 --- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,3 +679,4 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []

@@ -47,10 +47,17 @@ namespace LazyPan {
         }
 
         private void Dead() {
-            Entity drop = Obj.Instance.LoadEntity("Obj_PickUp_ExperiencePoint");
-            drop.SetBeginLocationInfo(new LocationInformationData() {
-                Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
-            });
+            //掉落概率 1 - 100
+            int randNum = Random.Range(0, 100);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.DROP, LabelStr.RATIO),
+                out IntData intData);
+            if (randNum <= intData.Int) {
+                Entity drop = Obj.Instance.LoadEntity("Obj_PickUp_ExperiencePoint");
+                drop.SetBeginLocationInfo(new LocationInformationData() {
+                    Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
+                });
+            }
+
             MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
         }
 

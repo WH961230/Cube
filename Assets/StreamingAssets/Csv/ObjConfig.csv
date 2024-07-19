@@ -36,11 +36,13 @@ Obj_WeaponBuff_SubmachineGunFiresFasterAndHasACloserRange,SceneB,WeaponBuff,战�
 Obj_PlayerBuff_IncreasePickupRange,SceneB,PlayerBuff,战斗场景B增加玩家拾取范围,,Behaviour_Event_IncreasePickupRange
 Obj_PlayerBuff_IncreaseHealthMax,SceneB,PlayerBuff,战斗场景B增加玩家血量上限,,Behaviour_Event_IncreaseHealthMax
 Obj_PlayerBuff_IncreaseHealthSpeed,SceneB,PlayerBuff,战斗场景B增加玩家血量回复速度,,Behaviour_Event_IncreaseHealthSpeed
-Obj_PlayerBuff_IncreaseChargeEnergySpeed,SceneB,PlayerBuff,战斗场景B增加玩家充能速度,,Behaviour_Event_IncreaseChargeEnergySpeed
+Obj_TowerBuff_IncreaseChargeEnergySpeed,SceneB,TowerBuff,战斗场景B增加玩家充能速度,,Behaviour_Event_IncreaseChargeEnergySpeed
 Obj_PlayerBuff_MoreDrops,SceneB,PlayerBuff,战斗场景B更多掉落物,,Behaviour_Event_MoreDrops
 Obj_PlayerBuff_RecoverHealth,SceneB,PlayerBuff,战斗场景B一次性增加玩家血量,,Behaviour_Event_RecoverHealth
 Obj_PlayerBuff_DestroyAllRobot,SceneB,PlayerBuff,战斗场景B清理机器人,,Behaviour_Event_DestroyAllRobot
-Obj_RobotBuff_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth,SceneB,RobotBuff,战斗场景B增加所有机器人的移速并减少生命值,,
+Obj_RobotBuff_AllEnemiesHaveHighSpeedMiddleDamageLowHealth,SceneB,RobotBuff,战斗场景B所有机器人高速中伤低血,,
+Obj_RobotBuff_AllEnemiesHaveHighHealthMiddleSpeedLowDamage,SceneB,RobotBuff,战斗场景B所有机器人高血中速低伤,,
+Obj_RobotBuff_AllEnemiesHaveHighDamageMiddleSpeedLowHealth,SceneB,RobotBuff,战斗场景B所有机器人高伤中速低血,,
 Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower
 Obj_Global_Global,SceneB,Global,战斗场景B全局,,
 Obj_WaveBuff_AddTenSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加10个小三角机器人,,

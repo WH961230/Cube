@@ -145,7 +145,7 @@ namespace LazyPan {
         private void RegisterSetUpBehaviour(Entity robot) {
 	        //注册事件
 	        foreach (var behaviourSign in _setUpBehaviours) {
-		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourSign);
+		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourSign, out Behaviour outBehaviour);
 	        }
         }
 

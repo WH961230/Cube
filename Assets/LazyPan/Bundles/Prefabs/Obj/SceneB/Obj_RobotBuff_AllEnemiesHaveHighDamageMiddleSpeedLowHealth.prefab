@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_RobotBuff_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth
+  m_Name: Obj_RobotBuff_AllEnemiesHaveHighDamageMiddleSpeedLowHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7868656383781502519}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5603811672759092760
 MonoBehaviour:
@@ -113,6 +113,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,13 +135,14 @@ MonoBehaviour:
   Strings:
   - Sign: Sign
     Description: "\u5F85\u6CE8\u518C\u884C\u4E3A\u6807\u8BC6"
-    String: Behaviour_Auto_AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth
+    String: Behaviour_Auto_AllEnemiesHaveHighDamageMiddleSpeedLowHealth
   - Sign: Icon
     Description: "\u56FE\u6807\u5730\u5740"
-    String: AllEnemiesHaveIncreasedMovementSpeedAndReducedHealth
+    String: AllEnemiesHaveHighDamageMiddleSpeedLowHealth
   - Sign: Info
     Description: "\u8BF4\u660E"
-    String: "\u589E\u52A0\u6240\u6709\u654C\u4EBA\u7684\u79FB\u52A8\u901F\u5EA6\u51CF\u5C11\u521D\u59CB\u751F\u547D\u503C"
+    String: "\u6240\u6709\u654C\u4EBA\u9AD8\u4F24\u4E2D\u901F\u4F4E\u8840"
+  Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

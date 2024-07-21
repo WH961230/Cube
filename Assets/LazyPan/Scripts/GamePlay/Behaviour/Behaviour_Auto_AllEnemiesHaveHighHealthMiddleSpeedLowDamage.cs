@@ -6,7 +6,9 @@ namespace LazyPan {
         public Behaviour_Auto_AllEnemiesHaveHighHealthMiddleSpeedLowDamage(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
         }
 
-
+        public override void DelayedExecute() {
+            
+        }
 
         public override void Clear() {
             base.Clear();

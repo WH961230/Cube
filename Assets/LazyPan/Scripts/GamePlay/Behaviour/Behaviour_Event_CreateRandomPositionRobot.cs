@@ -38,6 +38,10 @@ namespace LazyPan {
 	        InputRegister.Instance.Load(InputCode.M, InputStartLevel);
 	        Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void InputStartLevel(InputAction.CallbackContext obj) {
 	        if (obj.started) {

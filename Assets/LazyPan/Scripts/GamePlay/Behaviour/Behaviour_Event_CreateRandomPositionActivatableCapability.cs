@@ -19,8 +19,12 @@ namespace LazyPan {
 
 	        #endregion
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
-		/*获取随机位置*/
+        /*获取随机位置*/
 		private LocationInformationData GetRandomPosition() {
 			LocationInformationSetting setting = Loader.LoadLocationInfSetting(entity.ObjConfig.SetUpLocationInformationSign);
 			List<LocationInformationData> datas = setting.locationInformationDatas;

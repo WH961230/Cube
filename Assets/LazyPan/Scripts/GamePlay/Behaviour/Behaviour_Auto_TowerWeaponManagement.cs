@@ -14,6 +14,10 @@ namespace LazyPan {
             InitAllWeapon();
             InitDefaultWeapon();
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void InitAllWeapon() {
             _allWeapons.Clear();

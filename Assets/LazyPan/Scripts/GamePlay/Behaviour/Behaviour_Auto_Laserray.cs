@@ -53,6 +53,10 @@ namespace LazyPan {
             _bullets.Clear();
         }
 
+        public override void DelayedExecute() {
+            
+        }
+
         private bool IsActive() {
             bool active = entity.Prefab.activeSelf;
             _fireRangeImgGo.SetActive(active);

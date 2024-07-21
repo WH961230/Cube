@@ -11,6 +11,10 @@ namespace LazyPan {
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
             TestUI();
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void TestUI() {
             if (Flo.Instance.GetFlow(out Flow_SceneB flow)) {

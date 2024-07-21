@@ -3,6 +3,10 @@
 namespace LazyPan {
     public class Behaviour_Event_IncreaseHealthMax : Behaviour {
         public Behaviour_Event_IncreaseHealthMax(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+
+        }
+
+        public override void DelayedExecute() {
             //玩家血量上限
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out FloatData _maxHealthData);
             //增加量

@@ -7,7 +7,9 @@ namespace LazyPan {
             Debug.Log("注册冲锋枪Buff " + entity.Sign);
         }
 
-
+        public override void DelayedExecute() {
+            
+        }
 
         public override void Clear() {
             base.Clear();

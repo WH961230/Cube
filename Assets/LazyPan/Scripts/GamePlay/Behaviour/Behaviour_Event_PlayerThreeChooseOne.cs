@@ -23,6 +23,10 @@ namespace LazyPan {
 
             #endregion
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         //初始化Buff
         private void InitBuffs() {
@@ -156,6 +160,7 @@ namespace LazyPan {
                         if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
                             BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
                             outBehaviour.SetBehaviourData(buffEntity.Data);
+                            outBehaviour.DelayedExecute();
                             usedBoolData.Bool = true;
                             ClosePlayerThreeChooseOneUI();
                         }

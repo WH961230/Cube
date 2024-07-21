@@ -11,6 +11,10 @@ namespace LazyPan {
             Game.instance.OnLateUpdateEvent.AddListener(OnGravityUpdate);
         }
 
+        public override void DelayedExecute() {
+            
+        }
+
         private void OnGravityUpdate() {
             if (_characterController != null) {
                 _characterController.Move(Vector3.down * _gravitySpeed * Time.fixedDeltaTime);

@@ -25,6 +25,10 @@ namespace LazyPan {
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerExitEvent.AddListener(ChargeOut);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void ChargeIn(Collider arg0) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {

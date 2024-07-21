@@ -18,6 +18,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.EXPERIENCE), out _maxExperienceData);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void OnUpdate() {
             _experienceBar.value = _experienceData.Float / _maxExperienceData.Float;

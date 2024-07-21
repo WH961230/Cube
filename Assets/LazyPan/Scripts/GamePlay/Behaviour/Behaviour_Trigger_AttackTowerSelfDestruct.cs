@@ -11,6 +11,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.DAMAGE, out _damage);
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(OnAttackTower);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void OnAttackTower(Collider arg0) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity triggerEntity)) {

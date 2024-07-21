@@ -37,6 +37,10 @@ namespace LazyPan {
             
             _balls.Clear();
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private bool IsActive() {
             bool active = entity.Prefab.activeSelf;

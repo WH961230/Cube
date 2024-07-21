@@ -26,6 +26,10 @@ namespace LazyPan {
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerExitEvent.AddListener(ChargeOut);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void OnUpdate() {
             if (_isChargingEnergyData.Bool) {

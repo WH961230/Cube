@@ -34,6 +34,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, Label.SPEED), out _teleportSpeedData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, LabelStr.ACCELERATION), out _teleportAccelerationData);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void InputInvincibleTeleportation(InputAction.CallbackContext obj) {
             if (!_teleportData.Bool) {

@@ -25,6 +25,10 @@ namespace LazyPan {
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
+        public override void DelayedExecute() {
+            
+        }
+
         private void OnUpdate() {
             if (_healthImg != null) {
                 _healthImg.fillAmount = _healthData.Float / _maxHealthData.Float;

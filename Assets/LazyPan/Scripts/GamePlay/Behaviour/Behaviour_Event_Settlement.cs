@@ -12,6 +12,10 @@ namespace LazyPan {
             Time.timeScale = 0;
             OpenSettlementUI();
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void OpenSettlementUI() {
             Comp settlement = Cond.Instance.Get<Comp>(_ui, LabelStr.SETTLEMENT);

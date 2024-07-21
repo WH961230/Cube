@@ -38,6 +38,10 @@ namespace LazyPan {
             Game.instance.OnLateUpdateEvent.AddListener(OnUpdate);
         }
 
+        public override void DelayedExecute() {
+            
+        }
+
         private void OnUpdate() {
             _healthBar.value = _healthData.Float / _maxHealthData.Float;
 

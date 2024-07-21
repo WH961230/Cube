@@ -37,6 +37,10 @@ namespace LazyPan {
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void KnockbackPlayer(Vector3 direction) {
             _knockbackDirection = direction;

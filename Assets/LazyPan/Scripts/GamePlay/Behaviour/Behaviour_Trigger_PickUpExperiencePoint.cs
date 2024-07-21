@@ -7,6 +7,10 @@ namespace LazyPan {
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(OnTriggerEnter);
         }
 
+        public override void DelayedExecute() {
+            
+        }
+
         private void OnTriggerEnter(Collider arg0) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {
                 if (playerEntity.ObjConfig.Type == "Player") {

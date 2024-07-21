@@ -31,6 +31,10 @@ namespace LazyPan {
             
             DisplayLevelUI();
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         //传入消息开始三选一
         private void MsgRobotThreeChooseOne() {

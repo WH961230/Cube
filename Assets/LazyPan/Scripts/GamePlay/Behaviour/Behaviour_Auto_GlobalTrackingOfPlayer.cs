@@ -16,6 +16,10 @@ namespace LazyPan {
             _navMeshAgent.SetDestination(_playerBody.position);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
+        
+        public override void DelayedExecute() {
+            
+        }
 
         private void OnUpdate() {
             _navMeshAgent.speed = _movementSpeedData.Float;

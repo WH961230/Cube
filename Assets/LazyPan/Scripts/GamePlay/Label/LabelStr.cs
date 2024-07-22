@@ -53,6 +53,7 @@ public class LabelStr {
     public static string CHARGE = "Charge";
     public static string DROP = "Drop";
     public static string RATIO = "Ratio";
+    public static string ENERGY = "Energy";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

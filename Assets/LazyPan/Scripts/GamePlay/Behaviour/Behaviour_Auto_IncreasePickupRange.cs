@@ -7,7 +7,10 @@ namespace LazyPan {
         }
 
         public override void DelayedExecute() {
-            
+            BehaviourData.Get(LabelStr.RANGE, out FloatData _rangeData);
+
+            Cond.Instance.GetData(entity, LabelStr.RANGE, out FloatData _currentRangeData);
+            _currentRangeData.Float += _rangeData.Float;
         }
 
         public override void Clear() {

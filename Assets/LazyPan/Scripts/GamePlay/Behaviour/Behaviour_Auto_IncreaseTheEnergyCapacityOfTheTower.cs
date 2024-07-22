@@ -7,7 +7,11 @@ namespace LazyPan {
         }
 
         public override void DelayedExecute() {
-            
+            if (BehaviourData.Get(LabelStr.Assemble(LabelStr.ENERGY, LabelStr.MAX), out FloatData _increaseCapacityData)) {
+                if (Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.ENERGY, LabelStr.MAX), out FloatData _capacityData)) {
+                    _capacityData.Float += _increaseCapacityData.Float;
+                }
+            }
         }
 
         public override void Clear() {

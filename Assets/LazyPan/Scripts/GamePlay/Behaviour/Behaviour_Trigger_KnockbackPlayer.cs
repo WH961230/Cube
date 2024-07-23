@@ -18,6 +18,12 @@ namespace LazyPan {
         private void OnKnockback(Collider arg0) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {
                 if (playerEntity.ObjConfig.Type == "Player") {
+                    Cond.Instance.GetData(playerEntity, Label.Assemble(LabelStr.TELEPORT, Label.ING), out BoolData _teleportData);
+                    //击退中取消瞬移
+                    if (_teleportData.Bool) {
+                        return;
+                    }
+
                     Vector3 direction = (Cond.Instance.Get<Transform>(playerEntity, LabelStr.BODY).position - _body.position).normalized;
                     direction.y = 0;
                     MessageRegister.Instance.Dis(MessageCode.MsgKnockbackPlayer, direction);

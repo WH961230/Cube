@@ -48,13 +48,6 @@ namespace LazyPan {
 
         private void OnUpdate() {
             if (_characterController != null) {
-                //击退中取消瞬移
-                if (_knockbackData.Bool) {
-                    _teleportData.Bool = false;
-                    _invincibleData.Bool = _teleportData.Bool;
-                    return;
-                }
-
                 Vector3 moveDirection = _moveDirectionData.Vector3;
                 if (moveDirection == Vector3.zero) {
                     moveDirection = _body.forward;

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace LazyPan {
     public class Behaviour_Event_CreateRandomPositionRobot : Behaviour {
-	    private List<string> _setUpBehaviours = new List<string>();
+	    private List<SetUpBehaviourData> _setUpBehaviours = new List<SetUpBehaviourData>();
 	    private List<Entity> _robots = new List<Entity>();
 	    private WaveData _waveData = new WaveData();
 	    private Queue<WaveInstanceData> _waveInstanceQueue = new Queue<WaveInstanceData>();
@@ -148,14 +148,16 @@ namespace LazyPan {
 
         private void RegisterSetUpBehaviour(Entity robot) {
 	        //注册事件
-	        foreach (var behaviourSign in _setUpBehaviours) {
-		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourSign, out Behaviour outBehaviour);
+	        foreach (var behaviourData in _setUpBehaviours) {
+		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourData.BehaviourSign, out Behaviour outBehaviour);
+		        outBehaviour.SetBehaviourData(behaviourData.BehaviourData);
+		        outBehaviour.DelayedExecute();
 	        }
         }
 
-        public void AddSetUpBehaviourSign(string behaviourSign) {
-	        if (!_setUpBehaviours.Contains(behaviourSign)) {
-		        _setUpBehaviours.Add(behaviourSign);
+        public void AddSetUpBehaviourSign(SetUpBehaviourData behaviourData) {
+	        if (!_setUpBehaviours.Contains(behaviourData)) {
+		        _setUpBehaviours.Add(behaviourData);
 	        }
         }
 
@@ -188,5 +190,10 @@ namespace LazyPan {
 	            Obj.Instance.UnLoadEntity(tmpRobot);
             }
         }
+    }
+
+    public class SetUpBehaviourData {
+	    public string BehaviourSign;
+	    public Data BehaviourData;
     }
 }

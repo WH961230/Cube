@@ -53,12 +53,7 @@ namespace LazyPan {
         }
 
         private Vector3 GetMovementDirection() {
-            Vector3 moveDirection = Vector3.forward * _inputMovementValue.y + Vector3.right * _inputMovementValue.x;
-            if (moveDirection != Vector3.zero) {
-                _moveDirectionData.Vector3 = moveDirection;
-            }
-
-            return moveDirection;
+            return Vector3.forward * _inputMovementValue.y + Vector3.right * _inputMovementValue.x;
         }
 
         private void OnUpdate() {
@@ -76,6 +71,7 @@ namespace LazyPan {
 
                 Vector3 moveDirection = GetMovementDirection();
                 _characterController.Move(moveDirection * _movementSpeedData.Float * Time.deltaTime);
+                _moveDirectionData.Vector3 = _characterController.velocity.normalized;
                 _moveData.Bool = moveDirection != Vector3.zero;
             }
         }

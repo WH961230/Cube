@@ -219,7 +219,10 @@ namespace LazyPan {
                                 out Entity createRobotEntity)) {
                             if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                                     out Behaviour_Event_CreateRandomPositionRobot beh)) {
-                                beh.AddSetUpBehaviourSign(behaviourSignStringData.String);
+                                beh.AddSetUpBehaviourSign(new SetUpBehaviourData() {
+                                    BehaviourSign = behaviourSignStringData.String,
+                                    BehaviourData = buffEntity.Data
+                                });
                                 usedBoolData.Bool = true;
                                 CloseRobotThreeChooseOneUI();
                                 MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);

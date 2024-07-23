@@ -159,8 +159,6 @@ namespace LazyPan {
                     if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                         if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
                             BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
-                            outBehaviour.SetBehaviourData(buffEntity.Data);
-                            outBehaviour.DelayedExecute();
                             usedBoolData.Bool = true;
                             ClosePlayerThreeChooseOneUI();
                         }

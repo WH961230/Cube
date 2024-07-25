@@ -71,7 +71,10 @@ namespace LazyPan {
 
                 Vector3 moveDirection = GetMovementDirection();
                 _characterController.Move(moveDirection * _movementSpeedData.Float * Time.deltaTime);
-                _moveDirectionData.Vector3 = _characterController.velocity.normalized;
+                if (_characterController.velocity.normalized != Vector3.zero) {
+                    _moveDirectionData.Vector3 = _characterController.velocity.normalized;
+                }
+
                 _moveData.Bool = moveDirection != Vector3.zero;
             }
         }

@@ -167,6 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad884187ba553694ca31205e9125d95f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenConsole: 1
+  OpenConsole: 0
   StageLoadScene: SceneA
   UIDontDestroyRoot: {fileID: 0}

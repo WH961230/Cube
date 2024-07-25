@@ -138,7 +138,6 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "Robot") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
-                    fxGo.SetActive(false);
                 }
             }
         }

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: LocationInf_SceneB_Tower
   m_EditorClassIdentifier: 
   SettingName: 
-  TerrainGo: {fileID: 0}
   locationInformationDatas:
-  - Position: {x: -3.7, y: 0, z: -2.24}
+  - Position: {x: 0, y: 0, z: -2.24}
     Rotation: {x: -0, y: 0, z: 0}

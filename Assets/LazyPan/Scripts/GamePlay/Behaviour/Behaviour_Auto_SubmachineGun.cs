@@ -19,7 +19,7 @@ namespace LazyPan {
 
         private float fireRateIntervalDeploy;
         private GameObject bulletTemplate;
-        private GameObject _fireRangeImgGo;//范围图片
+        private LineRenderer _fireRangeLineRenderer;//范围图片
 
         public Behaviour_Auto_SubmachineGun(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             //冲锋枪根源
@@ -36,15 +36,13 @@ namespace LazyPan {
             EntityRegister.TryGetRandEntityByType("Tower", out Entity _tower);
             _towerFoot = Cond.Instance.Get<Transform>(_tower, LabelStr.FOOT);
             //获取射击速率
-            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RATE, LabelStr.INTERVAL),
-                out _fireRateInterval);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RATE, LabelStr.INTERVAL), out _fireRateInterval);
             //获取射击伤害
-            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.DAMAGE),
-                out _fireDamage);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.DAMAGE), out _fireDamage);
             //获取射击范围
-            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
-                out _fireRange);
-            _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE), out _fireRange);
+            _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -59,7 +57,13 @@ namespace LazyPan {
 
         private bool IsActive() {
             bool active = entity.Prefab.activeSelf;
-            _fireRangeImgGo.SetActive(active);
+            _fireRangeLineRenderer.gameObject.SetActive(active);
+            if (active) {
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position + new Vector3(0, 0, 0.05f), _fireRange.Float, 50);
+            } else {
+                MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            }
+
             return active;
         }
 

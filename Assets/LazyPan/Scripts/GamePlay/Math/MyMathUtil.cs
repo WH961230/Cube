@@ -14,5 +14,30 @@ namespace LazyPan {
             root2 = (-b - Mathf.Sqrt(num)) / (2 * a);
             return num > 0 ? 2 : 1;
         }
+
+        #region 画线
+
+        public static void CircleLineRenderer(LineRenderer lineRenderer, Vector3 center, float _radius, int numSegments) {
+            if (lineRenderer.positionCount == 0) {
+                lineRenderer.positionCount = numSegments + 1;
+                float angleStep = 360f / numSegments;
+                Vector3[] positions = new Vector3[numSegments + 1]; // 缓存位置数组
+                for (int i = 0; i <= numSegments; i++) {
+                    float angle = i * angleStep;
+                    float x = Mathf.Sin(Mathf.Deg2Rad * angle) * _radius / 2;
+                    float z = Mathf.Cos(Mathf.Deg2Rad * angle) * _radius / 2;
+                    positions[i] = center + new Vector3(x, 0f, z);
+                }
+
+                lineRenderer.SetPositions(positions);
+                Debug.Log("线渲染");
+            }
+        }
+
+        public static void ClearCircleRenderer(LineRenderer lineRenderer) {
+            lineRenderer.positionCount = 0;
+        }
+
+        #endregion
     }
 }

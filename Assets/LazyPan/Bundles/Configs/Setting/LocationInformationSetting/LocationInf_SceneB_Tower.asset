@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SettingName: 
   locationInformationDatas:
-  - Position: {x: 0, y: 0, z: -2.24}
+  - Position: {x: 0, y: 0, z: 0}
     Rotation: {x: -0, y: 0, z: 0}

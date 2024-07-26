@@ -18,7 +18,7 @@ namespace LazyPan {
 			Obj_Terrain_Terrain = Obj.Instance.LoadEntity("Obj_Terrain_Terrain");
 			Obj_Player_Player = Obj.Instance.LoadEntity("Obj_Player_Player");
 			Obj_Trigger_ChargeStartGame = Obj.Instance.LoadEntity("Obj_Trigger_ChargeStartGame");
-
+			Next("SceneB");
         }
 
 		/*获取UI*/

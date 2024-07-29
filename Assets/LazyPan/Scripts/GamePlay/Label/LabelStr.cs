@@ -55,6 +55,12 @@ public class LabelStr {
     public static string RATIO = "Ratio";
     public static string ENERGY = "Energy";
     public static string RING = "Ring";
+    public static string START = "Start";
+    public static string RADIU = "Radiu";
+    public static string PULSE = "Pulse";
+    public static string DURATION = "Duration";
+    public static string DELAY = "Delay";
+    public static string DOWN = "Down";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -9,9 +9,9 @@ namespace LazyPan {
         private FloatData _fireDamage;//射击伤害
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _balls = new List<GameObject>();
-
         private FloatData _surroundSpeed;
         private IntData _surroundCount;
+        private FloatData _towerEnergy;//塔能量
         private GameObject _ball1;
         private GameObject _ball2;
         private GameObject _ball3;
@@ -31,6 +31,9 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.SURROUND, LabelStr.SPEED), out _surroundSpeed);
             //获取环绕数量
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.SURROUND, LabelStr.COUNT), out _surroundCount);
+            //塔能量
+            EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
+            Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -43,7 +46,7 @@ namespace LazyPan {
         }
 
         private bool IsActive() {
-            bool active = entity.Prefab.activeSelf;
+            bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
             RefreshBall(active);
             return active;
         }

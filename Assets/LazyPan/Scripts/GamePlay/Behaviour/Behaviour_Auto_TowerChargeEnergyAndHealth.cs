@@ -8,15 +8,17 @@ namespace LazyPan {
         private FloatData _energyData;
         private FloatData _energyMaxData;
         private FloatData _energySpeedData;
+        private FloatData _energySpeedDownData;
         private Image _energyImage;
 
         public Behaviour_Auto_TowerChargeEnergy(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flowSceneB);
 
             Cond.Instance.GetData(entity, Label.ENERGY, out _energyData);
-            Cond.Instance.GetData(entity, Label.ENERGY + Label.MAX, out _energyMaxData);
-            Cond.Instance.GetData(entity, Label.ENERGY + Label.SPEED, out _energySpeedData);
-            Cond.Instance.GetData(entity, Label.ENERGY + Label.ING, out _isChargingEnergyData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, Label.MAX), out _energyMaxData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, Label.SPEED), out _energySpeedData);
+            Cond.Instance.GetData(entity,  LabelStr.Assemble(Label.ENERGY, LabelStr.DOWN, Label.SPEED), out _energySpeedDownData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY ,Label.ING), out _isChargingEnergyData);
 
             _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
@@ -59,7 +61,7 @@ namespace LazyPan {
                     _energyData.Float = _energyMaxData.Float;
                 }
             } else {
-                _energyData.Float -= _energySpeedData.Float * Time.deltaTime;
+                _energyData.Float -= _energySpeedDownData.Float * Time.deltaTime;
                 if (_energyData.Float < 0) {
                     _energyImage.gameObject.SetActive(false);
                     _energyData.Float = 0;

@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace LazyPan {
     public class Behaviour_Auto_SubmachineGun : Behaviour {
+        private float fireRateIntervalDeploy;
         private Transform _foot;//冲锋枪
         private Transform _body;//身体
         private Transform _muzzle;//枪口
@@ -14,10 +15,9 @@ namespace LazyPan {
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
+        private FloatData _towerEnergy;//塔能量
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
-
-        private float fireRateIntervalDeploy;
         private GameObject bulletTemplate;
         private LineRenderer _fireRangeLineRenderer;//范围图片
 
@@ -43,6 +43,9 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE), out _fireRange);
             _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            //塔能量
+            EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
+            Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -56,10 +59,10 @@ namespace LazyPan {
         }
 
         private bool IsActive() {
-            bool active = entity.Prefab.activeSelf;
+            bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
             _fireRangeLineRenderer.gameObject.SetActive(active);
             if (active) {
-                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position + new Vector3(0, 0, 0.05f), _fireRange.Float, 50);
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position, _fireRange.Float, 200);
             } else {
                 MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
             }

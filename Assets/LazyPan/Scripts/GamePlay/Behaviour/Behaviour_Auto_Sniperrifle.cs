@@ -13,6 +13,7 @@ namespace LazyPan {
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
+        private FloatData _towerEnergy;//塔能量
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
 
@@ -44,6 +45,9 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
             _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            //塔能量
+            EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
+            Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -57,7 +61,7 @@ namespace LazyPan {
         }
 
         private bool IsActive() {
-            bool active = entity.Prefab.activeSelf;
+            bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
             _fireRangeImgGo.SetActive(active);
             return active;
         }

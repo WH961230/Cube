@@ -24,13 +24,12 @@ namespace LazyPan {
                 Vector3[] positions = new Vector3[numSegments + 1]; // 缓存位置数组
                 for (int i = 0; i <= numSegments; i++) {
                     float angle = i * angleStep;
-                    float x = Mathf.Sin(Mathf.Deg2Rad * angle) * _radius / 2;
-                    float z = Mathf.Cos(Mathf.Deg2Rad * angle) * _radius / 2;
-                    positions[i] = center + new Vector3(x, 0f, z);
+                    float x = Mathf.Sin(Mathf.Deg2Rad * angle) * _radius;
+                    float z = Mathf.Cos(Mathf.Deg2Rad * angle) * _radius;
+                    positions[i] = center + new Vector3(x, 0.5f, z);
                 }
 
                 lineRenderer.SetPositions(positions);
-                Debug.Log("线渲染");
             }
         }
 

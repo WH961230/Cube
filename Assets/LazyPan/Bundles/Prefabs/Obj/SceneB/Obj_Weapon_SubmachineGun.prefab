@@ -5157,7 +5157,7 @@ MonoBehaviour:
     Float: 20
   - Sign: FireRange
     Description: "\u5C04\u51FB\u8303\u56F4"
-    Float: 10
+    Float: 12
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"

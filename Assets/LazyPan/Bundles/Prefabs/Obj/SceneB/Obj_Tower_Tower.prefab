@@ -222,6 +222,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &2672552122214190840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +250,9 @@ MonoBehaviour:
   - Sign: EnergySpeed
     Description: "\u5145\u80FD\u901F\u5EA6"
     Float: 10
+  - Sign: EnergyDownSpeed
+    Description: "\u5145\u80FD\u4E0B\u964D\u901F\u5EA6"
+    Float: 5
   Strings: []
   Vector3s: []
 --- !u!1 &6242194965163223405
@@ -567,6 +571,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!1 &8323905122252880505
 GameObject:
   m_ObjectHideFlags: 0

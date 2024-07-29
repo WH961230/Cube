@@ -109,10 +109,12 @@ namespace LazyPan {
         private void ShotLaser() {
             //找到目前的敌人
             int instanceLaserNum = _fireCount.Int;
+            //获取所有机器人
             bool findRobotEntity = EntityRegister.TryGetEntitiesByType("Robot", out List<Entity> robotEntities);
             if (findRobotEntity) {
                 int entityNum = robotEntities.Count;
-                if (entityNum > instanceLaserNum) {
+                //机器人数量大于等于开火数量
+                if (entityNum >= instanceLaserNum) {
                     int[] robotIndex = MathUtil.Instance.GetRandNoRepeatIndex(entityNum, instanceLaserNum);
                     foreach (var tmpIndex in robotIndex) {
                         CreateLaser(robotEntities[tmpIndex]);

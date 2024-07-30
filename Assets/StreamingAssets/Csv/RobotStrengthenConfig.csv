@@ -1,0 +1,12 @@
+﻿Sign,Level,HealthPercentage,AttackPercentage,MovementSpeedPercentage
+string,string,float,float,float
+标识,等级,生命值百分比,攻击力百分比,移速百分比
+1,1,50,0,0
+2,1,0,50,0
+3,1,0,0,50
+4,2,75,20,20
+5,2,20,75,20
+6,2,20,20,75
+7,3,100,50,50
+8,3,50,100,50
+9,3,50,50,100

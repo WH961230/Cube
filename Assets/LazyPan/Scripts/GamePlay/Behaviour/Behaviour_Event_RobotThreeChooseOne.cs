@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace LazyPan {
     public class Behaviour_Event_RobotThreeChooseOne : Behaviour {
@@ -18,16 +19,6 @@ namespace LazyPan {
             InitBuffs();
             MessageRegister.Instance.Reg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
             MessageRegister.Instance.Reg(MessageCode.MsgLevelUp, MsgDisplayLevelUp);
-
-            #region Test
-
-            InputRegister.Instance.Load(InputCode.E, context => {
-                if (context.performed) {
-                    MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
-                }
-            });
-
-            #endregion
             
             DisplayLevelUI();
         }
@@ -163,7 +154,23 @@ namespace LazyPan {
             Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
             if (!choose.gameObject.activeSelf) {
 
-                List<Entity> robotBuffEntities = GetBuff(new[]{"RobotBuff", "WaveBuff"});
+                string buffType = "";
+                int difficulty = 1;
+
+                //拿到类型和关卡难度
+                foreach (string key in LevelConfig.GetKeys()) {
+                    LevelConfig level = LevelConfig.Get(key);
+                    int waveNum = level.Wave;
+                    buffType = level.LevelType;
+                    Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL,
+                        out IntData levelData);
+                    if (waveNum == levelData.Int && buffType == "WaveBuff") {
+                        difficulty = Random.Range(level.DifficultyLowerLimit, level.DifficultyUpperLimit + 1);
+                        break;
+                    }
+                }
+
+                List<Entity> robotBuffEntities = GetBuff(new[]{buffType});
                 if (robotBuffEntities.Count == 0) {
                     return;
                 }
@@ -178,6 +185,7 @@ namespace LazyPan {
                     Entity buffEntity = robotBuffEntities[tmpIndex];
                     Comp item = Cond.Instance.Get<Comp>(choose,
                         LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
+
                     //注册图片
                     Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
                     Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
@@ -186,15 +194,23 @@ namespace LazyPan {
                     //注册说明
                     TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
                     Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
-                    info.text = infoData.String;
+                    if (buffEntity.ObjConfig.Type == "WaveBuff") {
+                        if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE,
+                                out WaveData waveData)) {
+                            info.text = string.Format(infoData.String,
+                                waveData.WaveInstanceDefaultList[0].InstanceNumber * 1 * difficulty);
+                        }
+                    } else if(buffEntity.ObjConfig.Type == "RobotBuff") {
+                        info.text = infoData.String;
+                    }
 
                     //注册按钮事件
                     Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
                     ButtonRegister.RemoveAllListener(button);
                     if (buffEntity.ObjConfig.Type == "RobotBuff") {
-                        ButtonRegister.AddListener(button, RegisterBehaviour, buffEntity);
+                        ButtonRegister.AddListener(button, RegisterStrengthenBehaviour, buffEntity);
                     } else if (buffEntity.ObjConfig.Type == "WaveBuff") {
-                        ButtonRegister.AddListener(button, RegisterWave, buffEntity);
+                        ButtonRegister.AddListener(button, RegisterWave, buffEntity, difficulty);
                     }
                 }
 
@@ -202,7 +218,7 @@ namespace LazyPan {
             }
         }
 
-        private void RegisterBehaviour(Entity buffEntity) {
+        private void RegisterStrengthenBehaviour(Entity buffEntity) {
             if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
                 if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                     //有目标 针对单独目标
@@ -220,7 +236,7 @@ namespace LazyPan {
                             if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                                     out Behaviour_Event_CreateRandomPositionRobot beh)) {
                                 beh.AddSetUpBehaviourSign(new SetUpBehaviourData() {
-                                    BehaviourSign = behaviourSignStringData.String,
+                                    BehaviourSign = "Behaviour_Auto_RobotStrengthen",
                                     BehaviourData = buffEntity.Data
                                 });
                                 usedBoolData.Bool = true;
@@ -234,14 +250,20 @@ namespace LazyPan {
         }
 
         //波次BUFF可以重复选择
-        private void RegisterWave(Entity buffEntity) {
+        private void RegisterWave(Entity buffEntity, int difficulty) {
             if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE, out WaveData waveData)) {
                 //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
                 if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
                         out Entity createRobotEntity)) {
                     if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                             out Behaviour_Event_CreateRandomPositionRobot beh)) {
-                        beh.AddWaveInstanceData(waveData.WaveInstanceDefaultList[0]);
+                        WaveInstanceData waveDataSetting = waveData.WaveInstanceDefaultList[0];
+                        
+                        WaveInstanceData waveDataInstance = new WaveInstanceData();
+                        waveDataInstance.InstanceRobotSign = waveDataSetting.InstanceRobotSign;
+                        waveDataInstance.InstanceNumber = waveDataSetting.InstanceNumber * /*系数*/ 1 * difficulty;
+                        waveDataInstance.InstanceDelayTime = waveDataSetting.InstanceDelayTime;
+                        beh.AddWaveInstanceData(waveDataInstance);
                         CloseRobotThreeChooseOneUI();
                         MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
                     }

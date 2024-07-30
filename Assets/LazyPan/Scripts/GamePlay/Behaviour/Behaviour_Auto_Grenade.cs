@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-
 
 namespace LazyPan {
     public class Behaviour_Auto_Grenade : Behaviour {
@@ -13,13 +11,21 @@ namespace LazyPan {
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
+        private FloatData _BoomRange;//爆炸范围
         private FloatData _towerEnergy;//塔能量
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
 
+        private bool _isPrepareBoom;
+        private bool _isBoom;
+        private Vector3 _shotBoomDir;
+        private Vector3 _shotBoomPoint;
+        private FloatData _bulletMoveSpeed;
+        private GameObject _bulletInstance;
+        
         private float fireRateIntervalDeploy;
         private GameObject bulletTemplate;
-        private GameObject _fireRangeImgGo;//范围图片
+        private LineRenderer _fireRangeLineRenderer;//范围图片
 
         public Behaviour_Auto_Grenade(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             //冲锋枪根源
@@ -38,13 +44,19 @@ namespace LazyPan {
             //获取射击速率
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RATE, LabelStr.INTERVAL),
                 out _fireRateInterval);
+            //子弹移动速度
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BULLET, LabelStr.MOVE, LabelStr.SPEED),
+                out _bulletMoveSpeed);
             //获取射击伤害
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.DAMAGE),
                 out _fireDamage);
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
-            _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            //爆炸范围
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out _BoomRange);
+            //范围
+            _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -61,9 +73,7 @@ namespace LazyPan {
         }
 
         private bool IsActive() {
-            bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
-            _fireRangeImgGo.SetActive(active);
-            return active;
+            return entity.Prefab.activeSelf && _towerEnergy.Float > 0;
         }
 
         private void OnLateUpdate() {
@@ -84,8 +94,8 @@ namespace LazyPan {
             if (!IsActive()) {
                 return;
             }
-            GetWithinDistanceEntity();
-            ShotBulletToEnemy();
+            ShotGrenade();
+            BoomCircleRange();
         }
 
         private void GetWithinDistanceEntity() {
@@ -97,77 +107,81 @@ namespace LazyPan {
             }
         }
 
-        private void ShotBulletToEnemy() {
-            if (_targetInRangeRobotEntity != null) {
-                if (fireRateIntervalDeploy > 0) {
-                    fireRateIntervalDeploy -= Time.deltaTime;
-                } else {
-                    fireRateIntervalDeploy = _fireRateInterval.Float;
+        private void ShotGrenade() {
+            //射击频率
+            if (fireRateIntervalDeploy > 0) {
+                fireRateIntervalDeploy -= Time.deltaTime;
+            } else {
+                //第一阶段发射中
+                if (_isPrepareBoom) {
+                    if (!_isBoom) {
+                        _bulletInstance.transform.position = Vector3.Lerp(_bulletInstance.transform.position,
+                            _shotBoomPoint, Time.deltaTime * _bulletMoveSpeed.Float);
 
-                    //target forward shot grenade and boom
-                    GameObject instanceBullet = FireParticleSystemBullet();
-                    _bullets.Add(instanceBullet);
-                    Comp comp = instanceBullet.GetComponent<Comp>();
-                    comp.OnParticleCollisionEvent.RemoveAllListeners();
-                    comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
+                        if (Vector3.Distance(_bulletInstance.transform.position, _shotBoomPoint) < 0.5f) {
+                            _isBoom = true;
+                        }
+                    }
+                } else {
+                    //获取最近的敌人
+                    GetWithinDistanceEntity();
+
+                    //发射方向 有敌人朝向敌人 没敌人 朝向随机方向
+                    _shotBoomDir = Random.onUnitSphere;
+                    if (_targetInRangeRobotEntity != null) {
+                        _shotBoomDir = (Cond.Instance.Get<Transform>(_targetInRangeRobotEntity, LabelStr.BODY).position - _body.position).normalized;
+                    }
+                    _shotBoomDir.y = 0;
+
+                    //目标点范围显示
+                    _shotBoomPoint = _shotBoomDir * _fireRange.Float;
+
+                    //创建子弹
+                    _bulletInstance = Object.Instantiate(bulletTemplate, _muzzle.position, Quaternion.Euler(_shotBoomDir), _bulletFoot);
+                    _bulletInstance.SetActive(true);
+
+                    _fireRangeLineRenderer.gameObject.SetActive(true);
+                    _isPrepareBoom = true;
+                }
+
+                //第二阶段爆炸
+                if (_isBoom) {
+                    //激活触发器
+                    Collider[] colliders = Physics.OverlapSphere(_shotBoomPoint, _BoomRange.Float);
+                    foreach (var tmpCollider in colliders) {
+                        OnTriggerEnter(tmpCollider);
+                    }
+
+                    //激活爆炸特效
+                    //完全结束后延时
+                    ClockUtil.Instance.AlarmAfter(0.1f, () => {
+                        //销毁弹药
+                        GameObject.Destroy(_bulletInstance);
+                        _fireRangeLineRenderer.gameObject.SetActive(false);
+                        _isBoom = false;
+                        _isPrepareBoom = false;
+                        //爆炸后开始延时
+                        fireRateIntervalDeploy = _fireRateInterval.Float;
+                    });
                 }
             }
         }
 
-        private GameObject FireParticleSystemBullet() {
-            Transform targetRobot = Cond.Instance.Get<Transform>(_targetInRangeRobotEntity, LabelStr.BODY);
-
-            //创建子弹
-            GameObject bulletGameObject =
-                Object.Instantiate(bulletTemplate, _muzzle.position, Quaternion.identity, _bulletFoot);
-            bulletGameObject.SetActive(true);
-
-            ParticleSystem bulletInstance = bulletGameObject.GetComponent<ParticleSystem>();
-
-            //计算预瞄敌人
-            NavMeshAgent targetRobotNavMeshAgent = Cond.Instance.Get<NavMeshAgent>(_targetInRangeRobotEntity, LabelStr.NAVMESHAGENT);
-            if (ComputeDirection(targetRobot.position, _foot.position, targetRobotNavMeshAgent.velocity, bulletInstance.startSpeed, out Vector3 result)) {
-                result.y = 0;
-                _body.forward = result;
+        private void BoomCircleRange() {
+            if (_fireRangeLineRenderer.gameObject.activeSelf) {
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _shotBoomPoint, _BoomRange.Float, 30);
             } else {
-                _body.forward = (targetRobot.position - _foot.position).normalized;
+                MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
             }
-
-            bulletGameObject.transform.position = _muzzle.position;
-            bulletGameObject.transform.forward = _body.forward;
-            return bulletGameObject;
         }
 
-        private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
-            if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
+        private void OnTriggerEnter(Collider collider) {
+            if (EntityRegister.TryGetEntityByBodyPrefabID(collider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "Robot") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
-                    fxGo.SetActive(false);
                 }
             }
         }
-
-        #region Math
-
-        private bool ComputeDirection(Vector3 targetDir, Vector3 bulletStartPoint, Vector3 vA, float speed, out Vector3 result) {
-            var aTob = bulletStartPoint - targetDir;
-            var dc = aTob.magnitude;
-            var alpha = Vector3.Angle(aTob, vA) * Mathf.Deg2Rad;
-            var sA = vA.magnitude;
-            var r = sA / speed;
-            if (MyMathUtil.ComputeRoot((1 - r * r), 2 * dc * r * Mathf.Cos(alpha), -dc * dc, out float root1, out float root2) == 0) {
-                result = default;
-                return false;
-            }
-
-            var dA = Mathf.Max(root1, root2);
-            var t = dA / speed;
-            var c = targetDir + t * vA;
-            result = (c - bulletStartPoint).normalized;
-            return true;
-        }
-
-        #endregion
 
         public override void Clear() {
             base.Clear();

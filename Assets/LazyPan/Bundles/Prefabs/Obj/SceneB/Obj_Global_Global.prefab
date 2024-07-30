@@ -143,6 +143,9 @@ MonoBehaviour:
   - Sign: DropRatio
     Description: "\u6389\u843D\u51E0\u7387"
     Int: 20
+  - Sign: Difficulty
+    Description: "\u96BE\u5EA6"
+    Int: 1
   Floats: []
   Strings: []
   Vector3s: []

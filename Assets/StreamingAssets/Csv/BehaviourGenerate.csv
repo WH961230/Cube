@@ -53,8 +53,8 @@ IncreasePickupRange,增加玩家的拾取范围,Auto,Init,初始化
 IncreasePickupRange,增加玩家的拾取范围,Auto,Clear,清除
 IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,Auto,Init,初始化
 IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,Auto,Clear,清除
-AllEnemiesHaveHighSpeedMiddleDamageLowHealth,高速中伤低血,Auto,Init,初始化
-AllEnemiesHaveHighSpeedMiddleDamageLowHealth,高速中伤低血,Auto,Clear,清除
+RobotStrengthen,机器人强化,Auto,Init,初始化
+RobotStrengthen,机器人强化,Auto,Clear,清除
 ChargeActivation,充能激活,Trigger,Init,初始化
 ChargeActivation,充能激活,Trigger,Clear,清除
 GlobalTrackingOfPlayer,全局追踪玩家,Auto,Init,初始化
@@ -85,7 +85,5 @@ DestroyAllRobot,毁灭所有机器人,Event,Init,初始化
 DestroyAllRobot,毁灭所有机器人,Event,Clear,清除
 IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,Event,Init,初始化
 IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,Event,Clear,清除
-AllEnemiesHaveHighHealthMiddleSpeedLowDamage,高血中速低伤,Auto,Init,初始化
-AllEnemiesHaveHighHealthMiddleSpeedLowDamage,高血中速低伤,Auto,Clear,清除
-AllEnemiesHaveHighDamageMiddleSpeedLowHealth,高伤中速低血,Auto,Init,初始化
-AllEnemiesHaveHighDamageMiddleSpeedLowHealth,高伤中速低血,Auto,Clear,清除
+RobotStrengthen,机器人强化,Auto,Init,初始化
+RobotStrengthen,机器人强化,Auto,Clear,清除

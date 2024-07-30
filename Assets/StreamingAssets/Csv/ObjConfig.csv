@@ -40,14 +40,17 @@ Obj_TowerBuff_IncreaseChargeEnergySpeed,SceneB,TowerBuff,战斗场景B增加玩�
 Obj_PlayerBuff_MoreDrops,SceneB,PlayerBuff,战斗场景B更多掉落物,,Behaviour_Event_MoreDrops
 Obj_PlayerBuff_RecoverHealth,SceneB,PlayerBuff,战斗场景B一次性增加玩家血量,,Behaviour_Event_RecoverHealth
 Obj_PlayerBuff_DestroyAllRobot,SceneB,PlayerBuff,战斗场景B清理机器人,,Behaviour_Event_DestroyAllRobot
-Obj_RobotBuff_AllEnemiesHaveHighSpeedMiddleDamageLowHealth,SceneB,RobotBuff,战斗场景B所有机器人高速中伤低血,,
-Obj_RobotBuff_AllEnemiesHaveHighHealthMiddleSpeedLowDamage,SceneB,RobotBuff,战斗场景B所有机器人高血中速低伤,,
-Obj_RobotBuff_AllEnemiesHaveHighDamageMiddleSpeedLowHealth,SceneB,RobotBuff,战斗场景B所有机器人高伤中速低血,,
+Obj_RobotBuff_IncreaseHalfSpeed,SceneB,RobotBuff,战斗场景B所有机器人速度提升50%,,
+Obj_RobotBuff_IncreaseHalfHealth,SceneB,RobotBuff,战斗场景B所有机器人血量提升50%,,
+Obj_RobotBuff_IncreaseHalfDamage,SceneB,RobotBuff,战斗场景B所有机器人伤害提升50%,,
 Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower
 Obj_Global_Global,SceneB,Global,战斗场景B全局,,
-Obj_WaveBuff_AddTenSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加10个小三角机器人,,
-Obj_WaveBuff_AddThirtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加30个小三角机器人,,
-Obj_WaveBuff_AddSixtySmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加60个小三角机器人,,
+Obj_WaveBuff_AddSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加小三角机器人,,
+Obj_WaveBuff_AddBigTriangleRobots,SceneB,WaveBuff,战斗场景B增加大三角机器人,,
+Obj_WaveBuff_AddBreedRobots,SceneB,WaveBuff,战斗场景B增加繁育,,
+Obj_WaveBuff_AddBombRobots,SceneB,WaveBuff,战斗场景B增加炸弹,,
+Obj_WaveBuff_AddRapidlyRobots,SceneB,WaveBuff,战斗场景B增加急速,,
+Obj_WaveBuff_AddRemotelyRobots,SceneB,WaveBuff,战斗场景B增加远程,,
 Obj_PickUp_ExperiencePoint,SceneB,PickUp,战斗场景B可拾取经验值,,Behaviour_Trigger_PickUpExperiencePoint
 Obj_AssembledBuff_Shotgun,SceneB,AssembledBuff,战斗场景B组装武器Buff霰弹枪,,
 Obj_AssembledBuff_Sniperrifle,SceneB,AssembledBuff,战斗场景B组装武器Buff狙击枪,,

@@ -61,6 +61,9 @@ public class LabelStr {
     public static string DURATION = "Duration";
     public static string DELAY = "Delay";
     public static string DOWN = "Down";
+    public static string ROTATE = "Rotate";
+    public static string MOVE = "Move";
+    public static string BOOM = "Boom";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

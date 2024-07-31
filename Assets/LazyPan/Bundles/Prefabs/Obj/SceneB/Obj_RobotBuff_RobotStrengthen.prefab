@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_RobotBuff_IncreaseHalfDamage
+  m_Name: Obj_RobotBuff_RobotStrengthen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7868656383781502519}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5603811672759092760
 MonoBehaviour:
@@ -126,18 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools:
-  - Sign: Used
-    Description: "\u88AB\u4F7F\u7528"
-    Bool: 0
-  Ints: []
+  Bools: []
+  Ints:
+  - Sign: Difficulty
+    Description: "\u96BE\u5EA6"
+    Int: 0
   Floats:
   - Sign: MovementSpeed
     Description: "\u79FB\u52A8\u901F\u5EA6"
     Float: 1
   - Sign: Damage
     Description: "\u4F24\u5BB3"
-    Float: 1.5
+    Float: 1
   - Sign: MaxHealth
     Description: "\u6700\u5927\u8840\u91CF"
     Float: 1
@@ -147,7 +147,7 @@ MonoBehaviour:
     String: RobotStrenghthen
   - Sign: Info
     Description: "\u8BF4\u660E"
-    String: "\u63D0\u534750%\u673A\u5668\u4EBA\u4F24\u5BB3"
+    String: 
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

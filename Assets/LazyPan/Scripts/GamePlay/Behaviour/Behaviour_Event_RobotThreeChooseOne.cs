@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,12 +10,14 @@ namespace LazyPan {
     public class Behaviour_Event_RobotThreeChooseOne : Behaviour {
         private Flow_SceneB _flow;
         private Comp _ui;
-        private List<Entity> _buffs = new List<Entity>();
+        private List<Entity> _parallelBuffs = new List<Entity>();
+        private Dictionary<int, List<Entity>> _robotStrengthenBuffs = new Dictionary<int, List<Entity>>();
         public Behaviour_Event_RobotThreeChooseOne(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
 
-            InitBuffs();
+            InitWaveBuffs();
+            InitRobotBuffs();
             MessageRegister.Instance.Reg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
             MessageRegister.Instance.Reg(MessageCode.MsgLevelUp, MsgDisplayLevelUp);
             
@@ -29,10 +30,9 @@ namespace LazyPan {
 
         //传入消息开始三选一
         private void MsgRobotThreeChooseOne() {
-            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL),
-                out IntData robotLevel);
-            robotLevel.Int++;
-            OpenRobotThreeChooseOneUI();
+            ClockUtil.Instance.AlarmAfter(1, () => {
+                OpenRobotThreeChooseOneUI();
+            });
         }
 
         private void MsgDisplayLevelUp() {
@@ -90,10 +90,9 @@ namespace LazyPan {
         }
 
         //初始化Buff
-        private void InitBuffs() {
-            _buffs.Clear();
+        private void InitWaveBuffs() {
             List<string> objConfigs = ObjConfig.GetKeys();
-            string[] types = new[] { "RobotBuff", "WaveBuff" };
+            string[] types = new[] { "WaveBuff" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
                 if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
@@ -104,44 +103,38 @@ namespace LazyPan {
                 foreach (var type in types) {
                     if (config.Type == type) {
                         Entity buffInstanceEntity = Obj.Instance.LoadEntity(config.Sign);
-                        _buffs.Add(buffInstanceEntity);
+                        _parallelBuffs.Add(buffInstanceEntity);
                         break;
                     }
                 }
             }
         }
 
-        //获取类型集合的所有实体
-        private List<Entity> GetBuff(string[] types) {
-            List<Entity> retEntities = new List<Entity>();
-            //遍历所有的buff
-            foreach (var buffEntity in _buffs) {
-                foreach (var type in types) {
-                    //获取当前的类型
-                    if (buffEntity.ObjConfig.Type == type) {
-                        Type dataType = buffEntity.Data.GetType();
-                        if (dataType == typeof(RobotWaveData)) {
-                            retEntities.Add(buffEntity);
-                        } else {
-                            if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                                if (!usedBoolData.Bool) {
-                                    retEntities.Add(buffEntity);
-                                }
-                            }
-                        }
-                    }
+        private void InitRobotBuffs() {
+            string objSign = "Obj_RobotBuff_RobotStrengthen";
+            List<string> list = RobotStrengthenConfig.GetKeys();
+            foreach (var tmpKey in list) {
+                RobotStrengthenConfig config = RobotStrengthenConfig.Get(tmpKey);
+                Entity buffEntity = Obj.Instance.LoadEntity(objSign);
+                Cond.Instance.GetData(buffEntity, LabelStr.Assemble(LabelStr.MOVEMENT, LabelStr.SPEED), out FloatData speedData);
+                speedData.Float = config.MovementSpeedPercentage / 100;
+                Cond.Instance.GetData(buffEntity, LabelStr.DAMAGE, out FloatData damageData);
+                damageData.Float = config.AttackPercentage / 100;
+                Cond.Instance.GetData(buffEntity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out FloatData maxHealthData);
+                maxHealthData.Float = config.HealthPercentage / 100;
+                Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                infoData.String = config.Text;
+                Cond.Instance.GetData(buffEntity, LabelStr.DIFFICULTY, out IntData difficultyData);
+                difficultyData.Int = config.Level;
+
+                if (_robotStrengthenBuffs.TryGetValue(config.Level, out List<Entity> entities)) {
+                    entities.Add(buffEntity);
+                } else {
+                    List<Entity> buffs = new List<Entity>();
+                    buffs.Add(buffEntity);
+                    _robotStrengthenBuffs.Add(config.Level, buffs);
                 }
             }
-
-            return retEntities;
-        }
-
-        //清理Buff
-        private void ClearBuffs() {
-            foreach (var buffEntity in _buffs) {
-                Obj.Instance.UnLoadEntity(buffEntity);
-            }
-            _buffs.Clear();
         }
 
         //打开机器人三选一界面
@@ -153,97 +146,150 @@ namespace LazyPan {
             //显示三选一界面
             Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
             if (!choose.gameObject.activeSelf) {
-
                 string buffType = "";
                 int difficulty = 1;
+
+                //等级
+                Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL,
+                    out IntData globalLevelData);
 
                 //拿到类型和关卡难度
                 foreach (string key in LevelConfig.GetKeys()) {
                     LevelConfig level = LevelConfig.Get(key);
-                    int waveNum = level.Wave;
-                    buffType = level.LevelType;
-                    Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.LEVEL,
-                        out IntData levelData);
-                    if (waveNum == levelData.Int && buffType == "WaveBuff") {
+                    if (level.Wave == globalLevelData.Int) {
+                        buffType = level.LevelType;
                         difficulty = Random.Range(level.DifficultyLowerLimit, level.DifficultyUpperLimit + 1);
                         break;
                     }
                 }
 
-                List<Entity> robotBuffEntities = GetBuff(new[]{buffType});
-                if (robotBuffEntities.Count == 0) {
-                    return;
-                }
-
-                Time.timeScale = 0;
-                choose.gameObject.SetActive(true);
-                int resultCount = 3;
-                int[] index = MathUtil.Instance.GetRandNoRepeatIndex(robotBuffEntities.Count, resultCount);
-
-                for (int i = 0; i < index.Length; i++) {
-                    int tmpIndex = index[i];
-                    Entity buffEntity = robotBuffEntities[tmpIndex];
-                    Comp item = Cond.Instance.Get<Comp>(choose,
-                        LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
-
-                    //注册图片
-                    Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
-                    Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
-                    image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
-
-                    //注册说明
-                    TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
-                    Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
-                    if (buffEntity.ObjConfig.Type == "WaveBuff") {
-                        if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE,
-                                out WaveData waveData)) {
-                            info.text = string.Format(infoData.String,
-                                waveData.WaveInstanceDefaultList[0].InstanceNumber * 1 * difficulty);
-                        }
-                    } else if(buffEntity.ObjConfig.Type == "RobotBuff") {
-                        info.text = infoData.String;
-                    }
-
-                    //注册按钮事件
-                    Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
-                    ButtonRegister.RemoveAllListener(button);
-                    if (buffEntity.ObjConfig.Type == "RobotBuff") {
-                        ButtonRegister.AddListener(button, RegisterStrengthenBehaviour, buffEntity);
-                    } else if (buffEntity.ObjConfig.Type == "WaveBuff") {
-                        ButtonRegister.AddListener(button, RegisterWave, buffEntity, difficulty);
-                    }
+                if (buffType == "WaveBuff") {
+                    WaveBuff(difficulty);
+                } else if (buffType == "RobotBuff") {
+                    RobotBuff(difficulty);
                 }
 
                 InputRegister.Instance.Load(InputRegister.ESCAPE, InputCloseUI);
             }
         }
 
+        private void WaveBuff(int difficulty) {
+            Flo.Instance.GetFlow(out Flow_SceneB flow);
+            Comp ui = flow.GetUI();
+            Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
+            if (_parallelBuffs.Count == 0) {
+                return;
+            }
+            string debug = "开始怪物三选一 增加怪物:";
+            Time.timeScale = 0;
+            choose.gameObject.SetActive(true);
+            int resultCount = 3;
+            int[] index = MathUtil.Instance.GetRandNoRepeatIndex(_parallelBuffs.Count, resultCount);
+            if (index == null) {
+                Debug.LogError("错误");
+                return;
+            }
+            for (int i = 0; i < index.Length; i++) {
+                int tmpIndex = index[i];
+                Entity buffEntity = _parallelBuffs[tmpIndex];
+                Comp item = Cond.Instance.Get<Comp>(choose,
+                    LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
+
+                //注册图片
+                // Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
+                // Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
+                // image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
+
+                //注册说明
+                TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                //提取波数数据 输出文本
+                if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE,
+                        out WaveData waveData)) {
+                    info.text = string.Format(infoData.String,
+                        waveData.WaveInstanceDefaultList[0].InstanceNumber * difficulty);
+                }
+
+                debug += info.text + " ";
+
+                //注册按钮事件
+                Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
+                ButtonRegister.RemoveAllListener(button);
+                ButtonRegister.AddListener(button, RegisterWave, buffEntity, difficulty);
+            }
+
+            Debug.Log(debug);
+        }
+
+        private void RobotBuff(int difficulty) {
+            Flo.Instance.GetFlow(out Flow_SceneB flow);
+            Comp ui = flow.GetUI();
+            Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
+            string debug = "开始怪物三选一 强化怪物:";
+            Time.timeScale = 0;
+            choose.gameObject.SetActive(true);
+            int resultCount = 3;
+            if (_robotStrengthenBuffs.TryGetValue(difficulty, out List<Entity> takeOutRobotStrengthen)) {
+                int[] index = MathUtil.Instance.GetRandNoRepeatIndex(takeOutRobotStrengthen.Count, resultCount);
+                if (index == null) {
+                    Debug.LogError("错误");
+                    return;
+                }
+                for (int i = 0; i < index.Length; i++) {
+                    int tmpIndex = index[i];
+                    Entity buffEntity = takeOutRobotStrengthen[tmpIndex];
+                    Comp item = Cond.Instance.Get<Comp>(choose,
+                        LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
+
+                    //注册图片
+                    // Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
+                    // Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
+                    // image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
+
+                    //注册说明
+                    TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                    Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                    //提取波数数据 输出文本
+                    info.text = infoData.String;
+
+                    debug += info.text + " ";
+
+                    //注册按钮事件
+                    Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
+                    ButtonRegister.RemoveAllListener(button);
+                    ButtonRegister.AddListener(button, RegisterStrengthenBehaviour, buffEntity);
+                }
+
+                Debug.Log(debug);
+            }
+        }
+
         private void RegisterStrengthenBehaviour(Entity buffEntity) {
-            if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
-                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                    //有目标 针对单独目标
-                    if (Cond.Instance.GetData(buffEntity, LabelStr.TARGET, out StringData targetSignStringData)) {
-                        if (EntityRegister.TryGetEntityBySign(targetSignStringData.String, out Entity targetEntity)) {
-                            BehaviourRegister.RegisterBehaviour(targetEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
-                            usedBoolData.Bool = true;
-                            CloseRobotThreeChooseOneUI();
-                            MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
-                        }
-                    } else {
-                        //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-                        if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
-                                out Entity createRobotEntity)) {
-                            if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
-                                    out Behaviour_Event_CreateRandomPositionRobot beh)) {
-                                beh.AddSetUpBehaviourSign(new SetUpBehaviourData() {
-                                    BehaviourSign = "Behaviour_Auto_RobotStrengthen",
-                                    BehaviourData = buffEntity.Data
-                                });
-                                usedBoolData.Bool = true;
-                                CloseRobotThreeChooseOneUI();
-                                MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
-                            }
-                        }
+            if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
+                //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
+                if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
+                        out Entity createRobotEntity)) {
+                    if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
+                            out Behaviour_Event_CreateRandomPositionRobot beh)) {
+                        Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData info);
+
+                        Debug.Log("增加所有机器人能力:" + info);
+                        string sign = "Behaviour_Auto_RobotStrengthen";
+                        beh.RemoveSetUpBehaviourSign(sign);
+                        beh.AddSetUpBehaviourSign(new SetUpBehaviourData() {
+                            BehaviourSign = sign,
+                            BehaviourData = buffEntity.Data
+                        });
+                        usedBoolData.Bool = true;
+                        CloseRobotThreeChooseOneUI();
+                        MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
+
+                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL),
+                            out IntData robotLevel);
+
+                        robotLevel.Int++;
+
+                        Debug.Log("机器人升级后等级:" + robotLevel.Int);
                     }
                 }
             }
@@ -263,9 +309,16 @@ namespace LazyPan {
                         waveDataInstance.InstanceRobotSign = waveDataSetting.InstanceRobotSign;
                         waveDataInstance.InstanceNumber = waveDataSetting.InstanceNumber * /*系数*/ 1 * difficulty;
                         waveDataInstance.InstanceDelayTime = waveDataSetting.InstanceDelayTime;
+                        Debug.Log("增加机器人 :" + waveDataInstance.InstanceRobotSign + " 波增加个数: " + waveDataInstance.InstanceNumber);
                         beh.AddWaveInstanceData(waveDataInstance);
                         CloseRobotThreeChooseOneUI();
                         MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
+
+                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL),
+                            out IntData robotLevel);
+                        robotLevel.Int++;
+                        
+                        Debug.Log("机器人升级后等级:" + robotLevel.Int);
                     }
                 }
             }
@@ -294,7 +347,6 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             CloseRobotThreeChooseOneUI();
-            ClearBuffs();
             MessageRegister.Instance.UnReg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
             MessageRegister.Instance.UnReg(MessageCode.MsgLevelUp, MsgDisplayLevelUp);
         }

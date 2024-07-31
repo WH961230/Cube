@@ -4,10 +4,11 @@ using System.Collections.Generic;
 namespace LazyPan {
     public class RobotStrengthenConfig {
 		public string Sign;
-		public string Level;
+		public int Level;
 		public float HealthPercentage;
 		public float AttackPercentage;
 		public float MovementSpeedPercentage;
+		public string Text;
 
         private static bool isInit;
         private static string content;
@@ -18,10 +19,11 @@ namespace LazyPan {
             try {
                 string[] values = line.Split(',');
 				Sign = values[0];
-				Level = values[1];
+				Level = int.Parse(values[1]);
 				HealthPercentage = float.Parse(values[2]);
 				AttackPercentage = float.Parse(values[3]);
 				MovementSpeedPercentage = float.Parse(values[4]);
+				Text = values[5];
 
             } catch (Exception e) {
                 Console.WriteLine(e);

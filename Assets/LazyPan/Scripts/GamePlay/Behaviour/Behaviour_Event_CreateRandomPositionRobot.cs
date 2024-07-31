@@ -60,15 +60,18 @@ namespace LazyPan {
 					        CreateRobot(operatorWave.InstanceRobotSign);
 					        delayDeployTime = Random.Range(1, operatorWave.InstanceDelayTime);
 					        operatorWave.InstanceNumber--;
+					        Debug.Log("正在创建机器人:" + operatorWave.InstanceRobotSign + " 剩余数量 " + operatorWave.InstanceNumber);
 				        } else {
 					        operatorWave = null;
 				        }
 			        } else {
 				        if (_waveInstanceQueue.Any()) {
 					        operatorWave = _waveInstanceQueue.Dequeue();
+					        Debug.Log("创建机器人:" + operatorWave.InstanceRobotSign + " 总共创建 " + operatorWave.InstanceNumber);
 				        } else {
 					        delayDeployTime = 0;
 					        startLevelCreate = false;
+					        Debug.Log("创建完毕");
 				        }
 			        }
 		        }
@@ -82,6 +85,7 @@ namespace LazyPan {
         private void MsgGlobalLevelUp() {
 	        if (_globalLevelData.Int < _globalMaxLevelData.Int) {
 		        _globalLevelData.Int++;
+		        Debug.Log("全局关卡升级后等级:" + _globalLevelData.Int);
 	        }
         }
 
@@ -90,12 +94,13 @@ namespace LazyPan {
 		        for (int i = _robots.Count - 1; i >= 0; i--) {
 			        Entity tmpRobot = _robots[i];
 			        if (tmpRobot.ID == entityId) {
+				        Debug.Log("机器人死亡:" + tmpRobot.Prefab.name);
 				        _robots.Remove(tmpRobot);
 				        Obj.Instance.UnLoadEntity(tmpRobot);
 			        }
 		        }
 
-		        if (_robots.Count == 0) {
+		        if (_robots.Count == 0 && !startLevelCreate) {
 			        MessageRegister.Instance.Dis(MessageCode.MsgGlobalLevelUp);
 			        MessageRegister.Instance.Dis(MessageCode.MsgRobotUp);
 			        MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
@@ -131,6 +136,7 @@ namespace LazyPan {
 	        instance.SetBeginLocationInfo(locationData);
 	        //注册行为
 	        RegisterSetUpBehaviour(instance);
+	        Debug.Log("生成机器人:" + instance.Prefab.name);
 
 	        _robots.Add(instance);
         }
@@ -158,6 +164,15 @@ namespace LazyPan {
         public void AddSetUpBehaviourSign(SetUpBehaviourData behaviourData) {
 	        if (!_setUpBehaviours.Contains(behaviourData)) {
 		        _setUpBehaviours.Add(behaviourData);
+	        }
+        }
+
+        public void RemoveSetUpBehaviourSign(string behaviourSign) {
+	        for (int i = _setUpBehaviours.Count - 1; i > 0; i++) {
+		        SetUpBehaviourData data = _setUpBehaviours[i];
+		        if (data.BehaviourSign == behaviourSign) {
+			        _setUpBehaviours.Remove(data);
+		        }
 	        }
         }
 

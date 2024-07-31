@@ -13,7 +13,6 @@ namespace LazyPan {
         private FloatData _fireRange;//射击范围
         private FloatData _BoomRange;//爆炸范围
         private FloatData _towerEnergy;//塔能量
-        private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
 
         private bool _isPrepareBoom;
@@ -98,15 +97,6 @@ namespace LazyPan {
             BoomCircleRange();
         }
 
-        private void GetWithinDistanceEntity() {
-            if (EntityRegister.TryGetEntitiesWithinDistance("Robot", _foot.position,
-                    _fireRange.Float, out List<Entity> entities)) {
-                _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
-            } else {
-                _targetInRangeRobotEntity = null;
-            }
-        }
-
         private void ShotGrenade() {
             //射击频率
             if (fireRateIntervalDeploy > 0) {
@@ -123,14 +113,8 @@ namespace LazyPan {
                         }
                     }
                 } else {
-                    //获取最近的敌人
-                    GetWithinDistanceEntity();
-
                     //发射方向 有敌人朝向敌人 没敌人 朝向随机方向
                     _shotBoomDir = Random.onUnitSphere;
-                    if (_targetInRangeRobotEntity != null) {
-                        _shotBoomDir = (Cond.Instance.Get<Transform>(_targetInRangeRobotEntity, LabelStr.BODY).position - _body.position).normalized;
-                    }
                     _shotBoomDir.y = 0;
 
                     //目标点范围显示

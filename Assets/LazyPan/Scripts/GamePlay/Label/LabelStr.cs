@@ -64,6 +64,7 @@ public class LabelStr {
     public static string ROTATE = "Rotate";
     public static string MOVE = "Move";
     public static string BOOM = "Boom";
+    public static string DIFFICULTY = "Difficulty";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

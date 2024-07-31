@@ -40,9 +40,7 @@ Obj_TowerBuff_IncreaseChargeEnergySpeed,SceneB,TowerBuff,战斗场景B增加玩�
 Obj_PlayerBuff_MoreDrops,SceneB,PlayerBuff,战斗场景B更多掉落物,,Behaviour_Event_MoreDrops
 Obj_PlayerBuff_RecoverHealth,SceneB,PlayerBuff,战斗场景B一次性增加玩家血量,,Behaviour_Event_RecoverHealth
 Obj_PlayerBuff_DestroyAllRobot,SceneB,PlayerBuff,战斗场景B清理机器人,,Behaviour_Event_DestroyAllRobot
-Obj_RobotBuff_IncreaseHalfSpeed,SceneB,RobotBuff,战斗场景B所有机器人速度提升50%,,
-Obj_RobotBuff_IncreaseHalfHealth,SceneB,RobotBuff,战斗场景B所有机器人血量提升50%,,
-Obj_RobotBuff_IncreaseHalfDamage,SceneB,RobotBuff,战斗场景B所有机器人伤害提升50%,,
+Obj_RobotBuff_RobotStrengthen,SceneB,RobotBuff,战斗场景B所有机器人强化,,
 Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,TowerBuff,战斗场景B增加塔的能量容量,,Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower
 Obj_Global_Global,SceneB,Global,战斗场景B全局,,
 Obj_WaveBuff_AddSmallTriangleRobots,SceneB,WaveBuff,战斗场景B增加小三角机器人,,

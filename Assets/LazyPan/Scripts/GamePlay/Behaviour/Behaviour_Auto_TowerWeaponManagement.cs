@@ -35,7 +35,7 @@ namespace LazyPan {
                         Entity instanceEntity = Obj.Instance.LoadEntity(config.Sign);
                         instanceEntity.Prefab.SetActive(false);
                         _allWeapons.Add(instanceEntity);
-                        Debug.Log("获取武器:" + config.Name);
+                        Debug.Log("初始化武器:" + config.Name);
                         break;
                     }
                 }
@@ -62,6 +62,7 @@ namespace LazyPan {
             prepareAssembledWeapon.Prefab.SetActive(true);
             _assembledWeapons.Add(prepareAssembledWeapon);
             RefreshWeapons();
+            Debug.Log("默认武器:" + prepareAssembledWeapon.ObjConfig.Name);
         }
 
         public int GetAssembledWeaponCount() {

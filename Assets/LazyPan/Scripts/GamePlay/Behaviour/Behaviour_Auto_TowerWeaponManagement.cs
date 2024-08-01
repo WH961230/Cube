@@ -54,7 +54,7 @@ namespace LazyPan {
 
         private void InitDefaultWeapon() {
             _assembledWeapons.Clear();
-            InitWeapon("Obj_Weapon_Grenade");
+            InitWeapon("Obj_Weapon_Ring");
         }
 
         public void InitWeapon(string weaponSign) {

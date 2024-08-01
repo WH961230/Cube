@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 8890627523352820282}
   - component: {fileID: 6354867115914038953}
   - component: {fileID: 1990447036574188779}
-  - component: {fileID: 9184258224449189936}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -115,28 +114,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9184258224449189936
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966139073377679774}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &3962003611953072960
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +472,7 @@ MonoBehaviour:
     Float: 10
   - Sign: FireDamage
     Description: "\u5C04\u51FB\u4F24\u5BB3"
-    Float: 5
+    Float: 15
   - Sign: StartRadiu
     Description: "\u83B7\u53D6\u521D\u59CB\u534A\u5F84"
     Float: 1

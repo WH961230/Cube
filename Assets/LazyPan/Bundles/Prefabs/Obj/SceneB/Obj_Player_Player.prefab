@@ -266,10 +266,10 @@ MonoBehaviour:
     Float: 8
   - Sign: Health
     Description: "\u8840\u91CF"
-    Float: 1000
+    Float: 100
   - Sign: MaxHealth
     Description: "\u6700\u5927\u8840\u91CF"
-    Float: 1000
+    Float: 100
   - Sign: HealthSpeed
     Description: "\u8840\u91CF\u56DE\u590D\u901F\u5EA6"
     Float: 2

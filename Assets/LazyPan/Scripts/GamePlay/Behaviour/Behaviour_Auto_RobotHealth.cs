@@ -44,13 +44,20 @@ namespace LazyPan {
 
                     if (_healthData.Float <= 0) {
                         _healthData.Float = 0;
-                        Dead();
+                        Dead(damageValue != Mathf.Infinity);
                     }
                 } 
             }
         }
 
-        private void Dead() {
+        private void Dead(bool isDrop) {
+            if (isDrop) {
+                DeathDropExperience();
+            }
+            MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
+        }
+
+        private void DeathDropExperience() {
             //掉落概率 1 - 100
             int randNum = Random.Range(0, 100);
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.DROP, LabelStr.RATIO),
@@ -61,8 +68,6 @@ namespace LazyPan {
                     Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
                 });
             }
-
-            MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
         }
 
         public override void Clear() {

@@ -22,6 +22,7 @@ Behaviour_Auto_Ring,圆环,圆环
 Behaviour_Auto_Orbitingball,环绕球,环绕球
 Behaviour_Auto_Laserray,激光射线,激光射线
 Behaviour_Auto_Grenade,手雷,手雷
+Behaviour_Auto_ChainLightning,闪电链,闪电链
 Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,冲锋枪射速更快范围更近
 Behaviour_Auto_IncreasePickupRange,增加玩家的拾取范围,增加玩家的拾取范围
 Behaviour_Auto_IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,增加塔的能量容量
@@ -41,3 +42,5 @@ Behaviour_Event_RecoverHealth,一次性恢复玩家血量,一次性恢复玩家�
 Behaviour_Event_DestroyAllRobot,毁灭所有机器人,毁灭所有机器人
 Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,增加能量的容量
 Behaviour_Auto_RobotStrengthen,机器人强化,机器人强化
+Behaviour_Event_IncreaseAllWeaponAttack,增加所有武器的攻击力,
+Behaviour_Event_IncreasesAllWeaponFireRate,增加所有武器的攻击速率,

@@ -87,3 +87,9 @@ IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,Event,Init,初始化
 IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,Event,Clear,清除
 RobotStrengthen,机器人强化,Auto,Init,初始化
 RobotStrengthen,机器人强化,Auto,Clear,清除
+ChainLightning,闪电链,Auto,Init,初始化
+ChainLightning,闪电链,Auto,Clear,清除
+IncreaseAllWeaponAttack,增加所有武器的伤害,Event,Init,初始化
+IncreaseAllWeaponAttack,增加所有武器的伤害,Event,Clear,清除
+IncreasesAllWeaponFireRate,增加所有武器的攻击速率,Event,Init,初始化
+IncreasesAllWeaponFireRate,增加所有武器的攻击速率,Event,Clear,清除

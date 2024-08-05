@@ -110,6 +110,7 @@ namespace LazyPan {
             }
         }
 
+        //初始化机器人BUFF
         private void InitRobotBuffs() {
             string objSign = "Obj_RobotBuff_RobotStrengthen";
             List<string> list = RobotStrengthenConfig.GetKeys();
@@ -264,6 +265,7 @@ namespace LazyPan {
             }
         }
 
+        //注册强化行为
         private void RegisterStrengthenBehaviour(Entity buffEntity) {
             if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                 //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff

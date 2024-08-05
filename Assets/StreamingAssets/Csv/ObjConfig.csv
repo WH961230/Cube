@@ -11,9 +11,10 @@ Obj_Player_Player,SceneB,Player,战斗场景B玩家,LocationInf_SceneB_Player,Be
 Obj_Terrain_Terrain,SceneB,Terrain,战斗场景B地形,LocationInf_SceneB_Terrain,
 Obj_Tower_Tower,SceneB,Tower,战斗场景B塔,LocationInf_SceneB_Tower,Behaviour_Auto_TowerChargeEnergy|Behaviour_Auto_TowerWeaponManagement
 Obj_Activable_PlayerUpgrade,SceneB,可激活,战斗场景B可激活玩家升级,,Behaviour_Trigger_ChargeActivation
-Obj_Activable_RecoverAllHealth,SceneB,可激活,战斗场景B可激活恢复所有血量,,Behaviour_Event_RecoverHealth
-Obj_Activable_DestroyAllRobot,SceneB,可激活,战斗场景B可激活清除所有机器人,,Behaviour_Event_DestroyAllRobot
-Obj_Activable_DropSomeExperiencePoints,SceneB,可激活,战斗场景B可激活经验值掉落物,,Behaviour_Event_MoreDrops
+Obj_Activable_RecoverAllHealth,SceneB,可激活,战斗场景B可激活恢复所有血量,,Behaviour_Trigger_RecoverHealth
+Obj_Activable_DestroyAllRobot,SceneB,可激活,战斗场景B可激活清除所有机器人,,Behaviour_Trigger_DestroyAllRobot
+Obj_Activable_DropSomeExperiencePoints,SceneB,可激活,战斗场景B可激活经验值掉落物,,Behaviour_Trigger_DropSomeExperiencePoints
+Obj_Activable_DefenseTower,SceneB,可激活,战斗场景B可激活临时防御塔,,Behaviour_Trigger_DefenseTower
 Obj_PickUp_ExperiencePoint,SceneB,拾取,战斗场景B可拾取经验值,,Behaviour_Trigger_PickUpExperiencePoint
 Obj_Creator_ActivableCreator,SceneB,创建器,战斗场景B可激活能力生成器,LocationInf_SceneB_ActivatableCapabilityCreator,Behaviour_Event_CreateRandomPositionActivatableCapability
 Obj_Creator_RobotCreator,SceneB,创建器,战斗场景B机器人生成器,LocationInf_SceneB_RobotCreator,Behaviour_Event_CreateRandomPositionRobot
@@ -30,22 +31,22 @@ Obj_RobotBuff_RobotStrengthen,SceneB,机器人BUFF,战斗场景B所有机器人�
 Obj_Event_PlayerThreeChooseOne,SceneB,事件,战斗场景B玩家增益三选一,,Behaviour_Event_PlayerThreeChooseOne
 Obj_Event_RobotThreeChooseOne,SceneB,事件,战斗场景B机器人增益三选一,,Behaviour_Event_RobotThreeChooseOne
 Obj_Event_Settlement,SceneB,事件,战斗场景B结算,,Behaviour_Event_Settlement
-Obj_TowerBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,属性BUFF,战斗场景B增加塔的能量容量,,Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower
-Obj_TowerBuff_IncreaseChargeEnergySpeed,SceneB,属性BUFF,战斗场景B增加玩家充能速度,,Behaviour_Event_IncreaseChargeEnergySpeed
-Obj_PlayerBuff_IncreaseHealthMax,SceneB,属性BUFF,战斗场景B增加玩家血量上限,,Behaviour_Event_IncreaseHealthMax
-Obj_WeaponBuff_IncreaseAllWeaponAttack,SceneB,属性BUFF,战斗场景B增加所有武器攻击力,,
-Obj_WeaponBuff_IncreaseAllWeaponFireRate,SceneB,属性BUFF,战斗场景B增加所有武器射速,,
+Obj_AttributeBuff_IncreaseTheEnergyCapacityOfTheTower,SceneB,属性BUFF,战斗场景B增加塔的能量容量,,Behaviour_Event_IncreaseEnergyCapacity
+Obj_AttributeBuff_IncreaseChargeEnergySpeed,SceneB,属性BUFF,战斗场景B增加玩家充能速度,,Behaviour_Event_IncreaseChargeEnergySpeed
+Obj_AttributeBuff_IncreaseHealthMax,SceneB,属性BUFF,战斗场景B增加玩家血量上限,,Behaviour_Event_IncreaseHealthMax
+Obj_AttributeBuff_IncreaseAllWeaponAttack,SceneB,属性BUFF,战斗场景B增加所有武器攻击力,,Behaviour_Event_IncreaseAllWeaponAttack
+Obj_AttributeBuff_IncreaseAllWeaponFireRate,SceneB,属性BUFF,战斗场景B增加所有武器射速,,Behaviour_Event_IncreaseAllWeaponFireRate
 Obj_PlayerBuff_Swift,SceneB,角色BUFF,战斗场景B角色BUFF迅捷,,
 Obj_PlayerBuff_StrongGuard,SceneB,角色BUFF,战斗场景B角色BUFF固守,,
 Obj_PlayerBuff_PickUp,SceneB,角色BUFF,战斗场景B角色BUFF拾取,,
-Obj_PlayerBuff_FrozenImmunity,SceneB,角色BUFF,战斗场景B角色BUFF冰冻免疫,,
-Obj_PlayerBuff_SuperFrozen,SceneB,角色BUFF,战斗场景B角色BUFF超级冰冻,,
-Obj_PlayerBuff_BurnImmunity,SceneB,角色BUFF,战斗场景B角色BUFF燃烧免疫,,
-Obj_PlayerBuff_SuperBurning,SceneB,角色BUFF,战斗场景B角色BUFF超级燃烧,,
-Obj_PlayerBuff_Defense,SceneB,角色BUFF,战斗场景B角色BUFF防御,,
-Obj_PlayerBuff_Behead,SceneB,角色BUFF,战斗场景B角色BUFF斩杀,,
-Obj_PlayerBuff_Inertia,SceneB,角色BUFF,战斗场景B角色BUFF惰性,,
-Obj_PlayerBuff_Dissipate,SceneB,角色BUFF,战斗场景B角色BUFF消散,,
+Obj_PlayerBuff_FrozenImmunity,SceneB,角色BUFF,战斗场景B角色BUFF冰冻免疫,,Behaviour_Event_FrozenImmunity
+Obj_PlayerBuff_SuperFrozen,SceneB,角色BUFF,战斗场景B角色BUFF超级冰冻,,Behaviour_Event_SuperFrozen
+Obj_PlayerBuff_BurnImmunity,SceneB,角色BUFF,战斗场景B角色BUFF燃烧免疫,,Behaviour_Event_BurnImmunity
+Obj_PlayerBuff_SuperBurning,SceneB,角色BUFF,战斗场景B角色BUFF超级燃烧,,Behaviour_Event_SuperBurning
+Obj_PlayerBuff_Defense,SceneB,角色BUFF,战斗场景B角色BUFF防御,,Behaviour_Event_Defense
+Obj_PlayerBuff_Behead,SceneB,角色BUFF,战斗场景B角色BUFF斩杀,,Behaviour_Event_Behead
+Obj_PlayerBuff_Inertia,SceneB,角色BUFF,战斗场景B角色BUFF惰性,,Behaviour_Event_Inertia
+Obj_PlayerBuff_Dissipate,SceneB,角色BUFF,战斗场景B角色BUFF消散,,Behaviour_Event_Dissipate
 Obj_Weapon_SubmachineGun,SceneB,武器,战斗场景B冲锋枪,,Behaviour_Auto_SubmachineGun
 Obj_Weapon_Shotgun,SceneB,武器,战斗场景B霰弹枪,,Behaviour_Auto_Shotgun
 Obj_Weapon_Sniperrifle,SceneB,武器,战斗场景B狙击枪,,Behaviour_Auto_Sniperrifle
@@ -70,8 +71,3 @@ Obj_WaveBuff_AddBreedRobots,SceneB,波数BUFF,战斗场景B增加繁育,,
 Obj_WaveBuff_AddBombRobots,SceneB,波数BUFF,战斗场景B增加炸弹,,
 Obj_WaveBuff_AddRapidlyRobots,SceneB,波数BUFF,战斗场景B增加急速,,
 Obj_WaveBuff_AddRemotelyRobots,SceneB,波数BUFF,战斗场景B增加远程,,
-Obj_PlayerBuff_IncreasePickupRange,SceneB,角色BUFF,战斗场景B增加玩家拾取范围,,Behaviour_Event_IncreasePickupRange
-Obj_PlayerBuff_IncreaseHealthSpeed,SceneB,角色BUFF,战斗场景B增加玩家血量回复速度,,Behaviour_Event_IncreaseHealthSpeed
-Obj_PlayerBuff_MoreDrops,SceneB,角色BUFF,战斗场景B更多掉落物,,
-Obj_PlayerBuff_RecoverHealth,SceneB,角色BUFF,战斗场景B一次性增加玩家血量,,
-Obj_PlayerBuff_DestroyAllRobot,SceneB,角色BUFF,战斗场景B清理机器人,,

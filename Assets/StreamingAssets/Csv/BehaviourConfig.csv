@@ -82,11 +82,11 @@ Behaviour_Auto_SniperrifleIncreaseAttack,狙击枪升级 - 增加狙击枪100攻
 Behaviour_Auto_SniperrifleIncreaseFireRate,狙击枪升级 - 增加狙击枪150%攻速,狙击枪升级 - 增加狙击枪150%攻速
 Behaviour_Auto_SniperrifleAttackIncreaseFireCriticalHitRate,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置
 Behaviour_Auto_SniperrifleAttackIncreaseComboRate,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置
-Behaviour_Auto_StrafesatelliteAddABulletCount,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
+Behaviour_Auto_StrafesatelliteAddSecondBullet,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
 Behaviour_Auto_StrafesatelliteSlowRobotMoveSpeed,扫射卫星升级 - 对敌人造成减速效果,扫射卫星升级 - 对敌人造成减速效果
 Behaviour_Auto_StrafesatelliteBurnRobot,扫射卫星升级 - 对敌人造成燃烧效果,扫射卫星升级 - 对敌人造成燃烧效果
 Behaviour_Auto_StrafesatelliteIncreaseFireRate,扫射卫星升级 - 增加射速,扫射卫星升级 - 增加射速
-Behaviour_Auto_StrafesatelliteAddABulletCount,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
+Behaviour_Auto_StrafesatelliteAddThirdBullet,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
 Behaviour_Auto_GrenadeIncreaseBoomRange,手雷升级 - 增加手榴弹爆炸范围,手雷升级 - 增加手榴弹爆炸范围
 Behaviour_Auto_GrenadeLeaveBurningArea,手雷升级 - 爆炸后留下一片燃烧区域,手雷升级 - 爆炸后留下一片燃烧区域
 Behaviour_Auto_GrenadeLeaveFreezingArea,手雷升级 - 爆炸后留下一片冰冻区域,手雷升级 - 爆炸后留下一片冰冻区域

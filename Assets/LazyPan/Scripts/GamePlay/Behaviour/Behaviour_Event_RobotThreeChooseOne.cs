@@ -112,7 +112,7 @@ namespace LazyPan {
 
         //初始化机器人BUFF
         private void InitRobotBuffs() {
-            string objSign = "Obj_RobotBuff_RobotStrengthen";
+            string objSign = "A23_物体_事件_机器人强化";
             List<string> list = RobotStrengthenConfig.GetKeys();
             foreach (var tmpKey in list) {
                 RobotStrengthenConfig config = RobotStrengthenConfig.Get(tmpKey);

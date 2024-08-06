@@ -34,7 +34,7 @@ namespace LazyPan {
 		/*创建可激活物体*/
 		private void CreateActivatableCapability() {
 			LocationInformationData data = GetRandomPosition();
-			Entity instanceEntity = Obj.Instance.LoadEntity("Obj_Activable_ActivatableCapability");
+			Entity instanceEntity = Obj.Instance.LoadEntity("A6_物体_可激活_玩家升级");
 			instanceEntity.SetBeginLocationInfo(data);
 			ActivatableCapabilityEntities.Add(instanceEntity);
 		}

@@ -7,13 +7,52 @@ Behaviour_Auto_CameraPlayerView,相机跟随玩家,相机跟随玩家
 Behaviour_Trigger_ChargeStartGame,开始游戏充能,开始游戏充能
 Behaviour_Event_CreateRandomPositionActivatableCapability,创建随机位置可激活物体,创建随机位置可激活物体
 Behaviour_Event_CreateRandomPositionRobot,创建随机位置机器人,创建随机位置机器人
-Behaviour_Auto_PlayerHealth,玩家血量,玩家血量
-Behaviour_Auto_PlayerExperience,玩家经验值,玩家经验值
+Behaviour_Trigger_PickUpExperiencePoint,被玩家拾取增加经验值,经验值 - 被玩家拾取
+Behaviour_Auto_PlayerInvincibleTeleportation,玩家无敌传送,玩家 - 玩家无敌传送
+Behaviour_Auto_PlayerHealth,玩家血量,玩家 - 玩家血量
+Behaviour_Auto_PlayerExperience,玩家经验值,玩家 - 玩家经验值
+Behaviour_Trigger_RobotKnockbackPlayer,机器人击退玩家,机器人 - 击退玩家
+Behaviour_Trigger_AttackTowerSelfDestruct,攻击塔自爆,机器人 - 攻击塔自爆
+Behaviour_Auto_RobotHealth,机器人血量,机器人 - 机器人血量
+Behaviour_Auto_GlobalTrackingOfPlayer,全局追踪玩家,机器人 - 全局追踪玩家
+Behaviour_Event_DropMoreExperiencePoint,掉落大量掉落物,可激活物体 - 更多的掉落物
+Behaviour_Event_RecoverHealth,恢复玩家血量,可激活物体 - 恢复玩家血量
+Behaviour_Event_DestroyAllRobot,毁灭所有机器人,可激活物体 - 毁灭所有机器人
+Behaviour_Trigger_ChargeActivation,被充能激活可激活物体,可激活物体 - 充能可激活物体
+Behaviour_Auto_TowerWeaponManagement,武器管理,塔 - 武器管理
+Behaviour_Auto_TowerChargeEnergy,塔被充能,塔 - 塔被充能
 Behaviour_Event_Settlement,结算,结算
 Behaviour_Event_PlayerThreeChooseOne,玩家增益三选一,玩家增益三选一
 Behaviour_Event_RobotThreeChooseOne,机器人增益三选一,机器人增益三选一
-Behaviour_Auto_TowerChargeEnergy,塔充能,塔充能
-Behaviour_Auto_TowerWeaponManagement,塔武器管理,塔武器管理
+Behaviour_Auto_RobotStrengthen,机器人强化,机器人强化
+Behaviour_Event_IncreaseEnergyCapacity,增加充能容量,增加能量容量
+Behaviour_Event_IncreaseChargeEnergySpeed,增加充能速度,增加能量回复速度
+Behaviour_Event_IncreaseHealthMax,增加血量上限,增加血量上限
+Behaviour_Event_IncreaseAllWeaponAttack,增加所有武器攻击力,增加所有武器的攻击力
+Behaviour_Event_IncreaseAllWeaponFireRate,增加所有武器攻击速率,增加所有武器的攻击速率
+Behaviour_Event_SwiftIncreaseMoveSpeed,迅捷 - 加速,迅捷 - 增加移动速度20%
+Behaviour_Event_SwiftMoveRecoverHealth,迅捷 - 移动回血,迅捷 - 持续移动时，每隔1s回复1%生命
+Behaviour_Event_SwiftMoveIncreaseAttack,迅捷 - 移动加攻,迅捷 - 持续移动时，每隔增加1%攻击力，最高20%，停止移动时清空
+Behaviour_Event_SwiftMoveRecoverHealthDouble,迅捷 - 回复量翻倍,迅捷 - 回复量翻倍
+Behaviour_Event_SwiftMoveIncreaseAttackMaxLimit,迅捷 - 增加上限,迅捷 - 上限增加20%
+Behaviour_Event_ProtectIncreaseRecoverHealthSpeed,固守 - 塔范围内加速生命恢复,固守 - 当角色在防御塔范围内时生命恢复速度提升100%
+Behaviour_Event_ProtectDropsMoveTowardsToTower,固守 - 塔范围内掉落道具向塔靠近,固守 - 当角色在防御塔范围内时掉落道具向防御塔靠近
+Behaviour_Event_ProtectIncreaseTowerViewRange,固守 - 塔范围内提升视野范围,固守 - 当角色在防御塔范围提升视野范围
+Behaviour_Event_ProtectAutoAbsorbDrops,固守 - 击杀怪物概率自动吸收经验值,固守 - 击杀怪物有概率自动吸收掉落经验值
+Behaviour_Event_ProtectWhenEnergyIsFullIncreaseAttack,固守 - 塔充满能量增加所有武器伤害,固守 - 防御塔能量充满时增加20%伤害
+Behaviour_Event_PickupIncreasePickupRange,拾取 - 增加拾取范围,拾取 - 增加拾取半径50%
+Behaviour_Event_PickupMoreDrops,拾取 - 增加掉落概率,拾取 - 掉落概率增加50%
+Behaviour_Event_PickupIncreasePickupSpeed,拾取 - 增加拾取速度,拾取 - 拾取速度增加50%
+Behaviour_Event_PickupGetPickupRecover,拾取 - 获得拾取治疗,拾取 - 拾取治疗1%生命
+Behaviour_Event_PickupIncreaseTimeLimitCanOverlayMoveSpeed,拾取 - 拾取时增加限时可叠加移速,拾取 - 拾取时增加1%移速，持续3s，可叠加
+Behaviour_Event_ImmunityToFrost,冰冻免疫,冰冻免疫
+Behaviour_Event_SuperFrozen,超级冰冻,超级冰冻
+Behaviour_Event_ImmunityToBurning,燃烧免疫,燃烧免疫
+Behaviour_Event_SuperBurning,超级燃烧,超级燃烧
+Behaviour_Event_Defense,防御,防御
+Behaviour_Event_Behead,斩杀,斩杀
+Behaviour_Event_Inertia,惰性,惰性
+Behaviour_Event_Dissipate,消散,消散
 Behaviour_Auto_SubmachineGun,冲锋枪,冲锋枪
 Behaviour_Auto_Shotgun,霰弹枪,霰弹枪
 Behaviour_Auto_Sniperrifle,狙击枪,狙击枪
@@ -23,24 +62,48 @@ Behaviour_Auto_Orbitingball,环绕球,环绕球
 Behaviour_Auto_Laserray,激光射线,激光射线
 Behaviour_Auto_Grenade,手雷,手雷
 Behaviour_Auto_ChainLightning,闪电链,闪电链
-Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,冲锋枪射速更快范围更近
-Behaviour_Auto_IncreasePickupRange,增加玩家的拾取范围,增加玩家的拾取范围
-Behaviour_Auto_IncreaseEnergyCapacity,增加能量容量,增加能量容量
-Behaviour_Trigger_ChargeActivation,充能激活,充能激活
-Behaviour_Auto_GlobalTrackingOfPlayer,全局追踪玩家,全局追踪玩家
-Behaviour_Auto_RobotHealth,机器人血量,机器人血量
-Behaviour_Trigger_KnockbackPlayer,击退玩家,击退玩家
-Behaviour_Trigger_AttackTowerSelfDestruct,攻击塔自爆,攻击塔自爆
-Behaviour_Auto_PlayerInvincibleTeleportation,玩家无敌传送,玩家无敌传送
-Behaviour_Trigger_PickUpExperiencePoint,拾取经验值,拾取经验值
-Behaviour_Event_IncreasePickupRange,增加可拾取范围,增加可拾取范围
-Behaviour_Event_IncreaseHealthMax,增加血量上限,增加血量上限
-Behaviour_Event_IncreaseHealthSpeed,增加血量回复速度,增加血量回复速度
-Behaviour_Event_IncreaseChargeEnergySpeed,增加能量回复速度,增加能量回复速度
-Behaviour_Event_MoreDrops,更多的掉落物,更多的掉落物
-Behaviour_Event_RecoverHealth,一次性恢复玩家血量,一次性恢复玩家血量
-Behaviour_Event_DestroyAllRobot,毁灭所有机器人,毁灭所有机器人
-Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,增加能量的容量
-Behaviour_Auto_RobotStrengthen,机器人强化,机器人强化
-Behaviour_Event_IncreaseAllWeaponAttack,增加所有武器的攻击力,
-Behaviour_Event_IncreasesAllWeaponFireRate,增加所有武器的攻击速率,
+Behaviour_Auto_SubmachineGunKnockbackRobot,冲锋枪升级 - 击退,冲锋枪升级 - 击退命中的敌人
+Behaviour_Auto_SubmachineGunFiresSlowlyAndHasALargeRange,冲锋枪升级 - 射程加倍射速减半,冲锋枪升级 - 冲锋枪射程加倍，射速减半
+Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪升级 - 射速加倍射程减半,冲锋枪升级 - 冲锋枪射速加倍，射程减半
+Behaviour_Auto_SubmachineGunKillRobotIncreaseAttack,冲锋枪升级 - 击杀增加回合攻击力,冲锋枪升级 - 冲锋枪击杀敌人增加1%冲锋枪攻击力，回合结束刷新
+Behaviour_Auto_SubmachineGunKillRobotIncreaseFireRange,冲锋枪升级 - 击杀增加回合攻击速度,冲锋枪升级 - 冲锋枪击杀敌人增加1%冲锋枪射速，回合结束刷新
+Behaviour_Auto_OrbitingballIncreaseABall,环绕球升级 - 增加一个球体,环绕球升级 - 增加一个球体
+Behaviour_Auto_OrbitingballIgnite,环绕球升级 - 点燃效果,环绕球升级 - 球体造成点燃效果
+Behaviour_Auto_OrbitingballFreezing,环绕球升级 - 冰霜效果,环绕球升级 - 球体造成冰霜效果
+Behaviour_Auto_OrbitingballIntervalIncreaseAttack,环绕球升级 - 间隔时间增加攻击力,环绕球升级 - 每隔一段时间增加攻击力
+Behaviour_Auto_OrbitingballIntervalIncreaseRoundSpeed,环绕球升级 - 间隔时间增加移速,环绕球升级 - 每隔一段时间增加移速
+Behaviour_Auto_LaserrayIncreaseARay,激光升级 - 增加一道激光,激光升级 - 增加一道激光
+Behaviour_Auto_LaserrayIncreaseRayWidthAndColdTime,激光升级 - 增加一半宽度和冷却时间,激光升级 - 激光宽度增加50%，增加50%冷却时间
+Behaviour_Auto_LaserrayReduceColdTimeAndRayWidth,激光升级 - 减少一半宽度和冷却时间,激光升级 - 减少50%冷却时间，激光宽度增加50%
+Behaviour_Auto_LaserrayIncreaseAttack,激光升级 - 造成倍数伤害,激光升级 - 造成150%伤害
+Behaviour_Auto_LaserrayAttackChargeEnergyIncreaseAttack,激光升级 - 攻击间隙充能每秒加攻下次攻击刷新,激光升级 - 攻击后进行充能，每充能1s增加5%伤害，攻击后重新充能
+Behaviour_Auto_SniperrifleBulletPenetrate,狙击枪升级 - 子弹获得穿透,狙击枪升级 - 子弹获得穿透
+Behaviour_Auto_SniperrifleIncreaseAttack,狙击枪升级 - 增加狙击枪100攻击力,狙击枪升级 - 增加狙击枪100攻击力
+Behaviour_Auto_SniperrifleIncreaseFireRate,狙击枪升级 - 增加狙击枪150%攻速,狙击枪升级 - 增加狙击枪150%攻速
+Behaviour_Auto_SniperrifleAttackIncreaseFireCriticalHitRate,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置
+Behaviour_Auto_SniperrifleAttackIncreaseComboRate,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置
+Behaviour_Auto_StrafesatelliteAddABulletCount,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
+Behaviour_Auto_StrafesatelliteSlowRobotMoveSpeed,扫射卫星升级 - 对敌人造成减速效果,扫射卫星升级 - 对敌人造成减速效果
+Behaviour_Auto_StrafesatelliteBurnRobot,扫射卫星升级 - 对敌人造成燃烧效果,扫射卫星升级 - 对敌人造成燃烧效果
+Behaviour_Auto_StrafesatelliteIncreaseFireRate,扫射卫星升级 - 增加射速,扫射卫星升级 - 增加射速
+Behaviour_Auto_StrafesatelliteAddABulletCount,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
+Behaviour_Auto_GrenadeIncreaseBoomRange,手雷升级 - 增加手榴弹爆炸范围,手雷升级 - 增加手榴弹爆炸范围
+Behaviour_Auto_GrenadeLeaveBurningArea,手雷升级 - 爆炸后留下一片燃烧区域,手雷升级 - 爆炸后留下一片燃烧区域
+Behaviour_Auto_GrenadeLeaveFreezingArea,手雷升级 - 爆炸后留下一片冰冻区域,手雷升级 - 爆炸后留下一片冰冻区域
+Behaviour_Auto_GrenadeReduceColdTime,手雷升级 - 减少冷却时间,手雷升级 - 减少冷却时间
+Behaviour_Auto_GrenadeIncreaseAreaContinueTime,手雷升级 - 增加范围持续时间,手雷升级 - 增加范围持续时间
+Behaviour_Auto_ShootGunIncreaseAttack,霰弹枪升级 - 增加50%霰弹枪伤害,霰弹枪升级 - 增加50%霰弹枪伤害
+Behaviour_Auto_ShootGunAddSpreadReduceRange,霰弹枪升级 - 增加50%霰弹枪扇形区间，减少射程,霰弹枪升级 - 增加50%霰弹枪扇形区间，减少射程
+Behaviour_Auto_ShootGunAddRangeReduceSpread,霰弹枪升级 - 增加50%霰弹枪射程，减少扇形大小,霰弹枪升级 - 增加50%霰弹枪射程，减少扇形大小
+Behaviour_Auto_ShootGunShootWeakDouble,霰弹枪升级 - 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低,霰弹枪升级 - 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低
+Behaviour_Auto_ShootGunChangeShootWay,霰弹枪升级 - 急速：修改攻击方式,霰弹枪升级 - 急速：修改攻击方式
+Behaviour_Auto_RingIncreaseFireRange,圆环升级 - 射程增加33%,圆环升级 - 射程增加33%
+Behaviour_Auto_RingAttackRobotMoveSlowly,圆环升级 - 对敌人造成减速效果,圆环升级 - 对敌人造成减速效果
+Behaviour_Auto_RingAttackRobotBurning,圆环升级 - 对敌人造成燃烧效果,圆环升级 - 对敌人造成燃烧效果
+Behaviour_Auto_RingAttackBurningArea,圆环升级 - 圆环造成伤害时生成一片燃烧区域,圆环升级 - 圆环造成伤害时生成一片燃烧区域
+Behaviour_Auto_RingAttackFreezingArea,圆环升级 - 圆环造成伤害时生成一片冰冻区域,圆环升级 - 圆环造成伤害时生成一片冰冻区域
+Behaviour_Auto_ChainLightningIncreaseACatapult,闪电链升级 - 增加1次弹射,闪电链升级 - 增加1次弹射
+Behaviour_Auto_ChainLightningNetCatapult,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1
+Behaviour_Auto_ChainLightningLineCatapult,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2
+Behaviour_Auto_ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1
+Behaviour_Auto_ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,闪电链升级 - 弹射伤害量减少10%，弹射次数+2

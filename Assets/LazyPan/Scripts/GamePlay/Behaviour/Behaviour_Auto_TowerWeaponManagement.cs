@@ -8,20 +8,23 @@ namespace LazyPan {
         private Comp _ui;
         private List<Entity> _allWeapons = new List<Entity>();
         private List<Entity> _assembledWeapons = new List<Entity>();
+        private StringData _defaultWeapon;
+
         public Behaviour_Auto_TowerWeaponManagement(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.DEFAULT, LabelStr.WEAPON), out  _defaultWeapon);
             InitAllWeapon();
             InitDefaultWeapon();
         }
-        
+
         public override void DelayedExecute() {
             
         }
 
         private void InitAllWeapon() {
             _allWeapons.Clear();
-            string[] types = new[] { "Weapon"};
+            string[] types = new[] { "武器"};
             List<string> objConfigs = ObjConfig.GetKeys();
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
@@ -54,7 +57,7 @@ namespace LazyPan {
 
         private void InitDefaultWeapon() {
             _assembledWeapons.Clear();
-            InitWeapon("Obj_Weapon_Ring");
+            InitWeapon(_defaultWeapon.String);
         }
 
         public void InitWeapon(string weaponSign) {

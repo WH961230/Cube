@@ -92,7 +92,7 @@ namespace LazyPan {
         //初始化Buff
         private void InitWaveBuffs() {
             List<string> objConfigs = ObjConfig.GetKeys();
-            string[] types = new[] { "WaveBuff" };
+            string[] types = new[] { "波数增益" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
                 if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
@@ -164,9 +164,9 @@ namespace LazyPan {
                     }
                 }
 
-                if (buffType == "WaveBuff") {
+                if (buffType == "波数增益") {
                     WaveBuff(difficulty);
-                } else if (buffType == "RobotBuff") {
+                } else if (buffType == "机器人增益") {
                     RobotBuff(difficulty);
                 }
 
@@ -269,7 +269,7 @@ namespace LazyPan {
         private void RegisterStrengthenBehaviour(Entity buffEntity) {
             if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                 //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-                if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
+                if (EntityRegister.TryGetEntityBySign("A13_物体_事件_机器人创建器",
                         out Entity createRobotEntity)) {
                     if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                             out Behaviour_Event_CreateRandomPositionRobot beh)) {
@@ -301,7 +301,7 @@ namespace LazyPan {
         private void RegisterWave(Entity buffEntity, int difficulty) {
             if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE, out WaveData waveData)) {
                 //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-                if (EntityRegister.TryGetEntityBySign("Obj_Creator_RobotCreator",
+                if (EntityRegister.TryGetEntityBySign("A13_物体_事件_机器人创建器",
                         out Entity createRobotEntity)) {
                     if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                             out Behaviour_Event_CreateRandomPositionRobot beh)) {

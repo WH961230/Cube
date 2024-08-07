@@ -99,7 +99,7 @@ namespace LazyPan {
 
         private void OnTriggerEnterEvent(Collider collider) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(collider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
-                if (bodyEntity.ObjConfig.Type == "Robot") {
+                if (bodyEntity.ObjConfig.Type == "机器人") {
                     Debug.Log("圆环攻击敌人" + _fireDamage.Float);
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                 }

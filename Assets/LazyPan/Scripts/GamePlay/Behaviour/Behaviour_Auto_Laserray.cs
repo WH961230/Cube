@@ -92,7 +92,7 @@ namespace LazyPan {
         }
 
         private void GetWithinDistanceEntity() {
-            if (EntityRegister.TryGetEntitiesWithinDistance("Robot", _foot.position,
+            if (EntityRegister.TryGetEntitiesWithinDistance("机器人", _foot.position,
                     _fireRange.Float, out List<Entity> entities)) {
                 _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
             } else {
@@ -115,7 +115,7 @@ namespace LazyPan {
             //找到目前的敌人
             int instanceLaserNum = _fireCount.Int;
             //获取所有机器人
-            bool findRobotEntity = EntityRegister.TryGetEntitiesByType("Robot", out List<Entity> robotEntities);
+            bool findRobotEntity = EntityRegister.TryGetEntitiesByType("机器人", out List<Entity> robotEntities);
             if (findRobotEntity) {
                 int entityNum = robotEntities.Count;
                 //机器人数量大于等于开火数量
@@ -156,7 +156,7 @@ namespace LazyPan {
 
         private void OnTriggerEvent(Collider collider) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(collider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
-                if (bodyEntity.ObjConfig.Type == "Robot") {
+                if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                 }
             }

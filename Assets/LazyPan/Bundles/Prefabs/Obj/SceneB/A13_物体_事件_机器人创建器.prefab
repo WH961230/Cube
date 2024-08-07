@@ -113,6 +113,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &187674213716340927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ MonoBehaviour:
     Description: "\u673A\u5668\u4EBA\u521B\u5EFA\u6CE2\u6B21"
     WaveInstanceDefaultList:
     - InstanceNumber: 5
-      InstanceRobotSign: Obj_Robot_SmallTriangle
+      InstanceRobotSign: "A14_\u7269\u4F53_\u673A\u5668\u4EBA_\u5C0F\u4E09\u89D2"
       InstanceDelayTime: 2
     WaveInstanceList: []
 --- !u!1 &8090360991350506415

@@ -90,7 +90,7 @@ namespace LazyPan {
         }
 
         private void GetWithinDistanceEntity() {
-            if (EntityRegister.TryGetEntitiesWithinDistance("Robot", _foot.position,
+            if (EntityRegister.TryGetEntitiesWithinDistance("机器人", _foot.position,
                     _fireRange.Float, out List<Entity> entities)) {
                 _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
             } else {
@@ -140,7 +140,7 @@ namespace LazyPan {
 
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
-                if (bodyEntity.ObjConfig.Type == "Robot") {
+                if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                 }
             }

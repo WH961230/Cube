@@ -152,7 +152,7 @@ namespace LazyPan {
 
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
-                if (bodyEntity.ObjConfig.Type == "Robot") {
+                if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                     fxGo.SetActive(false);
                 }

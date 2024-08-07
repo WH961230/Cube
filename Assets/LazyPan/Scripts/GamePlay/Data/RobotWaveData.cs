@@ -5,7 +5,6 @@ namespace LazyPan {
     public class RobotWaveData : Data {
         public List<WaveData> Waves = new List<WaveData>();
         public override bool Get<T>(string sign, out T t) {
-            base.Get(sign, out t);
             if (typeof(T) == typeof(WaveData)) {
                 foreach (WaveData data in Waves) {
                     if (data.Sign == sign) {
@@ -16,7 +15,7 @@ namespace LazyPan {
             }
 
             t = default;
-            return false;
+            return base.Get(sign, out t);
         }
     }
 

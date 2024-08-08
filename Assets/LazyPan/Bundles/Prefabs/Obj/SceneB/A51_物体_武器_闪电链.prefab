@@ -40,7 +40,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6570254296117653826}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -266,7 +266,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bools: []
   Ints: []
-  Floats: []
+  Floats:
+  - Sign: FireRateInterval
+    Description: "\u5C04\u51FB\u901F\u5EA6\u65F6\u95F4\u95F4\u9694"
+    Float: 1
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

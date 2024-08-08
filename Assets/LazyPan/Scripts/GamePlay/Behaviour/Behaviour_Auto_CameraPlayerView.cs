@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace LazyPan {
+    
     public class Behaviour_Auto_CameraPlayerView : Behaviour {
         private Entity _playerEntity;
         private CinemachineVirtualCamera _virtualCamera;

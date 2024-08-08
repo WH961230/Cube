@@ -97,6 +97,7 @@ namespace LazyPan {
 				        Debug.Log("机器人死亡:" + tmpRobot.Prefab.name);
 				        _robots.Remove(tmpRobot);
 				        Obj.Instance.UnLoadEntity(tmpRobot);
+				        MessageRegister.Instance.Dis(MessageCode.MsgCreateActivatableObj);
 			        }
 		        }
 

@@ -66,6 +66,10 @@ public class LabelStr {
     public static string BOOM = "Boom";
     public static string DIFFICULTY = "Difficulty";
     public static string DEFAULT = "Default";
+    public static string ACTIVATABLE = "Activatable";
+    public static string CURRENT = "Current";
+    public static string PATH = "Path";
+    public static string TYPE = "Type";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

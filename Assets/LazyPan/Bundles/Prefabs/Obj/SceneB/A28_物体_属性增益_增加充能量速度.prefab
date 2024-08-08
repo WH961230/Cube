@@ -133,12 +133,15 @@ MonoBehaviour:
     Description: "\u589E\u52A0\u7684\u80FD\u91CF\u901F\u5EA6 \u589E\u52A0\u91CF"
     Float: 2
   Strings:
-  - Sign: ChooseType
-    Description: "\u9009\u62E9\u7C7B\u578B"
-    String: Unlimit
   - Sign: Target
     Description: "\u76EE\u6807\u5B9E\u4F53\u6807\u8BC6"
-    String: Obj_Tower_Tower
+    String: "A5_\u7269\u4F53_\u5854_\u5854"
+  - Sign: Sign
+    Description: "\u6CE8\u518C\u7684\u884C\u4E3A"
+    String: "\u589E\u52A0\u5145\u80FD\u901F\u5EA6"
+  - Sign: Info
+    Description: "\u63CF\u8FF0"
+    String: "\u589E\u52A0\u5145\u80FD\u901F\u5EA6"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

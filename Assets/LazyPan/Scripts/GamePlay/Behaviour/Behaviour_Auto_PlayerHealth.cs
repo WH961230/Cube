@@ -28,13 +28,14 @@ namespace LazyPan {
             
             InputRegister.Instance.Load(InputCode.R, context => {
                 if (context.performed) {
-                    BeDamaged(10);
+                    MsgBeDamaged(10);
                 }
             });
 
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
             
-            MessageRegister.Instance.Reg<float>(MessageCode.MsgDamagePlayer, BeDamaged);
+            MessageRegister.Instance.Reg<float>(MessageCode.MsgDamagePlayer, MsgBeDamaged);
+            MessageRegister.Instance.Reg<float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
             Game.instance.OnLateUpdateEvent.AddListener(OnUpdate);
         }
 
@@ -44,17 +45,24 @@ namespace LazyPan {
 
         private void OnUpdate() {
             _healthBar.value = _healthData.Float / _maxHealthData.Float;
-
             if (_chargyingEnergyData.Bool) {
-                if (_healthData.Float < _maxHealthData.Float) {
-                    _healthData.Float += _healthRecoverSpeed.Float * Time.deltaTime;
-                } else {
-                    _healthData.Float = _maxHealthData.Float;
-                }
+                BeRecoveredHealth(_healthRecoverSpeed.Float * Time.deltaTime);
             }
         }
 
-        private void BeDamaged(float damageValue) {
+        private void MsgBeRecovered(float recoverValue) {
+            BeRecoveredHealth(recoverValue);
+        }
+
+        private void BeRecoveredHealth(float recoverValue) {
+            if (_healthData.Float < _maxHealthData.Float) {
+                _healthData.Float += recoverValue;
+            } else {
+                _healthData.Float = _maxHealthData.Float;
+            }
+        }
+
+        private void MsgBeDamaged(float damageValue) {
             if (_invincibleData.Bool) {
                 return;
             }
@@ -78,7 +86,8 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             Game.instance.OnLateUpdateEvent.RemoveListener(OnUpdate);
-            MessageRegister.Instance.UnReg<float>(MessageCode.MsgDamagePlayer, BeDamaged);
+            MessageRegister.Instance.UnReg<float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
+            MessageRegister.Instance.UnReg<float>(MessageCode.MsgDamagePlayer, MsgBeDamaged);
         }
     }
 }

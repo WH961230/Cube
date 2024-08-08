@@ -8,4 +8,6 @@ public class MessageCode {
     public static int MsgGlobalLevelUp = 6;//全局关卡等级提升
     public static int MsgRobotDead = 7;//机器人死亡
     public static int MsgLevelUp = 8;//关卡等级升级
+    public static int MsgRecoverHealth = 9;//恢复血量
+    public static int MsgCreateActivatableObj = 10;//创建可激活物体
 }

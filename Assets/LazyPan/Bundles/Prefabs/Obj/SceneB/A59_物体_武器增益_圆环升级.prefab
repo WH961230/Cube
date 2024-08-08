@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3094119822270521761}
   - component: {fileID: 5603811672759092760}
-  - component: {fileID: 1637018644772130692}
+  - component: {fileID: 5145578623938622141}
   m_Layer: 0
   m_Name: "A59_\u7269\u4F53_\u6B66\u5668\u589E\u76CA_\u5706\u73AF\u5347\u7EA7"
   m_TagString: Untagged
@@ -114,7 +114,7 @@ MonoBehaviour:
   Cameras: []
   NavMeshAgents: []
   LineRenderers: []
---- !u!114 &1637018644772130692
+--- !u!114 &5145578623938622141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,32 +123,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 7962291709713167343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
+  m_Script: {fileID: 11500000, guid: b7c99eca6be60cf4a9d8f8de0da18483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools:
-  - Sign: Used
-    Description: "\u88AB\u4F7F\u7528"
-    Bool: 0
+  Bools: []
   Ints: []
   Floats: []
   Strings:
-  - Sign: ChooseType
-    Description: "\u9009\u62E9\u7C7B\u578B"
-    String: Path
   - Sign: CurrentPath
     Description: "\u5F53\u524D\u8DEF\u5F84"
     String: 01
-  - Sign: Sign
-    Description: "\u6B66\u5668\u6807\u8BC6"
-    String: Obj_Weapon_Ring
-  - Sign: Icon
-    Description: "\u56FE\u6807"
-    String: Ring
-  - Sign: Info
-    Description: "\u63CF\u8FF0"
-    String: "\u83B7\u53D6\u6B66\u5668\u5706\u73AF"
   Vector3s: []
+  Paths:
+  - Sign: 01
+    BehaviourName: "\u8FC5\u6377 - \u52A0\u901F"
+    Description: "\u8FC5\u6377 - \u589E\u52A0\u79FB\u52A8\u901F\u5EA620%"
+    NextSign: 02A|02B
+  - Sign: 02A
+    BehaviourName: "\u8FC5\u6377 - \u79FB\u52A8\u56DE\u8840"
+    Description: "\u8FC5\u6377 - \u6301\u7EED\u79FB\u52A8\u65F6\uFF0C\u6BCF\u96941s\u56DE\u590D1%\u751F\u547D"
+    NextSign: 03A
+  - Sign: 02B
+    BehaviourName: "\u8FC5\u6377 - \u79FB\u52A8\u52A0\u653B"
+    Description: "\u8FC5\u6377 - \u6301\u7EED\u79FB\u52A8\u65F6\uFF0C\u6BCF\u9694\u589E\u52A01%\u653B\u51FB\u529B\uFF0C\u6700\u9AD820%\uFF0C\u505C\u6B62\u79FB\u52A8\u65F6\u6E05\u7A7A"
+    NextSign: 03B
+  - Sign: 03A
+    BehaviourName: "\u8FC5\u6377 - \u56DE\u590D\u91CF\u7FFB\u500D"
+    Description: "\u8FC5\u6377 - \u56DE\u590D\u91CF\u7FFB\u500D"
+    NextSign: 
+  - Sign: 03B
+    BehaviourName: "\u8FC5\u6377 - \u589E\u52A0\u4E0A\u9650"
+    Description: "\u8FC5\u6377 - \u4E0A\u9650\u589E\u52A020%"
+    NextSign: 
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: "A35_\u7269\u4F53_\u89D2\u8272\u589E\u76CA_\u51B0\u51BB\u514D\u75AB"
+  m_Name: "A35_\u7269\u4F53_\u89D2\u8272\u4E00\u6B21\u6027\u589E\u76CA_\u51B0\u51BB\u514D\u75AB"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,9 +133,15 @@ MonoBehaviour:
   Ints: []
   Floats: []
   Strings:
-  - Sign: ChooseType
-    Description: "\u9009\u62E9\u7C7B\u578B"
-    String: Once
+  - Sign: TargetType
+    Description: "\u76EE\u6807\u7C7B\u578B"
+    String: Player
+  - Sign: Sign
+    Description: "\u6CE8\u518C\u7684\u884C\u4E3A"
+    String: "\u51B0\u51BB\u514D\u75AB"
+  - Sign: Info
+    Description: "\u63CF\u8FF0"
+    String: "\u89D2\u8272\u5C06\u5BF9\u51B0\u51BB\u514D\u75AB"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

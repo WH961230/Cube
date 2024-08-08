@@ -15,10 +15,11 @@ Behaviour_Trigger_RobotKnockbackPlayer,机器人击退玩家,机器人 - 击退�
 Behaviour_Trigger_AttackTowerSelfDestruct,攻击塔自爆,机器人 - 攻击塔自爆
 Behaviour_Auto_RobotHealth,机器人血量,机器人 - 机器人血量
 Behaviour_Auto_GlobalTrackingOfPlayer,全局追踪玩家,机器人 - 全局追踪玩家
-Behaviour_Event_DropMoreExperiencePoint,掉落大量掉落物,可激活物体 - 更多的掉落物
-Behaviour_Event_RecoverHealth,恢复玩家血量,可激活物体 - 恢复玩家血量
-Behaviour_Event_DestroyAllRobot,毁灭所有机器人,可激活物体 - 毁灭所有机器人
-Behaviour_Trigger_ChargeActivation,被充能激活可激活物体,可激活物体 - 充能可激活物体
+Behaviour_Trigger_ChargeActivationPlayerLevelUp,被充能激活可激活物体玩家升级,可激活物体 - 充能可激活物体玩家升级
+Behaviour_Trigger_ChargeActivationRecoverAllHealth,被充能激活可激活物体回复所有血量,可激活物体 - 充能可激活物体恢复所有血量
+Behaviour_Trigger_ChargeActivationAttackAllRobot,被充能激活可激活物体轰炸攻击所有机器人,可激活物体 - 充能可激活物体轰炸攻击所有机器人
+Behaviour_Trigger_ChargeActivationDropMoreExperiencePoint,被充能激活可激活物体经验值掉落物,可激活物体 - 充能可激活物体经验值掉落物
+Behaviour_Trigger_ChargeActivationTemporaryDefenseTower,被充能激活可激活物体临时防御塔,可激活物体 - 充能可激活物体临时防御塔
 Behaviour_Auto_TowerWeaponManagement,武器管理,塔 - 武器管理
 Behaviour_Auto_TowerChargeEnergy,塔被充能,塔 - 塔被充能
 Behaviour_Event_Settlement,结算,结算

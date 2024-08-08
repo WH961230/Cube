@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: Obj_PlayerBuff_IncreasePickupRange
+  m_Name: "A42_\u7269\u4F53_\u89D2\u8272\u4E00\u6B21\u6027\u589E\u76CA_\u6D88\u6563"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,23 +128,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bools:
   - Sign: Used
-    Description: "\u88AB\u4F7F\u7528"
+    Description: "\u662F\u5426\u88AB\u4F7F\u7528"
     Bool: 0
   Ints: []
-  Floats: []
+  Floats:
+  - Sign: DestroyRatio
+    Description: "\u9053\u5177\u6D88\u5931\u65F6\u95F4\u6BD4\u4F8B"
+    Float: 1.5
   Strings:
-  - Sign: Target
-    Description: "\u76EE\u6807\u5B9E\u4F53\u6807\u8BC6"
-    String: Obj_Player_Player
+  - Sign: TargetType
+    Description: "\u76EE\u6807\u7C7B\u578B"
+    String: Player
   - Sign: Sign
-    Description: "\u5F85\u6CE8\u518C\u884C\u4E3A\u6807\u8BC6"
-    String: Behaviour_Auto_IncreasePickupRange
-  - Sign: Icon
-    Description: "\u56FE\u6807\u5730\u5740"
-    String: IncreasePickupRange
+    Description: "\u6CE8\u518C\u7684\u884C\u4E3A"
+    String: "\u6D88\u6563"
   - Sign: Info
-    Description: "\u8BF4\u660E"
-    String: "\u589E\u52A0\u73A9\u5BB6\u7684\u62FE\u53D6\u8303\u56F4"
+    Description: "\u63CF\u8FF0"
+    String: "\u9053\u5177\u6D88\u6563\u65F6\u95F4\u589E\u52A0"
+  Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

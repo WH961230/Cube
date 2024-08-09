@@ -27,7 +27,7 @@ namespace LazyPan {
         private void InitBuffs() {
             _buffs.Clear();
             List<string> objConfigs = ObjConfig.GetKeys();
-            string[] types = new[] { "武器增益", "角色增益", "角色一次性增益", "属性增益", "武器" };
+            string[] types = new[] { "武器增益", "角色增益", "角色一次性增益", "属性增益" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
                 if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
@@ -41,6 +41,12 @@ namespace LazyPan {
                         _buffs.Add(buffInstanceEntity);
                         break;
                     }
+                }
+            }
+
+            if (EntityRegister.TryGetEntitiesByType("武器", out List<Entity> weapons)) {
+                foreach (var tmpWeapon in weapons) {
+                    _buffs.Add(tmpWeapon);
                 }
             }
         }
@@ -127,9 +133,9 @@ namespace LazyPan {
                         Comp item = Cond.Instance.Get<Comp>(choose,
                             LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
                         //注册图片
-                        Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
-                        Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
-                        image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
+                        // Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
+                        // Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
+                        // image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
 
                         //注册说明
                         TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);

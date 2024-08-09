@@ -21,6 +21,10 @@ PlayerThreeChooseOne,玩家增益三选一,Event,Init,初始化
 PlayerThreeChooseOne,玩家增益三选一,Event,Clear,清除
 RobotThreeChooseOne,机器人增益三选一,Event,Init,初始化
 RobotThreeChooseOne,机器人增益三选一,Event,Clear,清除
+TowerChargeEnergy,塔充能,Auto,Init,初始化
+TowerChargeEnergy,塔充能,Auto,Clear,清除
+TowerWeaponManagement,塔武器管理,Auto,Init,初始化
+TowerWeaponManagement,塔武器管理,Auto,Clear,清除
 Settlement,结算,Event,Init,初始化
 Settlement,结算,Event,Clear,清除
 PlayerExperience,玩家经验,Auto,Init,初始化
@@ -29,12 +33,6 @@ PlayerHealth,玩家血量,Auto,Init,初始化
 PlayerHealth,玩家血量,Auto,Clear,清除
 SubmachineGun,冲锋枪,Auto,Init,初始化
 SubmachineGun,冲锋枪,Auto,Clear,清除
-TowerChargeEnergy,塔充能,Auto,Init,初始化
-TowerChargeEnergy,塔充能,Auto,Clear,清除
-TowerWeaponManagement,塔武器管理,Auto,Init,初始化
-TowerWeaponManagement,塔武器管理,Auto,Clear,清除
-SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,Auto,Init,初始化
-SubmachineGunFiresFasterAndHasACloserRange,冲锋枪射速更快范围更近,Auto,Clear,清除
 Shotgun,霰弹枪,Auto,Init,初始化
 Shotgun,霰弹枪,Auto,Clear,清除
 Sniperrifle,狙击枪,Auto,Init,初始化
@@ -49,47 +47,183 @@ Laserray,激光射线,Auto,Init,初始化
 Laserray,激光射线,Auto,Clear,清除
 Grenade,手雷,Auto,Init,初始化
 Grenade,手雷,Auto,Clear,清除
-IncreasePickupRange,增加玩家的拾取范围,Auto,Init,初始化
-IncreasePickupRange,增加玩家的拾取范围,Auto,Clear,清除
-IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,Auto,Init,初始化
-IncreaseTheEnergyCapacityOfTheTower,增加塔的能量容量,Auto,Clear,清除
+ChainLightning,闪电链,Auto,Init,初始化
+ChainLightning,闪电链,Auto,Clear,清除
 RobotStrengthen,机器人强化,Auto,Init,初始化
 RobotStrengthen,机器人强化,Auto,Clear,清除
 ChargeActivation,充能激活,Trigger,Init,初始化
 ChargeActivation,充能激活,Trigger,Clear,清除
 GlobalTrackingOfPlayer,全局追踪玩家,Auto,Init,初始化
 GlobalTrackingOfPlayer,全局追踪玩家,Auto,Clear,清除
+ChargeActivationPlayerLevelUp,被充能激活可激活物体玩家升级,Trigger,Init,初始化
+ChargeActivationPlayerLevelUp,被充能激活可激活物体玩家升级,Trigger,Clear,清除
+ChargeActivationRecoverAllHealth,被充能激活可激活物体回复所有血量,Trigger,Init,初始化
+ChargeActivationRecoverAllHealth,被充能激活可激活物体回复所有血量,Trigger,Clear,清除
+ChargeActivationAttackAllRobot,被充能激活可激活物体轰炸攻击所有机器人,Trigger,Init,初始化
+ChargeActivationAttackAllRobot,被充能激活可激活物体轰炸攻击所有机器人,Trigger,Clear,清除
+ChargeActivationDropMoreExperiencePoint,被充能激活可激活物体经验值掉落物,Trigger,Init,初始化
+ChargeActivationDropMoreExperiencePoint,被充能激活可激活物体经验值掉落物,Trigger,Clear,清除
+ChargeActivationTemporaryDefenseTower,被充能激活可激活物体临时防御塔,Trigger,Init,初始化
+ChargeActivationTemporaryDefenseTower,被充能激活可激活物体临时防御塔,Trigger,Clear,清除
 RobotHealth,敌人血量,Auto,Init,初始化
 RobotHealth,敌人血量,Auto,Clear,清除
-KnockbackPlayer,击退玩家,Trigger,Init,初始化
-KnockbackPlayer,击退玩家,Trigger,Clear,清除
+RobotKnockbackPlayer,击退玩家,Trigger,Init,初始化
+RobotKnockbackPlayer,击退玩家,Trigger,Clear,清除
 AttackTowerSelfDestruct,攻击塔自爆,Trigger,Init,初始化
 AttackTowerSelfDestruct,攻击塔自爆,Trigger,Clear,清除
 PlayerInvincibleTeleportation,玩家无敌瞬移,Auto,Init,初始化
 PlayerInvincibleTeleportation,玩家无敌瞬移,Auto,Clear,清除
 PickUpExperiencePoint,可拾取经验值,Trigger,Init,初始化
 PickUpExperiencePoint,可拾取经验值,Trigger,Clear,清除
-IncreasePickupRange,增加拾取范围,Event,Init,初始化
-IncreasePickupRange,增加拾取范围,Event,Clear,清除
-IncreaseHealthMax,增加血量上限,Event,Init,初始化
-IncreaseHealthMax,增加血量上限,Event,Clear,清除
-IncreaseHealthSpeed,增加血量回复速度,Event,Init,初始化
-IncreaseHealthSpeed,增加血量回复速度,Event,Clear,清除
-IncreaseChargeEnergySpeed,增加能量回复速度,Event,Init,初始化
-IncreaseChargeEnergySpeed,增加能量回复速度,Event,Clear,清除
-MoreDrops,增加掉落物,Event,Init,初始化
-MoreDrops,增加掉落物,Event,Clear,清除
 RecoverHealth,一次性增加玩家血量,Event,Init,初始化
 RecoverHealth,一次性增加玩家血量,Event,Clear,清除
 DestroyAllRobot,毁灭所有机器人,Event,Init,初始化
 DestroyAllRobot,毁灭所有机器人,Event,Clear,清除
-IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,Event,Init,初始化
-IncreaseTheEnergyCapacityOfTheTower,增加能量的容量,Event,Clear,清除
 RobotStrengthen,机器人强化,Auto,Init,初始化
 RobotStrengthen,机器人强化,Auto,Clear,清除
-ChainLightning,闪电链,Auto,Init,初始化
-ChainLightning,闪电链,Auto,Clear,清除
+IncreaseEnergyCapacity,增加能量的容量,Event,Init,初始化
+IncreaseEnergyCapacity,增加能量的容量,Event,Clear,清除
+IncreaseChargeEnergySpeed,增加能量回复速度,Event,Init,初始化
+IncreaseChargeEnergySpeed,增加能量回复速度,Event,Clear,清除
+IncreaseHealthMax,增加血量上限,Event,Init,初始化
+IncreaseHealthMax,增加血量上限,Event,Clear,清除
 IncreaseAllWeaponAttack,增加所有武器的伤害,Event,Init,初始化
 IncreaseAllWeaponAttack,增加所有武器的伤害,Event,Clear,清除
 IncreasesAllWeaponFireRate,增加所有武器的攻击速率,Event,Init,初始化
 IncreasesAllWeaponFireRate,增加所有武器的攻击速率,Event,Clear,清除
+ImmunityToFrost,冰冻免疫,Event,Init,初始化
+ImmunityToFrost,冰冻免疫,Event,Clear,清除
+SuperFrozen,超级冰冻,Event,Init,初始化
+SuperFrozen,超级冰冻,Event,Clear,清除
+ImmunityToBurning,燃烧免疫,Event,Init,初始化
+ImmunityToBurning,燃烧免疫,Event,Clear,清除
+SuperBurning,超级燃烧,Event,Init,初始化
+SuperBurning,超级燃烧,Event,Clear,清除
+Defense,防御,Event,Init,初始化
+Defense,防御,Event,Clear,清除
+Behead,斩杀,Event,Init,初始化
+Behead,斩杀,Event,Clear,清除
+Inertia,惰性,Event,Init,初始化
+Inertia,惰性,Event,Clear,清除
+Dissipate,消散,Event,Init,初始化
+Dissipate,消散,Event,Clear,清除
+SwiftIncreaseMoveSpeed,迅捷 - 加速,Event,Init,初始化
+SwiftIncreaseMoveSpeed,迅捷 - 加速,Event,Clear,清除
+SwiftMoveRecoverHealth,迅捷 - 移动回血,Event,Init,初始化
+SwiftMoveRecoverHealth,迅捷 - 移动回血,Event,Clear,清除
+SwiftMoveIncreaseAttack,迅捷 - 移动加攻,Event,Init,初始化
+SwiftMoveIncreaseAttack,迅捷 - 移动加攻,Event,Clear,清除
+SwiftMoveRecoverHealthDouble,迅捷 - 回复量翻倍,Event,Init,初始化
+SwiftMoveRecoverHealthDouble,迅捷 - 回复量翻倍,Event,Clear,清除
+SwiftMoveIncreaseAttackMaxLimit,迅捷 - 增加上限,Event,Init,初始化
+SwiftMoveIncreaseAttackMaxLimit,迅捷 - 增加上限,Event,Clear,清除
+ProtectIncreaseRecoverHealthSpeed,固守 - 塔范围内加速生命恢复,Event,Init,初始化
+ProtectIncreaseRecoverHealthSpeed,固守 - 塔范围内加速生命恢复,Event,Clear,清除
+ProtectDropsMoveTowardsToTower,固守 - 塔范围内掉落道具向塔靠近,Event,Init,初始化
+ProtectDropsMoveTowardsToTower,固守 - 塔范围内掉落道具向塔靠近,Event,Clear,清除
+ProtectIncreaseTowerViewRange,固守 - 塔范围内提升视野范围,Event,Init,初始化
+ProtectIncreaseTowerViewRange,固守 - 塔范围内提升视野范围,Event,Clear,清除
+ProtectAutoAbsorbDrops,固守 - 击杀怪物概率自动吸收经验值,Event,Init,初始化
+ProtectAutoAbsorbDrops,固守 - 击杀怪物概率自动吸收经验值,Event,Clear,清除
+ProtectWhenEnergyIsFullIncreaseAttack,固守 - 塔充满能量增加所有武器伤害,Event,Init,初始化
+ProtectWhenEnergyIsFullIncreaseAttack,固守 - 塔充满能量增加所有武器伤害,Event,Clear,清除
+PickupIncreasePickupRange,拾取 - 增加拾取范围,Event,Init,初始化
+PickupIncreasePickupRange,拾取 - 增加拾取范围,Event,Clear,清除
+PickupMoreDrops,拾取 - 增加掉落概率,Event,Init,初始化
+PickupMoreDrops,拾取 - 增加掉落概率,Event,Clear,清除
+PickupIncreasePickupSpeed,拾取 - 增加拾取速度,Event,Init,初始化
+PickupIncreasePickupSpeed,拾取 - 增加拾取速度,Event,Clear,清除
+PickupGetPickupRecover,拾取 - 获得拾取治疗,Event,Init,初始化
+PickupGetPickupRecover,拾取 - 获得拾取治疗,Event,Clear,清除
+PickupIncreaseTimeLimitCanOverlayMoveSpeed,拾取 - 拾取时增加限时可叠加移速,Event,Init,初始化
+PickupIncreaseTimeLimitCanOverlayMoveSpeed,拾取 - 拾取时增加限时可叠加移速,Event,Clear,清除
+SubmachineGunKnockbackRobot,冲锋枪升级 - 击退,Auto,Init,初始化
+SubmachineGunKnockbackRobot,冲锋枪升级 - 击退,Auto,Clear,清除
+SubmachineGunFiresSlowlyAndHasALargeRange,冲锋枪升级 - 射程加倍射速减半,Auto,Init,初始化
+SubmachineGunFiresSlowlyAndHasALargeRange,冲锋枪升级 - 射程加倍射速减半,Auto,Clear,清除
+SubmachineGunFiresFasterAndHasACloserRange,冲锋枪升级 - 射速加倍射程减半,Auto,Init,初始化
+SubmachineGunFiresFasterAndHasACloserRange,冲锋枪升级 - 射速加倍射程减半,Auto,Clear,清除
+SubmachineGunKillRobotIncreaseAttack,冲锋枪升级 - 击杀增加回合攻击力,Auto,Init,初始化
+SubmachineGunKillRobotIncreaseAttack,冲锋枪升级 - 击杀增加回合攻击力,Auto,Clear,清除
+SubmachineGunKillRobotIncreaseFireRange,冲锋枪升级 - 击杀增加回合攻击速度,Auto,Init,初始化
+SubmachineGunKillRobotIncreaseFireRange,冲锋枪升级 - 击杀增加回合攻击速度,Auto,Clear,清除
+OrbitingballIncreaseABall,环绕球升级 - 增加一个球体,Auto,Init,初始化
+OrbitingballIncreaseABall,环绕球升级 - 增加一个球体,Auto,Clear,清除
+OrbitingballIgnite,环绕球升级 - 点燃效果,Auto,Init,初始化
+OrbitingballIgnite,环绕球升级 - 点燃效果,Auto,Clear,清除
+OrbitingballFreezing,环绕球升级 - 冰霜效果,Auto,Init,初始化
+OrbitingballFreezing,环绕球升级 - 冰霜效果,Auto,Clear,清除
+OrbitingballIntervalIncreaseAttack,环绕球升级 - 间隔时间增加攻击力,Auto,Init,初始化
+OrbitingballIntervalIncreaseAttack,环绕球升级 - 间隔时间增加攻击力,Auto,Clear,清除
+OrbitingballIntervalIncreaseRoundSpeed,环绕球升级 - 间隔时间增加移速,Auto,Init,初始化
+OrbitingballIntervalIncreaseRoundSpeed,环绕球升级 - 间隔时间增加移速,Auto,Clear,清除
+LaserrayIncreaseARay,激光升级 - 增加一道激光,Auto,Init,初始化
+LaserrayIncreaseARay,激光升级 - 增加一道激光,Auto,Clear,清除
+LaserrayIncreaseRayWidthAndColdTime,激光升级 - 增加一半宽度和冷却时间,Auto,Init,初始化
+LaserrayIncreaseRayWidthAndColdTime,激光升级 - 增加一半宽度和冷却时间,Auto,Clear,清除
+LaserrayReduceColdTimeAndRayWidth,激光升级 - 减少一半宽度和冷却时间,Auto,Init,初始化
+LaserrayReduceColdTimeAndRayWidth,激光升级 - 减少一半宽度和冷却时间,Auto,Clear,清除
+LaserrayIncreaseAttack,激光升级 - 造成倍数伤害,Auto,Init,初始化
+LaserrayIncreaseAttack,激光升级 - 造成倍数伤害,Auto,Clear,清除
+LaserrayAttackChargeEnergyIncreaseAttack,激光升级 - 攻击间隙充能每秒加攻下次攻击刷新,Auto,Init,初始化
+LaserrayAttackChargeEnergyIncreaseAttack,激光升级 - 攻击间隙充能每秒加攻下次攻击刷新,Auto,Clear,清除
+SniperrifleBulletPenetrate,狙击枪升级 - 子弹获得穿透,Auto,Init,初始化
+SniperrifleBulletPenetrate,狙击枪升级 - 子弹获得穿透,Auto,Clear,清除
+SniperrifleIncreaseAttack,狙击枪升级 - 增加狙击枪100攻击力,Auto,Init,初始化
+SniperrifleIncreaseAttack,狙击枪升级 - 增加狙击枪100攻击力,Auto,Clear,清除
+SniperrifleIncreaseFireRate,狙击枪升级 - 增加狙击枪150%攻速,Auto,Init,初始化
+SniperrifleIncreaseFireRate,狙击枪升级 - 增加狙击枪150%攻速,Auto,Clear,清除
+SniperrifleAttackIncreaseFireCriticalHitRate,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置,Auto,Init,初始化
+SniperrifleAttackIncreaseFireCriticalHitRate,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置,Auto,Clear,清除
+SniperrifleAttackIncreaseComboRate,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置,Auto,Init,初始化
+SniperrifleAttackIncreaseComboRate,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置,Auto,Clear,清除
+StrafesatelliteAddSecondBullet,扫射卫星升级 - 增加一个枪头,Auto,Init,初始化
+StrafesatelliteAddSecondBullet,扫射卫星升级 - 增加一个枪头,Auto,Clear,清除
+StrafesatelliteSlowRobotMoveSpeed,扫射卫星升级 - 对敌人造成减速效果,Auto,Init,初始化
+StrafesatelliteSlowRobotMoveSpeed,扫射卫星升级 - 对敌人造成减速效果,Auto,Clear,清除
+StrafesatelliteBurnRobot,扫射卫星升级 - 对敌人造成燃烧效果,Auto,Init,初始化
+StrafesatelliteBurnRobot,扫射卫星升级 - 对敌人造成燃烧效果,Auto,Clear,清除
+StrafesatelliteIncreaseFireRate,扫射卫星升级 - 增加射速,Auto,Init,初始化
+StrafesatelliteIncreaseFireRate,扫射卫星升级 - 增加射速,Auto,Clear,清除
+StrafesatelliteAddThirdBullet,扫射卫星升级 - 增加一个枪头,Auto,Init,初始化
+StrafesatelliteAddThirdBullet,扫射卫星升级 - 增加一个枪头,Auto,Clear,清除
+GrenadeIncreaseBoomRange,手雷升级 - 增加手榴弹爆炸范围,Auto,Init,初始化
+GrenadeIncreaseBoomRange,手雷升级 - 增加手榴弹爆炸范围,Auto,Clear,清除
+GrenadeLeaveBurningArea,手雷升级 - 爆炸后留下一片燃烧区域,Auto,Init,初始化
+GrenadeLeaveBurningArea,手雷升级 - 爆炸后留下一片燃烧区域,Auto,Clear,清除
+GrenadeLeaveFreezingArea,手雷升级 - 爆炸后留下一片冰冻区域,Auto,Init,初始化
+GrenadeLeaveFreezingArea,手雷升级 - 爆炸后留下一片冰冻区域,Auto,Clear,清除
+GrenadeReduceColdTime,手雷升级 - 减少冷却时间,Auto,Init,初始化
+GrenadeReduceColdTime,手雷升级 - 减少冷却时间,Auto,Clear,清除
+GrenadeIncreaseAreaContinueTime,手雷升级 - 增加范围持续时间,Auto,Init,初始化
+GrenadeIncreaseAreaContinueTime,手雷升级 - 增加范围持续时间,Auto,Clear,清除
+ShootGunIncreaseAttack,霰弹枪升级 - 增加50%霰弹枪伤害,Auto,Init,初始化
+ShootGunIncreaseAttack,霰弹枪升级 - 增加50%霰弹枪伤害,Auto,Clear,清除
+ShootGunAddSpreadReduceRange,霰弹枪升级 - 增加50%霰弹枪扇形区间，减少射程,Auto,Init,初始化
+ShootGunAddSpreadReduceRange,霰弹枪升级 - 增加50%霰弹枪扇形区间，减少射程,Auto,Clear,清除
+ShootGunAddRangeReduceSpread,霰弹枪升级 - 增加50%霰弹枪射程，减少扇形大小,Auto,Init,初始化
+ShootGunAddRangeReduceSpread,霰弹枪升级 - 增加50%霰弹枪射程，减少扇形大小,Auto,Clear,清除
+ShootGunShootWeakDouble,霰弹枪升级 - 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低,Auto,Init,初始化
+ShootGunShootWeakDouble,霰弹枪升级 - 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低,Auto,Clear,清除
+ShootGunChangeShootWay,霰弹枪升级 - 急速：修改攻击方式,Auto,Init,初始化
+ShootGunChangeShootWay,霰弹枪升级 - 急速：修改攻击方式,Auto,Clear,清除
+RingIncreaseFireRange,圆环升级 - 射程增加33%,Auto,Init,初始化
+RingIncreaseFireRange,圆环升级 - 射程增加33%,Auto,Clear,清除
+RingAttackRobotMoveSlowly,圆环升级 - 对敌人造成减速效果,Auto,Init,初始化
+RingAttackRobotMoveSlowly,圆环升级 - 对敌人造成减速效果,Auto,Clear,清除
+RingAttackRobotBurning,圆环升级 - 对敌人造成燃烧效果,Auto,Init,初始化
+RingAttackRobotBurning,圆环升级 - 对敌人造成燃烧效果,Auto,Clear,清除
+RingAttackBurningArea,圆环升级 - 圆环造成伤害时生成一片燃烧区域,Auto,Init,初始化
+RingAttackBurningArea,圆环升级 - 圆环造成伤害时生成一片燃烧区域,Auto,Clear,清除
+RingAttackFreezingArea,圆环升级 - 圆环造成伤害时生成一片冰冻区域,Auto,Init,初始化
+RingAttackFreezingArea,圆环升级 - 圆环造成伤害时生成一片冰冻区域,Auto,Clear,清除
+ChainLightningIncreaseACatapult,闪电链升级 - 增加1次弹射,Auto,Init,初始化
+ChainLightningIncreaseACatapult,闪电链升级 - 增加1次弹射,Auto,Clear,清除
+ChainLightningNetCatapult,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1,Auto,Init,初始化
+ChainLightningNetCatapult,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1,Auto,Clear,清除
+ChainLightningLineCatapult,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2,Auto,Init,初始化
+ChainLightningLineCatapult,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2,Auto,Clear,清除
+ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,Auto,Init,初始化
+ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,Auto,Clear,清除
+ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Init,初始化
+ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Clear,清除

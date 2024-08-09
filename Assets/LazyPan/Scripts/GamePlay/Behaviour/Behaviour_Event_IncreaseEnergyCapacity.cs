@@ -2,8 +2,8 @@
 
 
 namespace LazyPan {
-    public class Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower : Behaviour {
-        public Behaviour_Event_IncreaseTheEnergyCapacityOfTheTower(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+    public class Behaviour_Event_IncreaseEnergyCapacity : Behaviour {
+        public Behaviour_Event_IncreaseEnergyCapacity(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
 
         }
 

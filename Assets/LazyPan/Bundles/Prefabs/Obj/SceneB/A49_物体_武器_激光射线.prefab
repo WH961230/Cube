@@ -515,6 +515,9 @@ MonoBehaviour:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
     String: Laserray
+  - Sign: Info
+    Description: "\u63CF\u8FF0"
+    String: "\u6FC0\u5149\u5C04\u7EBF"
   Vector3s: []
 --- !u!1 &8170376677880357285
 GameObject:

@@ -128,6 +128,8 @@ namespace LazyPan {
                 Cond.Instance.GetData(buffEntity, LabelStr.DIFFICULTY, out IntData difficultyData);
                 difficultyData.Int = config.Level;
 
+                buffEntity.Prefab.name += string.Concat("速度", config.MovementSpeedPercentage,
+                    "_伤害" + config.AttackPercentage + "_血量" + config.HealthPercentage);
                 if (_robotStrengthenBuffs.TryGetValue(config.Level, out List<Entity> entities)) {
                     entities.Add(buffEntity);
                 } else {

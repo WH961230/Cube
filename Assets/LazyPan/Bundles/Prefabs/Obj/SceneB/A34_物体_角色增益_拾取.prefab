@@ -136,24 +136,24 @@ MonoBehaviour:
   Vector3s: []
   Paths:
   - Sign: 01
-    BehaviourName: "\u8FC5\u6377 - \u52A0\u901F"
-    Description: "\u8FC5\u6377 - \u589E\u52A0\u79FB\u52A8\u901F\u5EA620%"
+    BehaviourName: "\u62FE\u53D6 - \u589E\u52A0\u62FE\u53D6\u8303\u56F4"
+    Description: "\u62FE\u53D6 - \u589E\u52A0\u62FE\u53D6\u534A\u5F8450%"
     NextSign: 02A|02B
   - Sign: 02A
-    BehaviourName: "\u8FC5\u6377 - \u79FB\u52A8\u56DE\u8840"
-    Description: "\u8FC5\u6377 - \u6301\u7EED\u79FB\u52A8\u65F6\uFF0C\u6BCF\u96941s\u56DE\u590D1%\u751F\u547D"
+    BehaviourName: "\u62FE\u53D6 - \u589E\u52A0\u6389\u843D\u6982\u7387"
+    Description: "\u62FE\u53D6 - \u6389\u843D\u6982\u7387\u589E\u52A050%"
     NextSign: 03A
   - Sign: 02B
-    BehaviourName: "\u8FC5\u6377 - \u79FB\u52A8\u52A0\u653B"
-    Description: "\u8FC5\u6377 - \u6301\u7EED\u79FB\u52A8\u65F6\uFF0C\u6BCF\u9694\u589E\u52A01%\u653B\u51FB\u529B\uFF0C\u6700\u9AD820%\uFF0C\u505C\u6B62\u79FB\u52A8\u65F6\u6E05\u7A7A"
+    BehaviourName: "\u62FE\u53D6 - \u589E\u52A0\u62FE\u53D6\u901F\u5EA6"
+    Description: "\u62FE\u53D6 - \u62FE\u53D6\u901F\u5EA6\u589E\u52A050%"
     NextSign: 03B
   - Sign: 03A
-    BehaviourName: "\u8FC5\u6377 - \u56DE\u590D\u91CF\u7FFB\u500D"
-    Description: "\u8FC5\u6377 - \u56DE\u590D\u91CF\u7FFB\u500D"
+    BehaviourName: "\u62FE\u53D6 - \u83B7\u5F97\u62FE\u53D6\u6CBB\u7597"
+    Description: "\u62FE\u53D6 - \u62FE\u53D6\u6CBB\u75971%\u751F\u547D"
     NextSign: 
   - Sign: 03B
-    BehaviourName: "\u8FC5\u6377 - \u589E\u52A0\u4E0A\u9650"
-    Description: "\u8FC5\u6377 - \u4E0A\u9650\u589E\u52A020%"
+    BehaviourName: "\u62FE\u53D6 - \u62FE\u53D6\u65F6\u589E\u52A0\u9650\u65F6\u53EF\u53E0\u52A0\u79FB\u901F"
+    Description: "\u62FE\u53D6 - \u62FE\u53D6\u65F6\u589E\u52A01%\u79FB\u901F\uFF0C\u6301\u7EED3s\uFF0C\u53EF\u53E0\u52A0"
     NextSign: 
 --- !u!1 &8090360991350506415
 GameObject:

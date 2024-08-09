@@ -142,7 +142,7 @@ MonoBehaviour:
     Description: "\u6CE2\u6570Buff"
     WaveInstanceDefaultList:
     - InstanceNumber: 5
-      InstanceRobotSign: Obj_Robot_Rapidly
+      InstanceRobotSign: "A18_\u7269\u4F53_\u673A\u5668\u4EBA_\u6025\u901F"
       InstanceDelayTime: 2
     WaveInstanceList: []
 --- !u!1 &8090360991350506415

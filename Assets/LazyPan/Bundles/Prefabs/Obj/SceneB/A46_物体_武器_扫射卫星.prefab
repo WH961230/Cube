@@ -5675,6 +5675,9 @@ MonoBehaviour:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
     String: Strafesatellite
+  - Sign: Info
+    Description: "\u63CF\u8FF0"
+    String: "\u626B\u5C04\u536B\u661F"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

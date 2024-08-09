@@ -476,7 +476,7 @@ MonoBehaviour:
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
-    String: Orbitingball
+    String: "\u73AF\u7ED5\u7403"
   Vector3s: []
 --- !u!1 &7998865933611097595
 GameObject:

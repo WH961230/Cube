@@ -270,7 +270,10 @@ MonoBehaviour:
   - Sign: FireRateInterval
     Description: "\u5C04\u51FB\u901F\u5EA6\u65F6\u95F4\u95F4\u9694"
     Float: 1
-  Strings: []
+  Strings:
+  - Sign: Info
+    Description: "\u63CF\u8FF0"
+    String: "\u95EA\u7535\u94FE"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

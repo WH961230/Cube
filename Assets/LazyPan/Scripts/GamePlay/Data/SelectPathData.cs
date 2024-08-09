@@ -5,7 +5,6 @@ namespace LazyPan {
     public class SelectPathData : Data {
         public List<PathData> Paths = new List<PathData>();
         public override bool Get<T>(string sign, out T t) {
-            base.Get(sign, out t);
             if (typeof(T) == typeof(PathData)) {
                 foreach (PathData data in Paths) {
                     if (data.Sign == sign) {
@@ -15,8 +14,7 @@ namespace LazyPan {
                 }
             }
 
-            t = default;
-            return false;
+            return base.Get(sign, out t);
         }
     }
 

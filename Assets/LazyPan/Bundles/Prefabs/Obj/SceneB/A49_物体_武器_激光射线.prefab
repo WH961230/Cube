@@ -490,7 +490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools: []
+  Bools:
+  - Sign: Used
+    Description: "\u662F\u5426\u5DF2\u4F7F\u7528"
+    Bool: 0
   Ints:
   - Sign: Level
     Description: "\u7B49\u7EA7"

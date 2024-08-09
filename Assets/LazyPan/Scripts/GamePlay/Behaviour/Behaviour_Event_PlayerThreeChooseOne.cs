@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -60,7 +61,7 @@ namespace LazyPan {
                 if (buffEntity.ObjConfig.Type == "属性增益") {
                     //无限次数直接加
                     retEntities.Add(buffEntity);
-                }else if(buffEntity.ObjConfig.Type == "角色一次性增益") {
+                }else if (buffEntity.ObjConfig.Type == "角色一次性增益") {
                     //使用完后就无法再加
                     if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                         if (!usedBoolData.Bool) {
@@ -68,9 +69,11 @@ namespace LazyPan {
                         }
                     }
                 } else if (buffEntity.ObjConfig.Type == "角色增益" || buffEntity.ObjConfig.Type == "武器增益") {
+                    StringData currentPathData;
                     //当前路径不为空
-                    if (Cond.Instance.GetData(buffEntity, LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH),
-                            out StringData currentPathData)) {
+                    if (Cond.Instance.GetData<SelectPathData, StringData>(buffEntity,
+                            LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH),
+                            out currentPathData)) {
                         if (!string.IsNullOrEmpty(currentPathData.String)) {
                             retEntities.Add(buffEntity);
                         }
@@ -111,6 +114,7 @@ namespace LazyPan {
             //打开UI
             Flo.Instance.GetFlow(out Flow_SceneB flow);
             Comp ui = flow.GetUI();
+            string debug = "开始玩家选择三选一：";
             
             //显示三选一界面
             Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
@@ -137,26 +141,47 @@ namespace LazyPan {
                         // Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
                         // image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
 
-                        //注册说明
-                        TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
-                        Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
-                        info.text = infoData.String;
-
                         //注册按钮事件
                         Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
                         ButtonRegister.RemoveAllListener(button);
                         if (buffEntity.ObjConfig.Type == "属性增益") {
+                            //注册说明
+                            TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                            Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                            info.text = infoData.String;
+                            debug += infoData.String + "\n";
+                            //按钮
                             ButtonRegister.AddListener(button, RegisterUnLimitBehaviour, buffEntity);
                         } else if (buffEntity.ObjConfig.Type == "角色一次性增益") {
+                            //注册说明
+                            TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                            Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                            info.text = infoData.String;
+                            debug += infoData.String + "\n";
+                            //按钮
                             ButtonRegister.AddListener(button, RegisterOnceBehaviour, buffEntity);
                         } else if (buffEntity.ObjConfig.Type == "角色增益" || buffEntity.ObjConfig.Type == "武器增益") {
-                            ButtonRegister.AddListener(button, RegisterPathBehaviour, buffEntity);
+                            int randIndex = Random.Range(0, 2);
+                            if (GetBuffPathData(randIndex, buffEntity, out PathData pathData)) {
+                                TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                                info.text = pathData.Description;
+                                debug += pathData.Description + "\n";
+                            }
+                            //按钮
+                            ButtonRegister.AddListener(button, RegisterPathBehaviour, randIndex, buffEntity);
                         } else if (buffEntity.ObjConfig.Type == "武器") {
+                            //注册说明
+                            TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                            Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
+                            info.text = infoData.String;
+                            debug += infoData.String + "\n";
+                            //按钮
                             ButtonRegister.AddListener(button, RegisterAssembledWeapon, buffEntity);
                         }
                     }
                 }
                 InputRegister.Instance.Load(InputRegister.ESCAPE, InputCloseUI);
+                Debug.Log(debug);
             }
         }
 
@@ -195,13 +220,30 @@ namespace LazyPan {
             }
         }
 
-        private void RegisterPathBehaviour(Entity buffEntity) {
+        private bool GetBuffPathData(int randIndex, Entity buffEntity, out PathData pathData) {
+            //让目标单位注册该方法
+            if (Cond.Instance.GetData<SelectPathData, StringData>(buffEntity,
+                    LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH), out StringData currentPathData)) {
+                string randPath = "";
+                if (currentPathData.String.Contains("|")) {
+                    string[] pathSigns = currentPathData.String.Split("|");
+                    randPath = pathSigns[randIndex];
+                } else {
+                    randPath = currentPathData.String;
+                }
+
+                return Cond.Instance.GetData<SelectPathData, PathData>(buffEntity, randPath, out pathData);
+            }
+
+            pathData = default;
+            return false;
+        }
+
+        private void RegisterPathBehaviour(int randIndex, Entity buffEntity) {
             //让目标单位注册该方法
             if (Cond.Instance.GetData<SelectPathData, StringData> (buffEntity,
                     LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH), out StringData currentPathData)) {
-                string[] pathSigns = currentPathData.String.Split("|");
-                string randPath = pathSigns[Random.Range(0, pathSigns.Length)];
-                if (Cond.Instance.GetData<SelectPathData, PathData> (buffEntity, randPath, out PathData targetPathData)) {
+                if (GetBuffPathData(randIndex, buffEntity, out PathData targetPathData)) {
                     BehaviourRegister.RegisterBehaviour(Cond.Instance.GetPlayerEntity().ID, targetPathData.BehaviourName, out Behaviour outBehaviour);
                     currentPathData.String = targetPathData.NextSign;
                     ClosePlayerThreeChooseOneUI();

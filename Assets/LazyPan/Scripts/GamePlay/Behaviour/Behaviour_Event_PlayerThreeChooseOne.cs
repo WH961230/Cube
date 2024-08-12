@@ -81,6 +81,7 @@ namespace LazyPan {
                 } else if (buffEntity.ObjConfig.Type == "武器") {
                     //是否装配满4把武器 且 未使用
                     if (weaponManagerBehaviour.GetAssembledWeaponCount() < 4) {
+                        //必须武器增益是已装备武器的
                         if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                             if (!usedBoolData.Bool) {
                                 retEntities.Add(buffEntity);

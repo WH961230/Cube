@@ -133,6 +133,9 @@ MonoBehaviour:
   - Sign: CurrentPath
     Description: "\u5F53\u524D\u8DEF\u5F84"
     String: 01
+  - Sign: TargetSIgn
+    Description: "\u76EE\u6807\u6807\u8BC6"
+    String: "A47_\u7269\u4F53_\u6B66\u5668_\u5706\u73AF"
   Vector3s: []
   Paths:
   - Sign: 01

@@ -68,8 +68,8 @@ namespace LazyPan {
             Debug.Log("默认武器:" + prepareAssembledWeapon.ObjConfig.Name);
         }
 
-        public int GetAssembledWeaponCount() {
-            return _assembledWeapons.Count;
+        public List<Entity> GetAssembledWeapons() {
+            return _assembledWeapons;
         }
 
         private void RefreshWeapons() {

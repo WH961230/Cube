@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +9,7 @@ namespace LazyPan {
     public class Behaviour_Event_PlayerThreeChooseOne : Behaviour {
         private Behaviour_Auto_TowerWeaponManagement weaponManagerBehaviour;
         private List<Entity> _buffs = new List<Entity>();
+        List<Entity> retEntities = new List<Entity>();
         public Behaviour_Event_PlayerThreeChooseOne(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             if (EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity)) {
                 if (BehaviourRegister.GetBehaviour(towerEntity.ID, out weaponManagerBehaviour)) {
@@ -53,35 +53,54 @@ namespace LazyPan {
         }
 
         //获取类型集合的所有实体
-        private List<Entity> GetBuff(string[] types) {
-            List<Entity> retEntities = new List<Entity>();
+        private List<Entity> GetBuff() {
+            retEntities.Clear();
             //遍历所有的buff
             foreach (var buffEntity in _buffs) {
                 //获取当前的类型
                 if (buffEntity.ObjConfig.Type == "属性增益") {
                     //无限次数直接加
                     retEntities.Add(buffEntity);
-                }else if (buffEntity.ObjConfig.Type == "角色一次性增益") {
+                } else if (buffEntity.ObjConfig.Type == "角色一次性增益") {
                     //使用完后就无法再加
                     if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                         if (!usedBoolData.Bool) {
                             retEntities.Add(buffEntity);
                         }
                     }
-                } else if (buffEntity.ObjConfig.Type == "角色增益" || buffEntity.ObjConfig.Type == "武器增益") {
-                    StringData currentPathData;
+                } else if (buffEntity.ObjConfig.Type == "角色增益") {
                     //当前路径不为空
                     if (Cond.Instance.GetData<SelectPathData, StringData>(buffEntity,
                             LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH),
-                            out currentPathData)) {
+                            out StringData currentPathData)) {
                         if (!string.IsNullOrEmpty(currentPathData.String)) {
                             retEntities.Add(buffEntity);
                         }
                     }
+                } else if (buffEntity.ObjConfig.Type == "武器增益") {
+                    List<Entity> assembledWeapons = weaponManagerBehaviour.GetAssembledWeapons();
+                    //当前目标武器玩家已装配
+                    Cond.Instance.GetData<SelectPathData, StringData> (buffEntity, LabelStr.Assemble(LabelStr.TARGET, LabelStr.SIGN),
+                        out StringData weaponSign);
+                    //必须武器增益是已装备武器的
+                    foreach (var tmpWeapon in assembledWeapons) {
+                        if (tmpWeapon.Sign == weaponSign.String) {
+                            //当前路径不为空
+                            if (Cond.Instance.GetData<SelectPathData, StringData>(buffEntity,
+                                    LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH),
+                                    out StringData currentPathData)) {
+                                if (!string.IsNullOrEmpty(currentPathData.String)) {
+                                    retEntities.Add(buffEntity);
+                                }
+                            }
+                            break;
+                        }
+                    }
                 } else if (buffEntity.ObjConfig.Type == "武器") {
+                    List<Entity> assembledWeapons = weaponManagerBehaviour.GetAssembledWeapons();
                     //是否装配满4把武器 且 未使用
-                    if (weaponManagerBehaviour.GetAssembledWeaponCount() < 4) {
-                        //必须武器增益是已装备武器的
+                    if (assembledWeapons.Count < 4) {
+                        //未被使用的 buff
                         if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
                             if (!usedBoolData.Bool) {
                                 retEntities.Add(buffEntity);
@@ -116,12 +135,11 @@ namespace LazyPan {
             Flo.Instance.GetFlow(out Flow_SceneB flow);
             Comp ui = flow.GetUI();
             string debug = "开始玩家选择三选一：";
-            
+
             //显示三选一界面
             Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
             if (!choose.gameObject.activeSelf) {
-
-                List<Entity> playBuffEntity = GetBuff(new[]{"武器增益", "角色增益", "角色一次性增益", "属性增益", "武器"});
+                List<Entity> playBuffEntity = GetBuff();
                 if (playBuffEntity.Count == 0) {
                     return;
                 }
@@ -150,7 +168,7 @@ namespace LazyPan {
                             TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
                             Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
                             info.text = infoData.String;
-                            debug += infoData.String + "\n";
+                            debug += buffEntity.ObjConfig.Type + " - " + infoData.String + "\n";
                             //按钮
                             ButtonRegister.AddListener(button, RegisterUnLimitBehaviour, buffEntity);
                         } else if (buffEntity.ObjConfig.Type == "角色一次性增益") {
@@ -158,24 +176,48 @@ namespace LazyPan {
                             TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
                             Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
                             info.text = infoData.String;
-                            debug += infoData.String + "\n";
+                            debug += buffEntity.ObjConfig.Type + " - " + infoData.String + "\n";
                             //按钮
                             ButtonRegister.AddListener(button, RegisterOnceBehaviour, buffEntity);
-                        } else if (buffEntity.ObjConfig.Type == "角色增益" || buffEntity.ObjConfig.Type == "武器增益") {
+                        } else if (buffEntity.ObjConfig.Type == "角色增益") {
                             int randIndex = Random.Range(0, 2);
                             if (GetBuffPathData(randIndex, buffEntity, out PathData pathData)) {
                                 TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
                                 info.text = pathData.Description;
-                                debug += pathData.Description + "\n";
+                                debug += buffEntity.ObjConfig.Type + " - " + pathData.Description + "\n";
                             }
                             //按钮
-                            ButtonRegister.AddListener(button, RegisterPathBehaviour, randIndex, buffEntity);
+                            ButtonRegister.AddListener(button, RegisterPathBehaviour, randIndex, buffEntity, Cond.Instance.GetPlayerEntity().ID);
+                        } else if (buffEntity.ObjConfig.Type == "武器增益") {
+                            int randIndex = Random.Range(0, 2);//随机
+                            int entityID = -1;//装配实体
+                            if (GetBuffPathData(randIndex, buffEntity, out PathData pathData)) {//获取buff路径数据
+                                TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
+                                info.text = pathData.Description;
+                                debug += buffEntity.ObjConfig.Type + " - " + pathData.Description + "\n";
+
+                                List<Entity> assembledWeapons = weaponManagerBehaviour.GetAssembledWeapons();
+                                //当前目标武器玩家已装配
+                                Cond.Instance.GetData<SelectPathData, StringData> (buffEntity, LabelStr.Assemble(LabelStr.TARGET, LabelStr.SIGN),
+                                    out StringData weaponSign);
+                                //必须武器增益是已装备武器的
+                                foreach (var tmpWeapon in assembledWeapons) {
+                                    if (tmpWeapon.Sign == weaponSign.String) {
+                                        //当前路径不为空
+                                        entityID = tmpWeapon.ID;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            //按钮
+                            ButtonRegister.AddListener(button, RegisterPathBehaviour, randIndex, buffEntity, entityID);
                         } else if (buffEntity.ObjConfig.Type == "武器") {
                             //注册说明
                             TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);
                             Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData infoData);
                             info.text = infoData.String;
-                            debug += infoData.String + "\n";
+                            debug += buffEntity.ObjConfig.Type + " - " + infoData.String + "\n";
                             //按钮
                             ButtonRegister.AddListener(button, RegisterAssembledWeapon, buffEntity);
                         }
@@ -240,12 +282,16 @@ namespace LazyPan {
             return false;
         }
 
-        private void RegisterPathBehaviour(int randIndex, Entity buffEntity) {
+        private void RegisterPathBehaviour(int randIndex, Entity buffEntity, int targetID) {
+            if (targetID == -1) {
+                Debug.LogError("目标Buff错误 id = " + buffEntity.ID);
+            }
+
             //让目标单位注册该方法
             if (Cond.Instance.GetData<SelectPathData, StringData> (buffEntity,
                     LabelStr.Assemble(LabelStr.CURRENT, LabelStr.PATH), out StringData currentPathData)) {
                 if (GetBuffPathData(randIndex, buffEntity, out PathData targetPathData)) {
-                    BehaviourRegister.RegisterBehaviour(Cond.Instance.GetPlayerEntity().ID, targetPathData.BehaviourName, out Behaviour outBehaviour);
+                    BehaviourRegister.RegisterBehaviour(targetID, targetPathData.BehaviourName, out Behaviour outBehaviour);
                     currentPathData.String = targetPathData.NextSign;
                     ClosePlayerThreeChooseOneUI();
                 }

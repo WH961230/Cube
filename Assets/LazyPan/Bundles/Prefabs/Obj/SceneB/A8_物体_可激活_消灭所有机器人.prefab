@@ -691,10 +691,10 @@ MonoBehaviour:
     Float: 100
   - Sign: EnergyChargeSpeed
     Description: "\u80FD\u91CF\u6FC0\u6D3B\u901F\u5EA6"
-    Float: 25
+    Float: 100
   - Sign: EnergyDownSpeed
     Description: "\u80FD\u91CF\u4E0B\u964D\u901F\u5EA6"
-    Float: 20
+    Float: 5
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

@@ -58,7 +58,7 @@ namespace LazyPan {
                 _energyData.Float += _energyChargeSpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
                     Debug.Log("充能恢复所有血量可激活物体完成");
-                    MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, 999);
+                    MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, 999f);
                     Obj.Instance.UnLoadEntity(entity);
                     return;
                 }

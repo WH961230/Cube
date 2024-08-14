@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -58,7 +59,12 @@ namespace LazyPan {
                 _energyData.Float += _energyChargeSpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
                     Debug.Log("充能所有机器人造成大量伤害可激活物体完成");
-                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, 999);
+                    if (EntityRegister.TryGetEntitiesByType("机器人", out List<Entity> robotEntities)) {
+                        foreach (var tmpRobot in robotEntities) {
+                            MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, tmpRobot.ID, 999f);
+                        }
+                    }
+
                     Obj.Instance.UnLoadEntity(entity);
                     return;
                 }

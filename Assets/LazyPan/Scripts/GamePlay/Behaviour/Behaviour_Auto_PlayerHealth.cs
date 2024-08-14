@@ -52,12 +52,19 @@ namespace LazyPan {
 
         private void MsgBeRecovered(float recoverValue) {
             BeRecoveredHealth(recoverValue);
+            Debug.Log("恢复血量:" + recoverValue + " 当前血量:" + _healthData.Float);
         }
 
         private void BeRecoveredHealth(float recoverValue) {
+            if (_healthData.Float == _maxHealthData.Float || recoverValue == 0) {
+                return;
+            }
+
             if (_healthData.Float < _maxHealthData.Float) {
                 _healthData.Float += recoverValue;
-            } else {
+            }
+
+            if (_healthData.Float > _maxHealthData.Float) {
                 _healthData.Float = _maxHealthData.Float;
             }
         }
@@ -76,6 +83,8 @@ namespace LazyPan {
                     _healthData.Float = 0;
                     Next();
                 }
+                
+                Debug.Log("玩家受到伤害:" + damageValue + " 当前血量:" + _healthData.Float);
             }
         }
 

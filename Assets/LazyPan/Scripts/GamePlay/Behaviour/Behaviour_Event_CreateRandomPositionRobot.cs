@@ -156,7 +156,7 @@ namespace LazyPan {
         private void RegisterSetUpBehaviour(Entity robot) {
 	        //注册事件
 	        foreach (var behaviourData in _setUpBehaviours) {
-		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourData.BehaviourSign, out Behaviour outBehaviour);
+		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourData.BehaviourName, out Behaviour outBehaviour);
 		        outBehaviour.SetBehaviourData(behaviourData.BehaviourData);
 		        outBehaviour.DelayedExecute();
 	        }
@@ -168,10 +168,10 @@ namespace LazyPan {
 	        }
         }
 
-        public void RemoveSetUpBehaviourSign(string behaviourSign) {
+        public void RemoveSetUpBehaviourSign(string behaviourName) {
 	        for (int i = _setUpBehaviours.Count - 1; i > 0; i++) {
 		        SetUpBehaviourData data = _setUpBehaviours[i];
-		        if (data.BehaviourSign == behaviourSign) {
+		        if (data.BehaviourName == behaviourName) {
 			        _setUpBehaviours.Remove(data);
 		        }
 	        }
@@ -209,7 +209,7 @@ namespace LazyPan {
     }
 
     public class SetUpBehaviourData {
-	    public string BehaviourSign;
+	    public string BehaviourName;
 	    public Data BehaviourData;
     }
 }

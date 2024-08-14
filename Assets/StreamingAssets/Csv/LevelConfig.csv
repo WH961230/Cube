@@ -1,8 +1,8 @@
 ﻿Sign,Wave,LevelType,DifficultyLowerLimit,DifficultyUpperLimit
 string,int,string,int,int
 标识,波数,关卡类型,难度下限,难度上限
-1,1,波数增益,1,2
-2,2,波数增益,1,2
+1,1,机器人增益,1,2
+2,2,机器人增益,1,2
 3,3,波数增益,1,2
 4,4,机器人增益,1,1
 5,5,波数增益,1,3

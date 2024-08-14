@@ -130,13 +130,17 @@ namespace LazyPan {
 
                 buffEntity.Prefab.name += string.Concat("速度", config.MovementSpeedPercentage,
                     "_伤害" + config.AttackPercentage + "_血量" + config.HealthPercentage);
+                string debug = "机器人加强初始化";
                 if (_robotStrengthenBuffs.TryGetValue(config.Level, out List<Entity> entities)) {
                     entities.Add(buffEntity);
+                    debug += infoData.String;
                 } else {
                     List<Entity> buffs = new List<Entity>();
                     buffs.Add(buffEntity);
                     _robotStrengthenBuffs.Add(config.Level, buffs);
                 }
+                
+                Debug.Log(debug);
             }
         }
 
@@ -269,32 +273,29 @@ namespace LazyPan {
 
         //注册强化行为
         private void RegisterStrengthenBehaviour(Entity buffEntity) {
-            if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-                if (EntityRegister.TryGetEntityBySign("A13_物体_事件_机器人创建器",
-                        out Entity createRobotEntity)) {
-                    if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
-                            out Behaviour_Event_CreateRandomPositionRobot beh)) {
-                        Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData info);
+            //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
+            if (EntityRegister.TryGetEntityBySign("A13_物体_事件_机器人创建器",
+                    out Entity createRobotEntity)) {
+                if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
+                        out Behaviour_Event_CreateRandomPositionRobot beh)) {
+                    Cond.Instance.GetData(buffEntity, LabelStr.INFO, out StringData info);
 
-                        Debug.Log("增加所有机器人能力:" + info);
-                        string sign = "Behaviour_Auto_RobotStrengthen";
-                        beh.RemoveSetUpBehaviourSign(sign);
-                        beh.AddSetUpBehaviourSign(new SetUpBehaviourData() {
-                            BehaviourSign = sign,
-                            BehaviourData = buffEntity.Data
-                        });
-                        usedBoolData.Bool = true;
-                        CloseRobotThreeChooseOneUI();
-                        MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
+                    Debug.Log("增加所有机器人能力:" + info);
+                    string name = "机器人强化";
+                    beh.RemoveSetUpBehaviourSign(name);
+                    beh.AddSetUpBehaviourSign(new SetUpBehaviourData() {
+                        BehaviourName = name,
+                        BehaviourData = buffEntity.Data
+                    });
+                    CloseRobotThreeChooseOneUI();
+                    MessageRegister.Instance.Dis(MessageCode.MsgStartLevel);
 
-                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL),
-                            out IntData robotLevel);
+                    Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ROBOT, LabelStr.LEVEL),
+                        out IntData robotLevel);
 
-                        robotLevel.Int++;
+                    robotLevel.Int++;
 
-                        Debug.Log("机器人升级后等级:" + robotLevel.Int);
-                    }
+                    Debug.Log("机器人升级后等级:" + robotLevel.Int);
                 }
             }
         }

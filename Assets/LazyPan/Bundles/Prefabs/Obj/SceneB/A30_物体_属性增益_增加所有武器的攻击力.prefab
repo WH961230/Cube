@@ -130,8 +130,8 @@ MonoBehaviour:
   Ints: []
   Floats:
   - Sign: AttackRatio
-    Description: "\u653B\u51FB\u529B\u63D0\u5347\u7CFB\u6570"
-    Float: 1.2
+    Description: "\u589E\u52A0\u7684\u653B\u51FB\u529B\u7CFB\u6570"
+    Float: 0.1
   Strings:
   - Sign: TargetType
     Description: "\u76EE\u6807\u5B9E\u4F53\u7C7B\u578B\u6807\u8BC6"

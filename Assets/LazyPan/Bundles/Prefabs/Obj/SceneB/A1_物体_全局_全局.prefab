@@ -146,7 +146,13 @@ MonoBehaviour:
   - Sign: Difficulty
     Description: "\u96BE\u5EA6"
     Int: 1
-  Floats: []
+  Floats:
+  - Sign: AttackRatio
+    Description: "\u653B\u51FB\u529B\u7CFB\u6570"
+    Float: 1
+  - Sign: AttackSpeedRatio
+    Description: "\u653B\u51FB\u901F\u5EA6\u7CFB\u6570"
+    Float: 1
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

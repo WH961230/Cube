@@ -229,18 +229,11 @@ namespace LazyPan {
         }
 
         private void RegisterUnLimitBehaviour(Entity buffEntity) {
-            if (Cond.Instance.GetData(buffEntity, LabelStr.Assemble(LabelStr.TARGET, LabelStr.TYPE), out StringData targetTypeStringData)) {
-                if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
-                    //所有类型的实体都注册
-                    if (EntityRegister.TryGetEntitiesByType(targetTypeStringData.String, out List<Entity> entities)) {
-                        foreach (var tmpEntity in entities) {
-                            //先移除方法
-                            BehaviourRegister.UnRegisterBehaviour(tmpEntity.ID, behaviourSignStringData.String);
-                            BehaviourRegister.RegisterBehaviour(tmpEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
-                        }
-                        ClosePlayerThreeChooseOneUI();
-                    }
-                }
+            if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData behaviourSignStringData)) {
+                BehaviourRegister.UnRegisterBehaviour(buffEntity.ID, behaviourSignStringData.String);
+                BehaviourRegister.RegisterBehaviour(buffEntity.ID, behaviourSignStringData.String, out Behaviour outBehaviour);
+                outBehaviour.DelayedExecute();
+                ClosePlayerThreeChooseOneUI();
             }
         }
 

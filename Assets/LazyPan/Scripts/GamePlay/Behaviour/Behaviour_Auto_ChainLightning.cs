@@ -10,6 +10,9 @@ namespace LazyPan {
         private FloatData _attackDamage;//伤害基础值
         private FloatData _attackAttenuationRatio;//伤害递减系数
         private FloatData _attackInterval;//攻击间隔
+        
+        private FloatData _globalAttackSpeedRatio;//全局射击速度
+        private FloatData _globalAttackRatio;//全局射击伤害
 
         private FloatData _towerEnergy;
 
@@ -25,8 +28,15 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RATE, LabelStr.INTERVAL), out _fireRateInterval);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
+            //全局攻击伤害系数
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ATTACK, LabelStr.RATIO), out _globalAttackRatio);
+            //全局射击速率
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ATTACK, LabelStr.SPEED, LabelStr.RATIO), out _globalAttackSpeedRatio);
+
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+
+            attackIntervalDeploy = _fireRateInterval.Float * (1 / _globalAttackSpeedRatio.Float);
         }
 
         public override void DelayedExecute() {
@@ -45,7 +55,7 @@ namespace LazyPan {
                 attackIntervalDeploy -= Time.deltaTime;
             } else {
                 OnAttack();
-                attackIntervalDeploy = _fireRateInterval.Float;
+                attackIntervalDeploy = _fireRateInterval.Float * (1 / _globalAttackSpeedRatio.Float);;
             }
         }
 

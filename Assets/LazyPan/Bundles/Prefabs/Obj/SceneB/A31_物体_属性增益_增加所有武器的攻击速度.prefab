@@ -129,9 +129,9 @@ MonoBehaviour:
   Bools: []
   Ints: []
   Floats:
-  - Sign: AttackRateRatio
-    Description: "\u653B\u51FB\u901F\u5EA6\u7CFB\u6570 \u653B\u51FB\u95F4\u9694\u65F6\u95F4\u4E58\u4EE5\u8FD9\u4E2A\u7CFB\u6570"
-    Float: 0.8
+  - Sign: AttackSpeedRatio
+    Description: "\u589E\u52A0\u7684\u653B\u51FB\u901F\u5EA6\u7CFB\u6570"
+    Float: 0.1
   Strings:
   - Sign: TargetType
     Description: "\u76EE\u6807\u5B9E\u4F53\u7C7B\u578B\u6807\u8BC6"

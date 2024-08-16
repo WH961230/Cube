@@ -13,14 +13,16 @@ namespace LazyPan {
         private Transform _bulletFoot;//子弹根节点
         private Transform _towerFoot;//塔
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
+        private FloatData _globalAttackSpeedRatio;//全局射击速度
         private FloatData _fireDamage;//射击伤害
+        private FloatData _globalAttackRatio;//全局射击伤害
         private FloatData _fireRange;//射击范围
         private FloatData _towerEnergy;//塔能量
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
         private GameObject bulletTemplate;
         private LineRenderer _fireRangeLineRenderer;//范围图片
-
+        
         public Behaviour_Auto_SubmachineGun(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             //冲锋枪根源
             _foot = Cond.Instance.Get<Transform>(entity, LabelStr.FOOT);
@@ -35,6 +37,10 @@ namespace LazyPan {
             //获取塔 跟随塔的位置
             EntityRegister.TryGetRandEntityByType("Tower", out Entity _tower);
             _towerFoot = Cond.Instance.Get<Transform>(_tower, LabelStr.FOOT);
+            //全局攻击伤害系数
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ATTACK, LabelStr.RATIO), out _globalAttackRatio);
+            //全局射击速率
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ATTACK, LabelStr.SPEED, LabelStr.RATIO), out _globalAttackSpeedRatio);
             //获取射击速率
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RATE, LabelStr.INTERVAL), out _fireRateInterval);
             //获取射击伤害
@@ -49,11 +55,11 @@ namespace LazyPan {
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
-            
-            fireRateIntervalDeploy = _fireRateInterval.Float;
+
+            fireRateIntervalDeploy = _fireRateInterval.Float * (1 / _globalAttackSpeedRatio.Float);
             _bullets.Clear();
         }
-        
+
         public override void DelayedExecute() {
             
         }
@@ -93,8 +99,7 @@ namespace LazyPan {
         }
 
         private void GetWithinDistanceEntity() {
-            if (EntityRegister.TryGetEntitiesWithinDistance("机器人", _foot.position,
-                    _fireRange.Float, out List<Entity> entities)) {
+            if (EntityRegister.TryGetEntitiesWithinDistance("机器人", _foot.position, _fireRange.Float, out List<Entity> entities)) {
                 _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
             } else {
                 _targetInRangeRobotEntity = null;
@@ -106,7 +111,7 @@ namespace LazyPan {
                 if (fireRateIntervalDeploy > 0) {
                     fireRateIntervalDeploy -= Time.deltaTime;
                 } else {
-                    fireRateIntervalDeploy = _fireRateInterval.Float;
+                    fireRateIntervalDeploy = _fireRateInterval.Float * (1 / _globalAttackSpeedRatio.Float);
 
                     GameObject instanceBullet = FireParticleSystemBullet();
                     _bullets.Add(instanceBullet);
@@ -144,7 +149,7 @@ namespace LazyPan {
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
-                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float * _globalAttackRatio.Float);
                     fxGo.SetActive(false);
                 }
             }

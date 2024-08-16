@@ -8,9 +8,11 @@ namespace LazyPan {
         }
 
         public override void DelayedExecute() {
-            Cond.Instance.GetData(base.entity, LabelStr.Assemble(Label.ENERGY, LabelStr.MAX), out FloatData _energyMaxData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, LabelStr.MAX), out FloatData _energyMaxData);
+            float energyBefore = _energyMaxData.Float;
             BehaviourData.Get(LabelStr.Assemble(LabelStr.INCREASE, Label.ENERGY, LabelStr.MAX), out FloatData _increaseEnergyMaxData);
             _energyMaxData.Float += _increaseEnergyMaxData.Float;
+            Debug.LogFormat("增加容量{0}: 之前{1} 之后{2}", _increaseEnergyMaxData.Float, energyBefore, _energyMaxData.Float);
         }
 
         public override void Clear() {

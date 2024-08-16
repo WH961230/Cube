@@ -70,6 +70,7 @@ public class LabelStr {
     public static string CURRENT = "Current";
     public static string PATH = "Path";
     public static string TYPE = "Type";
+    public static string ATTACK = "Attack";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

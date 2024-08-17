@@ -9,7 +9,9 @@ namespace LazyPan {
         private FloatData _energyMaxData;
         private FloatData _energySpeedData;
         private FloatData _energySpeedDownData;
+        private StringData _chargeSoundData;
         private Image _energyImage;
+        private GameObject soundGo;
 
         public Behaviour_Auto_TowerChargeEnergy(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flowSceneB);
@@ -19,8 +21,9 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, Label.SPEED), out _energySpeedData);
             Cond.Instance.GetData(entity,  LabelStr.Assemble(Label.ENERGY, LabelStr.DOWN, Label.SPEED), out _energySpeedDownData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY ,Label.ING), out _isChargingEnergyData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.CHARGE, LabelStr.SOUND), out _chargeSoundData);
 
-            _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
+                _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
 
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(ChargeIn);
@@ -39,6 +42,7 @@ namespace LazyPan {
                     _energyImage.gameObject.SetActive(true);
                     Cond.Instance.GetData(playerEntity, Label.ENERGY + Label.ING, out BoolData playerIsChargingEnergyData);
                     playerIsChargingEnergyData.Bool = true;
+                    soundGo = Sound.Instance.SoundPlay(_chargeSoundData.String, Vector3.zero, true, -1);
                 }
             }
         }
@@ -50,6 +54,7 @@ namespace LazyPan {
                     _isChargingEnergyData.Bool = false;
                     Cond.Instance.GetData(playerEntity, Label.ENERGY + Label.ING, out BoolData playerIsChargingEnergyData);
                     playerIsChargingEnergyData.Bool = false;
+                    Sound.Instance.SoundRecycle(soundGo);
                 }
             }
         }
@@ -59,6 +64,7 @@ namespace LazyPan {
                 _energyData.Float += _energySpeedData.Float * Time.deltaTime;
                 if (_energyData.Float > _energyMaxData.Float) {
                     _energyData.Float = _energyMaxData.Float;
+                    Sound.Instance.SoundRecycle(soundGo);
                 }
             } else {
                 _energyData.Float -= _energySpeedDownData.Float * Time.deltaTime;

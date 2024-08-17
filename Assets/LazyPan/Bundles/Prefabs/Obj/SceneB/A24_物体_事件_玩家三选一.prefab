@@ -113,6 +113,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +129,11 @@ MonoBehaviour:
   Bools: []
   Ints: []
   Floats: []
-  Strings: []
+  Strings:
+  - Sign: StartChooseSound
+    Description: "\u5F00\u59CB\u9009\u62E9\u97F3\u6548"
+    String: "\u73A9\u5BB6\u5347\u7EA7"
+  Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

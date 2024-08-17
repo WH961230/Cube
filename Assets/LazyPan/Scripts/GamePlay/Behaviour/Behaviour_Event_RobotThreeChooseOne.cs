@@ -10,11 +10,14 @@ namespace LazyPan {
     public class Behaviour_Event_RobotThreeChooseOne : Behaviour {
         private Flow_SceneB _flow;
         private Comp _ui;
+        private StringData _startChooseSound;
         private List<Entity> _parallelBuffs = new List<Entity>();
         private Dictionary<int, List<Entity>> _robotStrengthenBuffs = new Dictionary<int, List<Entity>>();
         public Behaviour_Event_RobotThreeChooseOne(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.START, LabelStr.CHOOSE, LabelStr.SOUND),
+                out _startChooseSound);
 
             InitWaveBuffs();
             InitRobotBuffs();
@@ -31,6 +34,7 @@ namespace LazyPan {
         //传入消息开始三选一
         private void MsgRobotThreeChooseOne() {
             ClockUtil.Instance.AlarmAfter(1, () => {
+                Sound.Instance.SoundPlay(_startChooseSound.String, Vector3.zero, false, 2);
                 OpenRobotThreeChooseOneUI();
             });
         }

@@ -10,12 +10,15 @@ namespace LazyPan {
         private FloatData _energyChargeSpeedData;
         private FloatData _energyDownSpeedData;
         private Image _energyImage;
+        private StringData _chargeSoundData;
+        private GameObject soundGo;
         public Behaviour_Trigger_ChargeActivationTemporaryDefenseTower(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Cond.Instance.GetData(entity, Label.ENERGY, out _energyData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, Label.MAX), out _energyMaxData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, LabelStr.CHARGE, Label.SPEED), out _energyChargeSpeedData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, LabelStr.DOWN, Label.SPEED), out _energyDownSpeedData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, Label.ING), out _isChargingEnergyData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.CHARGE, LabelStr.SOUND), out _chargeSoundData);
             
             _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
@@ -34,6 +37,7 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.gameObject.GetInstanceID(), out Entity playerEntity)) {
                 if (playerEntity.Type == "Player") {
                     StartCharge();
+                    soundGo = Sound.Instance.SoundPlay(_chargeSoundData.String, Vector3.zero, true, -1);
                 }
             }
         }
@@ -43,6 +47,7 @@ namespace LazyPan {
                     out Entity playerEntity)) {
                 if (playerEntity.Type == "Player") {
                     _isChargingEnergyData.Bool = false;
+                    Sound.Instance.SoundRecycle(soundGo);
                 }
             }
         }
@@ -57,6 +62,7 @@ namespace LazyPan {
             if (_isChargingEnergyData.Bool) {
                 _energyData.Float += _energyChargeSpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
+                    Sound.Instance.SoundRecycle(soundGo);
                     Debug.Log("可激活物体临时防御塔充能完成");
                     //创建临时防御塔自配武器
                     Obj.Instance.UnLoadEntity(entity);

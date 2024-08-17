@@ -71,6 +71,9 @@ public class LabelStr {
     public static string PATH = "Path";
     public static string TYPE = "Type";
     public static string ATTACK = "Attack";
+    public static string SOUND = "Sound";
+    public static string BE = "Be";
+    public static string HIT = "Hit";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

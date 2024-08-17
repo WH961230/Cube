@@ -18,6 +18,7 @@ namespace LazyPan {
         private FloatData _globalAttackRatio;//全局射击伤害
         private FloatData _fireRange;//射击范围
         private FloatData _towerEnergy;//塔能量
+        private StringData _shootSoundData;//射击音效
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
         private GameObject bulletTemplate;
@@ -52,6 +53,8 @@ namespace LazyPan {
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
+            //射击音效
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.SOUND), out _shootSoundData);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -118,6 +121,7 @@ namespace LazyPan {
                     Comp comp = instanceBullet.GetComponent<Comp>();
                     comp.OnParticleCollisionEvent.RemoveAllListeners();
                     comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
+                    Sound.Instance.SoundPlay(_shootSoundData.String, Vector3.zero, false, 2);
                 }
             }
         }

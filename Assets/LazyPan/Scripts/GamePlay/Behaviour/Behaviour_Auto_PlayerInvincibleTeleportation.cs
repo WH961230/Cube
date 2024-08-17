@@ -13,6 +13,7 @@ namespace LazyPan {
         private BoolData _invincibleData;
         private FloatData _teleportSpeedData;
         private FloatData _teleportAccelerationData;
+        private StringData _teleportSoundData;
         private Vector3Data _moveDirectionData;
 
         private CharacterController _characterController;
@@ -33,6 +34,8 @@ namespace LazyPan {
 
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, Label.SPEED), out _teleportSpeedData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, LabelStr.ACCELERATION), out _teleportAccelerationData);
+
+            Cond.Instance.GetData(entity, Label.Assemble(LabelStr.TELEPORT, LabelStr.SOUND), out _teleportSoundData);
         }
         
         public override void DelayedExecute() {
@@ -40,9 +43,12 @@ namespace LazyPan {
         }
 
         private void InputInvincibleTeleportation(InputAction.CallbackContext obj) {
-            if (!_teleportData.Bool) {
-                _teleportSpeed = _teleportSpeedData.Float;
-                _teleportAcceleration = _teleportAccelerationData.Float;
+            if (obj.started) {
+                if (!_teleportData.Bool) {
+                    _teleportSpeed = _teleportSpeedData.Float;
+                    _teleportAcceleration = _teleportAccelerationData.Float;
+                    Sound.Instance.SoundPlay(_teleportSoundData.String, Vector3.zero, false, 2);
+                }
             }
         }
 

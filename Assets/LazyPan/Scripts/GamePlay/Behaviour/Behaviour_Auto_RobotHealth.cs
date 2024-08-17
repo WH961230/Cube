@@ -10,6 +10,7 @@ namespace LazyPan {
         private FloatData _healthData;//血量
         private BoolData _chargyingEnergyData;//充能中
         private BoolData _invincibleData;
+        private StringData _beHitSound;
         private Image _healthImg;
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
@@ -20,6 +21,9 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out _maxHealthData);
             Cond.Instance.GetData(entity, LabelStr.HEALTH, out _healthData);
             _healthData.Float = _maxHealthData.Float;
+
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BE, LabelStr.HIT, LabelStr.SOUND),
+                out _beHitSound);
 
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -40,6 +44,7 @@ namespace LazyPan {
                 if (_healthData.Float != 0) {
                     if (_healthData.Float > 0) {
                         _healthData.Float -= damageValue;
+                        Sound.Instance.SoundPlay(_beHitSound.String, Vector3.zero, false, 2);
                     }
 
                     if (_healthData.Float <= 0) {

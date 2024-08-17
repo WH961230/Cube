@@ -133,9 +133,6 @@ MonoBehaviour:
     Description: "\u589E\u52A0\u7684\u653B\u51FB\u901F\u5EA6\u7CFB\u6570"
     Float: 0.1
   Strings:
-  - Sign: TargetType
-    Description: "\u76EE\u6807\u5B9E\u4F53\u7C7B\u578B\u6807\u8BC6"
-    String: "\u6B66\u5668"
   - Sign: Sign
     Description: "\u6CE8\u518C\u7684\u884C\u4E3A"
     String: "\u589E\u52A0\u6240\u6709\u6B66\u5668\u653B\u51FB\u901F\u7387"

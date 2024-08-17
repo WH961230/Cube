@@ -695,7 +695,10 @@ MonoBehaviour:
   - Sign: EnergyDownSpeed
     Description: "\u80FD\u91CF\u4E0B\u964D\u901F\u5EA6"
     Float: 5
-  Strings: []
+  Strings:
+  - Sign: ChargeSound
+    Description: "\u5145\u80FD\u97F3\u6548"
+    String: "\u5145\u80FD"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

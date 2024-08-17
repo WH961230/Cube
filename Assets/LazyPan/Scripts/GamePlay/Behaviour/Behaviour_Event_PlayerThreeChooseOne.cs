@@ -7,10 +7,13 @@ using UnityEngine.UI;
 
 namespace LazyPan {
     public class Behaviour_Event_PlayerThreeChooseOne : Behaviour {
+        private StringData _startChooseSound;
         private Behaviour_Auto_TowerWeaponManagement weaponManagerBehaviour;
         private List<Entity> _buffs = new List<Entity>();
         List<Entity> retEntities = new List<Entity>();
         public Behaviour_Event_PlayerThreeChooseOne(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.START, LabelStr.CHOOSE, LabelStr.SOUND),
+                out _startChooseSound);
             if (EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity)) {
                 if (BehaviourRegister.GetBehaviour(towerEntity.ID, out weaponManagerBehaviour)) {
                 }
@@ -127,6 +130,7 @@ namespace LazyPan {
             playerLevel.Int++;
             MessageRegister.Instance.Dis(MessageCode.MsgLevelUp);
             OpenPlayerThreeChooseOneUI();
+            Sound.Instance.SoundPlay(_startChooseSound.String, Vector3.zero, false, 2);
         }
 
         //打开角色三选一界面

@@ -57,6 +57,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2684f0403d053246a61ceaee66c0018
+    m_Address: Assets/LazyPan/Bundles/Sounds
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6f7717521dcea85419ede1df738f7afe, type: 2}
   m_SchemaSet:

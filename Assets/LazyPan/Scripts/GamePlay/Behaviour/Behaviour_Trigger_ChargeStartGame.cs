@@ -10,6 +10,8 @@ namespace LazyPan {
         private FloatData _energyMaxData;
         private FloatData _energySpeedData;
         private Image _energyImage;
+        private StringData _chargeSoundData;
+        private GameObject soundGo;
 
         public Behaviour_Trigger_ChargeStartGame(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flowSceneA);
@@ -18,6 +20,7 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.ENERGY + Label.MAX, out _energyMaxData);
             Cond.Instance.GetData(entity, Label.ENERGY + Label.SPEED, out _energySpeedData);
             Cond.Instance.GetData(entity, Label.ENERGY + Label.ING, out _isChargingEnergyData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.CHARGE, LabelStr.SOUND), out _chargeSoundData);
 
             _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
@@ -35,6 +38,7 @@ namespace LazyPan {
             if (_isChargingEnergyData.Bool) {
                 _energyData.Float += _energySpeedData.Float * Time.deltaTime;
                 if (_energyData.Float >= _energyMaxData.Float) {
+                    Sound.Instance.SoundRecycle(soundGo);
                     Next();
                     return;
                 }
@@ -57,6 +61,7 @@ namespace LazyPan {
                 if (playerEntity.Type == "Player") {
                     _isChargingEnergyData.Bool = true;
                     _energyImage.gameObject.SetActive(true);
+                    soundGo = Sound.Instance.SoundPlay(_chargeSoundData.String, Vector3.zero, true, -1);
                 }
             }
         }
@@ -68,6 +73,7 @@ namespace LazyPan {
                     _isChargingEnergyData.Bool = false;
                     _energyImage.gameObject.SetActive(false);
                     _energyData.Float = 0;
+                    Sound.Instance.SoundRecycle(soundGo);
                 }
             }
         }

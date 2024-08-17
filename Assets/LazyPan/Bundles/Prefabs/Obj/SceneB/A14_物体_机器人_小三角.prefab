@@ -252,7 +252,10 @@ MonoBehaviour:
   - Sign: MaxHealth
     Description: "\u6700\u5927\u8840\u91CF"
     Float: 50
-  Strings: []
+  Strings:
+  - Sign: BeHitSound
+    Description: "\u88AB\u51FB\u4E2D\u97F3\u6548"
+    String: "\u654C\u4EBA\u88AB\u51FB\u4E2D"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

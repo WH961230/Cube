@@ -7,8 +7,10 @@ namespace LazyPan {
         }
 
         public override void DelayedExecute() {
+            BehaviourData.Get(LabelStr.TARGET, out StringData targetEntitySign);
+            EntityRegister.TryGetEntityBySign(targetEntitySign.String, out Entity targetEntity);
             //玩家血量上限
-            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out FloatData _maxHealthData);
+            Cond.Instance.GetData(targetEntity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out FloatData _maxHealthData);
             float maxHealthBefore = _maxHealthData.Float;
             //增加量
             BehaviourData.Get(LabelStr.Assemble(LabelStr.INCREASE, LabelStr.HEALTH, LabelStr.MAX), out FloatData _increaseHealthMaxData);

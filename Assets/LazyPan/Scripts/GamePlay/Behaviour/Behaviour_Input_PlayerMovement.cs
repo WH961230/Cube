@@ -16,11 +16,14 @@ namespace LazyPan {
         private Vector3 _knockbackDirection;
         private FloatData _knockbackSpeedSetting;
         private FloatData _knockbackAccelerationSetting;
+        private StringData _moveSound;
 
         private float _knockbackSpeed;
         private float _knockbackAcceleration;
 
         private CharacterController _characterController;
+
+        private GameObject _moveSoundGo;
         public Behaviour_Input_PlayerMovement(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _characterController = Cond.Instance.Get<CharacterController>(entity, Label.CHARACTERCONTROLLER);
             InputRegister.Instance.Load(InputRegister.Motion, InputMotionEvent);
@@ -34,6 +37,7 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.KNOCKBACK, Label.ING), out _knockbackData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, LabelStr.DIRECTION), out _moveDirectionData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MOVE, LabelStr.SOUND), out _moveSound);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
@@ -76,6 +80,13 @@ namespace LazyPan {
                 }
 
                 _moveData.Bool = moveDirection != Vector3.zero;
+                if (_moveData.Bool) {
+                    if (_moveSoundGo == null) {
+                        _moveSoundGo = Sound.Instance.SoundPlay(_moveSound.String, Vector3.zero, true, -1);
+                    }
+                } else {
+                    Sound.Instance.SoundRecycle(_moveSoundGo);
+                }
             }
         }
 

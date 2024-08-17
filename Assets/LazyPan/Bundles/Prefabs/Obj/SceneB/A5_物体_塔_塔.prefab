@@ -257,6 +257,9 @@ MonoBehaviour:
   - Sign: DefaultWeapon
     Description: "\u9ED8\u8BA4\u88C5\u914D\u6B66\u5668"
     String: "A43_\u7269\u4F53_\u6B66\u5668_\u51B2\u950B\u67AA"
+  - Sign: ChargeSound
+    Description: "\u5145\u80FD\u97F3\u6548"
+    String: "\u5145\u80FD"
   Vector3s: []
 --- !u!1 &6242194965163223405
 GameObject:

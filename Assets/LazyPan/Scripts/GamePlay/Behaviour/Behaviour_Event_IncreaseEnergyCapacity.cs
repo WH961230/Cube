@@ -8,7 +8,9 @@ namespace LazyPan {
         }
 
         public override void DelayedExecute() {
-            Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY, LabelStr.MAX), out FloatData _energyMaxData);
+            BehaviourData.Get(LabelStr.TARGET, out StringData targetEntitySign);
+            EntityRegister.TryGetEntityBySign(targetEntitySign.String, out Entity targetEntity);
+            Cond.Instance.GetData(targetEntity, LabelStr.Assemble(Label.ENERGY, LabelStr.MAX), out FloatData _energyMaxData);
             float energyBefore = _energyMaxData.Float;
             BehaviourData.Get(LabelStr.Assemble(LabelStr.INCREASE, Label.ENERGY, LabelStr.MAX), out FloatData _increaseEnergyMaxData);
             _energyMaxData.Float += _increaseEnergyMaxData.Float;

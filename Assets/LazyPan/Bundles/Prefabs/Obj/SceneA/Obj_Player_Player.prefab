@@ -227,6 +227,7 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
+  LineRenderers: []
 --- !u!114 &5456277861557487486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +258,10 @@ MonoBehaviour:
   - Sign: MovementSpeed
     Description: 
     Float: 5
-  Strings: []
+  Strings:
+  - Sign: MoveSound
+    Description: "\u79FB\u52A8\u97F3\u6548"
+    String: "\u79FB\u52A8"
   Vector3s:
   - Sign: MovementDirection
     Description: "\u79FB\u52A8\u65B9\u5411"

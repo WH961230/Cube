@@ -34,8 +34,8 @@ namespace LazyPan {
 		        instanceWave.InstanceDelayTime = wave.InstanceDelayTime;
 		        _waveData.WaveInstanceList.Add(instanceWave);
 	        }
-	        
-	        InputRegister.Instance.Load(InputCode.M, InputStartLevel);
+
+	        MsgStartLevel();
 	        Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
         

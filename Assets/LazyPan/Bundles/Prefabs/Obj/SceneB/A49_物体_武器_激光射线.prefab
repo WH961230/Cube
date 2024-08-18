@@ -521,6 +521,9 @@ MonoBehaviour:
   - Sign: Info
     Description: "\u63CF\u8FF0"
     String: "\u6FC0\u5149\u5C04\u7EBF"
+  - Sign: Sign
+    Description: "\u6807\u8BC6"
+    String: "A49_\u7269\u4F53_\u6B66\u5668_\u6FC0\u5149\u5C04\u7EBF"
   Vector3s: []
 --- !u!1 &8170376677880357285
 GameObject:

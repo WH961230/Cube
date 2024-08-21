@@ -5305,7 +5305,7 @@ MonoBehaviour:
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"
-    String: Shotgun
+    String: "\u9730\u5F39\u67AA"
   - Sign: Info
     Description: "\u63CF\u8FF0"
     String: "\u9730\u5F39\u67AA"

@@ -291,6 +291,12 @@ MonoBehaviour:
   - Sign: TeleportAcceleration
     Description: "\u77AC\u79FB\u52A0\u901F\u5EA6"
     Float: -50
+  - Sign: DamageReduceRatio
+    Description: "\u4F24\u5BB3\u51CF\u5C11\u7CFB\u6570"
+    Float: 1
+  - Sign: BeheadHealthRatio
+    Description: "\u65A9\u6740\u8840\u91CF\u7CFB\u6570"
+    Float: 0
   Strings:
   - Sign: TeleportSound
     Description: "\u51B2\u523A\u97F3\u6548"

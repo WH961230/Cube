@@ -63,6 +63,9 @@ namespace LazyPan {
         public void InitWeapon(string weaponSign) {
             Entity prepareAssembledWeapon = GetWeapon(weaponSign);
             prepareAssembledWeapon.Prefab.SetActive(true);
+            if (Cond.Instance.GetData(prepareAssembledWeapon, LabelStr.USED, out BoolData usedBoolData)) {
+                usedBoolData.Bool = true;
+            }
             _assembledWeapons.Add(prepareAssembledWeapon);
             RefreshWeapons();
             Debug.Log("默认武器:" + prepareAssembledWeapon.ObjConfig.Name);

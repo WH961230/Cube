@@ -144,7 +144,7 @@ namespace LazyPan {
             } else {
                 _body.forward = (targetRobot.position - _foot.position).normalized;
             }
-
+ 
             bulletGameObject.transform.position = _muzzle.position;
             bulletGameObject.transform.forward = _body.forward;
             return bulletGameObject;

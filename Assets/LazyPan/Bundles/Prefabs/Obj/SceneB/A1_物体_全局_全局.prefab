@@ -150,9 +150,15 @@ MonoBehaviour:
   - Sign: AttackRatio
     Description: "\u653B\u51FB\u529B\u7CFB\u6570"
     Float: 1
+  - Sign: AttackMaxRatio
+    Description: "\u653B\u51FB\u529B\u7CFB\u6570\u4E0A\u9650"
+    Float: 0.2
   - Sign: AttackSpeedRatio
     Description: "\u653B\u51FB\u901F\u5EA6\u7CFB\u6570"
     Float: 1
+  - Sign: HealthRecoverRatio
+    Description: "\u8840\u91CF\u6062\u590D\u7CFB\u6570"
+    Float: 0.01
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

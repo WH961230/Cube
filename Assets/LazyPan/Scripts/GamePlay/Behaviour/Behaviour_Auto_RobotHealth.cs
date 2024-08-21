@@ -8,6 +8,7 @@ namespace LazyPan {
         private Comp _ui;
         private FloatData _maxHealthData;//血量上限
         private FloatData _healthData;//血量
+        private FloatData _beheadHealthRatio;
         private BoolData _chargyingEnergyData;//充能中
         private BoolData _invincibleData;
         private StringData _beHitSound;
@@ -24,6 +25,7 @@ namespace LazyPan {
 
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BE, LabelStr.HIT, LabelStr.SOUND),
                 out _beHitSound);
+            Cond.Instance.GetData(Cond.Instance.GetPlayerEntity(), LabelStr.Assemble(LabelStr.BEHEAD, LabelStr.HEALTH, LabelStr.RATIO), out _beheadHealthRatio);
 
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -43,6 +45,10 @@ namespace LazyPan {
             if (entity.ID == entityId) {
                 if (_healthData.Float != 0) {
                     if (_healthData.Float > 0) {
+                        //斩杀最小生命值低于系数的怪物
+                        if (_healthData.Float < _maxHealthData.Float * _beheadHealthRatio.Float) {
+                            damageValue = 9999;
+                        }
                         _healthData.Float -= damageValue;
                         Sound.Instance.SoundPlay(_beHitSound.String, Vector3.zero, false, 2);
                     }

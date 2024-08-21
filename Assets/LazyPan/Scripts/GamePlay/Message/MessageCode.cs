@@ -10,4 +10,5 @@ public class MessageCode {
     public static int MsgLevelUp = 8;//关卡等级升级
     public static int MsgRecoverHealth = 9;//恢复血量
     public static int MsgCreateActivatableObj = 10;//创建可激活物体
+    public static int MsgKnockbackRobot = 11;//击退机器人
 }

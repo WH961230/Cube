@@ -12,6 +12,7 @@ namespace LazyPan {
         private FloatData _healthRecoverSpeed;//血量恢复速度
         private BoolData _chargyingEnergyData;//充能中
         private BoolData _invincibleData;
+        private FloatData _damageReduceRatio;
         public Behaviour_Auto_PlayerHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -23,14 +24,11 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.HEALTH, out _healthData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.HEALTH, LabelStr.SPEED), out _healthRecoverSpeed);
             _healthData.Float = _maxHealthData.Float;
-            
+
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.DAMAGE, LabelStr.REDUCE, LabelStr.RATIO),
+                out _damageReduceRatio);
+
             Cond.Instance.GetData(entity, Label.ENERGY + Label.ING, out _chargyingEnergyData);
-            
-            InputRegister.Instance.Load(InputCode.R, context => {
-                if (context.performed) {
-                    MsgBeDamaged(10);
-                }
-            });
 
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
             
@@ -74,17 +72,18 @@ namespace LazyPan {
                 return;
             }
 
+            float damageRatio = _damageReduceRatio.Float;
             if (_healthData.Float != 0) {
                 if (_healthData.Float > 0) {
-                    _healthData.Float -= damageValue;
+                    _healthData.Float -= damageValue * damageRatio;
                 }
 
                 if (_healthData.Float <= 0) {
                     _healthData.Float = 0;
                     Next();
                 }
-                
-                Debug.Log("玩家受到伤害:" + damageValue + " 当前血量:" + _healthData.Float);
+
+                Debug.Log("玩家受到伤害:" + damageValue * damageRatio + " 当前血量:" + _healthData.Float);
             }
         }
 

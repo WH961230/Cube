@@ -9,8 +9,6 @@ namespace LazyPan {
         public override void DelayedExecute() {
         }
 
-
-
         public override void Clear() {
             base.Clear();
         }

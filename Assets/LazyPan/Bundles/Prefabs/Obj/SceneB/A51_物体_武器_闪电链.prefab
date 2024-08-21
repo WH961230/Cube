@@ -136,6 +136,37 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1 &7686664548292328457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7958604526096503320}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7958604526096503320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686664548292328457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7868656383781502519}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7962291709713167343
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +262,8 @@ MonoBehaviour:
   Transforms:
   - Sign: Foot
     Tran: {fileID: 7868656383781502519}
+  - Sign: Body
+    Tran: {fileID: 7958604526096503320}
   Colliders: []
   Materials: []
   Renderers: []
@@ -268,14 +301,23 @@ MonoBehaviour:
   - Sign: Used
     Description: "\u662F\u5426\u5DF2\u4F7F\u7528"
     Bool: 0
-  Ints: []
+  Ints:
+  - Sign: ComboCount
+    Description: "\u8FDE\u51FB\u6B21\u6570"
+    Int: 3
   Floats:
   - Sign: FireRateInterval
     Description: "\u5C04\u51FB\u901F\u5EA6\u65F6\u95F4\u95F4\u9694"
     Float: 1
+  - Sign: AttackRange
+    Description: "\u653B\u51FB\u8303\u56F4"
+    Float: 10
+  - Sign: AttackDamage
+    Description: "\u653B\u51FB\u4F24\u5BB3"
+    Float: 5
   Strings:
-  - Sign: Info
-    Description: "\u63CF\u8FF0"
+  - Sign: Icon
+    Description: "\u56FE\u7247"
     String: "\u95EA\u7535\u94FE"
   - Sign: Info
     Description: "\u63CF\u8FF0"
@@ -283,6 +325,9 @@ MonoBehaviour:
   - Sign: Sign
     Description: "\u6807\u8BC6"
     String: "A51_\u7269\u4F53_\u6B66\u5668_\u95EA\u7535\u94FE"
+  - Sign: FireSound
+    Description: "\u5F00\u706B\u97F3\u6548"
+    String: "\u95EA\u7535\u94FE"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
@@ -313,6 +358,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4928113718768980372}
+  - {fileID: 7958604526096503320}
   m_Father: {fileID: 3094119822270521761}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

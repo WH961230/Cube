@@ -74,6 +74,10 @@ public class LabelStr {
     public static string SOUND = "Sound";
     public static string BE = "Be";
     public static string HIT = "Hit";
+    public static string COMBO = "Combo";
+    public static string RECOVER = "Recover";
+    public static string REDUCE = "Reduce";
+    public static string BEHEAD = "Behead";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

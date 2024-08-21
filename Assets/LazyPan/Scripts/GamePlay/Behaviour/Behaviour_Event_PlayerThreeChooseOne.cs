@@ -31,7 +31,8 @@ namespace LazyPan {
         private void InitBuffs() {
             _buffs.Clear();
             List<string> objConfigs = ObjConfig.GetKeys();
-            string[] types = new[] { "武器增益", "角色增益", "角色一次性增益", "属性增益" };
+            // string[] types = new[] { "武器增益", "角色增益", "角色一次性增益", "属性增益" };
+            string[] types = new[] { "武器增益" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
                 if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
@@ -152,7 +153,6 @@ namespace LazyPan {
                 choose.gameObject.SetActive(true);
                 int resultCount = 3;
                 int[] index = MathUtil.Instance.GetRandNoRepeatIndex(playBuffEntity.Count, resultCount);
-
                 if (index != null) {
                     for (int i = 0; i < index.Length; i++) {
                         int tmpIndex = index[i];
@@ -297,13 +297,10 @@ namespace LazyPan {
 
         private void RegisterAssembledWeapon(Entity buffEntity) {
             if (Cond.Instance.GetData(buffEntity, LabelStr.SIGN, out StringData stringData)) {
-                if (Cond.Instance.GetData(buffEntity, LabelStr.USED, out BoolData usedBoolData)) {
-                    if (EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity)) {
-                        if (BehaviourRegister.GetBehaviour(towerEntity.ID, out Behaviour_Auto_TowerWeaponManagement beh)) {
-                            beh.InitWeapon(stringData.String);
-                            usedBoolData.Bool = true;
-                            ClosePlayerThreeChooseOneUI();
-                        }
+                if (EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity)) {
+                    if (BehaviourRegister.GetBehaviour(towerEntity.ID, out Behaviour_Auto_TowerWeaponManagement beh)) {
+                        beh.InitWeapon(stringData.String);
+                        ClosePlayerThreeChooseOneUI();
                     }
                 }
             }

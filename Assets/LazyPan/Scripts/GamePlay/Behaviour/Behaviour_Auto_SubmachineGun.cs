@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 namespace LazyPan {
     public class Behaviour_Auto_SubmachineGun : Behaviour {
         private float fireRateIntervalDeploy;
+        private BoolData _knockback;
         private Transform _foot;//冲锋枪
         private Transform _body;//身体
         private Transform _muzzle;//枪口
@@ -50,6 +51,8 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE), out _fireRange);
             _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            //是否可以击退敌人
+            Cond.Instance.GetData(entity, LabelStr.KNOCKBACK, out _knockback);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -154,6 +157,11 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float * _globalAttackRatio.Float);
+                    if (_knockback.Bool) {
+                        Vector3 direction = (Cond.Instance.Get<Transform>(Cond.Instance.GetPlayerEntity(), LabelStr.BODY).position - _body.position).normalized;
+                        direction.y = 0;
+                        MessageRegister.Instance.Dis(MessageCode.MsgKnockbackRobot, bodyEntity.ID, direction);
+                    }
                     fxGo.SetActive(false);
                 }
             }

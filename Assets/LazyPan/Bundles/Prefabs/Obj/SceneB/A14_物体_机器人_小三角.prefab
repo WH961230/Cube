@@ -237,7 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools: []
+  Bools:
+  - Sign: Knockbacking
+    Description: "\u51FB\u9000\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed
@@ -252,6 +255,12 @@ MonoBehaviour:
   - Sign: MaxHealth
     Description: "\u6700\u5927\u8840\u91CF"
     Float: 50
+  - Sign: KnockbackSpeed
+    Description: "\u51FB\u9000\u901F\u5EA6"
+    Float: 15
+  - Sign: KnockbackAcceleration
+    Description: "\u51FB\u9000\u52A0\u901F\u5EA6\uFF08\u8D1F\u6570\uFF09"
+    Float: -50
   Strings:
   - Sign: BeHitSound
     Description: "\u88AB\u51FB\u4E2D\u97F3\u6548"

@@ -479,6 +479,12 @@ MonoBehaviour:
   - Sign: FireDamage
     Description: "\u5C04\u51FB\u4F24\u5BB3"
     Float: 20
+  - Sign: IncreaseDamageIntervalTime
+    Description: "\u589E\u52A0\u4F24\u5BB3\u95F4\u9694\u65F6\u95F4"
+    Float: 5
+  - Sign: IncreaseDamage
+    Description: "\u4F24\u5BB3\u589E\u52A0\u95F4\u9694\u65F6\u95F4"
+    Float: 10
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"

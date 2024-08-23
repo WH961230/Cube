@@ -241,6 +241,12 @@ MonoBehaviour:
   - Sign: Knockbacking
     Description: "\u51FB\u9000\u4E2D"
     Bool: 0
+  - Sign: Burning
+    Description: "\u71C3\u70E7\u4E2D"
+    Bool: 0
+  - Sign: Frosting
+    Description: "\u51B0\u971C\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed

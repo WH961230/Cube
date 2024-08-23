@@ -13,6 +13,7 @@ namespace LazyPan {
 	    private IntData _globalLevelData;
 	    private IntData _globalMaxLevelData;
 	    private IntData _robotCreateLevelData;
+	    private FloatData _delayCreateTime;
 	    private bool startLevelCreate;
 	    private float delayDeployTime;
         public Behaviour_Event_CreateRandomPositionRobot(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
@@ -26,7 +27,9 @@ namespace LazyPan {
 	        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.MAX, LabelStr.LEVEL), out _globalMaxLevelData);
 	        Cond.Instance.GetData<RobotWaveData, IntData>(entity, LabelStr.LEVEL, out _robotCreateLevelData);
 	        Cond.Instance.GetData<RobotWaveData, WaveData>(entity, LabelStr.WAVE, out _waveData);
-
+	        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+		        LabelStr.Assemble(LabelStr.CREATE, LabelStr.ROBOT, LabelStr.DELAY, LabelStr.TIME),
+		        out _delayCreateTime);
 	        foreach (var wave in _waveData.WaveInstanceDefaultList) {
 		        WaveInstanceData instanceWave = new WaveInstanceData();
 		        instanceWave.InstanceNumber = wave.InstanceNumber;
@@ -85,6 +88,10 @@ namespace LazyPan {
         private void MsgGlobalLevelUp() {
 	        if (_globalLevelData.Int < _globalMaxLevelData.Int) {
 		        _globalLevelData.Int++;
+		        //清空击杀机器人数量
+		        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.KILL, LabelStr.ROBOT),
+			        out IntData intData);
+		        intData.Int = 0;
 		        Debug.Log("全局关卡升级后等级:" + _globalLevelData.Int);
 	        }
         }
@@ -97,7 +104,6 @@ namespace LazyPan {
 				        Debug.Log("机器人死亡:" + tmpRobot.Prefab.name);
 				        _robots.Remove(tmpRobot);
 				        Obj.Instance.UnLoadEntity(tmpRobot);
-				        MessageRegister.Instance.Dis(MessageCode.MsgCreateActivatableObj);
 			        }
 		        }
 
@@ -118,7 +124,7 @@ namespace LazyPan {
 			        WaveInstanceData instanceWave = new WaveInstanceData();
 			        instanceWave.InstanceNumber = wave.InstanceNumber;
 			        instanceWave.InstanceRobotSign = wave.InstanceRobotSign;
-			        instanceWave.InstanceDelayTime = wave.InstanceDelayTime;
+			        instanceWave.InstanceDelayTime = wave.InstanceDelayTime + _delayCreateTime.Float;
 			        _waveInstanceQueue.Enqueue(instanceWave);
 		        }
 
@@ -200,7 +206,6 @@ namespace LazyPan {
             MessageRegister.Instance.UnReg(MessageCode.MsgStartLevel, MsgStartLevel);
             MessageRegister.Instance.UnReg(MessageCode.MsgGlobalLevelUp, MsgGlobalLevelUp);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgRobotDead, MsgRobotDead);
-            InputRegister.Instance.UnLoad(InputCode.M, InputStartLevel);
 
             foreach (var tmpRobot in _robots) {
 	            Obj.Instance.UnLoadEntity(tmpRobot);

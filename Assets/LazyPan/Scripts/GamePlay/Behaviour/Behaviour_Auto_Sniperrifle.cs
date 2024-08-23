@@ -13,6 +13,7 @@ namespace LazyPan {
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
+        private BoolData _penetrate;//穿透
         private FloatData _towerEnergy;//塔能量
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
@@ -44,6 +45,7 @@ namespace LazyPan {
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
+            Cond.Instance.GetData(entity, LabelStr.PENETRATE, out _penetrate);
             _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
@@ -141,6 +143,7 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    fxGo.SetActive(_penetrate.Bool);
                 }
             }
         }

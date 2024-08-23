@@ -8,12 +8,15 @@ namespace LazyPan {
     public class Behaviour_Auto_SubmachineGun : Behaviour {
         private float fireRateIntervalDeploy;
         private BoolData _knockback;
+        private IntData _killRobot;
         private Transform _foot;//冲锋枪
         private Transform _body;//身体
         private Transform _muzzle;//枪口
         private Transform _bulletFoot;//子弹根节点
         private Transform _towerFoot;//塔
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
+        private FloatData _killRobotIncreaseAttackRatio;//击杀敌人增益伤害系数
+        private FloatData _killRobotIncreaseRateRatio;//击杀敌人增益攻速系数
         private FloatData _globalAttackSpeedRatio;//全局射击速度
         private FloatData _fireDamage;//射击伤害
         private FloatData _globalAttackRatio;//全局射击伤害
@@ -43,6 +46,17 @@ namespace LazyPan {
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ATTACK, LabelStr.RATIO), out _globalAttackRatio);
             //全局射击速率
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.ATTACK, LabelStr.SPEED, LabelStr.RATIO), out _globalAttackSpeedRatio);
+            //击杀敌人
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                LabelStr.Assemble(LabelStr.KILL, LabelStr.ROBOT), out _killRobot);
+            //击杀敌人增益速率
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                LabelStr.Assemble(LabelStr.KILL, LabelStr.ROBOT, LabelStr.INCREASE, LabelStr.ATTACK, LabelStr.RATIO),
+                out _killRobotIncreaseAttackRatio);
+            //击杀敌人攻速速率
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                LabelStr.Assemble(LabelStr.KILL, LabelStr.ROBOT, LabelStr.INCREASE, LabelStr.RATE, LabelStr.RATIO),
+                out _killRobotIncreaseRateRatio);
             //获取射击速率
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RATE, LabelStr.INTERVAL), out _fireRateInterval);
             //获取射击伤害
@@ -117,7 +131,7 @@ namespace LazyPan {
                 if (fireRateIntervalDeploy > 0) {
                     fireRateIntervalDeploy -= Time.deltaTime;
                 } else {
-                    fireRateIntervalDeploy = _fireRateInterval.Float * (1 / _globalAttackSpeedRatio.Float);
+                    fireRateIntervalDeploy = (_fireRateInterval.Float * (1 / _globalAttackSpeedRatio.Float)) * (1 - _killRobotIncreaseAttackRatio.Float * _killRobot.Int);
 
                     GameObject instanceBullet = FireParticleSystemBullet();
                     _bullets.Add(instanceBullet);
@@ -156,7 +170,15 @@ namespace LazyPan {
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
-                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float * _globalAttackRatio.Float);
+                    float damage = (_fireDamage.Float * _globalAttackRatio.Float) * (1 + _killRobotIncreaseAttackRatio.Float * _killRobot.Int);
+
+                    //提前计算是否及杀敌人
+                    Cond.Instance.GetData(bodyEntity, LabelStr.HEALTH, out FloatData _healthData);
+                    if (_healthData.Float - damage <= 0) {
+                        _killRobot.Int++;
+                    }
+
+                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, damage);
                     if (_knockback.Bool) {
                         Vector3 direction = (Cond.Instance.Get<Transform>(Cond.Instance.GetPlayerEntity(), LabelStr.BODY).position - _body.position).normalized;
                         direction.y = 0;

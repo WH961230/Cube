@@ -78,6 +78,19 @@ public class LabelStr {
     public static string RECOVER = "Recover";
     public static string REDUCE = "Reduce";
     public static string BEHEAD = "Behead";
+    public static string PICK = "Pick";
+    public static string CREATE = "Create";
+    public static string TIME = "Time";
+    public static string PENETRATE = "Penetrate";//穿透
+    public static string DISTANCE = "Distance";//距离
+    public static string GET = "Get";
+    public static string AUTO = "Auto";
+    public static string ABSORB = "Absorb";
+    public static string DESTROY = "Destroy";
+    public static string KILL = "Kill";
+    public static string BURN = "Burn";
+    public static string FROST = "Frose";
+    public static string SLOW = "Slow";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {
@@ -87,5 +100,15 @@ public class LabelStr {
     //组合A+B+C
     public static string Assemble(string labelA, string labelB, string labelC) {
         return string.Concat(labelA, labelB, labelC);
+    }
+
+    //组合A+B+C+D
+    public static string Assemble(string labelA, string labelB, string labelC, string labelD) {
+        return string.Concat(labelA, labelB, labelC, labelD);
+    }
+
+    //组合A+B+C+D+E
+    public static string Assemble(string labelA, string labelB, string labelC, string labelD, string labelE) {
+        return string.Concat(labelA, labelB, labelC, labelD, labelE);
     }
 }

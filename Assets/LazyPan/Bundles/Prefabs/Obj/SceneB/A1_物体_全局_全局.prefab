@@ -146,6 +146,9 @@ MonoBehaviour:
   - Sign: Difficulty
     Description: "\u96BE\u5EA6"
     Int: 1
+  - Sign: KillRobot
+    Description: "\u51FB\u6740\u673A\u5668\u4EBA"
+    Int: 0
   Floats:
   - Sign: AttackRatio
     Description: "\u653B\u51FB\u529B\u7CFB\u6570"
@@ -159,6 +162,39 @@ MonoBehaviour:
   - Sign: HealthRecoverRatio
     Description: "\u8840\u91CF\u6062\u590D\u7CFB\u6570"
     Float: 0.01
+  - Sign: CreateRobotDelayTime
+    Description: "\u751F\u6210\u654C\u4EBA\u989D\u5916\u5EF6\u8FDF\u79D2"
+    Float: 0
+  - Sign: GetMoveSpeed
+    Description: "\u83B7\u53D6\u79FB\u52A8\u901F\u5EA6"
+    Float: 15
+  - Sign: PickMoveSpeed
+    Description: "\u62FE\u53D6\u589E\u52A0\u7684\u79FB\u901F\u603B\u548C"
+    Float: 1
+  - Sign: PickIncreaseMoveSpeed
+    Description: "\u62FE\u53D6\u589E\u52A0\u7684\u79FB\u901F"
+    Float: 0
+  - Sign: DestroyDelayIncreaseTime
+    Description: "\u6D88\u5931\u5EF6\u8FDF\u589E\u52A0\u65F6\u95F4"
+    Float: 0
+  - Sign: KillRobotIncreaseAttackRatio
+    Description: "\u51B2\u950B\u67AA\u51FB\u6740\u4E00\u4E2A\u654C\u4EBA\u589E\u52A0\u591A\u5C11\u4F24\u5BB3\u7CFB\u6570"
+    Float: 0
+  - Sign: KillRobotIncreaseRateRatio
+    Description: "\u51B2\u950B\u67AA\u51FB\u6740\u4E00\u4E2A\u654C\u4EBA\u589E\u52A0\u591A\u5C11\u5C04\u901F\u7CFB\u6570"
+    Float: 0
+  - Sign: BurnTime
+    Description: "\u71C3\u70E7\u65F6\u95F4"
+    Float: 3
+  - Sign: BurnAttack
+    Description: "\u71C3\u70E7\u4F24\u5BB3"
+    Float: 25
+  - Sign: FrostTime
+    Description: "\u51BB\u7ED3\u65F6\u95F4"
+    Float: 3
+  - Sign: FrostSlowRatio
+    Description: "\u51BB\u7ED3\u51CF\u901F\u7CFB\u6570"
+    Float: 0.3
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

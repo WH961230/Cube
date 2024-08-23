@@ -4,6 +4,10 @@
 namespace LazyPan {
     public class Behaviour_Event_PickupIncreasePickupRange : Behaviour {
         public Behaviour_Event_PickupIncreasePickupRange(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            Cond.Instance.GetData(Cond.Instance.GetPlayerEntity(),
+                LabelStr.Assemble(LabelStr.PICK, LabelStr.DISTANCE),
+                out FloatData _pickDistance);
+            _pickDistance.Float *= 1.5f;
         }
 
         public override void DelayedExecute() {

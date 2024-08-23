@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 namespace LazyPan {
     public class Behaviour_Input_PlayerMovement : Behaviour {
         private FloatData _movementSpeedData;//移动速度
+        private FloatData _pickMoveSpeed;//拾取增加移动速度
         private Vector2 _inputMovementValue;
         private Vector3Data _moveDirectionData;//移动方向
 
@@ -38,6 +39,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, LabelStr.DIRECTION), out _moveDirectionData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MOVE, LabelStr.SOUND), out _moveSound);
+
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                LabelStr.Assemble(LabelStr.PICK, LabelStr.MOVE, LabelStr.SPEED),
+                out _pickMoveSpeed);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
@@ -74,7 +79,7 @@ namespace LazyPan {
                 }
 
                 Vector3 moveDirection = GetMovementDirection();
-                _characterController.Move(moveDirection * _movementSpeedData.Float * Time.deltaTime);
+                _characterController.Move(moveDirection * _movementSpeedData.Float * _pickMoveSpeed.Float * Time.deltaTime);
                 if (_characterController.velocity.normalized != Vector3.zero) {
                     _moveDirectionData.Vector3 = _characterController.velocity.normalized;
                 }

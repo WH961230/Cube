@@ -297,6 +297,15 @@ MonoBehaviour:
   - Sign: BeheadHealthRatio
     Description: "\u65A9\u6740\u8840\u91CF\u7CFB\u6570"
     Float: 0
+  - Sign: PickRecoverRatio
+    Description: "\u62FE\u53D6\u6062\u590D\u7CFB\u6570"
+    Float: 0
+  - Sign: AutoAbsorbExperienceRatio
+    Description: "\u81EA\u52A8\u5438\u6536\u7ECF\u9A8C\u503C\u6982\u7387"
+    Float: 0
+  - Sign: PickDistance
+    Description: "\u62FE\u53D6\u8DDD\u79BB"
+    Float: 3
   Strings:
   - Sign: TeleportSound
     Description: "\u51B2\u523A\u97F3\u6548"

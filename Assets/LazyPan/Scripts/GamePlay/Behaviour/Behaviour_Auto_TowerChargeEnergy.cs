@@ -23,7 +23,7 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(Label.ENERGY ,Label.ING), out _isChargingEnergyData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.CHARGE, LabelStr.SOUND), out _chargeSoundData);
 
-                _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
+            _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
 
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(ChargeIn);

@@ -67,12 +67,12 @@ Behaviour_Auto_SubmachineGunKnockbackRobot,冲锋枪升级 - 击退,冲锋枪升
 Behaviour_Auto_SubmachineGunFiresSlowlyAndHasALargeRange,冲锋枪升级 - 射程加倍射速减半,冲锋枪升级 - 冲锋枪射程加倍，射速减半
 Behaviour_Auto_SubmachineGunFiresFasterAndHasACloserRange,冲锋枪升级 - 射速加倍射程减半,冲锋枪升级 - 冲锋枪射速加倍，射程减半
 Behaviour_Auto_SubmachineGunKillRobotIncreaseAttack,冲锋枪升级 - 击杀增加回合攻击力,冲锋枪升级 - 冲锋枪击杀敌人增加1%冲锋枪攻击力，回合结束刷新
-Behaviour_Auto_SubmachineGunKillRobotIncreaseFireRange,冲锋枪升级 - 击杀增加回合攻击速度,冲锋枪升级 - 冲锋枪击杀敌人增加1%冲锋枪射速，回合结束刷新
+Behaviour_Auto_SubmachineGunKillRobotIncreaseFireRate,冲锋枪升级 - 击杀增加回合攻击速度,冲锋枪升级 - 冲锋枪击杀敌人增加1%冲锋枪射速，回合结束刷新
 Behaviour_Auto_OrbitingballIncreaseABall,环绕球升级 - 增加一个球体,环绕球升级 - 增加一个球体
 Behaviour_Auto_OrbitingballIgnite,环绕球升级 - 点燃效果,环绕球升级 - 球体造成点燃效果
 Behaviour_Auto_OrbitingballFreezing,环绕球升级 - 冰霜效果,环绕球升级 - 球体造成冰霜效果
-Behaviour_Auto_OrbitingballIntervalIncreaseAttack,环绕球升级 - 间隔时间增加攻击力,环绕球升级 - 每隔一段时间增加攻击力
-Behaviour_Auto_OrbitingballIntervalIncreaseRoundSpeed,环绕球升级 - 间隔时间增加移速,环绕球升级 - 每隔一段时间增加移速
+Behaviour_Auto_OrbitingballIncreaseRoundSpeed,环绕球升级 - 增加移速100%,环绕球升级 - 增加移速100%
+Behaviour_Auto_OrbitingballIncreaseTwoBall,环绕球升级 - 增加两个球体,环绕球升级 - 增加两个球体
 Behaviour_Auto_LaserrayIncreaseARay,激光升级 - 增加一道激光,激光升级 - 增加一道激光
 Behaviour_Auto_LaserrayIncreaseRayWidthAndColdTime,激光升级 - 增加一半宽度和冷却时间,激光升级 - 激光宽度增加50%，增加50%冷却时间
 Behaviour_Auto_LaserrayReduceColdTimeAndRayWidth,激光升级 - 减少一半宽度和冷却时间,激光升级 - 减少50%冷却时间，激光宽度增加50%

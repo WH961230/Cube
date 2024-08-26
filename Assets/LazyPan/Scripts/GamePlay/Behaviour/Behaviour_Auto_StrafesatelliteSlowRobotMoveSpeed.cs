@@ -4,6 +4,9 @@
 namespace LazyPan {
     public class Behaviour_Auto_StrafesatelliteSlowRobotMoveSpeed : Behaviour {
         public Behaviour_Auto_StrafesatelliteSlowRobotMoveSpeed(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            //冰霜
+            Cond.Instance.GetData(entity, LabelStr.FROST, out BoolData _frost);
+            _frost.Bool = true;
         }
 
         public override void DelayedExecute() {

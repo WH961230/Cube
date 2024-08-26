@@ -8,6 +8,8 @@ namespace LazyPan {
         private Transform _muzzle;//枪口
         private Transform _bulletFoot;//子弹根节点
         private Transform _towerFoot;//塔
+        private BoolData _burn;
+        private BoolData _frost;
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
@@ -35,6 +37,10 @@ namespace LazyPan {
             bulletTemplate = Cond.Instance.Get<GameObject>(entity, LabelStr.BULLET);
             //身体
             _body = Cond.Instance.Get<Transform>(entity, LabelStr.BODY);
+            //燃烧
+            Cond.Instance.GetData(entity, LabelStr.BURN, out _burn);
+            //冰霜
+            Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
             //枪口
             _muzzle = Cond.Instance.Get<Transform>(entity, LabelStr.MUZZLE);
             //获取塔 跟随塔的位置
@@ -147,8 +153,30 @@ namespace LazyPan {
                         //爆炸后开始延时
                         fireRateIntervalDeploy = _fireRateInterval.Float;
                     });
+
+                    if (_burn.Bool) {
+                        //燃烧区域
+                        BurnArea();
+                    }
+
+                    if (_frost.Bool) {
+                        //冰冻区域
+                        FrostArea();
+                    }
                 }
             }
+        }
+
+        private void BurnArea() {
+            //燃烧时间
+            //燃烧事件
+            //特效
+        }
+
+        private void FrostArea() {
+            //冰霜时间
+            //冰霜事件
+            //特效
         }
 
         private void BoomCircleRange() {

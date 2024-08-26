@@ -180,7 +180,8 @@ namespace LazyPan {
 
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, damage);
                     if (_knockback.Bool) {
-                        Vector3 direction = (Cond.Instance.Get<Transform>(Cond.Instance.GetPlayerEntity(), LabelStr.BODY).position - _body.position).normalized;
+                        Vector3 robotPos = Cond.Instance.Get<Transform>(bodyEntity, LabelStr.BODY).position;
+                        Vector3 direction = (robotPos - _body.position).normalized;
                         direction.y = 0;
                         MessageRegister.Instance.Dis(MessageCode.MsgKnockbackRobot, bodyEntity.ID, direction);
                     }

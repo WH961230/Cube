@@ -7,6 +7,8 @@ namespace LazyPan {
         private Transform _ballFoot;//子弹根节点
         private Transform _towerFoot;//塔
         private FloatData _fireDamage;//射击伤害
+        private BoolData _burn;//灼烧
+        private BoolData _frost;//冰霜
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _balls = new List<GameObject>();
         private FloatData _surroundSpeed;
@@ -31,6 +33,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.SURROUND, LabelStr.SPEED), out _surroundSpeed);
             //获取环绕数量
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.SURROUND, LabelStr.COUNT), out _surroundCount);
+            //灼烧
+            Cond.Instance.GetData(entity, LabelStr.BURN, out _burn);
+            //冰霜
+            Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -106,6 +112,13 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(collider.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    if (_burn.Bool) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgBurnRobot, bodyEntity.ID);
+                    }
+
+                    if (_frost.Bool) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrostRobot, bodyEntity.ID);
+                    }
                 }
             }
         }

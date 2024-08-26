@@ -32,6 +32,8 @@ namespace LazyPan {
 
         private Comp _bulletTriggerComp;
         private LineRenderer _fireRangeLineRenderer;//范围渲染
+        private BoolData _burn;
+        private BoolData _frost;
 
         public Behaviour_Auto_Ring(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             //根源
@@ -59,6 +61,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.PULSE, LabelStr.DURATION), out _pulseDuration);
             //获取延迟时间
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.DELAY, LabelStr.PULSE), out _delayBetweenPulses);
+            //灼烧
+            Cond.Instance.GetData(entity, LabelStr.BURN, out _burn);
+            //冰霜
+            Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -102,6 +108,13 @@ namespace LazyPan {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     Debug.Log("圆环攻击敌人" + _fireDamage.Float);
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    if (_burn.Bool) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgBurnRobot, bodyEntity.ID);
+                    }
+
+                    if (_frost.Bool) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrostRobot, bodyEntity.ID);
+                    }
                 }
             }
         }

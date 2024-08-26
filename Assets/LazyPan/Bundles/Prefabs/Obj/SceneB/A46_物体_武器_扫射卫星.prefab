@@ -5657,6 +5657,12 @@ MonoBehaviour:
   - Sign: Knockback
     Description: "\u662F\u5426\u5F00\u542F\u51FB\u9000\u654C\u4EBA"
     Bool: 0
+  - Sign: Burn
+    Description: "\u707C\u70E7"
+    Bool: 0
+  - Sign: Frost
+    Description: "\u51B0\u971C"
+    Bool: 0
   Ints:
   - Sign: Level
     Description: "\u7B49\u7EA7"

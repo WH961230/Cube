@@ -7,6 +7,8 @@ namespace LazyPan {
         private Transform _foot;//冲锋枪
         private Transform _body;//身体
         private Transform _towerFoot;//塔
+        private BoolData _burn;//灼烧
+        private BoolData _frost;//冰霜
         private IntData _level;
         private FloatData _fireRateInterval;//射击速率 射击时间间隔
         private FloatData _fireDamage;//射击伤害
@@ -46,6 +48,10 @@ namespace LazyPan {
                 out _fireRange);
             //等级
             Cond.Instance.GetData(entity, LabelStr.LEVEL, out _level);
+            //灼烧
+            Cond.Instance.GetData(entity, LabelStr.BURN, out _burn);
+            //冰霜
+            Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -154,6 +160,13 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    if (_burn.Bool) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgBurnRobot, bodyEntity.ID);
+                    }
+
+                    if (_frost.Bool) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrostRobot, bodyEntity.ID);
+                    }
                     fxGo.SetActive(false);
                 }
             }

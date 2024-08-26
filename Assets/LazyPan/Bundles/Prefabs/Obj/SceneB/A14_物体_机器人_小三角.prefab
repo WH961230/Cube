@@ -241,10 +241,10 @@ MonoBehaviour:
   - Sign: Knockbacking
     Description: "\u51FB\u9000\u4E2D"
     Bool: 0
-  - Sign: Burning
+  - Sign: Burn
     Description: "\u71C3\u70E7\u4E2D"
     Bool: 0
-  - Sign: Frosting
+  - Sign: Frost
     Description: "\u51B0\u971C\u4E2D"
     Bool: 0
   Ints: []
@@ -267,6 +267,9 @@ MonoBehaviour:
   - Sign: KnockbackAcceleration
     Description: "\u51FB\u9000\u52A0\u901F\u5EA6\uFF08\u8D1F\u6570\uFF09"
     Float: -50
+  - Sign: FrostRatio
+    Description: "\u51CF\u901F\u7CFB\u6570"
+    Float: 0.3
   Strings:
   - Sign: BeHitSound
     Description: "\u88AB\u51FB\u4E2D\u97F3\u6548"

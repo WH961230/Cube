@@ -263,7 +263,7 @@ namespace LazyPan {
                     //提取波数数据 输出文本
                     info.text = infoData.String;
 
-                    debug += info.text + " ";
+                    debug += info.text + " \n";
 
                     //注册按钮事件
                     Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);

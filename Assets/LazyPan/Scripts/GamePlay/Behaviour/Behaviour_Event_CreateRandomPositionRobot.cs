@@ -162,9 +162,12 @@ namespace LazyPan {
         private void RegisterSetUpBehaviour(Entity robot) {
 	        //注册事件
 	        foreach (var behaviourData in _setUpBehaviours) {
-		        BehaviourRegister.RegisterBehaviour(robot.ID, behaviourData.BehaviourName, out Behaviour outBehaviour);
-		        outBehaviour.SetBehaviourData(behaviourData.BehaviourData);
-		        outBehaviour.DelayedExecute();
+		        if (BehaviourRegister.RegisterBehaviour(robot.ID, behaviourData.BehaviourName, out Behaviour outBehaviour)) {
+			        outBehaviour.SetBehaviourData(behaviourData.BehaviourData);
+			        outBehaviour.DelayedExecute();
+		        } else {
+			        Debug.LogErrorFormat("机器人:{0} 行为:{1}注册失败: ", robot.ID, behaviourData.BehaviourName);
+		        }
 	        }
         }
 

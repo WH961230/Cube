@@ -89,7 +89,7 @@ public class LabelStr {
     public static string DESTROY = "Destroy";
     public static string KILL = "Kill";
     public static string BURN = "Burn";
-    public static string FROST = "Frose";
+    public static string FROST = "Frost";
     public static string SLOW = "Slow";
 
     //组合A+B

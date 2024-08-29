@@ -680,6 +680,12 @@ MonoBehaviour:
   - Sign: BulletMoveSpeed
     Description: "\u5B50\u5F39\u79FB\u52A8\u901F\u5EA6"
     Float: 5
+  - Sign: BoomDurationTime
+    Description: "\u6301\u7EED\u65F6\u95F4"
+    Float: 3
+  - Sign: FrostTime
+    Description: "\u51B0\u971C\u6301\u7EED\u65F6\u95F4"
+    Float: 3
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"

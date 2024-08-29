@@ -109,11 +109,11 @@ namespace LazyPan {
                     Debug.Log("圆环攻击敌人" + _fireDamage.Float);
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                     if (_burn.Bool) {
-                        MessageRegister.Instance.Dis(MessageCode.MsgBurnRobot, bodyEntity.ID);
+                        MessageRegister.Instance.Dis(MessageCode.MsgBurnEntity, bodyEntity.ID);
                     }
 
                     if (_frost.Bool) {
-                        MessageRegister.Instance.Dis(MessageCode.MsgFrostRobot, bodyEntity.ID);
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrostEntity, bodyEntity.ID);
                     }
                 }
             }

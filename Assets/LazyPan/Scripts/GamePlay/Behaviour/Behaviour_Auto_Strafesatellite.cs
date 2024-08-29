@@ -161,11 +161,11 @@ namespace LazyPan {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                     if (_burn.Bool) {
-                        MessageRegister.Instance.Dis(MessageCode.MsgBurnRobot, bodyEntity.ID);
+                        MessageRegister.Instance.Dis(MessageCode.MsgBurnEntity, bodyEntity.ID);
                     }
 
                     if (_frost.Bool) {
-                        MessageRegister.Instance.Dis(MessageCode.MsgFrostRobot, bodyEntity.ID);
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrostEntity, bodyEntity.ID);
                     }
                     fxGo.SetActive(false);
                 }

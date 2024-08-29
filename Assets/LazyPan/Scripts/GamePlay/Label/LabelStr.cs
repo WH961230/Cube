@@ -91,6 +91,7 @@ public class LabelStr {
     public static string BURN = "Burn";
     public static string FROST = "Frost";
     public static string SLOW = "Slow";
+    public static string IGNORE = "Ignore";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -50,8 +50,8 @@ namespace LazyPan {
                 LabelStr.Assemble(LabelStr.FROST, LabelStr.SLOW, LabelStr.RATIO),
                 out _frostSlowRatio);
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnRobot, Burn);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostRobot, Frost);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, Burn);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, Frost);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
@@ -155,8 +155,8 @@ namespace LazyPan {
             base.Clear();
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
             MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnRobot, Burn);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostRobot, Frost);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnEntity, Burn);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostEntity, Frost);
         }
     }
 }

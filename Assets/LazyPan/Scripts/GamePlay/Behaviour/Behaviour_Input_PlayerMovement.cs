@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 
 namespace LazyPan {
     public class Behaviour_Input_PlayerMovement : Behaviour {
+        private float frostDeploy;
+
         private FloatData _movementSpeedData;//移动速度
         private FloatData _pickMoveSpeed;//拾取增加移动速度
+        private FloatData _frostMoveSpeed;
         private Vector2 _inputMovementValue;
         private Vector3Data _moveDirectionData;//移动方向
 
         private BoolData _moveData;
+        private BoolData _frost;
         private BoolData _teleportData;
         private BoolData _knockbackData;
         private BoolData _invincibleData;
@@ -25,10 +29,13 @@ namespace LazyPan {
         private CharacterController _characterController;
 
         private GameObject _moveSoundGo;
+        private BoolData _ignoreFrost;
+
         public Behaviour_Input_PlayerMovement(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _characterController = Cond.Instance.Get<CharacterController>(entity, Label.CHARACTERCONTROLLER);
             InputRegister.Instance.Load(InputRegister.Motion, InputMotionEvent);
             MessageRegister.Instance.Reg<Vector3>(MessageCode.MsgKnockbackPlayer, KnockbackPlayer);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, FrostPlayer);
 
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.KNOCKBACK, LabelStr.SPEED), out _knockbackSpeedSetting);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.KNOCKBACK, LabelStr.ACCELERATION), out _knockbackAccelerationSetting);
@@ -39,6 +46,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.INVINCIBLE, Label.ING), out _invincibleData);
             Cond.Instance.GetData(entity, Label.Assemble(LabelStr.MOVEMENT, LabelStr.DIRECTION), out _moveDirectionData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MOVE, LabelStr.SOUND), out _moveSound);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FROST, LabelStr.MOVE, LabelStr.SPEED),
+                out _frostMoveSpeed);
+            Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.IGNORE, LabelStr.FROST), out _ignoreFrost);
 
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
                 LabelStr.Assemble(LabelStr.PICK, LabelStr.MOVE, LabelStr.SPEED),
@@ -46,7 +57,29 @@ namespace LazyPan {
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
-        
+
+        //冰霜
+        private void FrostPlayer(int entityId) {
+            if (entity.ID == entityId) {
+                //冰霜减速几秒 判断是否在减速区域中
+                frostDeploy = 1;
+            }
+        }
+
+        private void Frost() {
+            if (_ignoreFrost != null && _ignoreFrost.Bool) {
+                _frost.Bool = false;
+                return;
+            }
+
+            if (frostDeploy > 0) {
+                frostDeploy -= Time.deltaTime;
+                _frost.Bool = true;
+            } else {
+                _frost.Bool = false;
+            }
+        }
+
         public override void DelayedExecute() {
             
         }
@@ -68,6 +101,7 @@ namespace LazyPan {
         private void OnUpdate() {
             Movement();
             Knockback();
+            Frost();
         }
 
         private void Movement() {
@@ -83,7 +117,13 @@ namespace LazyPan {
                 if (_pickMoveSpeed != null) {
                     pickMoveSpeed = _pickMoveSpeed.Float;
                 }
-                _characterController.Move(moveDirection * _movementSpeedData.Float * pickMoveSpeed * Time.deltaTime);
+
+                float frostMoveSpeed = 1;
+                if (_frost != null && _frost.Bool && _frostMoveSpeed != null) {
+                    frostMoveSpeed = _frostMoveSpeed.Float;
+                }
+
+                _characterController.Move(moveDirection * _movementSpeedData.Float * pickMoveSpeed * frostMoveSpeed * Time.deltaTime);
                 if (_characterController.velocity.normalized != Vector3.zero) {
                     _moveDirectionData.Vector3 = _characterController.velocity.normalized;
                 }
@@ -105,6 +145,7 @@ namespace LazyPan {
                     _knockbackData.Bool = false;
                     return;
                 }
+
                 //击退中无法移动无法瞬移
                 if (_knockbackSpeed > 0) {
                     _knockbackSpeed += _knockbackAcceleration * Time.deltaTime;
@@ -121,6 +162,7 @@ namespace LazyPan {
             base.Clear();
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
             MessageRegister.Instance.UnReg<Vector3>(MessageCode.MsgKnockbackPlayer, KnockbackPlayer);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostEntity, FrostPlayer);
             InputRegister.Instance.UnLoad(InputRegister.Motion, InputMotionEvent);
         }
     }

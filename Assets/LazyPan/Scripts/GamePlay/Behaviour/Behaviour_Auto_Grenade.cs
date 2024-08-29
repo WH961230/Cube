@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace LazyPan {
@@ -14,6 +15,7 @@ namespace LazyPan {
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
         private FloatData _BoomRange;//爆炸范围
+        private FloatData _BoomDuringTime;//总持续时间
         private FloatData _towerEnergy;//塔能量
         private List<GameObject> _bullets = new List<GameObject>();
 
@@ -27,6 +29,9 @@ namespace LazyPan {
         private float fireRateIntervalDeploy;
         private GameObject bulletTemplate;
         private LineRenderer _fireRangeLineRenderer;//范围图片
+
+        private List<BurnAreaData> _burnAreaData = new List<BurnAreaData>();
+        private List<FrostAreaData> _frostAreaData = new List<FrostAreaData>();
 
         public Behaviour_Auto_Grenade(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             //冲锋枪根源
@@ -58,6 +63,8 @@ namespace LazyPan {
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
+            //持续时间
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BOOM, LabelStr.DURATION, LabelStr.TIME), out _BoomDuringTime);
             //爆炸范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out _BoomRange);
             //范围
@@ -99,8 +106,11 @@ namespace LazyPan {
             if (!IsActive()) {
                 return;
             }
+
+            float delta = Time.deltaTime;
             ShotGrenade();
             BoomCircleRange();
+            BurnFrostAreaUpdate(delta);
         }
 
         private void ShotGrenade() {
@@ -156,27 +166,53 @@ namespace LazyPan {
 
                     if (_burn.Bool) {
                         //燃烧区域
-                        BurnArea();
+                        BurnArea(_shotBoomPoint);
                     }
 
                     if (_frost.Bool) {
                         //冰冻区域
-                        FrostArea();
+                        FrostArea(_shotBoomPoint);
                     }
                 }
             }
         }
 
-        private void BurnArea() {
-            //燃烧时间
-            //燃烧事件
-            //特效
+        private void BurnArea(Vector3 point) {
+            BurnAreaData instanceBurn = new BurnAreaData();
+            instanceBurn.OnInit(_BoomDuringTime.Float, 1, point, _BoomRange.Float);
+            _burnAreaData.Add(instanceBurn);
         }
 
-        private void FrostArea() {
-            //冰霜时间
-            //冰霜事件
-            //特效
+        private void FrostArea(Vector3 point) {
+            FrostAreaData instanceFrost = new FrostAreaData();
+            instanceFrost.OnInit(_BoomDuringTime.Float, 1, point, _BoomRange.Float);
+            _frostAreaData.Add(instanceFrost);
+        }
+
+        private void BurnFrostAreaUpdate(float delta) {
+            for (int i = 0; i < _burnAreaData.Count; i++) {
+                BurnAreaData tmpData = _burnAreaData[i];
+                tmpData.OnUpdate(delta);
+            }
+
+            for (int i = _burnAreaData.Count; i >= 0 ; i--) {
+                BurnAreaData tmpData = _burnAreaData[i];
+                if (tmpData.BurnDeploy == -1) {
+                    _burnAreaData.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i < _frostAreaData.Count; i++) {
+                FrostAreaData tmpData = _frostAreaData[i];
+                tmpData.OnUpdate(delta);
+            }
+
+            for (int i = _frostAreaData.Count; i >= 0 ; i--) {
+                FrostAreaData tmpData = _frostAreaData[i];
+                if (tmpData.FrostDeploy == -1) {
+                    _frostAreaData.RemoveAt(i);
+                }
+            }
         }
 
         private void BoomCircleRange() {
@@ -201,6 +237,90 @@ namespace LazyPan {
             Game.instance.OnLateUpdateEvent.RemoveListener(OnLateUpdate);
             foreach (var bullet in _bullets) {
                 GameObject.Destroy(bullet);
+            }
+        }
+    }
+
+    public class BurnAreaData {
+        public float BurnDeploy;
+        public float BurnIntervalDeploy;
+        public float BurnInterval;//燃烧间隔
+        public Vector3 Position;//爆炸位置
+        public float BoomRange;//爆炸范围
+
+        public void OnInit(float burnTime, float burnInterval, Vector3 point, float boomRange) {
+            BurnInterval = burnInterval;
+            Position = point;
+            BoomRange = boomRange;
+            BurnIntervalDeploy = BurnInterval;
+            BurnDeploy = burnTime;
+        }
+
+        public void OnUpdate(float delta) {
+            if (BurnDeploy > 0) {
+                BurnDeploy -= delta;
+                if (BurnIntervalDeploy < BurnInterval) {
+                    BurnIntervalDeploy += delta;
+                } else {
+                    BurnEvent(Position, BoomRange);
+                    BurnIntervalDeploy = 0;
+                }
+            } else {
+                BurnDeploy = -1;
+            }
+        }
+
+        private void BurnEvent(Vector3 point, float range) {
+            string[] types = new[] { "机器人", "Player" };
+            foreach (var tmpType in types) {
+                //扫描范围内的敌人和玩家 造成燃烧效果
+                if (EntityRegister.TryGetEntitiesWithinDistance(tmpType, point, range, out List<Entity> entities)) {
+                    foreach (var tmpEntity in entities) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgBurnEntity, tmpEntity.ID);
+                    }
+                }
+            }
+        }
+    }
+
+    public class FrostAreaData {
+        public float FrostDeploy;
+        public float FrostIntervalDeploy;
+        public float FrostInterval;//冰霜间隔
+        public Vector3 Position;//爆炸位置
+        public float BoomRange;//爆炸范围
+
+        public void OnInit(float frostTime, float frostInterval, Vector3 point, float boomRange) {
+            FrostInterval = frostInterval;
+            Position = point;
+            BoomRange = boomRange;
+            FrostIntervalDeploy = frostInterval;
+            FrostDeploy = frostTime;
+        }
+
+        public void OnUpdate(float delta) {
+            if (FrostDeploy > 0) {
+                FrostDeploy -= delta;
+                if (FrostIntervalDeploy < FrostInterval) {
+                    FrostIntervalDeploy += delta;
+                } else {
+                    FrostEvent(Position, BoomRange);
+                    FrostIntervalDeploy = 0;
+                }
+            } else {
+                FrostDeploy = -1;
+            }
+        }
+
+        private void FrostEvent(Vector3 point, float range) {
+            string[] types = new[] { "机器人", "Player" };
+            foreach (var tmpType in types) {
+                //扫描范围内的敌人和玩家 造成效果
+                if (EntityRegister.TryGetEntitiesWithinDistance(tmpType, point, range, out List<Entity> entities)) {
+                    foreach (var tmpEntity in entities) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrostEntity, tmpEntity.ID);
+                    }
+                }
             }
         }
     }

@@ -99,7 +99,9 @@ namespace LazyPan {
             string[] types = new[] { "波数增益" };
             foreach (string keyStr in objConfigs) {
                 string[] keys = keyStr.Split("|");
-                if (!Flo.Instance.CurFlowSign.Contains(keys[0])) {
+                string[] flowCodes = Flo.Instance.CurFlowSign.Split("_");
+                SceneConfig sceneConfig = SceneConfig.Get(flowCodes[1]);
+                if (sceneConfig.Description != keys[0]) {
                     continue;
                 }
                 string key = keys[1];

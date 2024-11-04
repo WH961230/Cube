@@ -15,7 +15,9 @@ namespace LazyPan {
 	        List<string> keys = ObjConfig.GetKeys();
 	        foreach (var tmpKey in keys) {
 		        string[] keySplit = tmpKey.Split("|");
-		        if (!Flo.Instance.CurFlowSign.Contains(keySplit[0])) {
+		        string[] flowCodes = Flo.Instance.CurFlowSign.Split("_");
+		        SceneConfig sceneConfig = SceneConfig.Get(flowCodes[1]);
+		        if (sceneConfig.Description != keys[0]) {
 			        continue;
 		        }
 		        ObjConfig config = ObjConfig.Get(keySplit[1]);

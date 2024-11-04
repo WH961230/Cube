@@ -199,15 +199,16 @@
       "url": "https://packages.unity.com"
     },
     "evoreek.lazypan": {
-      "version": "file:LazyPanPro",
+      "version": "https://github.com/WH961230/LazyPanPro.git",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.unity.inputsystem": "1.5.1",
         "com.unity.addressables": "1.21.20",
         "com.unity.textmeshpro": "3.0.6",
         "com.unity.timeline": "1.7.4"
-      }
+      },
+      "hash": "8ed1e19c92254f7eab1e032049e34390e1e5c2e9"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

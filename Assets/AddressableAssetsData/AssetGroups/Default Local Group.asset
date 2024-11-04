@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f881ac179214dea438be5c036c8438d3
   m_SerializeEntries:
-  - m_GUID: 7c35e4bd4d075be40b97bad778ec1d70
-    m_Address: Packages/evoreek.lazypan/Runtime/Bundles/GameSetting/GameSetting.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 08265563f7929dc409420eac6a028cf4
     m_Address: Assets/LazyPan/Bundles/Configs
     m_ReadOnly: 0
@@ -59,6 +54,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c2684f0403d053246a61ceaee66c0018
     m_Address: Assets/LazyPan/Bundles/Sounds
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c35e4bd4d075be40b97bad778ec1d70
+    m_Address: Packages/evoreek.lazypan/Runtime/Bundles/GameSetting/GameSetting.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

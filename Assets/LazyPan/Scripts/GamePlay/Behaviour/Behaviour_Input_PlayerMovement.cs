@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 namespace LazyPan {
     public class Behaviour_Input_PlayerMovement : Behaviour {
+        private Flow_SceneA _flowSceneA;
+        private Flow_SceneB _flowSceneB;
         private float frostDeploy;
 
         private FloatData _movementSpeedData;//移动速度
@@ -32,6 +34,8 @@ namespace LazyPan {
         private BoolData _ignoreFrost;
 
         public Behaviour_Input_PlayerMovement(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            Flo.Instance.GetFlow(out _flowSceneA);
+            Flo.Instance.GetFlow(out _flowSceneB);
             _characterController = Cond.Instance.Get<CharacterController>(entity, Label.CHARACTERCONTROLLER);
             InputRegister.Instance.Load(InputRegister.Motion, InputMotionEvent);
             MessageRegister.Instance.Reg<Vector3>(MessageCode.MsgKnockbackPlayer, KnockbackPlayer);
@@ -100,6 +104,9 @@ namespace LazyPan {
 
         private void OnUpdate() {
             Movement();
+            if (_flowSceneB == null) {
+                return;
+            }
             Knockback();
             Frost();
         }

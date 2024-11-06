@@ -139,7 +139,7 @@ MonoBehaviour:
     Description: "\u673A\u5668\u4EBA\u521B\u5EFA\u6CE2\u6B21"
     WaveInstanceDefaultList:
     - InstanceNumber: 5
-      InstanceRobotSign: "A14_\u7269\u4F53_\u673A\u5668\u4EBA_\u5C0F\u4E09\u89D2"
+      InstanceRobotSign: "A19_\u7269\u4F53_\u673A\u5668\u4EBA_\u8FDC\u7A0B"
       InstanceDelayTime: 2
     WaveInstanceList: []
 --- !u!1 &8090360991350506415

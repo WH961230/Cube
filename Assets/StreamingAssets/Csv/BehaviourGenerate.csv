@@ -227,3 +227,7 @@ ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%�
 ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,Auto,Clear,清除
 ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Init,初始化
 ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Clear,清除
+RemoteAttackSelfExplosion,远程攻击自爆,Auto,Init,初始化
+RemoteAttackSelfExplosion,远程攻击自爆,Auto,Clear,清除
+GlobalTrackingOfTower,全局追踪塔,Auto,Init,初始化
+GlobalTrackingOfTower,全局追踪塔,Auto,Clear,清除

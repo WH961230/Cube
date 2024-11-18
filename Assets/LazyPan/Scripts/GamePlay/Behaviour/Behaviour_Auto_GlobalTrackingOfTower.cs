@@ -26,9 +26,6 @@ namespace LazyPan {
 
         private void OnUpdate() {
             _navMeshAgent.speed = _movementSpeedData.Float * (_frost.Bool ? _frostRatio.Float : 1);
-            if (Vector3.Distance(_navMeshAgent.destination, _towerBody.position) > 0.1f) {
-                _navMeshAgent.SetDestination(_towerBody.position);
-            }
         }
 
         public override void DelayedExecute() {

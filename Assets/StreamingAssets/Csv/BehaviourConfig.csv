@@ -13,7 +13,6 @@ Behaviour_Auto_PlayerHealth,玩家血量,玩家 - 玩家血量
 Behaviour_Auto_PlayerExperience,玩家经验值,玩家 - 玩家经验值
 Behaviour_Trigger_RobotKnockbackPlayer,机器人击退玩家,机器人 - 击退玩家
 Behaviour_Trigger_AttackTowerSelfDestruct,攻击塔自爆,机器人 - 攻击塔自爆
-Behaviour_Auto_RemoteAttackSelfExplosion,远程攻击自爆,机器人 - 远程攻击自爆
 Behaviour_Auto_RobotHealth,机器人血量,机器人 - 机器人血量
 Behaviour_Auto_GlobalTrackingOfTower,全局追踪塔,机器人 - 全局追踪塔
 Behaviour_Auto_GlobalTrackingOfPlayer,全局追踪玩家,机器人 - 全局追踪玩家

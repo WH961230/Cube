@@ -324,6 +324,9 @@ MonoBehaviour:
   - Sign: FrostMoveSpeed
     Description: "\u51B0\u971C\u79FB\u52A8\u901F\u5EA6"
     Float: 0.3
+  - Sign: FrozenRatio
+    Description: "\u51B0\u51BB\u6982\u7387"
+    Float: 0
   Strings:
   - Sign: TeleportSound
     Description: "\u51B2\u523A\u97F3\u6548"

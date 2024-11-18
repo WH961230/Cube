@@ -6,6 +6,7 @@ namespace LazyPan {
     public class Behaviour_Auto_GlobalTrackingOfPlayer : Behaviour {
         private FloatData _movementSpeedData;
         private BoolData _frost;
+        private BoolData _frozen;
         private FloatData _frostRatio;
         private NavMeshAgent _navMeshAgent;
         private Entity _playerEntity;
@@ -31,7 +32,8 @@ namespace LazyPan {
 
         private void OnUpdate() {
             _navMeshAgent.speed = _movementSpeedData.Float * (_frost.Bool ? _frostRatio.Float : 1);
-            
+            _navMeshAgent.speed = _frozen.Bool ? 0 : _navMeshAgent.speed;
+
             _timeSinceLastUpdate += Time.deltaTime;
             if (_timeSinceLastUpdate >= _updateInterval) {
                 if (_playerBodyPos != _playerBody.position) {

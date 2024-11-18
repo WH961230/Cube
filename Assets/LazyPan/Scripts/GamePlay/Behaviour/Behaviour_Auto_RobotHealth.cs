@@ -13,6 +13,7 @@ namespace LazyPan {
         private BoolData _invincibleData;
         private BoolData _burn;
         private BoolData _frost;
+        private BoolData _frozen;
         private FloatData _autoAbsorbExperienceRatio;//自动吸收经验值概率
         private FloatData _burnTime;
         private FloatData _burnAttack;
@@ -22,6 +23,7 @@ namespace LazyPan {
         private Image _healthImg;
         private float burnDeploy;
         private float frostDeploy;
+        private float frozenDeploy;
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -40,6 +42,7 @@ namespace LazyPan {
                 out _autoAbsorbExperienceRatio);
             Cond.Instance.GetData(entity, LabelStr.BURN, out _burn);
             Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
+            Cond.Instance.GetData(entity, LabelStr.FROZEN, out _frozen);
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BURN, LabelStr.TIME),
                 out _burnTime);
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BURN, LabelStr.ATTACK),
@@ -79,8 +82,22 @@ namespace LazyPan {
         //冰霜
         private void Frost(int entityId) {
             if (entity.ID == entityId) {
+                bool isFrozen = false;
                 //冰霜减速几秒 判断是否在减速区域中
-                frostDeploy = 1;
+                Cond.Instance.GetData(Cond.Instance.GetPlayerEntity(), LabelStr.Assemble(LabelStr.FROZEN, LabelStr.RATIO), out FloatData frozenRatioData);
+                if (frozenRatioData.Float != 0) {
+                    float rand = Random.Range(0, 1);
+                    if (rand <= frozenRatioData.Float) {
+                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                            LabelStr.Assemble(LabelStr.FROZEN, LabelStr.TIME), out FloatData frozenData);
+                        frozenDeploy = frozenData.Float;
+                        isFrozen = true;
+                    }
+                }
+
+                if (!isFrozen) {
+                    frostDeploy = 1;
+                }
             }
         }
 
@@ -99,6 +116,13 @@ namespace LazyPan {
                 _frost.Bool = true;
             } else {
                 _frost.Bool = false;
+            }
+
+            if (frozenDeploy > 0) {
+                frozenDeploy -= Time.deltaTime;
+                _frozen.Bool = true;
+            } else {
+                _frozen.Bool = false;
             }
         }
 

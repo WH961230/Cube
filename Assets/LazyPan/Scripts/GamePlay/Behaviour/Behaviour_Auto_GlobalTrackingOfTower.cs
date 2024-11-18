@@ -6,6 +6,7 @@ namespace LazyPan {
     public class Behaviour_Auto_GlobalTrackingOfTower : Behaviour {
         private FloatData _movementSpeedData;
         private BoolData _frost;
+        private BoolData _frozen;
         private FloatData _frostRatio;
         private NavMeshAgent _navMeshAgent;
         private Entity _towerEntity;
@@ -15,6 +16,7 @@ namespace LazyPan {
             _navMeshAgent = Cond.Instance.Get<NavMeshAgent>(entity, LabelStr.NAVMESHAGENT);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MOVEMENT, LabelStr.SPEED), out _movementSpeedData);
             Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
+            Cond.Instance.GetData(entity, LabelStr.FROZEN, out _frozen);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FROST, LabelStr.RATIO), out _frostRatio);
             if(EntityRegister.TryGetEntitiesByType("Tower", out List<Entity> towerEntityList)) {
                 _towerEntity = towerEntityList[0];
@@ -26,6 +28,7 @@ namespace LazyPan {
 
         private void OnUpdate() {
             _navMeshAgent.speed = _movementSpeedData.Float * (_frost.Bool ? _frostRatio.Float : 1);
+            _navMeshAgent.speed = _frozen.Bool ? 0 : _navMeshAgent.speed;
         }
 
         public override void DelayedExecute() {

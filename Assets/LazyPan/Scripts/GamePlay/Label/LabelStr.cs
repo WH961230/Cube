@@ -95,6 +95,7 @@ public class LabelStr {
     public static string SLOW = "Slow";
     public static string IGNORE = "Ignore";
     public static string LOGO = "Logo";
+    public static string FROZEN = "Frozen";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

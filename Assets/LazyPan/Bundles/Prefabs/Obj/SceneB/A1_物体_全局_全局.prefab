@@ -195,6 +195,9 @@ MonoBehaviour:
   - Sign: FrostSlowRatio
     Description: "\u51BB\u7ED3\u51CF\u901F\u7CFB\u6570"
     Float: 0.3
+  - Sign: FrozenTime
+    Description: "\u51B0\u51BB\u65F6\u95F4"
+    Float: 1
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

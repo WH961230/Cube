@@ -1,3 +1,5 @@
+using LazyPan;
+
 public class LabelStr {
     public static string CHOOSE = "Choose";
     public static string ITEM = "Item";
@@ -92,6 +94,7 @@ public class LabelStr {
     public static string FROST = "Frost";
     public static string SLOW = "Slow";
     public static string IGNORE = "Ignore";
+    public static string LOGO = "Logo";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

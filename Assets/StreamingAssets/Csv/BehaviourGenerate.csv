@@ -229,3 +229,5 @@ ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%�
 ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Clear,清除
 GlobalTrackingOfTower,全局追踪塔,Auto,Init,初始化
 GlobalTrackingOfTower,全局追踪塔,Auto,Clear,清除
+Logo,LOGO动画,Event,Init,初始化,
+Logo,LOGO动画,Event,Clear,清除,

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4c935e4125df4b74fb76167bd279aec0
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - ChillDuanSans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e538704d22da64a448bc9b4e95628ea0, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

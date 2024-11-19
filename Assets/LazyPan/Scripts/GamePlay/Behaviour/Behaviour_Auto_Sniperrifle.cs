@@ -14,6 +14,8 @@ namespace LazyPan {
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
         private BoolData _penetrate;//穿透
+        private BoolData _effectAttackData;
+        private IntData _fireCount;//射击数量
         private FloatData _towerEnergy;//塔能量
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
@@ -45,8 +47,13 @@ namespace LazyPan {
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
+            //效果攻击
+            Cond.Instance.GetData(base.entity, LabelStr.Assemble(LabelStr.EFFECT, LabelStr.ATTACK),
+                out _effectAttackData);
             Cond.Instance.GetData(entity, LabelStr.PENETRATE, out _penetrate);
             _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            //射击数量
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.COUNT), out _fireCount);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -86,32 +93,34 @@ namespace LazyPan {
             if (!IsActive()) {
                 return;
             }
-            GetWithinDistanceEntity();
+            
             ShotBulletToEnemy();
         }
 
-        private void GetWithinDistanceEntity() {
-            if (EntityRegister.TryGetEntitiesWithinDistance("机器人", _foot.position,
-                    _fireRange.Float, out List<Entity> entities)) {
-                _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
+        private void ShotBulletToEnemy() {
+            if (fireRateIntervalDeploy > 0) {
+                fireRateIntervalDeploy -= Time.deltaTime;
             } else {
-                _targetInRangeRobotEntity = null;
+                fireRateIntervalDeploy = _fireRateInterval.Float;
+                Fire(_fireCount.Int);
             }
         }
 
-        private void ShotBulletToEnemy() {
-            if (_targetInRangeRobotEntity != null) {
-                if (fireRateIntervalDeploy > 0) {
-                    fireRateIntervalDeploy -= Time.deltaTime;
-                } else {
-                    fireRateIntervalDeploy = _fireRateInterval.Float;
-
+        private void Fire(int count) {
+            while (count > 0) {
+                if (EntityRegister.TryGetEntitiesWithinDistance("机器人", _foot.position,
+                        _fireRange.Float, out List<Entity> entities)) {
+                    _targetInRangeRobotEntity = entities[Random.Range(0, entities.Count)];
+                
                     GameObject instanceBullet = FireParticleSystemBullet();
                     _bullets.Add(instanceBullet);
                     Comp comp = instanceBullet.GetComponent<Comp>();
                     comp.OnParticleCollisionEvent.RemoveAllListeners();
                     comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
+                } else {
+                    _targetInRangeRobotEntity = null;
                 }
+                count--;
             }
         }
 
@@ -144,6 +153,16 @@ namespace LazyPan {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
                     fxGo.SetActive(_penetrate.Bool);
+
+                    //效果攻击
+                    if (_effectAttackData.Bool) {
+                        float rand = Random.Range(-1f, 1f);
+                        if (rand > 0) {
+                            MessageRegister.Instance.Dis(MessageCode.MsgBurnEntity, bodyEntity.ID);
+                        } else {
+                            MessageRegister.Instance.Dis(MessageCode.MsgFrostEntity, bodyEntity.ID);
+                        }
+                    }
                 }
             }
         }

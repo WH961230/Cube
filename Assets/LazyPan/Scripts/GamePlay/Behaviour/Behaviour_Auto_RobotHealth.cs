@@ -75,7 +75,27 @@ namespace LazyPan {
             if (entity.ID == entityId) {
                 //燃烧几秒后 判断是否燃烧区域中
                 burnDeploy = 1;
-                //燃烧特效
+
+                //爆炸概率
+                Cond.Instance.GetData(Cond.Instance.GetPlayerEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.RATIO), out FloatData boomRatioData);
+                if (boomRatioData.Float != 0) {
+                    float rand = Random.Range(0, 1);
+                    if (rand <= boomRatioData.Float) {
+                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out FloatData boomRangeData);
+                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.ATTACK), out FloatData boomAttackData);
+                        
+                        //激活触发器
+                        Vector3 robotBody = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position;
+                        Collider[] colliders = Physics.OverlapSphere(robotBody, boomRangeData.Float);
+                        foreach (var tmpCollider in colliders) {
+                            if (EntityRegister.TryGetEntityByBodyPrefabID(tmpCollider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
+                                if (bodyEntity.ObjConfig.Type == "机器人") {
+                                    BeDamaged(bodyEntity.ID, boomAttackData.Float);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

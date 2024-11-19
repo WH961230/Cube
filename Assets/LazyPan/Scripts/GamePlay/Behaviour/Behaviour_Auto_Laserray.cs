@@ -13,12 +13,13 @@ namespace LazyPan {
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
         private IntData _fireCount;
+        private BoolData _effectAttackData;
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private FloatData _towerEnergy;
         private List<GameObject> _bullets = new List<GameObject>();
 
         private float fireRateIntervalDeploy;
-        private GameObject bulletTemplate;
+        private StringData bulletData;
         private GameObject _fireRangeImgGo;//范围图片
 
         public Behaviour_Auto_Laserray(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
@@ -26,8 +27,8 @@ namespace LazyPan {
             _foot = Cond.Instance.Get<Transform>(entity, LabelStr.FOOT);
             //子弹根节点
             _bulletFoot = Cond.Instance.Get<Transform>(entity, LabelStr.Assemble(LabelStr.BULLET, LabelStr.FOOT));
-            //子弹模板
-            bulletTemplate = Cond.Instance.Get<GameObject>(entity, LabelStr.BULLET);
+            //子弹标识
+            Cond.Instance.GetData(entity, LabelStr.BULLET, out bulletData);
             //身体
             _body = Cond.Instance.Get<Transform>(entity, LabelStr.BODY);
             //枪口
@@ -44,13 +45,15 @@ namespace LazyPan {
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
+            //效果攻击
+            Cond.Instance.GetData(base.entity, LabelStr.Assemble(LabelStr.EFFECT, LabelStr.ATTACK),
+                out _effectAttackData);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
 
             _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.COUNT), out _fireCount);
-            _fireCount.Int = 1;
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -63,6 +66,10 @@ namespace LazyPan {
             
         }
 
+        private GameObject GetBullet() {
+            return Cond.Instance.Get<GameObject>(entity, bulletData.String);
+        }
+        
         private bool IsActive() {
             bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
             _fireRangeImgGo.SetActive(active);
@@ -130,7 +137,7 @@ namespace LazyPan {
 
         private void CreateLaser(Entity robotEntity) {
             GameObject bulletGameObject =
-                Object.Instantiate(bulletTemplate, _muzzle.position, Quaternion.identity, _bulletFoot);
+                Object.Instantiate(GetBullet(), _muzzle.position, Quaternion.identity, _bulletFoot);
             bulletGameObject.SetActive(true);
             bulletGameObject.transform.position = _muzzle.position;
             Vector3 direction = (Cond.Instance.Get<Transform>(robotEntity, LabelStr.BODY).position -
@@ -158,6 +165,15 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(collider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    //效果攻击
+                    if (_effectAttackData.Bool) {
+                        float rand = Random.Range(-1f, 1f);
+                        if (rand > 0) {
+                            MessageRegister.Instance.Dis(MessageCode.MsgBurnEntity, bodyEntity.ID);
+                        } else {
+                            MessageRegister.Instance.Dis(MessageCode.MsgFrostEntity, bodyEntity.ID);
+                        }
+                    }
                 }
             }
         }

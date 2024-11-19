@@ -4,6 +4,7 @@
 namespace LazyPan {
     public class Behaviour_Auto_ShotGunAddSpreadReduceRange : Behaviour {
         public Behaviour_Auto_ShotGunAddSpreadReduceRange(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            
         }
 
         public override void DelayedExecute() {

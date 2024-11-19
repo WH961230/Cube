@@ -5266,6 +5266,9 @@ MonoBehaviour:
   - Sign: Penetrate
     Description: "\u662F\u5426\u5F00\u542F\u7A7F\u900F"
     Bool: 0
+  - Sign: EffectAttack
+    Description: "\u662F\u5426\u5F00\u542F\u6548\u679C\u653B\u51FB\u654C\u4EBA"
+    Bool: 0
   Ints:
   - Sign: Level
     Description: "\u7B49\u7EA7"
@@ -5283,6 +5286,9 @@ MonoBehaviour:
   - Sign: FireRange
     Description: "\u5C04\u51FB\u8303\u56F4"
     Float: 20
+  - Sign: FireCount
+    Description: "\u5C04\u51FB\u6570\u91CF"
+    Float: 1
   Strings:
   - Sign: Icon
     Description: "\u56FE\u6807 \u4E0B\u65B9\u662F\u5B58\u653E\u56FE\u7247\u5730\u5740"

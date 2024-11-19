@@ -78,12 +78,12 @@ Behaviour_Auto_LaserrayIncreaseARay,激光升级 - 增加一道激光,激光升�
 Behaviour_Auto_LaserrayIncreaseRayWidthAndColdTime,激光升级 - 增加一半宽度和冷却时间,激光升级 - 激光宽度增加50%，增加50%冷却时间
 Behaviour_Auto_LaserrayReduceColdTimeAndRayWidth,激光升级 - 减少一半宽度和冷却时间,激光升级 - 减少50%冷却时间，激光宽度增加50%
 Behaviour_Auto_LaserrayIncreaseAttack,激光升级 - 造成倍数伤害,激光升级 - 造成150%伤害
-Behaviour_Auto_LaserrayAttackChargeEnergyIncreaseAttack,激光升级 - 攻击间隙充能每秒加攻下次攻击刷新,激光升级 - 攻击后进行充能，每充能1s增加5%伤害，攻击后重新充能
+Behaviour_Auto_LaserrayAttackChargeEnergyIncreaseAttack,激光升级 - 攻击50%的概率造成冰霜50%的概率造成点燃,激光升级 - 攻击50%的概率造成冰霜50%的概率造成点燃
 Behaviour_Auto_SniperrifleBulletPenetrate,狙击枪升级 - 子弹获得穿透,狙击枪升级 - 子弹获得穿透
 Behaviour_Auto_SniperrifleIncreaseAttack,狙击枪升级 - 增加狙击枪100攻击力,狙击枪升级 - 增加狙击枪100攻击力
 Behaviour_Auto_SniperrifleIncreaseFireRate,狙击枪升级 - 增加狙击枪150%攻速,狙击枪升级 - 增加狙击枪150%攻速
-Behaviour_Auto_SniperrifleAttackIncreaseFireCriticalHitRate,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置,狙击枪升级 - 每次攻击后增加20%暴击率，暴击后重置
-Behaviour_Auto_SniperrifleAttackIncreaseComboRate,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置,狙击枪升级 - 每次攻击后增加20%连击率，连击后重置
+Behaviour_Auto_SniperrifleAttackIncreaseFireCriticalHitRate,狙击枪升级 - 增加一发狙击枪子弹,狙击枪升级 - 增加一发狙击枪子弹
+Behaviour_Auto_SniperrifleAttackIncreaseComboRate,狙击枪升级 - 狙击枪每次攻击50%概率燃烧，50%概率冰霜,狙击枪升级 - 狙击枪每次攻击50%概率燃烧，50%概率冰霜
 Behaviour_Auto_StrafesatelliteAddSecondBullet,扫射卫星升级 - 增加一个枪头,扫射卫星升级 - 增加一个枪头
 Behaviour_Auto_StrafesatelliteSlowRobotMoveSpeed,扫射卫星升级 - 对敌人造成减速效果,扫射卫星升级 - 对敌人造成减速效果
 Behaviour_Auto_StrafesatelliteBurnRobot,扫射卫星升级 - 对敌人造成燃烧效果,扫射卫星升级 - 对敌人造成燃烧效果

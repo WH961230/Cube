@@ -95,10 +95,10 @@ Behaviour_Auto_GrenadeLeaveFreezingArea,手雷升级 - 爆炸后留下一片冰�
 Behaviour_Auto_GrenadeReduceColdTime,手雷升级 - 减少冷却时间,手雷升级 - 减少冷却时间
 Behaviour_Auto_GrenadeIncreaseAreaContinueTime,手雷升级 - 增加范围持续时间,手雷升级 - 增加范围持续时间
 Behaviour_Auto_ShotGunIncreaseAttack,霰弹枪升级 - 增加50%霰弹枪伤害,霰弹枪升级 - 增加50%霰弹枪伤害
-Behaviour_Auto_ShotGunAddSpreadReduceRange,霰弹枪升级 - 增加50%霰弹枪扇形区间，减少射程,霰弹枪升级 - 增加50%霰弹枪扇形区间，减少射程
-Behaviour_Auto_ShotGunAddRangeReduceSpread,霰弹枪升级 - 增加50%霰弹枪射程，减少扇形大小,霰弹枪升级 - 增加50%霰弹枪射程，减少扇形大小
-Behaviour_Auto_ShotGunShootWeakDouble,霰弹枪升级 - 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低,霰弹枪升级 - 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低
-Behaviour_Auto_ShotGunChangeShootWay,霰弹枪升级 - 急速：修改攻击方式,霰弹枪升级 - 急速：修改攻击方式
+Behaviour_Auto_ShotGunAddSpreadReduceRange,霰弹枪升级 - 减少50%霰弹枪冷却，减少50%射程,霰弹枪升级 - 减少50%霰弹枪冷却，减少50%射程
+Behaviour_Auto_ShotGunAddRangeReduceSpread,霰弹枪升级 - 增加50%霰弹枪射程，增加霰弹枪50%冷却,霰弹枪升级 - 增加50%霰弹枪射程，增加霰弹枪50%冷却
+Behaviour_Auto_ShotGunShootWeakDouble,霰弹枪升级 - 击退命中的敌人 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低,霰弹枪升级 - 击退命中的敌人 两连击：攻击后对当前区域在发动一次攻击，单次伤害降低，攻速降低
+Behaviour_Auto_ShotGunChangeShootWay,霰弹枪升级 - 概率秒杀弱小型敌人,霰弹枪升级 - 概率秒杀弱小型敌人
 Behaviour_Auto_RingIncreaseFireRange,圆环升级 - 射程增加33%,圆环升级 - 射程增加33%
 Behaviour_Auto_RingAttackRobotMoveSlowly,圆环升级 - 对敌人造成减速效果,圆环升级 - 对敌人造成减速效果
 Behaviour_Auto_RingAttackRobotBurning,圆环升级 - 对敌人造成燃烧效果,圆环升级 - 对敌人造成燃烧效果

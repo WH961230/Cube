@@ -23,6 +23,7 @@ namespace LazyPan {
             _playerEntity = Cond.Instance.GetPlayerEntity();
             _playerBody = Cond.Instance.Get<Transform>(_playerEntity, LabelStr.BODY);
             _navMeshAgent.SetDestination(_playerBody.position);
+            Cond.Instance.GetData(entity, LabelStr.FROZEN, out _frozen);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
         

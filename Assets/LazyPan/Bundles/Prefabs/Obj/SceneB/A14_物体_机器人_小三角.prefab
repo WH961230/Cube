@@ -247,6 +247,9 @@ MonoBehaviour:
   - Sign: Frost
     Description: "\u51B0\u971C\u4E2D"
     Bool: 0
+  - Sign: Frozen
+    Description: "\u51B0\u51BB\u4E2D"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: MovementSpeed

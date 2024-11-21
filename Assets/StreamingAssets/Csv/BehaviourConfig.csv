@@ -102,11 +102,6 @@ Behaviour_Auto_ShotGunChangeShootWay,霰弹枪升级 - 概率秒杀弱小型敌�
 Behaviour_Auto_RingIncreaseFireRange,圆环升级 - 射程增加33%,圆环升级 - 射程增加33%
 Behaviour_Auto_RingAttackRobotMoveSlowly,圆环升级 - 对敌人造成减速效果,圆环升级 - 对敌人造成减速效果
 Behaviour_Auto_RingAttackRobotBurning,圆环升级 - 对敌人造成燃烧效果,圆环升级 - 对敌人造成燃烧效果
-Behaviour_Auto_RingAttackBurningArea,圆环升级 - 圆环造成伤害时生成一片燃烧区域,圆环升级 - 圆环造成伤害时生成一片燃烧区域
-Behaviour_Auto_RingAttackFreezingArea,圆环升级 - 圆环造成伤害时生成一片冰冻区域,圆环升级 - 圆环造成伤害时生成一片冰冻区域
-Behaviour_Auto_ChainLightningIncreaseACatapult,闪电链升级 - 增加1次弹射,闪电链升级 - 增加1次弹射
-Behaviour_Auto_ChainLightningNetCatapult,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1
-Behaviour_Auto_ChainLightningLineCatapult,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2
-Behaviour_Auto_ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1
-Behaviour_Auto_ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,闪电链升级 - 弹射伤害量减少10%，弹射次数+2
-Behaviour_Event_Logo,LOGO动画,LOGO动画,,,
+Behaviour_Auto_RingAttackBurningArea,圆环升级 - 50%几率对敌人造成冰冻,圆环升级 - 50%几率对敌人造成冰冻
+Behaviour_Auto_RingAttackFreezingArea,圆环升级 - 50%几率对敌人造成爆炸,圆环升级 - 50%几率对敌人造成爆炸
+Behaviour_Event_Logo,LOGO动画,LOGO动画

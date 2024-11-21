@@ -4,6 +4,9 @@
 namespace LazyPan {
     public class Behaviour_Auto_ShotGunShootWeakDouble : Behaviour {
         public Behaviour_Auto_ShotGunShootWeakDouble(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+            //是否可以击退敌人
+            Cond.Instance.GetData(entity, LabelStr.KNOCKBACK, out BoolData _knockback);
+            _knockback.Bool = true;
         }
 
         public override void DelayedExecute() {

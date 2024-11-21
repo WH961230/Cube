@@ -14,6 +14,7 @@ namespace LazyPan {
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
         private FloatData _towerEnergy;//塔能量
+        private BoolData _bingo;//概率秒杀
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
 
@@ -48,6 +49,7 @@ namespace LazyPan {
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
+            Cond.Instance.GetData(towerEntity, LabelStr.BINGO, out _bingo);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -141,7 +143,11 @@ namespace LazyPan {
         private void OnParticleCollisionEvent(GameObject arg0, GameObject fxGo) {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
-                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, _fireDamage.Float);
+                    float damage = _fireDamage.Float;
+                    if (_bingo.Bool) {
+                        damage = 9999f;
+                    }
+                    MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, damage);
                 }
             }
         }

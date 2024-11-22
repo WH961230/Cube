@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ namespace LazyPan {
         private Transform _towerFoot;//塔
         private FloatData _fireDamage;//射击伤害
         private FloatData _fireRange;//射击范围
+        private FloatData _frozen;//射击范围
+        private FloatData _boom;//射击范围
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private FloatData _towerEnergy;//塔能量
         private FloatData _waveSpeed;
@@ -65,6 +68,10 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.BURN, out _burn);
             //冰霜
             Cond.Instance.GetData(entity, LabelStr.FROST, out _frost);
+            //冰冻
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FROZEN, LabelStr.RATIO), out _frozen);
+            //爆炸
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BOOM, LabelStr.RATIO), out _boom);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -114,6 +121,16 @@ namespace LazyPan {
 
                     if (_frost.Bool) {
                         MessageRegister.Instance.Dis(MessageCode.MsgFrostEntity, bodyEntity.ID);
+                    }
+
+                    bool isFrozen = Random.Range(0, 1) <= _frozen.Float;
+                    if (isFrozen) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgFrozenEntity, bodyEntity.ID);
+                    }
+
+                    bool isBoom = Random.Range(0, 1) <= _boom.Float;
+                    if (isBoom) {
+                        MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, bodyEntity.ID);
                     }
                 }
             }

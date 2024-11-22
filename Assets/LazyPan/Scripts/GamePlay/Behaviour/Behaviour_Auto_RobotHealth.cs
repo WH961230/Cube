@@ -55,6 +55,8 @@ namespace LazyPan {
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, Burn);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, Frost);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgBoomEntity, Boom);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, Frozen);
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
@@ -81,18 +83,24 @@ namespace LazyPan {
                 if (boomRatioData.Float != 0) {
                     float rand = Random.Range(0, 1);
                     if (rand <= boomRatioData.Float) {
-                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out FloatData boomRangeData);
-                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.ATTACK), out FloatData boomAttackData);
+                        Boom(entityId);
+                    }
+                }
+            }
+        }
+
+        private void Boom(int entityId) {
+            if (entity.ID == entityId) {
+                Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out FloatData boomRangeData);
+                Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.ATTACK), out FloatData boomAttackData);
                         
-                        //激活触发器
-                        Vector3 robotBody = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position;
-                        Collider[] colliders = Physics.OverlapSphere(robotBody, boomRangeData.Float);
-                        foreach (var tmpCollider in colliders) {
-                            if (EntityRegister.TryGetEntityByBodyPrefabID(tmpCollider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
-                                if (bodyEntity.ObjConfig.Type == "机器人") {
-                                    BeDamaged(bodyEntity.ID, boomAttackData.Float);
-                                }
-                            }
+                //激活触发器
+                Vector3 robotBody = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position;
+                Collider[] colliders = Physics.OverlapSphere(robotBody, boomRangeData.Float);
+                foreach (var tmpCollider in colliders) {
+                    if (EntityRegister.TryGetEntityByBodyPrefabID(tmpCollider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
+                        if (bodyEntity.ObjConfig.Type == "机器人") {
+                            BeDamaged(bodyEntity.ID, boomAttackData.Float);
                         }
                     }
                 }
@@ -102,22 +110,26 @@ namespace LazyPan {
         //冰霜
         private void Frost(int entityId) {
             if (entity.ID == entityId) {
-                bool isFrozen = false;
                 //冰霜减速几秒 判断是否在减速区域中
                 Cond.Instance.GetData(Cond.Instance.GetPlayerEntity(), LabelStr.Assemble(LabelStr.FROZEN, LabelStr.RATIO), out FloatData frozenRatioData);
                 if (frozenRatioData.Float != 0) {
                     float rand = Random.Range(0, 1);
                     if (rand <= frozenRatioData.Float) {
-                        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
-                            LabelStr.Assemble(LabelStr.FROZEN, LabelStr.TIME), out FloatData frozenData);
-                        frozenDeploy = frozenData.Float;
-                        isFrozen = true;
+                        Frozen(entityId);
                     }
                 }
 
-                if (!isFrozen) {
+                if (frozenDeploy <= 0) {
                     frostDeploy = 1;
                 }
+            }
+        }
+
+        private void Frozen(int entityId) {
+            if (entity.ID == entityId) {
+                Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
+                    LabelStr.Assemble(LabelStr.FROZEN, LabelStr.TIME), out FloatData frozenData);
+                frozenDeploy = frozenData.Float;
             }
         }
 
@@ -201,6 +213,8 @@ namespace LazyPan {
             MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnEntity, Burn);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostEntity, Frost);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBoomEntity, Boom);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrozenEntity, Frozen);
         }
     }
 }

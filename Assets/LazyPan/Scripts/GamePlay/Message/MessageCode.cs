@@ -13,4 +13,6 @@ public class MessageCode {
     public static int MsgKnockbackRobot = 11;//击退机器人
     public static int MsgBurnEntity = 12;//燃烧
     public static int MsgFrostEntity = 13;//冰霜
+    public static int MsgBoomEntity = 14;//爆炸
+    public static int MsgFrozenEntity = 15;//冰冻
 }

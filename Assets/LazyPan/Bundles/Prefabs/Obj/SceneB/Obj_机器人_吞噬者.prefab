@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603811672759092760}
   - component: {fileID: 1637018644772130692}
   m_Layer: 0
-  m_Name: "A22_\u7269\u4F53_\u673A\u5668\u4EBA_\u7E41\u80B2\u5821\u5792"
+  m_Name: "Obj_\u673A\u5668\u4EBA_\u541E\u566C\u8005"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,6 @@ MonoBehaviour:
   TrailRenderers: []
   Cameras: []
   NavMeshAgents: []
-  LineRenderers: []
 --- !u!114 &1637018644772130692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,32 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee2677da63c42f7ba7ea79356cc44b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bools:
-  - Sign: Knockbacking
-    Description: "\u51FB\u9000\u4E2D"
-    Bool: 0
-  - Sign: Burn
-    Description: "\u71C3\u70E7\u4E2D"
-    Bool: 0
-  - Sign: Frost
-    Description: "\u51B0\u971C\u4E2D"
-    Bool: 0
-  - Sign: Frozen
-    Description: "\u51B0\u51BB\u4E2D"
-    Bool: 0
+  Bools: []
   Ints: []
-  Floats:
-  - Sign: KnockbackSpeed
-    Description: "\u51FB\u9000\u901F\u5EA6"
-    Float: 15
-  - Sign: KnockbackAcceleration
-    Description: "\u51FB\u9000\u52A0\u901F\u5EA6\uFF08\u8D1F\u6570\uFF09"
-    Float: -50
-  - Sign: FrostRatio
-    Description: "\u51CF\u901F\u7CFB\u6570"
-    Float: 0.3
+  Floats: []
   Strings: []
-  Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:
   m_ObjectHideFlags: 0

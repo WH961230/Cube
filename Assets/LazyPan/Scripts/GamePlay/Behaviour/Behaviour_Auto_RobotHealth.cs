@@ -24,6 +24,7 @@ namespace LazyPan {
         private StringData _beHitSound;
         private BoolData _antibodyBool;
         private FloatData _rebornData;
+        private BoolData _deadBoomData;
         private Image _healthImg;
         private float burnDeploy;
         private float frostDeploy;
@@ -66,6 +67,9 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.ANTIBODY, out _antibodyBool);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.REBORN, LabelStr.RATIO),
                 out _rebornData);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.DEAD, LabelStr.BOOM),
+                out _deadBoomData);
+
             _body = Cond.Instance.Get<Transform>(entity, LabelStr.BODY);
             _navMeshAgent = Cond.Instance.Get<NavMeshAgent>(entity, LabelStr.NAVMESHAGENT);
 
@@ -257,6 +261,9 @@ namespace LazyPan {
                 DeathDropExperience();
             }
             MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
+            if (_deadBoomData.Bool) {
+                MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, entity.ID);
+            }
         }
 
         private void DeathDropExperience() {

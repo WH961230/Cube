@@ -106,3 +106,4 @@ Behaviour_Auto_RingAttackFreezingArea,圆环升级 - 50%几率对敌人造成爆
 Behaviour_Event_Logo,LOGO动画,LOGO动画
 Behaviour_Auto_RobotAntibody,机器人抗体,机器人抗体
 Behaviour_Auto_RobotReborn,机器人原地复活,机器人原地复活,,,
+Behaviour_Auto_RobotDeadBoom,机器人死亡后原地爆炸,机器人死亡后原地爆炸,,,

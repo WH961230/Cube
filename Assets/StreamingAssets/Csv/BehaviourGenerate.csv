@@ -223,3 +223,5 @@ RobotAntibody,机器人抗体,Auto,Init,初始化
 RobotAntibody,机器人抗体,Auto,Clear,清除
 RobotReborn,机器人原地复活,Auto,Init,初始化,
 RobotReborn,机器人原地复活,Auto,Clear,清除,
+RobotDeadBoom,机器人死亡后原地爆炸,Auto,Init,初始化,
+RobotDeadBoom,机器人死亡后原地爆炸,Auto,Clear,清除,

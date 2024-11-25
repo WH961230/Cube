@@ -100,6 +100,7 @@ public class LabelStr {
     public static string BINGO = "Bingo";
     public static string ANTIBODY = "Antibody";
     public static string REBORN = "Reborn";
+    public static string DEAD = "Dead";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

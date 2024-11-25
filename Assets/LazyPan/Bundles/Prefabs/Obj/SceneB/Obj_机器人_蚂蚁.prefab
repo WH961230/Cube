@@ -641,7 +641,9 @@ MonoBehaviour:
   UnityEventDatas: []
   TrailRenderers: []
   Cameras: []
-  NavMeshAgents: []
+  NavMeshAgents:
+  - Sign: NavMeshAgent
+    NavMeshAgent: {fileID: 5293773193777825626}
   LineRenderers: []
 --- !u!114 &1637018644772130692
 MonoBehaviour:
@@ -673,6 +675,18 @@ MonoBehaviour:
     Bool: 0
   Ints: []
   Floats:
+  - Sign: MovementSpeed
+    Description: "\u79FB\u52A8\u901F\u5EA6"
+    Float: 3
+  - Sign: Damage
+    Description: "\u4F24\u5BB3"
+    Float: 5
+  - Sign: Health
+    Description: "\u8840\u91CF"
+    Float: 20
+  - Sign: MaxHealth
+    Description: "\u6700\u5927\u8840\u91CF"
+    Float: 20
   - Sign: KnockbackSpeed
     Description: "\u51FB\u9000\u901F\u5EA6"
     Float: 15
@@ -682,6 +696,9 @@ MonoBehaviour:
   - Sign: FrostRatio
     Description: "\u51CF\u901F\u7CFB\u6570"
     Float: 0.3
+  - Sign: RebornRatio
+    Description: "\u590D\u6D3B\u7CFB\u6570"
+    Float: 0
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

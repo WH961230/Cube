@@ -47,8 +47,6 @@ Laserray,激光射线,Auto,Init,初始化
 Laserray,激光射线,Auto,Clear,清除
 Grenade,手雷,Auto,Init,初始化
 Grenade,手雷,Auto,Clear,清除
-ChainLightning,闪电链,Auto,Init,初始化
-ChainLightning,闪电链,Auto,Clear,清除
 RobotStrengthen,机器人强化,Auto,Init,初始化
 RobotStrengthen,机器人强化,Auto,Clear,清除
 ChargeActivation,充能激活,Trigger,Init,初始化
@@ -217,19 +215,11 @@ RingAttackBurningArea,圆环升级 - 圆环造成伤害时生成一片燃烧区�
 RingAttackBurningArea,圆环升级 - 圆环造成伤害时生成一片燃烧区域,Auto,Clear,清除
 RingAttackFreezingArea,圆环升级 - 圆环造成伤害时生成一片冰冻区域,Auto,Init,初始化
 RingAttackFreezingArea,圆环升级 - 圆环造成伤害时生成一片冰冻区域,Auto,Clear,清除
-ChainLightningIncreaseACatapult,闪电链升级 - 增加1次弹射,Auto,Init,初始化
-ChainLightningIncreaseACatapult,闪电链升级 - 增加1次弹射,Auto,Clear,清除
-ChainLightningNetCatapult,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1,Auto,Init,初始化
-ChainLightningNetCatapult,闪电链升级 - 网状弹射：每次弹射将分为两条闪电链，攻击力对半分，弹射次数+1,Auto,Clear,清除
-ChainLightningLineCatapult,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2,Auto,Init,初始化
-ChainLightningLineCatapult,闪电链升级 - 线性弹射：每次弹射减少20%伤害，弹射次数+2,Auto,Clear,清除
-ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,Auto,Init,初始化
-ChainLightningSplitCatapult,闪电链升级 - 分裂数量+1，攻击力为33%，弹射次数+1,Auto,Clear,清除
-ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Init,初始化
-ChainLightningIncreaseCatapultCount,闪电链升级 - 弹射伤害量减少10%，弹射次数+2,Auto,Clear,清除
 GlobalTrackingOfTower,全局追踪塔,Auto,Init,初始化
 GlobalTrackingOfTower,全局追踪塔,Auto,Clear,清除
-Logo,LOGO动画,Event,Init,初始化,
-Logo,LOGO动画,Event,Clear,清除,
-RobotAntibody,机器人抗体,Auto,Init,初始化,
-RobotAntibody,机器人抗体,Auto,Clear,清除,
+Logo,LOGO动画,Event,Init,初始化
+Logo,LOGO动画,Event,Clear,清除
+RobotAntibody,机器人抗体,Auto,Init,初始化
+RobotAntibody,机器人抗体,Auto,Clear,清除
+RobotReborn,机器人原地复活,Auto,Init,初始化,
+RobotReborn,机器人原地复活,Auto,Clear,清除,

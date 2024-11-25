@@ -279,6 +279,9 @@ MonoBehaviour:
   - Sign: FrostRatio
     Description: "\u51CF\u901F\u7CFB\u6570"
     Float: 0.3
+  - Sign: RebornRatio
+    Description: "\u590D\u6D3B\u7CFB\u6570"
+    Float: 0
   Strings:
   - Sign: BeHitSound
     Description: "\u88AB\u51FB\u4E2D\u97F3\u6548"

@@ -85,7 +85,7 @@ namespace LazyPan {
         private void DeathDropExperience() {
             int randNum = Random.Range(5, 10);
             while (randNum > 0) {
-                Entity drop = Obj.Instance.LoadEntity("A11_物体_可拾取_经验值");
+                Entity drop = Obj.Instance.LoadEntity("Obj_可拾取_经验值");
                 drop.SetBeginLocationInfo(new LocationInformationData() {
                     Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
                 });

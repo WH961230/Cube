@@ -191,7 +191,7 @@ namespace LazyPan {
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.DROP, LabelStr.RATIO),
                 out IntData intData);
             if (randNum <= intData.Int) {
-                Entity drop = Obj.Instance.LoadEntity("A11_物体_可拾取_经验值");
+                Entity drop = Obj.Instance.LoadEntity("Obj_可拾取_经验值");
                 drop.SetBeginLocationInfo(new LocationInformationData() {
                     Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
                 });

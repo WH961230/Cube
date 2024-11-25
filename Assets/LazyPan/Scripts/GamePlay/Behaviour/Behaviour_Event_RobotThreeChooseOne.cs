@@ -118,7 +118,7 @@ namespace LazyPan {
 
         //初始化机器人BUFF
         private void InitRobotBuffs() {
-            string objSign = "A23_物体_事件_机器人强化";
+            string objSign = "Obj_事件_机器人强化";
             List<string> list = RobotStrengthenConfig.GetKeys();
             foreach (var tmpKey in list) {
                 RobotStrengthenConfig config = RobotStrengthenConfig.Get(tmpKey);
@@ -280,7 +280,7 @@ namespace LazyPan {
         //注册强化行为
         private void RegisterStrengthenBehaviour(Entity buffEntity) {
             //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-            if (EntityRegister.TryGetEntityBySign("A13_物体_事件_机器人创建器",
+            if (EntityRegister.TryGetEntityBySign("Obj_事件_机器人创建器",
                     out Entity createRobotEntity)) {
                 if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                         out Behaviour_Event_CreateRandomPositionRobot beh)) {
@@ -310,7 +310,7 @@ namespace LazyPan {
         private void RegisterWave(Entity buffEntity, int difficulty) {
             if (Cond.Instance.GetData<RobotWaveData, WaveData>(buffEntity, LabelStr.WAVE, out WaveData waveData)) {
                 //无目标针对所有敌人 在敌人的生成位置 放置待注册Buff
-                if (EntityRegister.TryGetEntityBySign("A13_物体_事件_机器人创建器",
+                if (EntityRegister.TryGetEntityBySign("Obj_事件_机器人创建器",
                         out Entity createRobotEntity)) {
                     if (BehaviourRegister.GetBehaviour(createRobotEntity.ID,
                             out Behaviour_Event_CreateRandomPositionRobot beh)) {

@@ -105,3 +105,4 @@ Behaviour_Auto_RingAttackRobotBurning,圆环升级 - 对敌人造成燃烧效果
 Behaviour_Auto_RingAttackBurningArea,圆环升级 - 50%几率对敌人造成冰冻,圆环升级 - 50%几率对敌人造成冰冻
 Behaviour_Auto_RingAttackFreezingArea,圆环升级 - 50%几率对敌人造成爆炸,圆环升级 - 50%几率对敌人造成爆炸
 Behaviour_Event_Logo,LOGO动画,LOGO动画
+Behaviour_Auto_RobotAntibody,机器人抗体,机器人抗体,,,

@@ -231,3 +231,5 @@ GlobalTrackingOfTower,全局追踪塔,Auto,Init,初始化
 GlobalTrackingOfTower,全局追踪塔,Auto,Clear,清除
 Logo,LOGO动画,Event,Init,初始化,
 Logo,LOGO动画,Event,Clear,清除,
+RobotAntibody,机器人抗体,Auto,Init,初始化,
+RobotAntibody,机器人抗体,Auto,Clear,清除,

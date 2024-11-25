@@ -98,6 +98,7 @@ public class LabelStr {
     public static string FROZEN = "Frozen";
     public static string EFFECT = "Effect";
     public static string BINGO = "Bingo";
+    public static string ANTIBODY = "Antibody";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

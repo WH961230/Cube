@@ -20,6 +20,7 @@ namespace LazyPan {
         private FloatData _frostTime;
         private FloatData _frostSlowRatio;
         private StringData _beHitSound;
+        private BoolData _antibodyBool;
         private Image _healthImg;
         private float burnDeploy;
         private float frostDeploy;
@@ -52,11 +53,14 @@ namespace LazyPan {
             Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
                 LabelStr.Assemble(LabelStr.FROST, LabelStr.SLOW, LabelStr.RATIO),
                 out _frostSlowRatio);
+            Cond.Instance.GetData(entity, LabelStr.ANTIBODY, out _antibodyBool);
+
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, Burn);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, Frost);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgBoomEntity, Boom);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, Frozen);
+
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
 
@@ -75,6 +79,9 @@ namespace LazyPan {
         //燃烧 燃烧时间完成后再次检测
         private void Burn(int entityId) {
             if (entity.ID == entityId) {
+                if (_antibodyBool.Bool) {
+                    return;
+                }
                 //燃烧几秒后 判断是否燃烧区域中
                 burnDeploy = 1;
 
@@ -91,6 +98,10 @@ namespace LazyPan {
 
         private void Boom(int entityId) {
             if (entity.ID == entityId) {
+                if (_antibodyBool.Bool) {
+                    return;
+                }
+
                 Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out FloatData boomRangeData);
                 Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.ATTACK), out FloatData boomAttackData);
                         
@@ -110,6 +121,10 @@ namespace LazyPan {
         //冰霜
         private void Frost(int entityId) {
             if (entity.ID == entityId) {
+                if (_antibodyBool.Bool) {
+                    return;
+                }
+
                 //冰霜减速几秒 判断是否在减速区域中
                 Cond.Instance.GetData(Cond.Instance.GetPlayerEntity(), LabelStr.Assemble(LabelStr.FROZEN, LabelStr.RATIO), out FloatData frozenRatioData);
                 if (frozenRatioData.Float != 0) {
@@ -127,6 +142,10 @@ namespace LazyPan {
 
         private void Frozen(int entityId) {
             if (entity.ID == entityId) {
+                if (_antibodyBool.Bool) {
+                    return;
+                }
+
                 Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
                     LabelStr.Assemble(LabelStr.FROZEN, LabelStr.TIME), out FloatData frozenData);
                 frozenDeploy = frozenData.Float;

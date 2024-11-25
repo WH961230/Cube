@@ -668,6 +668,9 @@ MonoBehaviour:
   - Sign: Frozen
     Description: "\u51B0\u51BB\u4E2D"
     Bool: 0
+  - Sign: Antibody
+    Description: "\u514D\u75AB"
+    Bool: 0
   Ints: []
   Floats:
   - Sign: KnockbackSpeed

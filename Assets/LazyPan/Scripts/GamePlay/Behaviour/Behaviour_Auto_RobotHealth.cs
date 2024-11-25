@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 
@@ -21,10 +23,18 @@ namespace LazyPan {
         private FloatData _frostSlowRatio;
         private StringData _beHitSound;
         private BoolData _antibodyBool;
+        private FloatData _rebornData;
         private Image _healthImg;
         private float burnDeploy;
         private float frostDeploy;
         private float frozenDeploy;
+        private NavMeshAgent _navMeshAgent;
+        private Transform _body;
+        
+        private Vector3 originalDestination;
+        private Vector3 originalRespawnPosition;
+        private float respawnDelay = 2f;
+
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -54,6 +64,10 @@ namespace LazyPan {
                 LabelStr.Assemble(LabelStr.FROST, LabelStr.SLOW, LabelStr.RATIO),
                 out _frostSlowRatio);
             Cond.Instance.GetData(entity, LabelStr.ANTIBODY, out _antibodyBool);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.REBORN, LabelStr.RATIO),
+                out _rebornData);
+            _body = Cond.Instance.Get<Transform>(entity, LabelStr.BODY);
+            _navMeshAgent = Cond.Instance.Get<NavMeshAgent>(entity, LabelStr.NAVMESHAGENT);
 
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, Burn);
@@ -190,11 +204,52 @@ namespace LazyPan {
                     }
 
                     if (_healthData.Float <= 0) {
-                        _healthData.Float = 0;
-                        Dead(damageValue != Mathf.Infinity);
+                        float rand = Random.Range(0.001f, 1);
+                        if (_rebornData.Float != 0 && _rebornData.Float < rand) {
+                            _healthData.Float = _maxHealthData.Float;
+                            Respawn();
+                            return;
+                        }
+
+                        if (_rebornData.Float == 0) {
+                            _healthData.Float = 0;
+                            Dead(damageValue != Mathf.Infinity);
+                        }
                     }
                 } 
             }
+        }
+
+        private void Respawn() {
+            // 记录当前目标位置
+            if (_navMeshAgent.enabled) {
+                originalDestination = _navMeshAgent.destination;
+                originalRespawnPosition = _navMeshAgent.transform.position;
+            }
+
+            // 停止 NavMeshAgent 控制
+            _navMeshAgent.isStopped = true;
+            _navMeshAgent.enabled = false;
+            
+            _body.gameObject.SetActive(false);
+
+            _rebornData.Float = 0;
+
+            // 开始复活过程
+            ClockUtil.Instance.AlarmAfter(respawnDelay, RespawnAfter);
+        }
+
+        private void RespawnAfter() {
+            _body.gameObject.SetActive(true);
+            // 复活位置重置
+            _body.position = originalRespawnPosition;
+
+            // 恢复 NavMeshAgent 控制
+            _navMeshAgent.enabled = true;
+            _navMeshAgent.isStopped = false;
+
+            // 重新设定目标位置（可根据需求调整）
+            _navMeshAgent.SetDestination(originalDestination);
         }
 
         private void Dead(bool isDrop) {

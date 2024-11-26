@@ -260,16 +260,16 @@ MonoBehaviour:
   Floats:
   - Sign: MovementSpeed
     Description: "\u79FB\u52A8\u901F\u5EA6"
-    Float: 2
+    Float: 0
   - Sign: Damage
     Description: "\u4F24\u5BB3"
-    Float: 15
+    Float: 0
   - Sign: Health
     Description: "\u8840\u91CF"
-    Float: 50
+    Float: 10
   - Sign: MaxHealth
     Description: "\u6700\u5927\u8840\u91CF"
-    Float: 50
+    Float: 1000
   - Sign: KnockbackSpeed
     Description: "\u51FB\u9000\u901F\u5EA6"
     Float: 15
@@ -279,9 +279,15 @@ MonoBehaviour:
   - Sign: FrostRatio
     Description: "\u51CF\u901F\u7CFB\u6570"
     Float: 0.3
-  - Sign: RebornRatio
-    Description: "\u590D\u6D3B\u7CFB\u6570"
+  - Sign: RecoverRatio
+    Description: "\u56DE\u8840\u7CFB\u6570"
     Float: 0
+  - Sign: DamageConversionRatio
+    Description: "\u4F24\u5BB3\u8F6C\u5316\u7CFB\u6570"
+    Float: 0.5
+  - Sign: SpeedConversionRatio
+    Description: "\u79FB\u901F\u8F6C\u5316\u7CFB\u6570"
+    Float: 0.1
   Strings:
   - Sign: BeHitSound
     Description: "\u88AB\u51FB\u4E2D\u97F3\u6548"

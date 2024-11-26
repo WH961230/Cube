@@ -699,6 +699,9 @@ MonoBehaviour:
   - Sign: RebornRatio
     Description: "\u590D\u6D3B\u7CFB\u6570"
     Float: 0
+  - Sign: RecoverRatio
+    Description: "\u56DE\u8840\u7CFB\u6570"
+    Float: 0
   Strings:
   - Sign: BeHitSound
     Description: "\u88AB\u51FB\u4E2D\u97F3\u6548"

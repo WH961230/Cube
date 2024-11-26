@@ -101,6 +101,8 @@ public class LabelStr {
     public static string ANTIBODY = "Antibody";
     public static string REBORN = "Reborn";
     public static string DEAD = "Dead";
+    public static string ABSORBS = "Absorbs";
+    public static string CONVERSION = "Conversion";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -23,7 +23,10 @@ namespace LazyPan {
         private FloatData _frostSlowRatio;
         private StringData _beHitSound;
         private BoolData _antibodyBool;
+        private BoolData _globalAntibodyBool;
         private FloatData _rebornData;
+        private FloatData _globalRebornData;
+        private FloatData _globalRecoverRatioData;
         private BoolData _deadBoomData;
         private Image _healthImg;
         private float burnDeploy;
@@ -35,6 +38,7 @@ namespace LazyPan {
         private Vector3 originalDestination;
         private Vector3 originalRespawnPosition;
         private float respawnDelay = 2f;
+        private float globalRecoverDeploy = 0f;
 
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
@@ -65,19 +69,25 @@ namespace LazyPan {
                 LabelStr.Assemble(LabelStr.FROST, LabelStr.SLOW, LabelStr.RATIO),
                 out _frostSlowRatio);
             Cond.Instance.GetData(entity, LabelStr.ANTIBODY, out _antibodyBool);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.ANTIBODY, out _globalAntibodyBool);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.REBORN, LabelStr.RATIO),
                 out _rebornData);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.REBORN, LabelStr.RATIO),
+                out _globalRebornData);
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.DEAD, LabelStr.BOOM),
                 out _deadBoomData);
+            Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.RECOVER, LabelStr.RATIO),
+                out _globalRecoverRatioData);
 
             _body = Cond.Instance.Get<Transform>(entity, LabelStr.BODY);
             _navMeshAgent = Cond.Instance.Get<NavMeshAgent>(entity, LabelStr.NAVMESHAGENT);
 
-            MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, Burn);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, Frost);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgBoomEntity, Boom);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, Frozen);
+            MessageRegister.Instance.Reg<int, float>(MessageCode.MsgDamageRobot, MsgBeDamaged);
+            MessageRegister.Instance.Reg<int, float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, MsgBurn);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, MsgFrost);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgBoomEntity, MsgBoom);
+            MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, MsgFrozen);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
         }
@@ -92,12 +102,24 @@ namespace LazyPan {
             }
 
             OnBurnAndFrost();
+            OnRecover();
+        }
+
+        private void OnRecover() {
+            if (_globalRebornData.Float > 0) {
+                if (globalRecoverDeploy < 0) {
+                    globalRecoverDeploy += Time.deltaTime;
+                } else {
+                    BeRecoveredHealth(_maxHealthData.Float * _globalRecoverRatioData.Float);
+                    globalRecoverDeploy = 0;
+                }
+            }
         }
 
         //燃烧 燃烧时间完成后再次检测
-        private void Burn(int entityId) {
+        private void MsgBurn(int entityId) {
             if (entity.ID == entityId) {
-                if (_antibodyBool.Bool) {
+                if (_antibodyBool.Bool || _globalAntibodyBool.Bool) {
                     return;
                 }
                 //燃烧几秒后 判断是否燃烧区域中
@@ -108,15 +130,15 @@ namespace LazyPan {
                 if (boomRatioData.Float != 0) {
                     float rand = Random.Range(0, 1);
                     if (rand <= boomRatioData.Float) {
-                        Boom(entityId);
+                        MsgBoom(entityId);
                     }
                 }
             }
         }
 
-        private void Boom(int entityId) {
+        private void MsgBoom(int entityId) {
             if (entity.ID == entityId) {
-                if (_antibodyBool.Bool) {
+                if (_antibodyBool.Bool || _globalAntibodyBool.Bool) {
                     return;
                 }
 
@@ -129,7 +151,7 @@ namespace LazyPan {
                 foreach (var tmpCollider in colliders) {
                     if (EntityRegister.TryGetEntityByBodyPrefabID(tmpCollider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
                         if (bodyEntity.ObjConfig.Type == "机器人") {
-                            BeDamaged(bodyEntity.ID, boomAttackData.Float);
+                            MsgBeDamaged(bodyEntity.ID, boomAttackData.Float);
                         }
                     }
                 }
@@ -137,9 +159,9 @@ namespace LazyPan {
         }
 
         //冰霜
-        private void Frost(int entityId) {
+        private void MsgFrost(int entityId) {
             if (entity.ID == entityId) {
-                if (_antibodyBool.Bool) {
+                if (_antibodyBool.Bool || _globalAntibodyBool.Bool) {
                     return;
                 }
 
@@ -148,7 +170,7 @@ namespace LazyPan {
                 if (frozenRatioData.Float != 0) {
                     float rand = Random.Range(0, 1);
                     if (rand <= frozenRatioData.Float) {
-                        Frozen(entityId);
+                        MsgFrozen(entityId);
                     }
                 }
 
@@ -158,7 +180,7 @@ namespace LazyPan {
             }
         }
 
-        private void Frozen(int entityId) {
+        private void MsgFrozen(int entityId) {
             if (entity.ID == entityId) {
                 if (_antibodyBool.Bool) {
                     return;
@@ -174,7 +196,7 @@ namespace LazyPan {
             if (burnDeploy > 0) {
                 burnDeploy -= Time.deltaTime;
                 Debug.LogFormat("角色:{0}受到灼烧伤害:{1}", entity.ID, _burnAttack.Float * Time.deltaTime);
-                BeDamaged(entity.ID, _burnAttack.Float * Time.deltaTime);
+                MsgBeDamaged(entity.ID, _burnAttack.Float * Time.deltaTime);
                 _burn.Bool = true;
             } else {
                 _burn.Bool = false;
@@ -195,7 +217,7 @@ namespace LazyPan {
             }
         }
 
-        private void BeDamaged(int entityId, float damageValue) {
+        private void MsgBeDamaged(int entityId, float damageValue) {
             if (entity.ID == entityId) {
                 if (_healthData.Float != 0) {
                     if (_healthData.Float > 0) {
@@ -204,15 +226,28 @@ namespace LazyPan {
                             damageValue = 9999;
                         }
                         _healthData.Float -= damageValue;
+                        MessageRegister.Instance.Dis(MessageCode.MsgAbsorbsDamageToHealthMax, entityId, damageValue);
                         Sound.Instance.SoundPlay(_beHitSound.String, Vector3.zero, false, 2);
                     }
 
                     if (_healthData.Float <= 0) {
-                        float rand = Random.Range(0.001f, 1);
-                        if (_rebornData.Float != 0 && _rebornData.Float < rand) {
-                            _healthData.Float = _maxHealthData.Float;
-                            Respawn();
-                            return;
+                        //全局重生系数
+                        if (_globalRebornData.Float > 0) {
+                            //机器人自己的重生系数
+                            float rand = Random.Range(0.001f, 1);
+                            if (_globalRebornData.Float != 0 && _globalRebornData.Float < rand) {
+                                _healthData.Float = _maxHealthData.Float;
+                                Respawn();
+                                return;
+                            }
+                        } else {
+                            //机器人自己的重生系数
+                            float rand = Random.Range(0.001f, 1);
+                            if (_rebornData.Float != 0 && _rebornData.Float < rand) {
+                                _healthData.Float = _maxHealthData.Float;
+                                Respawn();
+                                return;
+                            }
                         }
 
                         if (_rebornData.Float == 0) {
@@ -223,6 +258,28 @@ namespace LazyPan {
                 } 
             }
         }
+        
+        private void MsgBeRecovered(int entityId, float recoverValue) {
+            if (entityId == entity.ID && _globalRecoverRatioData.Float == 0) {
+                BeRecoveredHealth(recoverValue);
+                Debug.Log("恢复血量:" + recoverValue + " 当前血量:" + _healthData.Float);
+            }
+        }
+
+        private void BeRecoveredHealth(float recoverValue) {
+            if (_healthData.Float == _maxHealthData.Float || recoverValue == 0) {
+                return;
+            }
+
+            if (_healthData.Float < _maxHealthData.Float) {
+                _healthData.Float += recoverValue;
+            }
+
+            if (_healthData.Float > _maxHealthData.Float) {
+                _healthData.Float = _maxHealthData.Float;
+            }
+        }
+
 
         private void Respawn() {
             // 记录当前目标位置
@@ -291,11 +348,11 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
-            MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, BeDamaged);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnEntity, Burn);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostEntity, Frost);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBoomEntity, Boom);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrozenEntity, Frozen);
+            MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, MsgBeDamaged);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnEntity, MsgBurn);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostEntity, MsgFrost);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBoomEntity, MsgBoom);
+            MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrozenEntity, MsgFrozen);
         }
     }
 }

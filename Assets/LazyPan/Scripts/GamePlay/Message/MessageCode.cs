@@ -15,4 +15,5 @@ public class MessageCode {
     public static int MsgFrostEntity = 13;//冰霜
     public static int MsgBoomEntity = 14;//爆炸
     public static int MsgFrozenEntity = 15;//冰冻
+    public static int MsgAbsorbsDamageToHealthMax = 16;//吸收伤害为血量上限
 }

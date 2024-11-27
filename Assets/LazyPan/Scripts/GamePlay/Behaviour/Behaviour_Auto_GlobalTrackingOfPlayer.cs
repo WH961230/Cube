@@ -51,7 +51,7 @@ namespace LazyPan {
 
             _timeSinceLastUpdate += Time.deltaTime;
             if (_timeSinceLastUpdate >= _updateInterval) {
-                if (_playerBodyPos != _playerBody.position) {
+                if (_playerBodyPos != _playerBody.position && _navMeshAgent.isOnNavMesh) {
                     _navMeshAgent.SetDestination(_playerBody.position);
                     _playerBodyPos = _playerBody.position; // 更新上次位置
                 }

@@ -632,7 +632,9 @@ MonoBehaviour:
   TextMeshProUGUIs: []
   TMPInputFields: []
   Animators: []
-  Images: []
+  Images:
+  - Sign: Health
+    Image: {fileID: 695501571726620270}
   PlayableDirectors: []
   TimelineAssets: []
   Comps:

@@ -44,7 +44,7 @@ namespace LazyPan {
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.IGNORE, LabelStr.BURN), out _ignoreBurn);
             
             MessageRegister.Instance.Reg<float>(MessageCode.MsgDamagePlayer, MsgBeDamaged);
-            MessageRegister.Instance.Reg<float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
+            MessageRegister.Instance.Reg<int, float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, BurnPlayer);
             Game.instance.OnLateUpdateEvent.AddListener(OnUpdate);
         }
@@ -84,9 +84,11 @@ namespace LazyPan {
             }
         }
 
-        private void MsgBeRecovered(float recoverValue) {
-            BeRecoveredHealth(recoverValue);
-            Debug.Log("恢复血量:" + recoverValue + " 当前血量:" + _healthData.Float);
+        private void MsgBeRecovered(int entityID, float recoverValue) {
+            if (entityID == entity.ID) {
+                BeRecoveredHealth(recoverValue);
+                Debug.Log("恢复血量:" + recoverValue + " 当前血量:" + _healthData.Float);
+            }
         }
 
         private void BeRecoveredHealth(float recoverValue) {
@@ -130,7 +132,7 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             Game.instance.OnLateUpdateEvent.RemoveListener(OnUpdate);
-            MessageRegister.Instance.UnReg<float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
+            MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
             MessageRegister.Instance.UnReg<float>(MessageCode.MsgDamagePlayer, MsgBeDamaged);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnEntity, BurnPlayer);
         }

@@ -64,7 +64,7 @@ namespace LazyPan {
                 if (_energyData.Float >= _energyMaxData.Float) {
                     Sound.Instance.SoundRecycle(soundGo);
                     Debug.Log("充能恢复所有血量可激活物体完成");
-                    MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, 999f);
+                    MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, entity.ID, 999f);
                     Obj.Instance.UnLoadEntity(entity);
                     return;
                 }

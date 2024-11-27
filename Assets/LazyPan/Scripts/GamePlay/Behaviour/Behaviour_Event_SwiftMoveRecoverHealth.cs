@@ -30,7 +30,7 @@ namespace LazyPan {
                 if (moveTime > 0) {
                     moveTime -= Time.deltaTime;
                 } else {
-                    MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, _healthMax.Float * _ratio.Float);
+                    MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, entity.ID, _healthMax.Float * _ratio.Float);
                     moveTime = 1;
                 }
             } else {

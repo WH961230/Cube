@@ -77,7 +77,7 @@ namespace LazyPan {
             //拾取恢复血量
             Cond.Instance.GetData(playerEntity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out FloatData _healthMax);
             Cond.Instance.GetData(playerEntity, LabelStr.Assemble(LabelStr.PICK, LabelStr.RECOVER, LabelStr.RATIO), out FloatData _ratio);
-            MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, _healthMax.Float * _ratio.Float);
+            MessageRegister.Instance.Dis(MessageCode.MsgRecoverHealth, playerEntity.ID, _healthMax.Float * _ratio.Float);
 
             //拾取增加移速
             _pickMoveSpeed.Float += _pickIncreaseMoveSpeed.Float;

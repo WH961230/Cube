@@ -318,7 +318,7 @@ namespace LazyPan {
                 DeathDropExperience();
             }
             MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
-            if (_deadBoomData.Bool) {
+            if (_deadBoomData != null && _deadBoomData.Bool) {
                 MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, entity.ID);
             }
         }

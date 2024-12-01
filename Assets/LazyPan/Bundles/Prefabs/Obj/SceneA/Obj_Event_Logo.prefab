@@ -131,7 +131,7 @@ MonoBehaviour:
   Floats:
   - Sign: LogoTime
     Description: "Logo\u6301\u7EED\u65F6\u95F4"
-    Float: 8
+    Float: 1
   Strings: []
   Vector3s: []
 --- !u!1 &8090360991350506415

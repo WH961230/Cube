@@ -1011,7 +1011,7 @@ MonoBehaviour:
     String: "\u6FC0\u5149\u5C04\u7EBF"
   - Sign: Sign
     Description: "\u6807\u8BC6"
-    String: "A49_\u7269\u4F53_\u6B66\u5668_\u6FC0\u5149\u5C04\u7EBF"
+    String: "Obj_\u6B66\u5668_\u6FC0\u5149\u5C04\u7EBF"
   - Sign: FireSound
     Description: "\u6807\u8BC6"
     String: "\u6FC0\u5149\u5C04\u7EBF"

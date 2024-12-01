@@ -500,7 +500,7 @@ MonoBehaviour:
     String: "\u73AF\u7ED5\u7403"
   - Sign: Sign
     Description: "\u6807\u8BC6"
-    String: "A48_\u7269\u4F53_\u6B66\u5668_\u73AF\u7ED5\u7403"
+    String: "Obj_\u6B66\u5668_\u73AF\u7ED5\u7403"
   Vector3s: []
 --- !u!1 &7998865933611097595
 GameObject:

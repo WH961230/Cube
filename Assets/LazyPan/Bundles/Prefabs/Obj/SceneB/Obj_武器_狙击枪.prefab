@@ -5298,5 +5298,5 @@ MonoBehaviour:
     String: "\u72D9\u51FB\u67AA"
   - Sign: Sign
     Description: "\u6807\u8BC6"
-    String: "A45_\u7269\u4F53_\u6B66\u5668_\u72D9\u51FB\u67AA"
+    String: "Obj_\u6B66\u5668_\u72D9\u51FB\u67AA"
   Vector3s: []

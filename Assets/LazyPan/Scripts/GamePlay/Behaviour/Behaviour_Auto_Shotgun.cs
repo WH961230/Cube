@@ -144,7 +144,7 @@ namespace LazyPan {
             if (EntityRegister.TryGetEntityByBodyPrefabID(arg0.GetInstanceID(), out Entity bodyEntity)) {
                 if (bodyEntity.ObjConfig.Type == "机器人") {
                     float damage = _fireDamage.Float;
-                    if (_bingo.Bool) {
+                    if (_bingo != null && _bingo.Bool) {
                         damage = 9999f;
                     }
                     MessageRegister.Instance.Dis(MessageCode.MsgDamageRobot, bodyEntity.ID, damage);

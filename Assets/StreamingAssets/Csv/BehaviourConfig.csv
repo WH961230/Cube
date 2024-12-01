@@ -111,3 +111,4 @@ Behaviour_Auto_GiantChanter,巨型吟唱者,巨型吟唱者
 Behaviour_Auto_GiantMutant,巨型变异体,巨型变异体
 Behaviour_Auto_GiantCharged,巨型充能机器人,巨型充能机器人
 Behaviour_Auto_GiantAnt,巨型蚂蚁,巨型蚂蚁
+Behaviour_Auto_RecoverNearRobotHealth,恢复周围的机器人血量,恢复周围的机器人血量,,,

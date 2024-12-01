@@ -5173,7 +5173,7 @@ MonoBehaviour:
     String: "\u51B2\u950B\u67AA"
   - Sign: Sign
     Description: "\u6807\u8BC6"
-    String: "A43_\u7269\u4F53_\u6B66\u5668_\u51B2\u950B\u67AA"
+    String: "Obj_\u6B66\u5668_\u51B2\u950B\u67AA"
   - Sign: FireSound
     Description: "\u6807\u8BC6"
     String: "\u51B2\u950B\u67AA\u5C04\u51FB"

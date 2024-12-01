@@ -5692,7 +5692,7 @@ MonoBehaviour:
     String: "\u626B\u5C04\u536B\u661F"
   - Sign: Sign
     Description: "\u6807\u8BC6"
-    String: "A46_\u7269\u4F53_\u6B66\u5668_\u626B\u5C04\u536B\u661F"
+    String: "Obj_\u6B66\u5668_\u626B\u5C04\u536B\u661F"
   Vector3s: []
 --- !u!1 &8090360991350506415
 GameObject:

@@ -48,7 +48,6 @@ namespace LazyPan {
             
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out _maxHealthData);
             Cond.Instance.GetData(entity, LabelStr.HEALTH, out _healthData);
-            _healthData.Float = _maxHealthData.Float;
 
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.BE, LabelStr.HIT, LabelStr.SOUND),
                 out _beHitSound);
@@ -235,25 +234,23 @@ namespace LazyPan {
                         if (_globalRebornData.Float > 0) {
                             //机器人自己的重生系数
                             float rand = Random.Range(0.001f, 1);
-                            if (_globalRebornData.Float != 0 && _globalRebornData.Float < rand) {
+                            if (_globalRebornData.Float != 0 && _globalRebornData.Float > rand) {
                                 _healthData.Float = _maxHealthData.Float;
                                 Respawn();
                                 return;
                             }
-                        } else {
+                        } else if(_rebornData != null && _rebornData.Float > 0) {
                             //机器人自己的重生系数
                             float rand = Random.Range(0.001f, 1);
-                            if (_rebornData.Float != 0 && _rebornData.Float < rand) {
+                            if (_rebornData.Float != 0 && _rebornData.Float > rand) {
                                 _healthData.Float = _maxHealthData.Float;
                                 Respawn();
                                 return;
                             }
                         }
 
-                        if (_rebornData.Float == 0) {
-                            _healthData.Float = 0;
-                            Dead(damageValue != Mathf.Infinity);
-                        }
+                        _healthData.Float = 0;
+                        Dead(damageValue != Mathf.Infinity);
                     }
                 } 
             }

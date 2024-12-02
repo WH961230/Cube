@@ -7,7 +7,7 @@ namespace LazyPan {
 		private Entity Obj_Camera_Camera;
 		private Entity Obj_Event_Logo;
 		private Entity Obj_灯光_灯光A;
-		private Entity Obj_Post_Post;
+		private Entity Obj_Post_PostA;
 		private Entity Obj_Terrain_Terrain;
 		private Entity Obj_Player_Player;
 		private Entity Obj_Trigger_ChargeStartGame;
@@ -30,7 +30,7 @@ namespace LazyPan {
 		/*开始游戏*/
 		public void StartGame() {
 			Obj_灯光_灯光A = Obj.Instance.LoadEntity("Obj_灯光_灯光A");
-			Obj_Post_Post = Obj.Instance.LoadEntity("Obj_Post_Post");
+			Obj_Post_PostA = Obj.Instance.LoadEntity("Obj_Post_PostA");
 			Obj_Terrain_Terrain = Obj.Instance.LoadEntity("Obj_Terrain_Terrain");
 			Obj_Player_Player = Obj.Instance.LoadEntity("Obj_Player_Player");
 			Obj_Trigger_ChargeStartGame = Obj.Instance.LoadEntity("Obj_Trigger_ChargeStartGame");
@@ -48,7 +48,7 @@ namespace LazyPan {
 			Obj.Instance.UnLoadEntity(Obj_Trigger_ChargeStartGame);
 			Obj.Instance.UnLoadEntity(Obj_Player_Player);
 			Obj.Instance.UnLoadEntity(Obj_Terrain_Terrain);
-			Obj.Instance.UnLoadEntity(Obj_Post_Post);
+			Obj.Instance.UnLoadEntity(Obj_Post_PostA);
 			Obj.Instance.UnLoadEntity(Obj_Event_Logo);
 			Obj.Instance.UnLoadEntity(Obj_Camera_Camera);
 			Obj.Instance.UnLoadEntity(Obj_灯光_灯光A);

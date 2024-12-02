@@ -5,6 +5,7 @@ namespace LazyPan {
 		private Comp UI_SceneB;
 
 		private Entity Obj_全局_全局;
+		private Entity Obj_Post_PostB;
 		private Entity Obj_灯光_灯光B;
 		private Entity Obj_相机_相机;
 		private Entity Obj_地形_地形;
@@ -22,6 +23,7 @@ namespace LazyPan {
 			UI_SceneB = UI.Instance.Open("UI_SceneB");
 
 			Obj_全局_全局 = Obj.Instance.LoadEntity("Obj_全局_全局");
+			Obj_Post_PostB = Obj.Instance.LoadEntity("Obj_Post_PostB");
 			Obj_灯光_灯光B = Obj.Instance.LoadEntity("Obj_灯光_灯光B");
 			Obj_相机_相机 = Obj.Instance.LoadEntity("Obj_相机_相机");
 			Obj_地形_地形 = Obj.Instance.LoadEntity("Obj_地形_地形");
@@ -63,6 +65,7 @@ namespace LazyPan {
 			Obj.Instance.UnLoadEntity(Obj_地形_地形);
 			Obj.Instance.UnLoadEntity(Obj_相机_相机);
 			Obj.Instance.UnLoadEntity(Obj_灯光_灯光B);
+			Obj.Instance.UnLoadEntity(Obj_Post_PostB);
 			Obj.Instance.UnLoadEntity(Obj_全局_全局);
 
 			UI.Instance.Close("UI_SceneB");

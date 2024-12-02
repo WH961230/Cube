@@ -6,10 +6,11 @@ Obj_Player_Player,开始场景A,Player,开始场景A玩家,LocationInf_SceneA_Pl
 Obj_Terrain_Terrain,开始场景A,Terrain,开始场景A地形,LocationInf_SceneA_Terrain,
 Obj_Trigger_ChargeStartGame,开始场景A,Trigger,开始场景A开始游戏触发器,LocationInf_SceneA_StartGame,开始游戏充能
 Obj_Event_Logo,开始场景A,Event,开始场景ALogo动画事件,,LOGO动画
-Obj_Post_Post,开始场景A,Post,开始场景A后处理,,
+Obj_Post_PostA,开始场景A,Post,开始场景A后处理,,
 Obj_灯光_灯光A,开始场景A,灯光,开始场景A灯光,,
 Obj_全局_全局,战斗场景B,Global,战斗场景B全局,,
 Obj_相机_相机,战斗场景B,Camera,战斗场景B相机,,相机跟随玩家
+Obj_Post_PostB,战斗场景B,Post,战斗场景B后处理,,
 Obj_玩家_玩家,战斗场景B,Player,战斗场景B玩家,LocationInf_SceneB_Player,玩家移动|重力|玩家血量|玩家经验值|玩家无敌传送
 Obj_灯光_灯光B,战斗场景B,灯光,战斗场景B灯光,,
 Obj_地形_地形,战斗场景B,Terrain,战斗场景B地形,LocationInf_SceneB_Terrain,

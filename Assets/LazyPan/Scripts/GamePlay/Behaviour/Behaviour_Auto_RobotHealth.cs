@@ -327,8 +327,10 @@ namespace LazyPan {
                 out IntData intData);
             if (randNum <= intData.Int) {
                 Entity drop = Obj.Instance.LoadEntity("Obj_可拾取_经验值");
+                Vector3 robotPos = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position;
+                Vector3 dropPos = new Vector3(robotPos.x, 0, robotPos.z);
                 drop.SetBeginLocationInfo(new LocationInformationData() {
-                    Position = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position
+                    Position = dropPos
                 });
 
                 //有概率直接吸收

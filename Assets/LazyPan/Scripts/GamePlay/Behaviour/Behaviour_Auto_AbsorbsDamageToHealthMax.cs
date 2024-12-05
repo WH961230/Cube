@@ -5,7 +5,7 @@ namespace LazyPan {
     public class Behaviour_Auto_AbsorbsDamageToHealthMax : Behaviour {
         private FloatData _healthMax;
         public Behaviour_Auto_AbsorbsDamageToHealthMax(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
-            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.HEALTH, LabelStr.MAX), out _healthMax);
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out _healthMax);
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgAbsorbsDamageToHealthMax, MsgAbsorbsDamageToHealthMax);
         }
 

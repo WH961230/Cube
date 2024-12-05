@@ -225,11 +225,9 @@ namespace LazyPan {
                             damageValue = 9999;
                         }
                         _healthData.Float -= damageValue;
-                        GameObject floatTextInstance = Loader.LoadAsset<GameObject>(AssetType.PREFAB, "Obj/Common/FloatText");
-                        GameObject instance = GameObject.Instantiate(floatTextInstance);
-                        instance.transform.SetParent(_body);
-                        instance.transform.localPosition = Vector3.zero;
-                        instance.GetComponent<FloatingText>().SetText(damageValue.ToString());
+                        
+                        SetFloatingText(damageValue);
+
                         MessageRegister.Instance.Dis(MessageCode.MsgAbsorbsDamageToHealthMax, entityId, damageValue);
                         Sound.Instance.SoundPlay(_beHitSound.String, Vector3.zero, false, 2);
                     }
@@ -260,7 +258,17 @@ namespace LazyPan {
                 } 
             }
         }
-        
+
+        private void SetFloatingText(float damageValue) {
+            GameObject floatTextInstance = Loader.LoadAsset<GameObject>(AssetType.PREFAB, "Obj/Common/FloatText");
+            GameObject instance = GameObject.Instantiate(floatTextInstance);
+            instance.transform.SetParent(_body);
+            instance.transform.localPosition = Vector3.zero;
+            FloatingText instanceText = instance.GetComponent<FloatingText>();
+            instanceText.SetText(damageValue.ToString());
+            instanceText.SetColor(Color.red);
+        }
+
         private void MsgBeRecovered(int entityId, float recoverValue) {
             if (entityId == entity.ID && _globalRecoverRatioData.Float == 0) {
                 BeRecoveredHealth(recoverValue);

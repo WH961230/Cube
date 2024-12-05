@@ -5,6 +5,8 @@ using UnityEngine.UI;
 namespace LazyPan {
     
     public class Behaviour_Auto_CameraPlayerView : Behaviour {
+        private Flow_SceneB flow;
+        private Slider _timeScaleSlider;
         private Entity _playerEntity;
         private CinemachineVirtualCamera _virtualCamera;
         public Behaviour_Auto_CameraPlayerView(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
@@ -18,7 +20,7 @@ namespace LazyPan {
         }
 
         private void TestUI() {
-            if (Flo.Instance.GetFlow(out Flow_SceneB flow)) {
+            if (Flo.Instance.GetFlow(out flow)) {
                 Comp ui = flow.GetUI();
                 Button testDead = Cond.Instance.Get<Button>(ui, "TestDead");
                 ButtonRegister.AddListener(testDead, () => {
@@ -28,6 +30,8 @@ namespace LazyPan {
                 ButtonRegister.AddListener(testWin, () => {
                     flow.Next("SceneA");
                 });
+                
+                _timeScaleSlider = Cond.Instance.Get<Slider>(ui, "TimeScale");
             }
         }
 
@@ -38,6 +42,14 @@ namespace LazyPan {
                 if (_virtualCamera.m_Follow == null) {
                     _virtualCamera.m_Follow = Cond.Instance.Get<Transform>(_playerEntity, Label.BODY);
                 }
+            }
+
+            TestTimeScale();
+        }
+
+        private void TestTimeScale() {
+            if (_timeScaleSlider != null) {
+                Time.timeScale = _timeScaleSlider.value;
             }
         }
 

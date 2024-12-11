@@ -291,7 +291,6 @@ namespace LazyPan {
             }
         }
 
-
         private void Respawn() {
             // 记录当前目标位置
             if (_navMeshAgent.enabled) {

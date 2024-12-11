@@ -227,6 +227,7 @@ namespace LazyPan {
                         _healthData.Float -= damageValue;
                         
                         SetFloatingText(damageValue);
+                        Cond.Instance.GetEvent(entity, LabelStr.HIT)?.Invoke();
 
                         MessageRegister.Instance.Dis(MessageCode.MsgAbsorbsDamageToHealthMax, entityId, damageValue);
                         Sound.Instance.SoundPlay(_beHitSound.String, Vector3.zero, false, 2);

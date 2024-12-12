@@ -9,7 +9,7 @@ namespace LazyPan {
         public Behaviour_Event_Settlement(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
-            Time.timeScale = 0;
+            MessageRegister.Instance.Dis(MessageCode.MsgSetTimeScale, 0f);
             OpenSettlementUI();
         }
         
@@ -33,7 +33,7 @@ namespace LazyPan {
         }
 
         private void Next() {
-            Time.timeScale = 1;
+            MessageRegister.Instance.Dis(MessageCode.MsgSetTimeScale, 1f);
             CloseSettlementUI();
             _flow.Next("SceneA");
         }

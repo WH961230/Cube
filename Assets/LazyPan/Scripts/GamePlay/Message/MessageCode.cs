@@ -1,3 +1,5 @@
+using UnityEngine.InputSystem;
+
 public class MessageCode {
     public static int MsgPlayerLevelUp = 0;//升级
     public static int MsgRobotUp = 1;//机器人升级
@@ -16,4 +18,5 @@ public class MessageCode {
     public static int MsgBoomEntity = 14;//爆炸
     public static int MsgFrozenEntity = 15;//冰冻
     public static int MsgAbsorbsDamageToHealthMax = 16;//吸收伤害为血量上限
+    public static int MsgSetTimeScale = 17;//时间暂停
 }

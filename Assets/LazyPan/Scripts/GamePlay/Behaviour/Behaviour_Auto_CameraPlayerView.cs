@@ -12,6 +12,7 @@ namespace LazyPan {
         public Behaviour_Auto_CameraPlayerView(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             _virtualCamera = Cond.Instance.Get<Transform>(entity, Label.CAMERA).GetComponent<CinemachineVirtualCamera>();
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+            MessageRegister.Instance.Reg<float>(MessageCode.MsgSetTimeScale, SetTimeScale);
             TestUI();
         }
         
@@ -35,6 +36,10 @@ namespace LazyPan {
             }
         }
 
+        private void SetTimeScale(float timeScale) {
+            _timeScaleSlider.value = timeScale;
+        }
+
         private void OnUpdate() {
             if (_playerEntity == null) {
                 _playerEntity = Cond.Instance.GetPlayerEntity();
@@ -56,6 +61,7 @@ namespace LazyPan {
         public override void Clear() {
             base.Clear();
             Game.instance.OnUpdateEvent.RemoveListener(OnUpdate);
+            MessageRegister.Instance.UnReg<float>(MessageCode.MsgSetTimeScale, SetTimeScale);
         }
     }
 }

@@ -151,7 +151,7 @@ namespace LazyPan {
                     return;
                 }
 
-                Time.timeScale = 0;
+                MessageRegister.Instance.Dis(MessageCode.MsgSetTimeScale, 0f);
                 choose.gameObject.SetActive(true);
                 int resultCount = 3;
                 int[] index = MathUtil.Instance.GetRandNoRepeatIndex(playBuffEntity.Count, resultCount);
@@ -325,7 +325,7 @@ namespace LazyPan {
             choose.gameObject.SetActive(false);
 
             InputRegister.Instance.UnLoad(InputRegister.ESCAPE, InputCloseUI);
-            Time.timeScale = 1;
+            MessageRegister.Instance.Dis(MessageCode.MsgSetTimeScale, 1f);
         }
 
         public override void Clear() {

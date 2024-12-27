@@ -1,7 +1,7 @@
 ﻿Sign,Flow,Type,Name,SetUpLocationInformationSign,SetUpBehaviourName
 string,string,string,string,string,string
 标识,流程,类型,名称,创建绑定的位置信息,创建绑定行为名字
-Obj_Camera_Camera,开始场景A,Camera,开始场景A相机,,相机跟随玩家
+Obj_Camera_Camera,开始场景A,Camera,开始场景A相机,,
 Obj_Player_Player,开始场景A,Player,开始场景A玩家,LocationInf_SceneA_Player,重力|玩家移动
 Obj_Terrain_Terrain,开始场景A,Terrain,开始场景A地形,LocationInf_SceneA_Terrain,
 Obj_Trigger_ChargeStartGame,开始场景A,Trigger,开始场景A开始游戏触发器,LocationInf_SceneA_StartGame,开始游戏充能

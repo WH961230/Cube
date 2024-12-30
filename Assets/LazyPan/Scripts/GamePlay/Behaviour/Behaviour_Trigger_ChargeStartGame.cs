@@ -62,6 +62,7 @@ namespace LazyPan {
                     _isChargingEnergyData.Bool = true;
                     _energyImage.gameObject.SetActive(true);
                     soundGo = Sound.Instance.SoundPlay(_chargeSoundData.String, Vector3.zero, true, -1);
+                    Cond.Instance.GetEvent(entity, "开始充能")?.Invoke();
                 }
             }
         }
@@ -74,6 +75,7 @@ namespace LazyPan {
                     _energyImage.gameObject.SetActive(false);
                     _energyData.Float = 0;
                     Sound.Instance.SoundRecycle(soundGo);
+                    Cond.Instance.GetEvent(entity, "结束充能")?.Invoke();
                 }
             }
         }

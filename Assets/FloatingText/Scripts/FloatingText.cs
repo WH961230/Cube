@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(TextMesh))]
 public class FloatingText : MonoBehaviour {
+    public SpriteRenderer icon;
     public TextMesh textMesh;
     public float LifeTime = 1;
     public bool FadeEnd = false;
@@ -43,6 +44,9 @@ public class FloatingText : MonoBehaviour {
         }
 
         textMesh.color = new Color(TextColor.r, TextColor.g, TextColor.b, alpha);
+        if (icon != null) {
+            icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, alpha);
+        }
 
         if (camera != null) {
             this.transform.localScale = Vector3.one;

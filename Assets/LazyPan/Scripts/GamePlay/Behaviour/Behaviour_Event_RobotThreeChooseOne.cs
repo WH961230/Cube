@@ -360,6 +360,16 @@ namespace LazyPan {
             CloseRobotThreeChooseOneUI();
             MessageRegister.Instance.UnReg(MessageCode.MsgRobotUp, MsgRobotThreeChooseOne);
             MessageRegister.Instance.UnReg(MessageCode.MsgLevelUp, MsgDisplayLevelUp);
+
+            foreach (var tmpEntity in _parallelBuffs) {
+                Obj.Instance.UnLoadEntity(tmpEntity);
+            }
+
+            foreach (var tmpListEntity in _robotStrengthenBuffs.Values) {
+                foreach (var tmpEntity in tmpListEntity) {
+                    Obj.Instance.UnLoadEntity(tmpEntity);
+                }
+            }
         }
     }
 }

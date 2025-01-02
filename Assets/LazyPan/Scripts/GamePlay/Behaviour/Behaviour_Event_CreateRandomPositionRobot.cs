@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 namespace LazyPan {
     public class Behaviour_Event_CreateRandomPositionRobot : Behaviour {
 	    private List<SetUpBehaviourData> _setUpBehaviours = new List<SetUpBehaviourData>();
-	    private List<Entity> _robots = new List<Entity>();
+	    private List<Entity> 
+		    _robots = new List<Entity>();
 	    private WaveData _waveData = new WaveData();
 	    private Queue<WaveInstanceData> _waveInstanceQueue = new Queue<WaveInstanceData>();
 	    private WaveInstanceData operatorWave;

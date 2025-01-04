@@ -103,6 +103,8 @@ public class LabelStr {
     public static string DEAD = "Dead";
     public static string ABSORBS = "Absorbs";
     public static string CONVERSION = "Conversion";
+    public static string DETAIL = "Detail";
+    public static string SURE = "Sure";
 
     //组合A+B
     public static string Assemble(string labelA, string labelB) {

@@ -3,6 +3,7 @@ using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
@@ -41,10 +42,11 @@ namespace LazyPan {
         private Vector3 originalRespawnPosition;
         private float respawnDelay = 2f;
         private float globalRecoverDeploy = 0f;
+
         private Comp robotName;
-        
         private string _robotName;
         private TextMeshProUGUI robotNameText;
+        private bool isOpenRobotDebug;
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -94,12 +96,17 @@ namespace LazyPan {
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, MsgFrozen);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+            InputRegister.Instance.Load(InputRegister.ESCAPE, OpenDebug);
 
 #if UNITY_EDITOR
             robotName = Loader.LoadGo("机器人名字", "Obj/Common/RobotName", _body, true).GetComponent<Comp>();
             robotNameText = Cond.Instance.Get<TextMeshProUGUI>(robotName, Label.TEXT);
             _robotName = entity.ObjConfig.Name.Split("战斗场景B")[1];
 #endif
+        }
+
+        private void OpenDebug(InputAction.CallbackContext obj) {
+            isOpenRobotDebug = !isOpenRobotDebug;
         }
 
         public override void DelayedExecute() {
@@ -115,6 +122,7 @@ namespace LazyPan {
             OnRecover();
 #if UNITY_EDITOR
             if (robotName != null) {
+                robotName.gameObject.SetActive(isOpenRobotDebug);
                 robotName.gameObject.transform.forward = Camera.main.gameObject.transform.forward;
                 robotName.gameObject.transform.up = Camera.main.gameObject.transform.up;
                 robotNameText.text = _robotName + ":" + _healthData.Float;
@@ -282,7 +290,7 @@ namespace LazyPan {
             GameObject floatTextInstance = Loader.LoadAsset<GameObject>(AssetType.PREFAB, "Obj/Common/FloatText");
             GameObject instance = GameObject.Instantiate(floatTextInstance);
             instance.transform.SetParent(_body);
-            instance.transform.localPosition = Vector3.zero;
+            instance.transform.localPosition = Vector3.zero + new Vector3(0, _body.localScale.x / 2 + 0.01f, 0);
             FloatingText instanceText = instance.GetComponent<FloatingText>();
             instanceText.SetText(damageValue.ToString());
             instanceText.SetColor(Color.red);

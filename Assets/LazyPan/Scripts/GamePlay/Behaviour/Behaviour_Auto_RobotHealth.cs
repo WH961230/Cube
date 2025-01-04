@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using MoreMountains.Tools;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -39,7 +41,10 @@ namespace LazyPan {
         private Vector3 originalRespawnPosition;
         private float respawnDelay = 2f;
         private float globalRecoverDeploy = 0f;
-
+        private Comp robotName;
+        
+        private string _robotName;
+        private TextMeshProUGUI robotNameText;
         public Behaviour_Auto_RobotHealth(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             Flo.Instance.GetFlow(out _flow);
             _ui = _flow.GetUI();
@@ -89,6 +94,12 @@ namespace LazyPan {
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, MsgFrozen);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
+
+#if UNITY_EDITOR
+            robotName = Loader.LoadGo("机器人名字", "Obj/Common/RobotName", _body, true).GetComponent<Comp>();
+            robotNameText = Cond.Instance.Get<TextMeshProUGUI>(robotName, Label.TEXT);
+            _robotName = entity.ObjConfig.Name.Split("战斗场景B")[1];
+#endif
         }
 
         public override void DelayedExecute() {
@@ -102,6 +113,13 @@ namespace LazyPan {
 
             OnBurnAndFrost();
             OnRecover();
+#if UNITY_EDITOR
+            if (robotName != null) {
+                robotName.gameObject.transform.forward = Camera.main.gameObject.transform.forward;
+                robotName.gameObject.transform.up = Camera.main.gameObject.transform.up;
+                robotNameText.text = _robotName + ":" + _healthData.Float;
+            }
+#endif
         }
 
         private void OnRecover() {

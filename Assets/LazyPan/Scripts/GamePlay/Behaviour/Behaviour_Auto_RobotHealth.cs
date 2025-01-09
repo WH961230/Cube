@@ -289,8 +289,8 @@ namespace LazyPan {
         private void SetFloatingText(float damageValue) {
             GameObject floatTextInstance = Loader.LoadAsset<GameObject>(AssetType.PREFAB, "Obj/Common/FloatText");
             GameObject instance = GameObject.Instantiate(floatTextInstance);
-            instance.transform.SetParent(_body);
-            instance.transform.localPosition = Vector3.zero + new Vector3(0, _body.localScale.x / 2 + 0.01f, 0);
+            instance.transform.SetParent(Obj.Instance.ObjRoot);
+            instance.transform.localPosition = _body.position + new Vector3(0, _body.localScale.x / 2 + 0.01f, 0);
             FloatingText instanceText = instance.GetComponent<FloatingText>();
             instanceText.SetText(damageValue.ToString());
             instanceText.SetColor(Color.red);

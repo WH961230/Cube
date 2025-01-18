@@ -293,7 +293,7 @@ namespace LazyPan {
             instance.transform.localPosition = _body.position + new Vector3(0, _body.localScale.x / 2 + 0.01f, 0);
             FloatingText instanceText = instance.GetComponent<FloatingText>();
             instanceText.SetText(damageValue.ToString());
-            instanceText.SetColor(Color.red);
+            instanceText.SetColor(Color.white);
         }
 
         private void MsgBeRecovered(int entityId, float recoverValue) {

@@ -20,7 +20,7 @@ namespace LazyPan {
 
         private float fireRateIntervalDeploy;
         private StringData bulletData;
-        private GameObject _fireRangeImgGo;//范围图片
+        private LineRenderer _fireRangeLineRenderer;//范围图片
 
         public Behaviour_Auto_Laserray(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
             //冲锋枪根源
@@ -51,8 +51,10 @@ namespace LazyPan {
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
-
-            _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            //范围
+            _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            //射击个数
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.COUNT), out _fireCount);
             //更新
             Game.instance.OnLateUpdateEvent.AddListener(OnLateUpdate);
@@ -72,7 +74,12 @@ namespace LazyPan {
         
         private bool IsActive() {
             bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
-            _fireRangeImgGo.SetActive(active);
+            _fireRangeLineRenderer.gameObject.SetActive(active);
+            if (active) {
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position, _fireRange.Float, 200);
+            } else {
+                MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            }
             return active;
         }
 

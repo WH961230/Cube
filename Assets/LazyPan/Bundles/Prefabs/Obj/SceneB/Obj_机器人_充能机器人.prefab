@@ -260,10 +260,10 @@ MonoBehaviour:
   Floats:
   - Sign: MovementSpeed
     Description: "\u79FB\u52A8\u901F\u5EA6"
-    Float: 0
+    Float: 2
   - Sign: Damage
     Description: "\u4F24\u5BB3"
-    Float: 0
+    Float: 15
   - Sign: Health
     Description: "\u8840\u91CF"
     Float: 10

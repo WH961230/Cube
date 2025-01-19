@@ -604,8 +604,6 @@ MonoBehaviour:
   GameObjects:
   - Sign: Bullet
     GO: {fileID: 1223376248068739779}
-  - Sign: FireRange
-    GO: {fileID: 4034016838015731178}
   Transforms:
   - Sign: Foot
     Tran: {fileID: 7868656383781502519}

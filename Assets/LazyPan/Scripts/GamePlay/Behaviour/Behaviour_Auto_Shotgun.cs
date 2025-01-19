@@ -15,6 +15,7 @@ namespace LazyPan {
         private FloatData _fireRange;//射击范围
         private FloatData _towerEnergy;//塔能量
         private BoolData _bingo;//概率秒杀
+        private LineRenderer _fireRangeLineRenderer;//范围图片
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
 
@@ -45,7 +46,9 @@ namespace LazyPan {
             //获取射击范围
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE),
                 out _fireRange);
-            _fireRangeImgGo = Cond.Instance.Get<GameObject>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            //范围
+            _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
+            MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -64,7 +67,13 @@ namespace LazyPan {
 
         private bool IsActive() {
             bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
-            _fireRangeImgGo.SetActive(active);
+            _fireRangeLineRenderer.gameObject.SetActive(active);
+            if (active) {
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position, _fireRange.Float, 200);
+            } else {
+                MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            }
+
             return active;
         }
 

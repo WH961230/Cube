@@ -17,7 +17,7 @@ namespace LazyPan {
 
         #region 画线
 
-        public static void CircleLineRenderer(LineRenderer lineRenderer, Vector3 center, float _radius, int numSegments) {
+        public static void CircleLineRenderer(LineRenderer lineRenderer, Vector3 center, float _radius, int numSegments, float roundDir) {
             if (lineRenderer.positionCount == 0) {
                 lineRenderer.positionCount = numSegments + 1;
                 float angleStep = 360f / numSegments;
@@ -30,6 +30,22 @@ namespace LazyPan {
                 }
 
                 lineRenderer.SetPositions(positions);
+            } else {
+                // 设置范围旋转
+                float deltaRotation = (_radius / 10f)  * Time.deltaTime; // 当前帧旋转的角度
+
+                Vector3[] positions = new Vector3[lineRenderer.positionCount];
+                lineRenderer.GetPositions(positions); // 获取当前的所有点位置
+
+                // 创建一个旋转四元数，绕Y轴旋转
+                Quaternion rotation = Quaternion.Euler(0, roundDir * deltaRotation, 0); // 绕Y轴旋转
+
+                // 旋转每个点
+                for (int i = 0; i < positions.Length; i++) {
+                    positions[i] = rotation * (positions[i] - center) + center; // 旋转点并保持相对位置
+                }
+
+                lineRenderer.SetPositions(positions); // 更新LineRenderer的位置
             }
         }
 

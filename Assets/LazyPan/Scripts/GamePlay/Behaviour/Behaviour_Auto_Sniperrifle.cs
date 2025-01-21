@@ -75,7 +75,7 @@ namespace LazyPan {
             bool active = entity.Prefab.activeSelf && _towerEnergy.Float > 0;
             _fireRangeLineRenderer.gameObject.SetActive(active);
             if (active) {
-                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position, _fireRange.Float, 200);
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _foot.position, _fireRange.Float, 200, 1);
             } else {
                 MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
             }

@@ -217,7 +217,7 @@ namespace LazyPan {
 
         private void BoomCircleRange() {
             if (_fireRangeLineRenderer.gameObject.activeSelf) {
-                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _shotBoomPoint, _BoomRange.Float, 30);
+                MyMathUtil.CircleLineRenderer(_fireRangeLineRenderer, _shotBoomPoint, _BoomRange.Float, 30, 1);
             } else {
                 MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
             }

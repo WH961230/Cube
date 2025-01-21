@@ -23,9 +23,6 @@ namespace LazyPan {
             //修改血量
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.MAX, LabelStr.HEALTH), out FloatData _robotMaxHealthData);
             _robotMaxHealthData.Float *= 1 + _maxHealthData.Float;
-
-            Cond.Instance.GetData(entity, LabelStr.HEALTH, out FloatData _currentHealthData);
-            _currentHealthData.Float = _robotMaxHealthData.Float;
         }
 
         public override void Clear() {

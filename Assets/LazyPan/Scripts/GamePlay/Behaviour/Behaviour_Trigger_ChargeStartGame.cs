@@ -10,6 +10,7 @@ namespace LazyPan {
         private FloatData _energyMaxData;
         private FloatData _energySpeedData;
         private Image _energyImage;
+        private Image _energyRangeImage;
         private StringData _chargeSoundData;
         private GameObject soundGo;
 
@@ -24,6 +25,8 @@ namespace LazyPan {
 
             _energyImage = Cond.Instance.Get<Image>(entity, Label.ENERGY);
             _energyImage.fillAmount = _energyData.Float / _energyMaxData.Float;
+            
+            _energyRangeImage = Cond.Instance.Get<Image>(entity, Label.ENERGY + LabelStr.RANGE);
 
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerEnterEvent.AddListener(ChargeIn);
             Cond.Instance.Get<Comp>(entity, Label.TRIGGER).OnTriggerExitEvent.AddListener(ChargeOut);
@@ -50,6 +53,8 @@ namespace LazyPan {
                 _energyImage.gameObject.SetActive(false);
                 _energyData.Float = 0;
             }
+            
+            _energyRangeImage.gameObject.SetActive(_isChargingEnergyData.Bool);
         }
 
         private void Next() {

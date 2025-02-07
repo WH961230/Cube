@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace LazyPan {
     public class Behaviour_Event_CreateRandomPositionRobot : Behaviour {
+	    private Flow_SceneB _flow;
 	    private List<SetUpBehaviourData> _setUpBehaviours = new List<SetUpBehaviourData>();
 	    private List<Entity> 
 		    _robots = new List<Entity>();
@@ -17,7 +19,11 @@ namespace LazyPan {
 	    private FloatData _delayCreateTime;
 	    private bool startLevelCreate;
 	    private float delayDeployTime;
+	    private GameObject _tipGo;
+	    private TextMeshProUGUI _tipText;
+	    private Animation _tipAnimation;
         public Behaviour_Event_CreateRandomPositionRobot(Entity entity, string behaviourSign) : base(entity, behaviourSign) {
+	        Flo.Instance.GetFlow(out _flow);
 	        MessageRegister.Instance.Reg(MessageCode.MsgStartLevel, MsgStartLevel);
 	        MessageRegister.Instance.Reg(MessageCode.MsgGlobalLevelUp, MsgGlobalLevelUp);
 	        MessageRegister.Instance.Reg<int>(MessageCode.MsgRobotDead, MsgRobotDead);
@@ -31,6 +37,12 @@ namespace LazyPan {
 	        Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(),
 		        LabelStr.Assemble(LabelStr.CREATE, LabelStr.ROBOT, LabelStr.DELAY, LabelStr.TIME),
 		        out _delayCreateTime);
+	        //提示
+	        Comp tip = Cond.Instance.Get<Comp>(_flow.GetUI(), "Tip");
+	        _tipGo = Cond.Instance.Get<GameObject>(tip, "Tip");
+	        _tipAnimation = _tipGo.GetComponent<Animation>();
+	        _tipText = Cond.Instance.Get<TextMeshProUGUI>(tip, "Text");
+	        
 	        foreach (var wave in _waveData.WaveInstanceDefaultList) {
 		        WaveInstanceData instanceWave = new WaveInstanceData();
 		        instanceWave.InstanceNumber = wave.InstanceNumber;
@@ -130,6 +142,9 @@ namespace LazyPan {
 		        }
 
 		        startLevelCreate = true;
+		        _tipText.text = string.Concat("开始关卡 ", _robotCreateLevelData.Int.ToString());
+		        _tipAnimation.Rewind();
+		        _tipAnimation.Play();
 	        }
         }
 

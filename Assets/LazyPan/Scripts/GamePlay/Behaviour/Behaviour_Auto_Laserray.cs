@@ -14,6 +14,7 @@ namespace LazyPan {
         private FloatData _fireRange;//射击范围
         private IntData _fireCount;
         private BoolData _effectAttackData;
+        private StringData _shootSoundData;//射击音效
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private FloatData _towerEnergy;
         private List<GameObject> _bullets = new List<GameObject>();
@@ -54,6 +55,8 @@ namespace LazyPan {
             //范围
             _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            //射击音效
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.SOUND), out _shootSoundData);
             //射击个数
             Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.COUNT), out _fireCount);
             //更新
@@ -138,6 +141,7 @@ namespace LazyPan {
                     foreach (var tmpIndex in robotIndex) {
                         CreateLaser(robotEntities[tmpIndex]);
                     }
+                    Sound.Instance.SoundPlay(_shootSoundData.String, Vector3.zero, false, 2);
                 }
             }
         }

@@ -15,6 +15,7 @@ namespace LazyPan {
         private FloatData _fireRange;//射击范围
         private FloatData _towerEnergy;//塔能量
         private BoolData _bingo;//概率秒杀
+        private StringData _shootSoundData;//射击音效
         private LineRenderer _fireRangeLineRenderer;//范围图片
         private Entity _targetInRangeRobotEntity;//目标范围内机器人实体
         private List<GameObject> _bullets = new List<GameObject>();
@@ -49,6 +50,8 @@ namespace LazyPan {
             //范围
             _fireRangeLineRenderer = Cond.Instance.Get<LineRenderer>(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.RANGE));
             MyMathUtil.ClearCircleRenderer(_fireRangeLineRenderer);
+            //射击音效
+            Cond.Instance.GetData(entity, LabelStr.Assemble(LabelStr.FIRE, LabelStr.SOUND), out _shootSoundData);
             //塔能量
             EntityRegister.TryGetRandEntityByType("Tower", out Entity towerEntity);
             Cond.Instance.GetData(towerEntity, LabelStr.ENERGY, out _towerEnergy);
@@ -121,6 +124,7 @@ namespace LazyPan {
                     Comp comp = instanceBullet.GetComponent<Comp>();
                     comp.OnParticleCollisionEvent.RemoveAllListeners();
                     comp.OnParticleCollisionEvent.AddListener(OnParticleCollisionEvent);
+                    Sound.Instance.SoundPlay(_shootSoundData.String, Vector3.zero, false, 2);
                 }
             }
         }

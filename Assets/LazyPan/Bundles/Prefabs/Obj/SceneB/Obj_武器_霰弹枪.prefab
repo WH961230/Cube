@@ -5235,6 +5235,9 @@ MonoBehaviour:
   - Sign: Sign
     Description: "\u6807\u8BC6"
     String: "Obj_\u6B66\u5668_\u9730\u5F39\u67AA"
+  - Sign: FireSound
+    Description: "\u6807\u8BC6"
+    String: "\u9730\u5F39\u67AA"
   Vector3s: []
 --- !u!1 &8213552431970774719
 GameObject:

@@ -692,7 +692,7 @@ MonoBehaviour:
     Float: 120
   - Sign: KnockbackSpeed
     Description: "\u51FB\u9000\u901F\u5EA6"
-    Float: 15
+    Float: 2
   - Sign: KnockbackAcceleration
     Description: "\u51FB\u9000\u52A0\u901F\u5EA6\uFF08\u8D1F\u6570\uFF09"
     Float: -50

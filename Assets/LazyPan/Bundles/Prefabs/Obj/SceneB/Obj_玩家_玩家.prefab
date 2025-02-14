@@ -600,7 +600,7 @@ MonoBehaviour:
   Floats:
   - Sign: MovementSpeed
     Description: "\u79FB\u52A8\u901F\u5EA6"
-    Float: 8
+    Float: 10
   - Sign: Health
     Description: "\u8840\u91CF"
     Float: 1000
@@ -624,10 +624,10 @@ MonoBehaviour:
     Float: -50
   - Sign: TeleportSpeed
     Description: "\u77AC\u79FB\u901F\u5EA6"
-    Float: 20
+    Float: 45
   - Sign: TeleportAcceleration
     Description: "\u77AC\u79FB\u52A0\u901F\u5EA6"
-    Float: -50
+    Float: -130
   - Sign: DamageReduceRatio
     Description: "\u4F24\u5BB3\u51CF\u5C11\u7CFB\u6570"
     Float: 1

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
@@ -227,6 +228,12 @@ namespace LazyPan {
 
                 //注册按钮事件
                 Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
+
+                //导航默认选择第一个
+                if (i == 0) {
+                    EventSystem.current.SetSelectedGameObject(button.gameObject);
+                }
+
                 ButtonRegister.RemoveAllListener(button);
                 ButtonRegister.AddListener(button, RegisterWave, buffEntity, difficulty);
             }

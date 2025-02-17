@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -165,10 +166,16 @@ namespace LazyPan {
                         // Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
                         // Cond.Instance.GetData(buffEntity, LabelStr.ICON, out StringData spritePathData);
                         // image.sprite = Loader.LoadAsset<Sprite>(AssetType.SPRITE, spritePathData.String);
-
+                        
                         //注册按钮事件
                         Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
                         ButtonRegister.RemoveAllListener(button);
+
+                        //导航默认选择第一个
+                        if (i == 0) {
+                            EventSystem.current.SetSelectedGameObject(button.gameObject);
+                        }
+
                         if (buffEntity.ObjConfig.Type == "属性增益") {
                             //注册说明
                             TextMeshProUGUI info = Cond.Instance.Get<TextMeshProUGUI>(item, LabelStr.INFO);

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
@@ -92,7 +93,7 @@ namespace LazyPan {
             MessageRegister.Instance.Reg<int, float>(MessageCode.MsgRecoverHealth, MsgBeRecovered);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgBurnEntity, MsgBurn);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrostEntity, MsgFrost);
-            MessageRegister.Instance.Reg<int>(MessageCode.MsgBoomEntity, MsgBoom);
+            MessageRegister.Instance.Reg<int, string>(MessageCode.MsgBoomEntity, MsgBoom);
             MessageRegister.Instance.Reg<int>(MessageCode.MsgFrozenEntity, MsgFrozen);
 
             Game.instance.OnUpdateEvent.AddListener(OnUpdate);
@@ -155,13 +156,13 @@ namespace LazyPan {
                 if (boomRatioData.Float != 0) {
                     float rand = Random.Range(0, 1);
                     if (rand <= boomRatioData.Float) {
-                        MsgBoom(entityId);
+                        MsgBoom(entityId, "机器人");
                     }
                 }
             }
         }
 
-        private void MsgBoom(int entityId) {
+        private void MsgBoom(int entityId, string type) {
             if (entity.ID == entityId) {
                 if (_antibodyBool.Bool || _globalAntibodyBool.Bool) {
                     return;
@@ -169,13 +170,13 @@ namespace LazyPan {
 
                 Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.RANGE), out FloatData boomRangeData);
                 Cond.Instance.GetData(Cond.Instance.GetGlobalEntity(), LabelStr.Assemble(LabelStr.BOOM, LabelStr.ATTACK), out FloatData boomAttackData);
-                        
+
                 //激活触发器
                 Vector3 robotBody = Cond.Instance.Get<Transform>(entity, LabelStr.BODY).position;
                 Collider[] colliders = Physics.OverlapSphere(robotBody, boomRangeData.Float);
                 foreach (var tmpCollider in colliders) {
                     if (EntityRegister.TryGetEntityByBodyPrefabID(tmpCollider.gameObject.GetInstanceID(), out Entity bodyEntity)) {
-                        if (bodyEntity.ObjConfig.Type == "机器人") {
+                        if (bodyEntity.ObjConfig.Type == type) {
                             MsgBeDamaged(bodyEntity.ID, boomAttackData.Float);
                         }
                     }
@@ -355,7 +356,7 @@ namespace LazyPan {
             }
             MessageRegister.Instance.Dis(MessageCode.MsgRobotDead, entity.ID);
             if (_deadBoomData != null && _deadBoomData.Bool) {
-                MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, entity.ID);
+                MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, entity.ID, "机器人|玩家|塔");
             }
         }
 
@@ -389,7 +390,7 @@ namespace LazyPan {
             MessageRegister.Instance.UnReg<int, float>(MessageCode.MsgDamageRobot, MsgBeDamaged);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgBurnEntity, MsgBurn);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrostEntity, MsgFrost);
-            MessageRegister.Instance.UnReg<int>(MessageCode.MsgBoomEntity, MsgBoom);
+            MessageRegister.Instance.UnReg<int, string>(MessageCode.MsgBoomEntity, MsgBoom);
             MessageRegister.Instance.UnReg<int>(MessageCode.MsgFrozenEntity, MsgFrozen);
         }
     }

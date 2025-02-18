@@ -130,7 +130,7 @@ namespace LazyPan {
 
                     bool isBoom = Random.Range(0, 1) <= _boom.Float;
                     if (isBoom) {
-                        MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, bodyEntity.ID);
+                        MessageRegister.Instance.Dis(MessageCode.MsgBoomEntity, bodyEntity.ID, "机器人");
                     }
                 }
             }

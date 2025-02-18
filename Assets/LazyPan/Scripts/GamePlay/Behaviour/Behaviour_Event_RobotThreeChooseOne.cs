@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
@@ -9,6 +8,8 @@ using Random = UnityEngine.Random;
 
 namespace LazyPan {
     public class Behaviour_Event_RobotThreeChooseOne : Behaviour {
+        private Comp _chooseComp;
+        private List<GameObject> _chooseSelect = new List<GameObject>();
         private Flow_SceneB _flow;
         private Comp _ui;
         private StringData _startChooseSound;
@@ -190,24 +191,28 @@ namespace LazyPan {
         private void WaveBuff(int difficulty) {
             Flo.Instance.GetFlow(out Flow_SceneB flow);
             Comp ui = flow.GetUI();
-            Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
+            _chooseComp = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
             if (_parallelBuffs.Count == 0) {
                 return;
             }
             string debug = "开始怪物三选一 增加怪物:";
             MessageRegister.Instance.Dis(MessageCode.MsgSetTimeScale, 0f);
-            choose.gameObject.SetActive(true);
+            _chooseComp.gameObject.SetActive(true);
             int resultCount = 3;
             int[] index = MathUtil.Instance.GetRandNoRepeatIndex(_parallelBuffs.Count, resultCount);
             if (index == null) {
                 Debug.LogError("错误");
                 return;
             }
+            _chooseSelect.Clear();
             for (int i = 0; i < index.Length; i++) {
                 int tmpIndex = index[i];
                 Entity buffEntity = _parallelBuffs[tmpIndex];
-                Comp item = Cond.Instance.Get<Comp>(choose,
-                    LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
+                Comp item = Cond.Instance.Get<Comp>(_chooseComp, LabelStr.Assemble(LabelStr.CHOOSE, LabelStr.ITEM, i.ToString()));
+
+                GameObject tmpSelect = Cond.Instance.Get<GameObject>(item, "Select");
+                tmpSelect.SetActive(false);
+                _chooseSelect.Add(tmpSelect);
 
                 //注册图片
                 // Image image = Cond.Instance.Get<Image>(item, LabelStr.ICON);
@@ -230,9 +235,9 @@ namespace LazyPan {
                 Button button = Cond.Instance.Get<Button>(item, LabelStr.BUTTON);
 
                 //导航默认选择第一个
-                if (i == 0) {
-                    EventSystem.current.SetSelectedGameObject(button.gameObject);
-                }
+                // if (i == 0) {
+                //     EventSystem.current.SetSelectedGameObject(button.gameObject);
+                // }
 
                 ButtonRegister.RemoveAllListener(button);
                 ButtonRegister.AddListener(button, RegisterWave, buffEntity, difficulty);
@@ -351,12 +356,10 @@ namespace LazyPan {
 
         //关闭角色三选一界面
         private void CloseRobotThreeChooseOneUI() {
-            //打开UI
-            Flo.Instance.GetFlow(out Flow_SceneB flow);
-            Comp ui = flow.GetUI();
-            //显示三选一界面
-            Comp choose = Cond.Instance.Get<Comp>(ui, LabelStr.CHOOSE);
-            choose.gameObject.SetActive(false);
+            foreach (var tmpSelect in _chooseSelect) {
+                tmpSelect.SetActive(false);
+            }
+            _chooseComp.gameObject.SetActive(false);
 
             InputRegister.Instance.UnLoad(InputRegister.ESCAPE, InputCloseUI);
             MessageRegister.Instance.Dis(MessageCode.MsgSetTimeScale, 1f);
